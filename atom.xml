@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>April Down</title>
+  
+  <subtitle>Android Development</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://aprildown.xyz/"/>
+  <updated>2020-09-27T13:24:01.512Z</updated>
+  <id>http://aprildown.xyz/</id>
+  
+  <author>
+    <name>Dewey Reed</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>天天坏，天天修的Android Studio</title>
+    <link href="http://aprildown.xyz/2020/09/20/android-studio-is-broken/"/>
+    <id>http://aprildown.xyz/2020/09/20/android-studio-is-broken/</id>
+    <published>2020-09-20T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
+    <link href="http://aprildown.xyz/2020/09/07/timer-cloud-backup/"/>
+    <id>http://aprildown.xyz/2020/09/07/timer-cloud-backup/</id>
+    <published>2020-09-07T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>想要自动清空浏览记录</title>
+    <link href="http://aprildown.xyz/2020/08/06/clean-browser-history/"/>
+    <id>http://aprildown.xyz/2020/08/06/clean-browser-history/</id>
+    <published>2020-08-06T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。&lt;/p&gt;
+&lt;p&gt;每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://aprildown.xyz/categories/notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android Dark Theme/深色模式使用体验</title>
+    <link href="http://aprildown.xyz/2020/05/07/android-dark-theme/"/>
+    <id>http://aprildown.xyz/2020/05/07/android-dark-theme/</id>
+    <published>2020-05-07T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽说一行代码&lt;code&gt;AppCompatDelegate.setDefaultNightMode&lt;/code&gt;就能搞定的问题，但实际上坑不少哩。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android上一个简单的Feature Flag实现</title>
+    <link href="http://aprildown.xyz/2020/04/21/android-feature-flags/"/>
+    <id>http://aprildown.xyz/2020/04/21/android-feature-flags/</id>
+    <published>2020-04-21T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;起因是看了Jeroen Mols大佬的&lt;a href=&quot;https://jeroenmols.com/blog/2019/08/13/featureflags/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Feature Flags&lt;/a&gt;系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android储存方案研究及分析</title>
+    <link href="http://aprildown.xyz/2020/01/25/android-storage/"/>
+    <id>http://aprildown.xyz/2020/01/25/android-storage/</id>
+    <published>2020-01-25T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了&lt;del&gt;一万&lt;/del&gt;多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近&lt;a href=&quot;https://developer.android.com/guide/topics/data&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;关于储存的官方文档&lt;/a&gt;也更新了。&lt;/p&gt;
+&lt;p&gt;本文只考虑棒棒糖之后的设备。因为&lt;code&gt;SharedPreference&lt;/code&gt;和&lt;code&gt;Sqlite(Room)&lt;/code&gt;没啥好说的，本文主要研究&lt;code&gt;MediaStore&lt;/code&gt;、&lt;code&gt;File&lt;/code&gt;和&lt;code&gt;SAF&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <link href="http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/"/>
+    <id>http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/</id>
+    <published>2020-01-19T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里做个大概的总结，文中出现的所有排列&lt;strong&gt;都分先后&lt;/strong&gt;，只选取了数据最多的前几名进行展示和说明。&lt;/p&gt;
+&lt;p&gt;因为我发现这些数据没啥用，从4.1.0开始将不再统计了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android Resources小研究</title>
+    <link href="http://aprildown.xyz/2020/01/12/android-resources-test/"/>
+    <id>http://aprildown.xyz/2020/01/12/android-resources-test/</id>
+    <published>2020-01-12T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <link href="http://aprildown.xyz/2020/01/01/android-oh-my-dagger/"/>
+    <id>http://aprildown.xyz/2020/01/01/android-oh-my-dagger/</id>
+    <published>2020-01-01T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一切都始于&lt;a href=&quot;https://www.youtube.com/watch?v=o-ins1nvbDg&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)&lt;/a&gt;。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android Animated Vector Drawable搜集</title>
+    <link href="http://aprildown.xyz/2019/11/27/android-animated_vector_drawables/"/>
+    <id>http://aprildown.xyz/2019/11/27/android-animated_vector_drawables/</id>
+    <published>2019-11-27T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Github Stars整理</title>
+    <link href="http://aprildown.xyz/2019/11/24/github-stars/"/>
+    <id>http://aprildown.xyz/2019/11/24/github-stars/</id>
+    <published>2019-11-24T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/DeweyReed?tab=stars&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Github的Stars页&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Notes" scheme="http://aprildown.xyz/categories/notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android Dev Summit 2019 笔记</title>
+    <link href="http://aprildown.xyz/2019/11/13/android-dev-summit-2019/"/>
+    <id>http://aprildown.xyz/2019/11/13/android-dev-summit-2019/</id>
+    <published>2019-11-13T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;RT&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+      <category term="Notes" scheme="http://aprildown.xyz/categories/android/notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>巧用Android CoordinatorLayout实现复杂布局 + 滚动内容</title>
+    <link href="http://aprildown.xyz/2019/10/02/android-coordinator-layout-hack/"/>
+    <id>http://aprildown.xyz/2019/10/02/android-coordinator-layout-hack/</id>
+    <published>2019-10-02T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个使用情景是：页面上半部分是一个不算短的、复杂的Layout，后半部分是一个嵌套了RecyclerView的Fragment的横向ViewPager。使用效果是，上半部分会充当下半部分可滚动内容的Header。怎么做？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>使用json-server模拟后台</title>
+    <link href="http://aprildown.xyz/2019/10/02/android-mock-server/"/>
+    <id>http://aprildown.xyz/2019/10/02/android-mock-server/</id>
+    <published>2019-10-02T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;笔记。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+      <category term="Notes" scheme="http://aprildown.xyz/categories/android/notes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <link href="http://aprildown.xyz/2019/09/07/android-appcompt110-fading-dark/"/>
+    <id>http://aprildown.xyz/2019/09/07/android-appcompt110-fading-dark/</id>
+    <published>2019-09-07T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>在国内做Android开发踩过的坑</title>
+    <link href="http://aprildown.xyz/2019/08/25/android-chinese-pitfalls/"/>
+    <id>http://aprildown.xyz/2019/08/25/android-chinese-pitfalls/</id>
+    <published>2019-08-25T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>开发历程</title>
+    <link href="http://aprildown.xyz/2019/07/07/personal-info/"/>
+    <id>http://aprildown.xyz/2019/07/07/personal-info/</id>
+    <published>2019-07-07T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;整理了一下个人的开发历程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="What" scheme="http://aprildown.xyz/categories/what/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>计时机器公告2019-7-6</title>
+    <link href="http://aprildown.xyz/2019/07/06/timer-death/"/>
+    <id>http://aprildown.xyz/2019/07/06/timer-death/</id>
+    <published>2019-07-06T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简单版本&quot;&gt;&lt;a href=&quot;#简单版本&quot; class=&quot;headerlink&quot; title=&quot;简单版本&quot;&gt;&lt;/a&gt;简单版本&lt;/h2&gt;&lt;p&gt;从计时机器3.8.0起，计时机器应用将从内购模式转为真·免费应用，所有专业版功能会在升级后为所有用户解锁。旧版本的登录、注册和激活将也会在未来几天失效。&lt;/p&gt;
+&lt;p&gt;以后的更新随缘，也会更加放飞自我。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>两种安慰别人的方式</title>
+    <link href="http://aprildown.xyz/2019/07/05/thoughts-comfort/"/>
+    <id>http://aprildown.xyz/2019/07/05/thoughts-comfort/</id>
+    <published>2019-07-05T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Thoughts" scheme="http://aprildown.xyz/categories/thoughts/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一些可能有用的Android代码</title>
+    <link href="http://aprildown.xyz/2019/06/15/android-code-snippets/"/>
+    <id>http://aprildown.xyz/2019/06/15/android-code-snippets/</id>
+    <published>2019-06-15T00:00:00.000Z</published>
+    <updated>2020-09-27T13:24:01.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;没地儿放它们。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+</feed>

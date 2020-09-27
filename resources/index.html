@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"aprildown.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2020.6.5 What’s new AndroidIn case you want to learn about Android DevelopmentAdvice FrameworkAnDevCon: Android Internals Overview - Marko Gargenta.mov Recycler ViewDrag and Swipe with RecyclerView En">
+<meta name="keywords" content="Android Development">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Development Barn">
+<meta property="og:url" content="http://aprildown.xyz/resources/index.html">
+<meta property="og:site_name" content="April Down">
+<meta property="og:description" content="2020.6.5 What’s new AndroidIn case you want to learn about Android DevelopmentAdvice FrameworkAnDevCon: Android Internals Overview - Marko Gargenta.mov Recycler ViewDrag and Swipe with RecyclerView En">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-27T13:24:01.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Development Barn">
+<meta name="twitter:description" content="2020.6.5 What’s new AndroidIn case you want to learn about Android DevelopmentAdvice FrameworkAnDevCon: Android Internals Overview - Marko Gargenta.mov Recycler ViewDrag and Swipe with RecyclerView En">
+
+<link rel="canonical" href="http://aprildown.xyz/resources/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false
+  };
+</script>
+
+  <title>Development Barn | April Down</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116348482-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-116348482-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">April Down</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Android Development</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-资源">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-code"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/DeweyReed" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/resources/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dewey Reed">
+      <meta itemprop="description" content="Hang in there, hang in there.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="April Down">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Development Barn
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-12-28 00:00:00" itemprop="dateCreated datePublished" datetime="2017-12-28T00:00:00+00:00">2017-12-28</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/resources/index.html#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="resources/index.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://github.com/DeweyReed/site/commits/master/source/resources/index.md" target="_blank" rel="noopener">2020.6.5 What’s new</a></p>
+<h1 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h1><h2 id="In-case-you-want-to-learn-about-Android-Development"><a href="#In-case-you-want-to-learn-about-Android-Development" class="headerlink" title="In case you want to learn about Android Development"></a>In case you want to learn about Android Development</h2><p><a href="https://medium.com/@drinfo/fuck-you-android-framework-ddbb02c4ae48" target="_blank" rel="noopener">Advice</a></p>
+<h3 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h3><p><a href="https://www.youtube.com/watch?v=MlxiQNijniQ" target="_blank" rel="noopener">AnDevCon: Android Internals Overview - Marko Gargenta.mov</a></p>
+<h3 id="Recycler-View"><a href="#Recycler-View" class="headerlink" title="Recycler View"></a>Recycler View</h3><p><a href="https://medium.com/@ipaulpro/drag-and-swipe-with-recyclerview-b9456d2b1aaf" target="_blank" rel="noopener">Drag and Swipe with RecyclerView</a></p>
+<p><a href="https://proandroiddev.com/enter-animation-using-recyclerview-and-layoutanimation-part-1-list-75a874a5d213" target="_blank" rel="noopener">Enter animation and LayoutAnimation</a></p>
+<p><a href="https://medium.com/@trionkidnapper/recyclerview-more-animations-with-less-code-using-support-library-listadapter-62e65126acdb" target="_blank" rel="noopener">RecyclerView — More Animations with Less Code using Support Library ListAdapter</a></p>
+<p><a href="https://android.jlelse.eu/android-sortedlist-explained-2def504e46d7" target="_blank" rel="noopener">SortedList</a></p>
+<p><a href="https://medium.com/@iammert/using-diffutil-in-android-recyclerview-bdca8e4fbb00" target="_blank" rel="noopener">DiffUtil</a></p>
+<p><a href="https://blog.mindorks.com/using-snaphelper-in-recyclerview-fc616b6833e8" target="_blank" rel="noopener">SnapHelper</a></p>
+<p><a href="https://android.jlelse.eu/a-recyclerview-with-multiple-item-types-dfba3979050" target="_blank" rel="noopener">Multiple item types</a></p>
+<p><a href="https://rubensousa.com/2019/08/16/nested_recyclerview_part1/" target="_blank" rel="noopener">Improving scrolling behavior of nested RecyclerViews - Part 1</a></p>
+<p><a href="https://proandroiddev.com/optimizing-nested-recyclerview-a9b7830a4ba7" target="_blank" rel="noopener">Optimizing Nested RecyclerView</a></p>
+<p><a href="https://medium.com/@BladeCoder/fixing-recyclerview-nested-scrolling-in-opposite-direction-f587be5c1a04" target="_blank" rel="noopener">Fixing RecyclerView nested scrolling in opposite direction</a></p>
+<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><p><a href="https://www.youtube.com/watch?v=N_x7SV3I3P0" target="_blank" rel="noopener">Get Animated (Android Dev Summit ‘18)</a></p>
+<p><a href="https://labs.ribot.co.uk/exploring-meaningful-motion-on-android-1cd95a4bc61d" target="_blank" rel="noopener">Exploring Meaningful Motion on Android</a></p>
+<p><a href="https://kylewbanks.com/blog/animating-toolbar-tablayout-floatingactionbutton-and-statusbar-background-color-on-android" target="_blank" rel="noopener">Synchronously Animating Toolbar, TabLayout, FloatingActionButton and StatusBar Background Colors on Android</a></p>
+<p><a href="https://www.androiddesignpatterns.com/2016/11/introduction-to-icon-animation-techniques.html" target="_blank" rel="noopener">An Introduction to Icon Animation Techniques</a></p>
+<p><a href="http://thetechnocafe.com/make-a-moving-gradient-background-in-android/" target="_blank" rel="noopener">Make a moving Gradient Background in Android</a></p>
+<p><a href="https://robinhood.engineering/beautiful-animations-using-android-constraintlayout-eee5b72ecae3" target="_blank" rel="noopener">Beautiful animations using Android ConstraintLayout</a></p>
+<p><a href="https://android.jlelse.eu/a-little-thing-that-matter-how-to-reveal-an-activity-with-circular-revelation-d94f9bfcae28" target="_blank" rel="noopener">Make your app shine #3: How to reveal an activity with circular revelation</a></p>
+<p><a href="https://android.jlelse.eu/polishing-ui-android-statelistanimator-7b74a06b85a5" target="_blank" rel="noopener">Polishing UI: Android StateListAnimator</a></p>
+<p><a href="https://proandroiddev.com/statelistanimator-a-powerful-little-tool-for-elevation-animation-4b31781e98a0" target="_blank" rel="noopener">StateListAnimator — a Powerful Little Tool for Elevation Animation</a></p>
+<p><a href="https://android.jlelse.eu/scroll-your-bottom-navigation-view-away-with-10-lines-of-code-346f1ed40e9e" target="_blank" rel="noopener">Scroll your Bottom Navigation View away with 10 lines of code</a></p>
+<p><a href="https://proandroiddev.com/transitiondrawable-small-gems-of-the-android-framework-4dcdd3c83319" target="_blank" rel="noopener">TransitionDrawable — Small Gems of the Android Framework</a></p>
+<p><a href="https://saket.me/smoothly-reacting-to-keyboard/" target="_blank" rel="noopener">Smoothly reacting to keyboard visibility changes in Android</a></p>
+<p><a href="https://proandroiddev.com/one-still-surprisingly-valid-reason-to-use-the-old-animation-api-1-2e646aba52d8" target="_blank" rel="noopener">One still surprisingly valid reason to use the old Animation (API 1+)</a></p>
+<p><a href="https://proandroiddev.com/playing-with-material-design-transitions-b3ea90c5794c" target="_blank" rel="noopener">Playing with Material Design Transitions ✨ - How to make material design transitions between two screens?</a></p>
+<p><a href="https://blog.stylingandroid.com/animatedicons-strikethru/" target="_blank" rel="noopener">AnimatedIcons: Strikethru</a></p>
+<h3 id="Desgin-and-Style"><a href="#Desgin-and-Style" class="headerlink" title="Desgin and Style"></a>Desgin and Style</h3><p><a href="https://www.youtube.com/watch?v=sNSlDfaNq-0" target="_blank" rel="noopener">Best Practices for Themes and Styles (Android Dev Summit ‘18)</a></p>
+<p><a href="https://uxdesign.cc/good-to-great-ui-animation-tips-7850805c12e5" target="_blank" rel="noopener">Good to great UI animation tips</a></p>
+<p><a href="https://medium.com/google-developers/spantastic-text-styling-with-spans-17b0c16b4568" target="_blank" rel="noopener">Spantastic text styling with Spans</a></p>
+<p><a href="https://medium.com/google-developers/styling-internationalized-text-in-android-f99759fb7b8f" target="_blank" rel="noopener">Styling internationalized text in Android</a></p>
+<p><a href="https://medium.com/mindorks/mastering-android-themes-chapter-1-4aadfa750ca7" target="_blank" rel="noopener">Mastering Android Themes</a></p>
+<p><a href="https://medium.com/google-developers/whats-your-text-s-appearance-f3a1729192d" target="_blank" rel="noopener">Understanding how to declaratively style text on Android</a></p>
+<p><a href="https://medium.com/@chrisbanes/appcompat-v23-2-age-of-the-vectors-91cbafa87c88" target="_blank" rel="noopener">AppCompat — Age of the vectors</a></p>
+<p><a href="https://medium.com/google-developers/why-would-i-want-to-fitssystemwindows-4e26d9ce1eec" target="_blank" rel="noopener">Why would I want to fitsSystemWindows?</a></p>
+<p><a href="https://medium.com/@chrisbanes/appcompat-v23-2-daynight-d10f90c83e94" target="_blank" rel="noopener">Night Theme =&gt; AppCompat — DayNight</a></p>
+<p><a href="https://hackernoon.com/vector-illustration-basics-for-android-developers-part-1-primitive-shapes-5af2e03ad24a" target="_blank" rel="noopener">Vector illustration basics for Android developers - Part 1: Primitive Shapes</a></p>
+<p><a href="https://www.youtube.com/watch?v=ZKJiXmIu06c" target="_blank" rel="noopener">Material shadows on Android by Sebastiano Poggi, JetBrains EN</a></p>
+<p><a href="https://medium.com/androiddevelopers/android-styling-common-theme-attributes-8f7c50c9eaba" target="_blank" rel="noopener">Android Styling: Common Theme Attributes</a></p>
+<p><a href="https://medium.com/androiddevelopers/motional-intelligence-build-smarter-animations-821af4d5f8c0" target="_blank" rel="noopener">Motional Intelligence: Build smarter animations</a></p>
+<h3 id="Custom-View"><a href="#Custom-View" class="headerlink" title="Custom View"></a>Custom View</h3><p><a href="https://developer.android.com/guide/topics/ui/custom-components" target="_blank" rel="noopener">Official Documentation</a></p>
+<p><a href="https://www.youtube.com/watch?v=EZAoJU-nUyI" target="_blank" rel="noopener">Mastering the Android Touch System</a></p>
+<p><a href="https://android.jlelse.eu/make-a-great-android-ux-how-to-make-a-swipe-button-eefbf060326d" target="_blank" rel="noopener">How to make a swipe button</a></p>
+<p><a href="https://medium.com/@Tunji_D/creating-an-expandable-floating-action-button-in-android-6626b968559e" target="_blank" rel="noopener">Creating an Extendable Floating Action Button in Android</a></p>
+<p><a href="https://proandroiddev.com/how-i-drew-custom-shapes-in-bottom-bar-c4539d86afd7" target="_blank" rel="noopener">How I drew custom shapes in bottom bar</a></p>
+<p><a href="https://medium.com/@afeozzz/how-we-implemented-3d-cards-in-revolut-fa84203a8f42" target="_blank" rel="noopener">How we implemented 3D cards in Revolut</a></p>
+<p><a href="https://www.rubicon-world.com/blog/2019/05/creating-custom-views-in-android/" target="_blank" rel="noopener">Creating Custom Views in Android</a></p>
+<p><a href="https://medium.com/@ali.muzaffar/android-why-your-canvas-shapes-arent-smooth-aa2a3f450eb5" target="_blank" rel="noopener">Android: Why your Canvas shapes aren’t smooth</a></p>
+<h3 id="Background-Execution"><a href="#Background-Execution" class="headerlink" title="Background Execution"></a>Background Execution</h3><p><a href="https://android-developers.googleblog.com/2018/10/modern-background-execution-in-android.html" target="_blank" rel="noopener">Modern background execution in Android</a></p>
+<p><a href="https://blog.yipl.com.np/things-to-consider-before-running-background-tasks-e71f00d2ad3a" target="_blank" rel="noopener">Things to consider before running background tasks</a></p>
+<p><a href="https://medium.com/@jagsaund/android-handler-internals-b5d49eba6977" target="_blank" rel="noopener">Android Handler Internals</a></p>
+<p><a href="https://medium.com/@kelvinma/exploring-android-processes-bf74ba63552c" target="_blank" rel="noopener">Exploring Android Processes</a></p>
+<p><a href="https://medium.com/mindorks/exploring-android-thread-priority-5d0542eebbd1" target="_blank" rel="noopener">Exploring Android Thread Priority</a></p>
+<p><a href="https://android.jlelse.eu/executor-framework-understanding-the-basics-43d575e72310" target="_blank" rel="noopener">Executor Framework- Understanding the basics</a></p>
+<p><a href="https://www.hellsoft.se/understanding-cpu-and-i-o-bound-for-asynchronous-operations/" target="_blank" rel="noopener">Understanding CPU and I/O bound for asynchronous operations</a></p>
+<p><a href="https://blog.stylingandroid.com/introduction-to-renderscript/" target="_blank" rel="noopener">AsyncAndroid: Introduction To Renderscript</a></p>
+<h4 id="Background-Work-on-Chinese-ROMs"><a href="#Background-Work-on-Chinese-ROMs" class="headerlink" title="Background Work on Chinese ROMs"></a>Background Work on Chinese ROMs</h4><p><a href="https://medium.freecodecamp.org/why-your-push-notifications-never-see-the-light-of-day-3fa297520793" target="_blank" rel="noopener">Why your Push Notifications never see the light of day</a></p>
+<p><a href="https://issuetracker.google.com/issues/113676489" target="_blank" rel="noopener">Google’s reply to WorkManager on Chinese ROMs. Only applys to ForegroundService and other</a></p>
+<h3 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h3><p><a href="https://medium.com/@mmbialas/50-android-studio-tips-tricks-resources-you-should-be-familiar-with-as-an-android-developer-af86e7cf56d2" target="_blank" rel="noopener">50 Android Studio Tips, Tricks &amp; Resources you should be familiar with, as an Android Developer</a></p>
+<p><a href="https://proandroiddev.com/making-the-most-out-of-the-android-studio-debugger-61713131d065" target="_blank" rel="noopener">Android Studio Debugger</a></p>
+<p><a href="https://stackoverflow.com/questions/28683327/how-to-check-if-gradle-dependency-has-new-version" target="_blank" rel="noopener">How to check dependencies updates</a>. There’re three ways: new experimental structure dialog, use android lint and a plugin .</p>
+<p><a href="https://proandroiddev.com/deep-dive-into-idea-folder-in-android-studio-53f867cf7b70" target="_blank" rel="noopener">Deep dive into .idea folder in Android Studio</a></p>
+<p><a href="https://proandroiddev.com/split-layout-into-subfolder-in-android-5bf76f805e90" target="_blank" rel="noopener">Split layouts into subfolders in Android Studio</a></p>
+<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p><a href="https://blog.jetbrains.com/kotlin/2018/02/using-gradle-build-cache-with-kotlin/" target="_blank" rel="noopener">Using Gradle build cache with Kotlin</a></p>
+<p><a href="https://www.raywenderlich.com/5532-gradle-tips-and-tricks-for-android" target="_blank" rel="noopener">Gradle Tips and Tricks for Android</a>(includes kotlin-dsl, resolving dependencies conflicts, apk splits, buildConfigField, externalNativeBuild, buildTypes configuration, gradle properties, offline mode, product flavors, dependency graph)</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808" target="_blank" rel="noopener">How to Include an External .aar File Using Gradle?</a></p>
+<p><a href="https://proandroiddev.com/how-to-manage-dependencies-in-multi-module-project-84620afbb415" target="_blank" rel="noopener">How to manage dependencies in a multi module project?</a></p>
+<p><a href="https://www.giorgosneokleous.com/2019/12/01/name-your-apk-aab-files/" target="_blank" rel="noopener">Name your .apk &amp; .aab files</a>, <a href="https://github.com/android/plaid/issues/41" target="_blank" rel="noopener">archivesBaseName in build.gradle of app module</a></p>
+<h4 id="Build-Time"><a href="#Build-Time" class="headerlink" title="Build Time"></a>Build Time</h4><p><a href="https://medium.com/linedevth/build-your-android-app-faster-and-smaller-than-ever-25f53fdd3cdc" target="_blank" rel="noopener">Build your Android app Faster and Smaller than ever</a></p>
+<p><a href="https://android.jlelse.eu/how-i-reduced-my-android-build-times-by-89-4242e51ce946" target="_blank" rel="noopener">How I reduced my Android build times by 89%</a></p>
+<p><a href="https://android.jlelse.eu/faster-android-build-times-a760d274b33c" target="_blank" rel="noopener">Faster Android Build Times</a></p>
+<h4 id="Kotlin-DSL"><a href="#Kotlin-DSL" class="headerlink" title="Kotlin DSL"></a>Kotlin DSL</h4><p><a href="https://proandroiddev.com/migrating-android-build-scripts-from-groovy-to-kotlin-dsl-f8db79dd6737" target="_blank" rel="noopener">Migrating Android build scripts from Groovy to Kotlin DSL</a></p>
+<p><a href="https://handstandsam.com/2018/02/11/kotlin-buildsrc-for-better-gradle-dependency-management/" target="_blank" rel="noopener">Kotlin + buildSrc for Better Gradle Dependency Management</a></p>
+<h3 id="ADB"><a href="#ADB" class="headerlink" title="ADB"></a>ADB</h3><p><a href="https://proandroiddev.com/adb-commands-part-iii-997f97c03546" target="_blank" rel="noopener">ADB Commands — Part III</a></p>
+<h3 id="Dagger2-Always-read-the-newets-posts"><a href="#Dagger2-Always-read-the-newets-posts" class="headerlink" title="Dagger2(Always read the newets posts)"></a>Dagger2(Always read the newets posts)</h3><p><a href="https://google.github.io/dagger/" target="_blank" rel="noopener">Official Doc</a></p>
+<p><a href="https://medium.com/mindorks/dagger-2-generated-code-9def1bebc44b" target="_blank" rel="noopener">Dagger 2 Generated Code.</a></p>
+<p><a href="https://blog.kotlin-academy.com/understanding-dagger-2-multibindings-viewmodel-8418eb372848" target="_blank" rel="noopener">Understanding Dagger 2 Multibindings + ViewModel</a></p>
+<p><a href="https://proandroiddev.com/inject-into-android-component-constructor-4f5ddd27d06" target="_blank" rel="noopener">Injection into Android Component’s Constructors is real</a></p>
+<p><a href="https://github.com/google/dagger/issues/900" target="_blank" rel="noopener">Kotlin+Dagger best practices/documentation</a></p>
+<p><a href="https://proandroiddev.com/brave-new-android-world-with-assistedinject-d11bdc20147d" target="_blank" rel="noopener">Brave New Android World with AssistedInject</a></p>
+<h3 id="Rx"><a href="#Rx" class="headerlink" title="Rx"></a>Rx</h3><p><a href="http://reactive.how/" target="_blank" rel="noopener">Reactive.how</a></p>
+<p><a href="https://www.raywenderlich.com/170233/reactive-programming-rxandroid-kotlin-introduction" target="_blank" rel="noopener">Reactive Programming with RxAndroid in Kotlin: An Introduction</a></p>
+<p><a href="https://blog.aritraroy.in/the-missing-rxjava-2-guide-to-supercharge-your-android-development-part-1-624ef326bff4" target="_blank" rel="noopener">The Missing RxJava 2 Guide to Supercharge Your Android Development</a></p>
+<p><a href="https://blog.mindorks.com/implement-search-using-rxjava-operators-c8882b64fe1d" target="_blank" rel="noopener">Implement Search Using RxJava Operators</a></p>
+<p><a href="https://stackoverflow.com/questions/43356314/android-rxjava-2-junit-test-getmainlooper-in-android-os-looper-not-mocked-runt/43356315" target="_blank" rel="noopener">Android RxJava 2 JUnit test - getMainLooper in android.os.Looper not mocked RuntimeException</a></p>
+<h3 id="APK"><a href="#APK" class="headerlink" title="APK"></a>APK</h3><p><a href="https://fractalwrench.co.uk/posts/playing-apk-golf-how-low-can-an-android-app-go/" target="_blank" rel="noopener">Playing APK Golf - Reducing an Android APK’s size by 99.99%</a></p>
+<p><a href="https://proandroiddev.com/reducing-apk-size-by-using-abi-filters-and-apk-split-74a68a885f4e" target="_blank" rel="noopener">Reducing APK size by using ABI Filters and APK split</a></p>
+<p><a href="https://github.com/MaxCamillo/android-keystore-password-recover" target="_blank" rel="noopener">android-keystore-password-recover</a></p>
+<h3 id="Proguard-Hell"><a href="#Proguard-Hell" class="headerlink" title="Proguard Hell"></a>Proguard Hell</h3><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74" target="_blank" rel="noopener">Troubleshooting ProGuard issues on Android</a></p>
+<p><a href="https://jebware.com/blog/?p=484" target="_blank" rel="noopener">Reading ProGuard’s Outputs</a></p>
+<p><a href="https://jebware.com/blog/?p=498" target="_blank" rel="noopener">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
+<p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc" target="_blank" rel="noopener">How Proguard Works</a></p>
+<p><a href="https://medium.com/androiddevelopers/practical-proguard-rules-examples-5640a3907dc9" target="_blank" rel="noopener">Practical ProGuard rules examples</a></p>
+<p><a href="https://www.zacsweers.dev/android-proguard-rules/" target="_blank" rel="noopener">Android’s Built-in ProGuard Rules: The Missing Guide</a></p>
+<h3 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h3><p><a href="https://proandroiddev.com/secure-data-in-android-encryption-7eda33e68f58" target="_blank" rel="noopener">Secure data in Android</a></p>
+<p><a href="https://proandroiddev.com/secure-data-in-android-encryption-7eda33e68f58" target="_blank" rel="noopener">Secure data in Android — Encryption</a></p>
+<p><a href="https://blog.mindorks.com/how-to-pass-large-data-between-server-and-client-android-securely-345fed551651" target="_blank" rel="noopener">How to pass large data between server and client (android) securely?</a></p>
+<p><a href="https://www.raywenderlich.com/5634-securing-network-data-tutorial-for-android" target="_blank" rel="noopener">Securing Network Data Tutorial for Android</a></p>
+<p><a href="https://proandroiddev.com/bang-bang-you-have-been-hacked-df82db3f2001" target="_blank" rel="noopener">Bang! Bang! You have been hacked.</a></p>
+<p><a href="https://medium.com/@ssaurel/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb" target="_blank" rel="noopener">How to retrieve an Unique ID to identify Android devices ?</a></p>
+<p><a href="https://joebirch.co/2019/08/22/oauth-on-android-with-custom-tabs/" target="_blank" rel="noopener">Performing OAuth on Android with Custom Tabs</a></p>
+<p><a href="https://blog.mindorks.com/securing-api-keys-using-android-ndk" target="_blank" rel="noopener">Securing API Keys using Android NDK (Native Development Kit)</a></p>
+<h3 id="Licenses"><a href="#Licenses" class="headerlink" title="Licenses"></a>Licenses</h3><p><a href="https://medium.freecodecamp.org/how-open-source-licenses-work-and-how-to-add-them-to-your-projects-34310c3cf94" target="_blank" rel="noopener">How open source licenses work and how to add them to your projects</a></p>
+<p><a href="https://choosealicense.com/" target="_blank" rel="noopener">How to Choose Licnese</a></p>
+<p><a href="https://developers.google.com/android/guides/opensource" target="_blank" rel="noopener">Including Open Source Notices</a> (Including an activity showing all libraries licenses. However, This official library doesn’t work very well)</p>
+<h3 id="OSS"><a href="#OSS" class="headerlink" title="OSS"></a>OSS</h3><p><a href="https://android.jlelse.eu/things-i-wish-i-knew-when-i-started-building-android-sdk-libraries-dba1a524d619" target="_blank" rel="noopener">Things I wish I knew when I started building Android SDK/Libraries</a></p>
+<p><a href="https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/" target="_blank" rel="noopener">The beginner’s guide to contributing to a GitHub project</a></p>
+<p><a href="https://help.github.com/articles/removing-sensitive-data-from-a-repository/" target="_blank" rel="noopener">Removing sensitive data from a repository</a></p>
+<p><a href="http://crushingcode.nisrulz.com/publish-your-android-library-via-jitpack/" target="_blank" rel="noopener">Guide to publishing your Android Library via JitPack</a></p>
+<p><a href="https://android.jlelse.eu/publishing-your-android-kotlin-or-java-library-to-jcenter-from-android-studio-1b24977fe450" target="_blank" rel="noopener">Publishing your Android, Kotlin or Java library to jCenter from Android Studio</a></p>
+<p><a href="https://blog.autsoft.hu/publishing-an-android-library-to-mavencentral-in-2019/" target="_blank" rel="noopener">Publishing an Android library to MavenCentral in 2019</a></p>
+<h3 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h3><p><a href="https://medium.com/@ali.muzaffar/did-you-get-one-of-these-google-play-developer-policy-violation-emails-6c529ceb082d" target="_blank" rel="noopener">Did you get one of these Google Play Developer Policy Violation Emails?</a></p>
+<p><a href="https://android.jlelse.eu/clean-your-status-bar-like-a-pro-76c89a1e2c2f/" target="_blank" rel="noopener">Clean your status bar like a pro!</a></p>
+<p><a href="https://android.googlesource.com/platform/frameworks/base/+/android-6.0.0_r1/packages/SystemUI/docs/demo_mode.md" target="_blank" rel="noopener">Demo mode doc</a></p>
+<p><a href="https://asostack.com/enhance-your-google-play-store-description-with-rich-formatting-and-emojis-5f50ff354e5f" target="_blank" rel="noopener">Enhance Your Google Play Store Description With Rich Formatting &amp; Emojis</a></p>
+<p><a href="https://medium.com/@Alconost/the-top-10-languages-for-app-localization-ed0baca4d58e" target="_blank" rel="noopener">Best Languages for App Localization</a></p>
+<h3 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h3><p><a href="https://blog.aritraroy.in/understanding-and-mastering-the-world-of-android-testing-part-1-32f6a1a06d3b" target="_blank" rel="noopener">Understanding and Mastering the World of Android Testing (Part 1)</a></p>
+<p><a href="https://engineering.21buttons.com/mocking-kotlin-classes-with-mockito-the-fast-way-631824edd5ba" target="_blank" rel="noopener">Mocking Kotlin classes with Mockito — the fast way</a></p>
+<h3 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h3><p><a href="https://medium.com/androiddevelopers/google-i-o-2018-app-architecture-and-testing-f546e37fc7eb" target="_blank" rel="noopener">Google I/O 2018 app — Architecture and Testing</a></p>
+<p><a href="https://proandroiddev.com/a-guided-tour-inside-a-clean-architecture-code-base-48bb5cc9fc97" target="_blank" rel="noopener">A Guided Tour inside a clean architecture code base.</a></p>
+<p><a href="https://android.jlelse.eu/building-a-shazam-clone-part-1-building-android-apps-series-179c2580a094" target="_blank" rel="noopener">Building a Shazam Clone Part 1 (Design) — Building Android Apps Series</a></p>
+<p><a href="https://proandroiddev.com/kotlin-clean-architecture-1ad42fcd97fa" target="_blank" rel="noopener">Kotlin Clean Architecture</a></p>
+<p><a href="https://jeroenmols.com/blog/2019/06/12/modularizationtips/" target="_blank" rel="noopener">Modularization - Lessons learned</a></p>
+<p><a href="https://androidessence.com/mvwtf" target="_blank" rel="noopener">MVWTF: Demystifying Architecture Patterns</a></p>
+<h3 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h3><p><a href="https://engineeringblog.yelp.com/2018/05/android-search-perf-improvements-part-1.html" target="_blank" rel="noopener">Performance Improvements for Search on The Yelp Android App</a></p>
+<p><a href="https://medium.com/@BladeCoder/advanced-json-parsing-techniques-using-moshi-and-kotlin-daf56a7b963d" target="_blank" rel="noopener">Advanced JSON parsing techniques using Moshi and Kotlin</a></p>
+<h3 id="CI-Continuous-Integration"><a href="#CI-Continuous-Integration" class="headerlink" title="CI, Continuous Integration"></a>CI, Continuous Integration</h3><p><a href="https://overflow.buffer.com/2020/05/07/using-github-actions-for-android-continuous-integration-and-delivery/" target="_blank" rel="noopener">Using GitHub Actions for Android Continuous Integration and Delivery</a></p>
+<p><a href="https://proandroiddev.com/cloud-continuous-integration-on-android-with-kotlin-project-8d6f12cbf0c4" target="_blank" rel="noopener">Cloud Continuous Integration on Android with Kotlin Project</a></p>
+<p><a href="https://coletiv.com/blog/android-github-actions-setup/" target="_blank" rel="noopener">Android GitHub Actions Setup</a></p>
+<h3 id="Archiecture-Components"><a href="#Archiecture-Components" class="headerlink" title="Archiecture Components"></a>Archiecture Components</h3><p><a href="https://proandroiddev.com/5-common-mistakes-when-using-architecture-components-403e9899f4cb" target="_blank" rel="noopener">5 common mistakes when using Architecture Components</a></p>
+<h4 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h4><p><a href="https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1" target="_blank" rel="noopener">7 Pro-tips for Room</a></p>
+<p><a href="https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929" target="_blank" rel="noopener">Understanding migrations with Room</a></p>
+<p><a href="https://medium.com/google-developers/room-rxjava-acb0cd4f3757" target="_blank" rel="noopener">Room 🔗 RxJava</a></p>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p><a href="https://arturdryomov.online/posts/modern-times/" target="_blank" rel="noopener">Modern DateTimes on Android</a></p>
+<h3 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h3><p><a href="https://typealias.com/guides/kotlin-sequences-illustrated-guide/" target="_blank" rel="noopener">Kotlin Sequences: An Illustrated Guide</a></p>
+<p><a href="https://typealias.com/guides/illustrated-guide-covariance-contravariance/" target="_blank" rel="noopener">An Illustrated Guide to Covariance and Contravariance in Kotlin</a></p>
+<p><a href="https://typealias.com/guides/ins-and-outs-of-generic-variance/" target="_blank" rel="noopener">The Ins and Outs of Generic Variance in Kotlin</a></p>
+<h4 id="Coroutines"><a href="#Coroutines" class="headerlink" title="Coroutines"></a>Coroutines</h4><p><a href="https://www.youtube.com/watch?v=YrrUCSi72E8" target="_blank" rel="noopener">KotlinConf 2017 - Deep Dive into Coroutines on JVM by Roman Elizarov</a></p>
+<p><a href="https://www.youtube.com/watch?v=YrrUCSi72E8" target="_blank" rel="noopener">KotlinConf 2017 - Deep Dive into Coroutines on JVM by Roman Elizarov</a></p>
+<p><a href="https://proandroiddev.com/kotlin-coroutines-patterns-anti-patterns-f9d12984c68e" target="_blank" rel="noopener">Kotlin Coroutines patterns &amp; anti-patterns</a></p>
+<p><a href="https://medium.com/androiddevelopers/easy-coroutines-in-android-viewmodelscope-25bffb605471" target="_blank" rel="noopener">Easy Coroutines in Android: viewModelScope</a></p>
+<p><a href="https://www.youtube.com/watch?v=w0kfnydnFWI" target="_blank" rel="noopener">KotlinConf 2019: Coroutines! Gotta catch ‘em all! by Florina Muntenescu &amp; Manuel Vivo</a></p>
+<h3 id="Framework-Classes"><a href="#Framework-Classes" class="headerlink" title="Framework Classes"></a>Framework Classes</h3><h4 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h4><p><a href="https://medium.freecodecamp.org/mastering-android-context-7055c8478a22" target="_blank" rel="noopener">Mastering Android context</a></p>
+<p><a href="https://jebware.com/blog/?p=600" target="_blank" rel="noopener">Enumerating Resources in Android</a></p>
+<h4 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h4><p><a href="https://medium.com/@iammert/android-launchmode-visualized-8843fc833dbe" target="_blank" rel="noopener">Android “launchMode” (Visualized)</a></p>
+<p><a href="https://itnext.io/the-android-launchmode-animated-cheatsheet-6657e5dd9b0f" target="_blank" rel="noopener">The Android Launch Mode Animated CheatSheet</a></p>
+<p><a href="https://medium.com/google-developer-experts/finally-understanding-how-references-work-in-android-and-java-26a0d9c92f83" target="_blank" rel="noopener">Finally understanding how references work in Android and Java</a></p>
+<p><a href="https://android.jlelse.eu/the-complete-android-splash-screen-guide-c7db82bce565" target="_blank" rel="noopener">The (Complete) Android Splash Screen Guide</a></p>
+<p><a href="https://medium.com/google-developers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab" target="_blank" rel="noopener">The Android Lifecycle cheat sheet — part I: Single Activities</a></p>
+<p><a href="https://medium.com/@Myyousseff/the-journey-of-launching-an-android-activity-9b64e11dc157" target="_blank" rel="noopener">The Journey Of Launching An Android Activity</a></p>
+<p><a href="https://arunkumar.dev/seamless-android-app-launch-animations-using-intent-sourcebounds/" target="_blank" rel="noopener">Seamless Android app launch animations using Intent Source Bounds</a></p>
+<h4 id="DataBinding"><a href="#DataBinding" class="headerlink" title="DataBinding"></a>DataBinding</h4><p><a href="https://medium.com/google-developers/android-data-binding-recyclerview-db7c40d9f0e4" target="_blank" rel="noopener">Android Data Binding: RecyclerView</a></p>
+<p><a href="https://proandroiddev.com/custom-attributes-using-bindingadapters-in-kotlin-971ef8fcc259" target="_blank" rel="noopener">Custom attributes using BindingAdapters in Kotlin</a></p>
+<h4 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h4><p><a href="https://robots.thoughtbot.com/android-imageview-scaletype-a-visual-guide" target="_blank" rel="noopener">Android ImageView ScaleType: A Visual Guide</a></p>
+<p><a href="https://android.jlelse.eu/scrolling-behavior-for-appbars-in-android-41aff9c5c468" target="_blank" rel="noopener">Scrolling Behavior for Appbars in Android</a></p>
+<p><a href="https://helw.net/2018/08/06/appcompat-view-inflation/" target="_blank" rel="noopener">AppCompat View Inflation</a></p>
+<h4 id="Media"><a href="#Media" class="headerlink" title="Media"></a>Media</h4><p><a href="https://medium.com/google-developers/audio-focus-3-cdc09da9c122" target="_blank" rel="noopener">Audio Focus</a></p>
+<h4 id="PIP"><a href="#PIP" class="headerlink" title="PIP"></a>PIP</h4><p><a href="https://medium.com/google-developers/making-magic-moments-with-picture-in-picture-e02964bf75ae" target="_blank" rel="noopener">Making magic moments with picture in picture</a> (Three more links at the end of the article)</p>
+<h4 id="Vibrate"><a href="#Vibrate" class="headerlink" title="Vibrate"></a>Vibrate</h4><p><a href="https://proandroiddev.com/using-vibrate-in-android-b0e3ef5d5e07" target="_blank" rel="noopener">The Correct Way to Vibrate</a></p>
+<h4 id="Google-Play-In-App-Purchase"><a href="#Google-Play-In-App-Purchase" class="headerlink" title="Google Play In-App Purchase"></a>Google Play In-App Purchase</h4><p><a href="https://medium.com/exploring-android/exploring-the-play-billing-library-for-android-55321f282929" target="_blank" rel="noopener">Exploring the Play Billing Library for Android</a></p>
+<h4 id="Marketing"><a href="#Marketing" class="headerlink" title="Marketing"></a>Marketing</h4><p><a href="https://www.novoda.com/blog/downloading-apps-is-emojinal-a-simple-hack-to-get-more-downloads/" target="_blank" rel="noopener">Downloading apps is emojinal 🚀 - a simple hack to get more downloads</a></p>
+<p><a href="https://medium.com/@cesarmcferreira/building-mobile-apps-bringing-home-the-bacon-f23e35be4a74" target="_blank" rel="noopener">How to make money Building Mobile Apps</a></p>
+<h1 id="Programming"><a href="#Programming" class="headerlink" title="Programming"></a>Programming</h1><p><a href="https://www.youtube.com/watch?v=EkluES9Rvak6" target="_blank" rel="noopener">Best of Fluent 2012: /Reg(exp){2}lained/: Demystifying Regular Expressions</a></p>
+<p><a href="http://reedbeta.com/blog/programmers-intro-to-unicode/" target="_blank" rel="noopener">A Programmer’s Introduction to Unicode</a></p>
+<p><a href="https://medium.com/leetcode-patterns/leetcode-pattern-1-bfs-dfs-25-of-the-problems-part-1-519450a84353" target="_blank" rel="noopener">Leetcode Pattern 1 BFS + DFS == 25% of the problems — part 1</a></p>
+<p><a href="https://codeburst.io/understanding-solid-principles-open-closed-principle-e2b588b6491f" target="_blank" rel="noopener">Understanding SOLID Principles: Open Closed Principle</a></p>
+<p><a href="https://medium.freecodecamp.org/demystifying-dynamic-programming-3efafb8d4296" target="_blank" rel="noopener">Demystifying Dynamic Programming</a></p>
+<p><a href="https://medium.freecodecamp.org/my-favorite-examples-of-functional-programming-in-kotlin-e69217b39112" target="_blank" rel="noopener">My favorite examples of functional programming in Kotlin(powerset in the middle of the article)</a></p>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Generic"><a href="#Generic" class="headerlink" title="Generic"></a>Generic</h2><p><a href="https://softwareengineering.stackexchange.com/a/51993" target="_blank" rel="noopener">Why not GUI application terminate like console application?</a></p>
+<p><a href="https://medium.com/@anthonypjshaw/why-is-python-so-slow-e5074b6fe55b" target="_blank" rel="noopener">Why is Python so slow?</a></p>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><p><a href="https://hackernoon.com/how-ive-captured-all-passwords-trying-to-ssh-into-my-server-d26a2a6263ec" target="_blank" rel="noopener">Capture all passwords trying to ssh into my server!</a></p>
+<p><a href="https://medium.freecodecamp.org/how-to-create-your-first-safe-server-ready-for-production-f1cc60eec69a" target="_blank" rel="noopener">Create your first safe server that’s ready for production</a></p>
+<p><a href="https://www.howtoforge.com/how-to-configure-ssh-keys-authentication-with-putty-and-linux-server-in-5-quick-steps" target="_blank" rel="noopener">Configure SSH Keys Authentication With PuTTY And Linux Server In 5 Quick Steps</a></p>
+<p><a href="https://unix.stackexchange.com/a/19335" target="_blank" rel="noopener">Disable a user’s login without disabling the account</a></p>
+<p><a href="https://medium.freecodecamp.org/docker-quick-start-video-tutorials-1dfc575522a0" target="_blank" rel="noopener">A fast and easy Docker tutorial for beginners (video series)</a></p>
+<p><a href="https://blog.ssdnodes.com/blog/tutorial-getting-started-with-docker-on-your-vps/" target="_blank" rel="noopener">Getting Started with Docker on Your VPS</a></p>
+<h2 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h2><p><a href="https://github.com/Microsoft/WSL/issues/2122" target="_blank" rel="noopener">How to use proxy in WSL?</a></p>
+<h2 id="Website-to-API"><a href="#Website-to-API" class="headerlink" title="Website to API"></a>Website to API</h2><p><a href="https://wrapapi.com/" target="_blank" rel="noopener">WrapAPI</a></p>
+<p><a href="https://github.com/gaojiuli/toapi" target="_blank" rel="noopener">toapi</a></p>
+<p><a href="http://www.hicrawler.com/" target="_blank" rel="noopener">hicrawler</a></p>
+<p><a href="https://scrapinghub.com/" target="_blank" rel="noopener">scrapinghub</a></p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p><a href="https://gist.github.com/btfak/18938572f5df000ebe06fbd1872e4e39" target="_blank" rel="noopener">Use Hexo and deploy to GitHub Pages</a></p>
+<p><a href="http://jr0cket.co.uk/hexo/using-git-submodules-for-custom-hexo-theme.html" target="_blank" rel="noopener">Using Git Submodules to Manage Your Custom Hexo Theme</a></p>
+<p><a href="https://github.com/iissnan/hexo-theme-next/wiki" target="_blank" rel="noopener">Next Theme Wiki</a></p>
+<h2 id="Encryption"><a href="#Encryption" class="headerlink" title="Encryption"></a>Encryption</h2><p><a href="https://gist.github.com/sepehr/5a2a8949afa7e74d0118" target="_blank" rel="noopener">PGP Guide</a></p>
+<h2 id="Game"><a href="#Game" class="headerlink" title="Game"></a>Game</h2><p><a href="https://medium.freecodecamp.org/from-zero-to-game-designer-how-to-start-building-video-games-even-if-you-dont-have-any-experience-5e2f9f45f4bb" target="_blank" rel="noopener">From Zero to Game Designer: how to start building video games even if you don’t have any experience</a></p>
+<p><a href="https://github.com/ellisonleao/magictools" target="_blank" rel="noopener">magictools</a></p>
+<h1 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h1><p><a href="https://dev.to/nickjj/optimize-your-programming-decisions-for-the-95-not-the-5-2n42" target="_blank" rel="noopener">Optimize Your Programming Decisions for the 95%, Not the 5%</a></p>
+<h1 id="More-links-at-any-time"><a href="#More-links-at-any-time" class="headerlink" title="More links at any time"></a>More links at any time</h1><p>😍</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android"><span class="nav-number">1.</span> <span class="nav-text">Android</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#In-case-you-want-to-learn-about-Android-Development"><span class="nav-number">1.1.</span> <span class="nav-text">In case you want to learn about Android Development</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Framework"><span class="nav-number">1.1.1.</span> <span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recycler-View"><span class="nav-number">1.1.2.</span> <span class="nav-text">Recycler View</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation"><span class="nav-number">1.1.3.</span> <span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Desgin-and-Style"><span class="nav-number">1.1.4.</span> <span class="nav-text">Desgin and Style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-View"><span class="nav-number">1.1.5.</span> <span class="nav-text">Custom View</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Background-Execution"><span class="nav-number">1.1.6.</span> <span class="nav-text">Background Execution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background-Work-on-Chinese-ROMs"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">Background Work on Chinese ROMs</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Studio"><span class="nav-number">1.1.7.</span> <span class="nav-text">Android Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle"><span class="nav-number">1.1.8.</span> <span class="nav-text">Gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Build-Time"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">Build Time</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kotlin-DSL"><span class="nav-number">1.1.8.2.</span> <span class="nav-text">Kotlin DSL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADB"><span class="nav-number">1.1.9.</span> <span class="nav-text">ADB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dagger2-Always-read-the-newets-posts"><span class="nav-number">1.1.10.</span> <span class="nav-text">Dagger2(Always read the newets posts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rx"><span class="nav-number">1.1.11.</span> <span class="nav-text">Rx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APK"><span class="nav-number">1.1.12.</span> <span class="nav-text">APK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proguard-Hell"><span class="nav-number">1.1.13.</span> <span class="nav-text">Proguard Hell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security"><span class="nav-number">1.1.14.</span> <span class="nav-text">Security</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Licenses"><span class="nav-number">1.1.15.</span> <span class="nav-text">Licenses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSS"><span class="nav-number">1.1.16.</span> <span class="nav-text">OSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Release"><span class="nav-number">1.1.17.</span> <span class="nav-text">Release</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test"><span class="nav-number">1.1.18.</span> <span class="nav-text">Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Architecture"><span class="nav-number">1.1.19.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance"><span class="nav-number">1.1.20.</span> <span class="nav-text">Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CI-Continuous-Integration"><span class="nav-number">1.1.21.</span> <span class="nav-text">CI, Continuous Integration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Archiecture-Components"><span class="nav-number">1.1.22.</span> <span class="nav-text">Archiecture Components</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Room"><span class="nav-number">1.1.22.1.</span> <span class="nav-text">Room</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.1.23.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kotlin"><span class="nav-number">1.1.24.</span> <span class="nav-text">Kotlin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Coroutines"><span class="nav-number">1.1.24.1.</span> <span class="nav-text">Coroutines</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Framework-Classes"><span class="nav-number">1.1.25.</span> <span class="nav-text">Framework Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Context"><span class="nav-number">1.1.25.1.</span> <span class="nav-text">Context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity"><span class="nav-number">1.1.25.2.</span> <span class="nav-text">Activity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DataBinding"><span class="nav-number">1.1.25.3.</span> <span class="nav-text">DataBinding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Views"><span class="nav-number">1.1.25.4.</span> <span class="nav-text">Views</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Media"><span class="nav-number">1.1.25.5.</span> <span class="nav-text">Media</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PIP"><span class="nav-number">1.1.25.6.</span> <span class="nav-text">PIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vibrate"><span class="nav-number">1.1.25.7.</span> <span class="nav-text">Vibrate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Google-Play-In-App-Purchase"><span class="nav-number">1.1.25.8.</span> <span class="nav-text">Google Play In-App Purchase</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Marketing"><span class="nav-number">1.1.25.9.</span> <span class="nav-text">Marketing</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Programming"><span class="nav-number">2.</span> <span class="nav-text">Programming</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other"><span class="nav-number">3.</span> <span class="nav-text">Other</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Generic"><span class="nav-number">3.1.</span> <span class="nav-text">Generic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Server"><span class="nav-number">3.2.</span> <span class="nav-text">Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WSL"><span class="nav-number">3.3.</span> <span class="nav-text">WSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Website-to-API"><span class="nav-number">3.4.</span> <span class="nav-text">Website to API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">3.5.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Encryption"><span class="nav-number">3.6.</span> <span class="nav-text">Encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Game"><span class="nav-number">3.7.</span> <span class="nav-text">Game</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Thoughts"><span class="nav-number">4.</span> <span class="nav-text">Thoughts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#More-links-at-any-time"><span class="nav-number">5.</span> <span class="nav-text">More links at any time</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dewey Reed"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dewey Reed</p>
+  <div class="site-description" itemprop="description">Hang in there, hang in there.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DeweyReed" title="GitHub → https://github.com/DeweyReed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5507158/dewey-reed" title="StackOverflow → https://stackoverflow.com/users/5507158/dewey-reed" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-deweyreed-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://aprildown.xyz/resources/index.html";
+    this.page.identifier = "resources/index.html";
+    this.page.title = "Development Barn";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://https-deweyreed-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"aprildown.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="虽然最终选择了GithubPages + Hexo，但之前使用Docker搭的Wordpress + HTTPS。搭完后才发现维护起来又累又贵，就把整个流程贴出来留给有缘人吧。 甩锅申明：出了问题我不知道怎么解决，请问万能的Stackoverflow吧😉 好处：  方便，命令几乎都是cd, ls和nano/vim。 快速，不需要LAMP或者LNMP漫长的安装/编译过程。新机器建站和删库跑路都很快">
+<meta name="keywords" content="Android Development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker快速搭建Wordpress + HTTPS">
+<meta property="og:url" content="http://aprildown.xyz/2018/03/20/docker-wordpress/index.html">
+<meta property="og:site_name" content="April Down">
+<meta property="og:description" content="虽然最终选择了GithubPages + Hexo，但之前使用Docker搭的Wordpress + HTTPS。搭完后才发现维护起来又累又贵，就把整个流程贴出来留给有缘人吧。 甩锅申明：出了问题我不知道怎么解决，请问万能的Stackoverflow吧😉 好处：  方便，命令几乎都是cd, ls和nano/vim。 快速，不需要LAMP或者LNMP漫长的安装/编译过程。新机器建站和删库跑路都很快">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-27T13:24:01.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker快速搭建Wordpress + HTTPS">
+<meta name="twitter:description" content="虽然最终选择了GithubPages + Hexo，但之前使用Docker搭的Wordpress + HTTPS。搭完后才发现维护起来又累又贵，就把整个流程贴出来留给有缘人吧。 甩锅申明：出了问题我不知道怎么解决，请问万能的Stackoverflow吧😉 好处：  方便，命令几乎都是cd, ls和nano/vim。 快速，不需要LAMP或者LNMP漫长的安装/编译过程。新机器建站和删库跑路都很快">
+
+<link rel="canonical" href="http://aprildown.xyz/2018/03/20/docker-wordpress/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Docker快速搭建Wordpress + HTTPS | April Down</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116348482-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-116348482-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">April Down</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Android Development</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-资源">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-code"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/DeweyReed" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2018/03/20/docker-wordpress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dewey Reed">
+      <meta itemprop="description" content="Hang in there, hang in there.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="April Down">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker快速搭建Wordpress + HTTPS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-20T00:00:00+00:00">2018-03-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/website/" itemprop="url" rel="index"><span itemprop="name">Website</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2018/03/20/docker-wordpress/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/03/20/docker-wordpress/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>虽然最终选择了GithubPages + Hexo，但之前使用Docker搭的Wordpress + HTTPS。搭完后才发现维护起来又累又贵，就把整个流程贴出来留给有缘人吧。</p>
+<p>甩锅申明：出了问题我不知道怎么解决，请问万能的Stackoverflow吧😉</p>
+<p>好处：</p>
+<ol>
+<li>方便，命令几乎都是cd, ls和nano/vim。</li>
+<li>快速，不需要LAMP或者LNMP漫长的安装/编译过程。新机器建站和删库跑路都很快。</li>
+<li>干净，不污染其他文件夹，删除网站只需要一条Docker命令。</li>
+<li>https，Let’s Encrypt! 不仅是网站，还要加个绿色的小锁。</li>
+</ol>
+<a id="more"></a>
+<p>坏处：</p>
+<ol>
+<li>出了问题不好解决，包括通过命令行修改网站、给网站装个监控什么的等等，都涉及有一定门槛儿的Docker命令。但对于正常地通过Wordpress面板的操作足够了。</li>
+</ol>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>先把域名解析上，最后上小锁时需要。</p>
+<p>新系统来了先</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt upgrade</span><br></pre></td></tr></table></figure>
+<p>老系统没有<code>apt</code>，用<code>apt-get</code></p>
+<h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><p>Docker是将程序和其依赖放在容器中，再进行部署的开源软件……总之很方便就对了。</p>
+<p>在其官网，不同系统有不同的安装教程。</p>
+<p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" target="_blank" rel="noopener">Ubuntu</a><br><a href="https://docs.docker.com/install/linux/docker-ce/debian/" target="_blank" rel="noopener">Debian</a><br><a href="https://docs.docker.com/install/linux/docker-ce/centos/" target="_blank" rel="noopener">Fedora</a><br><a href="https://docs.docker.com/install/linux/docker-ce/fedora/" target="_blank" rel="noopener">Ubuntu</a></p>
+<p>中文文档在</p>
+<p><a href="https://docs.docker-cn.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="noopener">Ubuntu</a><br><a href="https://docs.docker-cn.com/engine/installation/linux/docker-ce/debian/" target="_blank" rel="noopener">Debian</a><br><a href="https://docs.docker-cn.com/engine/installation/linux/docker-ce/centos/" target="_blank" rel="noopener">Fedora</a><br><a href="https://docs.docker-cn.com/engine/installation/linux/docker-ce/fedora/" target="_blank" rel="noopener">Ubuntu</a></p>
+<p>举例：我的Debian8（注意对内核有要求）是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apt-get install \</span><br><span class="line">     apt-transport-https \</span><br><span class="line">     ca-certificates \</span><br><span class="line">     curl \</span><br><span class="line">     gnupg2 \</span><br><span class="line">     software-properties-common</span><br><span class="line"></span><br><span class="line">curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; <span class="built_in">echo</span> <span class="string">"<span class="variable">$ID</span>"</span>)/gpg | apt-key add -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选，查看签名是否添加成功，在输出的内容中应该有下面那行内容。</span></span><br><span class="line">apt-key fingerprint 0EBFCD88</span><br><span class="line"><span class="comment"># 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88</span></span><br><span class="line"></span><br><span class="line">add-apt-repository \</span><br><span class="line">   <span class="string">"deb [arch=amd64] https://download.docker.com/linux/<span class="variable">$(. /etc/os-release; echo "$ID")</span> \</span></span><br><span class="line"><span class="string">   <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">   stable"</span></span><br><span class="line"></span><br><span class="line">apt update</span><br><span class="line">apt install docker-ce</span><br></pre></td></tr></table></figure>
+<h2 id="安装Docker-compose"><a href="#安装Docker-compose" class="headerlink" title="安装Docker-compose"></a>安装Docker-compose</h2><p>一次运行多个容器的工具。</p>
+<p>官网有<a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">安装指南</a>，中文的似乎没翻译。</p>
+<p>举例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h2 id="安装代理"><a href="#安装代理" class="headerlink" title="安装代理"></a>安装代理</h2><p>安装之前，先新建一些文件夹，来存放我们网站的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#/你的目录</span></span><br><span class="line"><span class="comment">#    /nginx-files</span></span><br><span class="line"><span class="comment">#    /database</span></span><br><span class="line"><span class="comment">#    /wordpress</span></span><br><span class="line"><span class="comment">#        /core/files</span></span><br><span class="line"><span class="comment">#        /wp-content</span></span><br><span class="line"><span class="comment"># 命令是：</span></span><br><span class="line">mkdir nginx-files</span><br><span class="line">mkdir database</span><br><span class="line">mkdir wordpress</span><br><span class="line"><span class="built_in">cd</span> wordpress</span><br><span class="line">mkdir core</span><br><span class="line">mkdir wp-content</span><br><span class="line"><span class="built_in">cd</span> core</span><br><span class="line">mkdir files</span><br><span class="line"><span class="built_in">cd</span> 回你的最上层目录</span><br></pre></td></tr></table></figure>
+<p>安装代理需要这么一个Github Repo: <a href="https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion" target="_blank" rel="noopener">Web Proxy using Docker, NGINX and Let’s Encrypt</a></p>
+<p>它的README有安装教程，但有几个坑。</p>
+<ol>
+<li>下载Repo：<code>git clone https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git</code></li>
+<li>【可选】如果不使用反向代理的话，可以删掉Repo中<code>/conf.d/realip.conf</code></li>
+<li>【可选】可以修改<code>/conf.d/uploadsize.conf</code>中的<code>client_max_body_size</code>的值，默认是100MB，限制上传文件的最大大小，不够就加大。</li>
+<li>改名，<code>mv .env.sample .env</code></li>
+<li>修改变量，<code>nano .env</code>，或者用<code>vim</code>。</li>
+<li>需要修改的变量有<ul>
+<li><code>IP</code>：修改为机器的IP </li>
+<li><code>NGINX_FILES_PATH</code>：修改为刚刚新建的<code>nginx-files</code>文件夹的路径</li>
+<li><code>USE_NGINX_CONF_FILES</code>：【可选】去掉变量前的井号。这里是要使用conf.d文件夹下的设置，包括之前第三步上传文件的最大大小。如果不在乎这几个设置也可以不管它（后果就是搭好后上传主题时，2MB就GG）</li>
+</ul>
+</li>
+<li>运行<code>./start.sh</code></li>
+</ol>
+<h2 id="安装Wordpress"><a href="#安装Wordpress" class="headerlink" title="安装Wordpress"></a>安装Wordpress</h2><p>又需要一个Github Repo：<a href="https://github.com/evertramos/docker-wordpress-letsencrypt" target="_blank" rel="noopener">Using Wordpress with SSL enabled integrated with NGINX proxy and autorenew LetsEncrypt certificates</a></p>
+<p>同样有几个坑。</p>
+<ol>
+<li><p>下载：<code>git clone https://github.com/evertramos/wordpress-docker-letsencrypt.git</code></p>
+</li>
+<li><p>【可选】新建一个<code>uploads.ini</code>的文件，内容是</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">file_uploads = On</span><br><span class="line">memory_limit = 64M</span><br><span class="line">upload_max_filesize = 64M</span><br><span class="line">post_max_size = 64M</span><br><span class="line">max_execution_time = 600</span><br></pre></td></tr></table></figure>
+<p> 这里跟上一步中修改上传文件的最大大小是一致的，要么一起用，要么就不用，下几步的可选也是一样的，不用的话都可以跳过。这里的最大上传文件设置为64MB，不够随便改。</p>
+</li>
+<li>【可选】修改<code>docker-compose.yml</code>，在<code>services - wordpress - volumes</code>下加一行<code>- ${PHP_UPLOAD_CONF}:/usr/local/etc/php/conf.d/uploads.ini</code></li>
+<li>改名，<code>mv .env.sample .env</code></li>
+<li>修改<code>.env</code><ul>
+<li><code>DB_PATH</code>: 修改为刚刚新建的<code>database</code>文件夹的路径</li>
+<li><code>MYSQL_ROOT_PASSWORD</code>: 挑一个数据库根密码</li>
+<li><code>MYSQL_DATABASE</code>: 数据库的名字，随便取，习惯上用<code>wordpress</code></li>
+<li><code>MYSQL_USER</code>: 数据库用户，随便取，习惯上用<code>wordpress</code></li>
+<li><code>MYSQL_PASSWORD</code>: 挑一个数据库密码</li>
+<li><code>WP_CORE</code>: 修改为刚刚新建的<code>core</code>文件夹的路径</li>
+<li><code>WP_CONTENT</code>: 修改为刚刚新建的<code>wp-content</code>文件夹的路径</li>
+<li><code>DOMAINS</code>: 修改为开头就应该解析上的域名</li>
+<li><code>LETSENCRYPT_EMAIL</code>: 修改为你的邮箱，用于Let’s Encrypt</li>
+<li>【可选】如果执行了2、3步的话，最后加一行<code>PHP_UPLOAD_CONF=/刚刚新建的文件路径/uploads.ini</code></li>
+</ul>
+</li>
+<li>运行<code>docker-compose up -d</code></li>
+</ol>
+<p>等个几十秒一分钟，网站就可以使用了，带个https绿色小锁。</p>
+<h2 id="命令与支援"><a href="#命令与支援" class="headerlink" title="命令与支援"></a>命令与支援</h2><ul>
+<li>不带<code>-d</code>直接运行<code>docker-compose up</code>可以查看日志，用于排错。</li>
+<li>在第二个Repo的文件夹中，运行<code>docker-compose down</code>可以停止Wordpress。</li>
+<li><code>docker container ls [--all]</code>: 显示所有Container，最后不带<code>--all</code>的仅显示运行中的，带的话还显示已停止的。最后应该一共有5个Container。</li>
+<li><code>docker rm [--force] linux_tweet_app</code>: 删除一个Container，带<code>--force</code>强制删除，无视是否运行。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/10/timer-devLog/" rel="prev" title="计时机器开发日志">
+      <i class="fa fa-chevron-left"></i> 计时机器开发日志
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/04/01/splinter/" rel="next" title="使用Splinter模拟网页操作">
+      使用Splinter模拟网页操作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker"><span class="nav-number">2.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Docker-compose"><span class="nav-number">3.</span> <span class="nav-text">安装Docker-compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装代理"><span class="nav-number">4.</span> <span class="nav-text">安装代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Wordpress"><span class="nav-number">5.</span> <span class="nav-text">安装Wordpress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令与支援"><span class="nav-number">6.</span> <span class="nav-text">命令与支援</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dewey Reed"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dewey Reed</p>
+  <div class="site-description" itemprop="description">Hang in there, hang in there.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DeweyReed" title="GitHub → https://github.com/DeweyReed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5507158/dewey-reed" title="StackOverflow → https://stackoverflow.com/users/5507158/dewey-reed" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-deweyreed-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://aprildown.xyz/2018/03/20/docker-wordpress/";
+    this.page.identifier = "2018/03/20/docker-wordpress/";
+    this.page.title = "Docker快速搭建Wordpress + HTTPS";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://https-deweyreed-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

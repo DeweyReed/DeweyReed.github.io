@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"aprildown.xyz","root":"/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="RT">
+<meta name="keywords" content="Android Development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Dev Summit 2019 笔记">
+<meta property="og:url" content="http://aprildown.xyz/2019/11/13/android-dev-summit-2019/index.html">
+<meta property="og:site_name" content="April Down">
+<meta property="og:description" content="RT">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-27T13:24:01.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Dev Summit 2019 笔记">
+<meta name="twitter:description" content="RT">
+
+<link rel="canonical" href="http://aprildown.xyz/2019/11/13/android-dev-summit-2019/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Android Dev Summit 2019 笔记 | April Down</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116348482-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-116348482-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">April Down</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Android Development</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-资源">
+
+    <a href="/resources/" rel="section"><i class="fa fa-fw fa-code"></i>资源</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/DeweyReed" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2019/11/13/android-dev-summit-2019/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dewey Reed">
+      <meta itemprop="description" content="Hang in there, hang in there.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="April Down">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android Dev Summit 2019 笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-13T00:00:00+00:00">2019-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/11/13/android-dev-summit-2019/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/13/android-dev-summit-2019/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>RT</p>
+<a id="more"></a>
+<h3 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h3><ul>
+<li>MAC: <code>system-Profiler SPUSBDataType</code></li>
+<li>Linux: <code>lsusb -vvv</code></li>
+<li>Windows: <code>USBView.exe</code></li>
+</ul>
+<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p><code>settings.gradle</code>: <code>project(&quot;:core&quot;).projectDir = new File(rootDir, &quot;libraries/core&quot;)</code></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> androidx = [:]</span><br><span class="line">androidx.appcompat = <span class="string">"androidx.apcompat:appcompat:1.1.0"</span></span><br><span class="line"></span><br><span class="line">ext.libs = [:]</span><br><span class="line">exit.libs.androidx = androidx</span><br><span class="line"></span><br><span class="line">implementation libs.androidx.appcompat</span><br></pre></td></tr></table></figure>
+<h3 id="ADB"><a href="#ADB" class="headerlink" title="ADB"></a>ADB</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb emu fold</span><br><span class="line">adb emu wm size</span><br><span class="line">adb emu wm size 1148x2480</span><br><span class="line">adb emu wm size reset</span><br></pre></td></tr></table></figure>
+<h3 id="Drawing-Behind-System-Bar"><a href="#Drawing-Behind-System-Bar" class="headerlink" title="Drawing Behind System Bar"></a>Drawing Behind System Bar</h3><ol>
+<li><p>Change system bar colors</p>
+<p> values-v29/themes.xml:</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:navigationBarColor"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> values/themes.xml: <code>#B3FFFFFF</code>(70% white)</p>
+<p> values-night/themes.xml: <code>#B3000000</code>(70% black)</p>
+</li>
+<li><p>Request to be laid out fullscreen</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// We wish to be laid out as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// We wish to be laid out fullscreen, behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// We wish to be laid out at the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Avoid overlays with system UI</p>
+<p> Always use the ViewCompat method:</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setOnApplyWindowInsetsListener(view) &#123; v, insets -&gt;</span><br><span class="line">    <span class="comment">// Do something with the insets</span></span><br><span class="line">    v.updatePadding(</span><br><span class="line">        bottom = insets.systemWindowInsets.bottom</span><br><span class="line">    )</span><br><span class="line">    v.updateLayoutParams&lt;MarginLayoutParams&gt;(</span><br><span class="line">        bottomMargin = insets.systemWindowInsets.bottom</span><br><span class="line">    )</span><br><span class="line">    <span class="comment">// return the insets</span></span><br><span class="line">    insets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WindowInsetsCompat.getSystemWindowInsets(): Insets</span><br><span class="line">WindowInsetsCompat.getSystemGestureInsets(): Insets</span><br><span class="line">WindowInsetsCompat.getMandatorySystemGestureInsets(): Insets</span><br></pre></td></tr></table></figure>
+<p> onLayout/onDraw: <code>View.setSystemGestureExclusionRects(List&lt;Rect&gt; rects)</code></p>
+</li>
+</ol>
+<h3 id="Scopes"><a href="#Scopes" class="headerlink" title="Scopes"></a>Scopes</h3><p>Fragment, Fragment ViewModel, Activity, Activity ViewModel, Application &amp; its ViewModel</p>
+<h3 id="One-way-to-handle-back"><a href="#One-way-to-handle-back" class="headerlink" title="One way to handle back"></a>One way to handle back</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> dispatcher <span class="keyword">by</span> lazy &#123; requireActivity().onBackPressedDispatcher &#125;</span><br><span class="line"><span class="keyword">lateinit</span> <span class="keyword">var</span> callback: OnBackPressedCallback</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    callback = dispatcher.addCallback(<span class="keyword">this</span>) &#123;</span><br><span class="line">        showConfirmDialog()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">onConfirm</span><span class="params">()</span></span> &#123;</span><br><span class="line">    callback.enabled = <span class="literal">false</span></span><br><span class="line">    dispatcher.onBackPressed()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Intent-Handling"><a href="#Intent-Handling" class="headerlink" title="Intent Handling"></a>Intent Handling</h3><ol>
+<li>A lot of intent handlers couble be disabled.</li>
+<li>Check if an intent handler exists, don’t assume it will just work.</li>
+</ol>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (intent.resolveActivity(packageManager) == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">// Error!</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Scoped-Storage"><a href="#Scoped-Storage" class="headerlink" title="Scoped Storage"></a>Scoped Storage</h3><ol>
+<li><p>Read only video/image/audio files</p>
+<p> MediaStore + READ_EXTERNAL_STORAGE</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Video</span></span>(<span class="keyword">val</span> uri: Uri, <span class="keyword">val</span> name: String, <span class="keyword">val</span> duration: <span class="built_in">Int</span>, <span class="keyword">val</span> size: <span class="built_in">Int</span>)</span><br><span class="line"><span class="keyword">val</span> videoList = mutableListOf&lt;Video&gt;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> projection = arrayOf(</span><br><span class="line">    MediaStore.Video.Media._ID,</span><br><span class="line">    MediaStore.Video.Media.DISPLAY_NAME,</span><br><span class="line">    MediaStore.Video.Media.DURATION,</span><br><span class="line">    MediaStore.Video.Media.SIZE</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> selection = <span class="string">"Video.Media.DURATION) &gt;= ?"</span></span><br><span class="line"><span class="keyword">val</span> selectionArgs = arrayOf(</span><br><span class="line">    TimeUnit.MILLISECONDS.convert(<span class="number">5</span>, TimeUnit.MINUTES).toString()</span><br><span class="line">)</span><br><span class="line"><span class="keyword">val</span> query = contentResolver.query(</span><br><span class="line">    MediaStore.Video.Media.EXTERNAL_CONTENT_URI,</span><br><span class="line">    projection,</span><br><span class="line">    selection,</span><br><span class="line">    selectionArgs,</span><br><span class="line">    <span class="string">"<span class="subst">$&#123;MediaStore.Video.Media.DISPLAY_NAME&#125;</span> ASC"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">query?.use &#123; cursor -&gt;</span><br><span class="line">    <span class="keyword">val</span> idColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID)</span><br><span class="line">    <span class="keyword">val</span> nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME)</span><br><span class="line">    <span class="keyword">val</span> durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DDRATION)</span><br><span class="line">    <span class="keyword">val</span> sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.SIZE)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(cursor.moveToNext()) &#123;</span><br><span class="line">        <span class="comment">// we 11 use the column indexes that we found above</span></span><br><span class="line">        <span class="keyword">val</span> id = cursor.getLong(idColumn)</span><br><span class="line">        <span class="keyword">val</span> name = cursor.getString(nameColumn)</span><br><span class="line">        <span class="keyword">val</span> duration = cursor.getInt(durationColumn)</span><br><span class="line">        <span class="keyword">val</span> size = cursor.getInt(sizeColumn)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> contentUri = ContentUris.withAppendedId(</span><br><span class="line">            MediaStore Video Media EXTERNAL_CONTENT_URI. id</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        videolist += Video(contentUri, name, duration, size)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Read non-media files</p>
+<p> SAF(No Permission): ACTION_OPEN_DOCUMENT, ACTION_OPEN_DOCUMENT_TREE + takePersistableUriPermission</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">intentPickDocument</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply &#123;</span><br><span class="line">        addCategory(Intent.CATEGORY_OPENABLE)</span><br><span class="line">        type = <span class="string">"application/pdf"</span></span><br><span class="line">    &#125;</span><br><span class="line">    startActivityForResult(intent, PICK_PDF_FILE)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onActivityResult</span><span class="params">(requestCode: <span class="type">Int</span>, resultCode: <span class="type">Int</span>, resultData: <span class="type">Intent</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, resultData)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (requestCode == PICK_PDF_FILE &amp;&amp; resultCode == Activity.RESULT_OK) &#123;</span><br><span class="line">        resultData?.<span class="keyword">data</span>?.let &#123; uri -&gt;</span><br><span class="line">            renderPdf(uri)</span><br><span class="line"></span><br><span class="line">            contentResolver.query(uri, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>)?.use &#123;</span><br><span class="line">                <span class="keyword">val</span> name = it.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))</span><br><span class="line">                <span class="keyword">val</span> size = it.getString(cursor.getColumnIndexOrThrow(OpenableColumns.SIZE)) <span class="comment">// May throw</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Add &amp; Edit image/video/audio files</p>
+<p> MediaStore + WRITE_EXTERNAL_STORAGE(READ?) + ACCESS_MEDIA_LOCATION to access EXIF data</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> selectedImageUri = Uri.parser(<span class="string">"content://media/external/images/media/44"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">editImage</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        contentResolver.openFileDescriptor(selectedtmageUri, <span class="string">"w"</span>)?.use &#123;</span><br><span class="line">            setGrayscaleFilter(it)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (securityException: SecurityException) &#123;</span><br><span class="line">        <span class="keyword">if</span> (Build.VERSIN.SDK_INT &gt;= Build.VERSION_CDDES.Q) &#123;</span><br><span class="line">            <span class="keyword">val</span> recoverableSecurityException = securityException <span class="keyword">as</span>? RecoverableSecurityException ?: <span class="keyword">throw</span> securityException</span><br><span class="line">            <span class="keyword">val</span> intentSender = recoverableSecurityException.userAction.actionIntent.intentSender</span><br><span class="line"></span><br><span class="line">            intenSender?.let &#123;</span><br><span class="line">                startIntentSenderForResult(intentSender, EDIT_IMAGE_REQUEST, <span class="literal">null</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">null</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> securityException</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>File management or Backup features need to approved in Play Console.</p>
+</li>
+</ol>
+<h3 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h3><ol>
+<li>Background Services =&gt; MediaBrowserServer(API 26)</li>
+<li>WorkManager</li>
+<li>Reduced use of SharedPreferences</li>
+<li>Reorganized the app graph to perform less object instantiation in application’s onCreate()</li>
+</ol>
+<h3 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h3><p><code>AppTheme</code> =&gt; <code>Theme.MaterialComponents.Light</code> =&gt; <code>Theme.AppCompat.Light</code> =&gt; <code>Theme.Material.Light</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">getThemeColor</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="meta">@AttrRes</span> themeAttrld: <span class="type">Int</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> obtainStyledAttributes(</span><br><span class="line">        intArrayOf(themeAttrld)</span><br><span class="line">    ).use &#123;</span><br><span class="line">        it.getColor(<span class="number">0</span>, Color.MAGENTA)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> themedContext = ContextThemeWrapper(context, R.style.ThemeOverlay_Owl_Blue)</span><br><span class="line"><span class="keyword">val</span> inflater = LayoutInflater.from(themedContext)</span><br><span class="line"><span class="keyword">val</span> view = inflater.inflate(...)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Use literal names, relavant to the value(brand_blue &gt; color_primary)</li>
+<li><p>Name</p>
+<p>  Theme.AppTheme.Blue</p>
+<p>  Widget.AppTheme.Toolbar.Green</p>
+<p>  StyleType.GroupName.SubGroupName.VariantName</p>
+</li>
+<li><p><del><code>&lt;View style=&quot;@style/Theme.AppTheme.Foo&quot; /&gt;</code></del></p>
+</li>
+<li><p>Files</p>
+<ul>
+<li>themes.xml: Themes and ThemeOverlays</li>
+<li>types.xml: TextApperances, Text size dimens</li>
+<li>styles.xml: Widget styles</li>
+<li>dimens.xml, colors.xml, strings.xml</li>
+</ul>
+</li>
+<li><p><code>?textApperanceHeandline1</code> &gt; <code>@style/TextApperance.MaterialComponts.Headline1</code></p>
+</li>
+</ul>
+<h3 id="Permissions"><a href="#Permissions" class="headerlink" title="Permissions"></a>Permissions</h3><ul>
+<li>Mimimum permissions</li>
+<li>Request in context</li>
+<li>Libraries</li>
+<li>Mimimize localtion and background location</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/02/android-coordinator-layout-hack/" rel="prev" title="巧用Android CoordinatorLayout实现复杂布局 + 滚动内容">
+      <i class="fa fa-chevron-left"></i> 巧用Android CoordinatorLayout实现复杂布局 + 滚动内容
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/24/github-stars/" rel="next" title="Github Stars整理">
+      Github Stars整理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#USB"><span class="nav-number">1.</span> <span class="nav-text">USB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradle"><span class="nav-number">2.</span> <span class="nav-text">Gradle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADB"><span class="nav-number">3.</span> <span class="nav-text">ADB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drawing-Behind-System-Bar"><span class="nav-number">4.</span> <span class="nav-text">Drawing Behind System Bar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scopes"><span class="nav-number">5.</span> <span class="nav-text">Scopes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#One-way-to-handle-back"><span class="nav-number">6.</span> <span class="nav-text">One way to handle back</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intent-Handling"><span class="nav-number">7.</span> <span class="nav-text">Intent Handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scoped-Storage"><span class="nav-number">8.</span> <span class="nav-text">Scoped Storage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ANR"><span class="nav-number">9.</span> <span class="nav-text">ANR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Theme"><span class="nav-number">10.</span> <span class="nav-text">Theme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permissions"><span class="nav-number">11.</span> <span class="nav-text">Permissions</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dewey Reed"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dewey Reed</p>
+  <div class="site-description" itemprop="description">Hang in there, hang in there.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DeweyReed" title="GitHub → https://github.com/DeweyReed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5507158/dewey-reed" title="StackOverflow → https://stackoverflow.com/users/5507158/dewey-reed" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-deweyreed-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://aprildown.xyz/2019/11/13/android-dev-summit-2019/";
+    this.page.identifier = "2019/11/13/android-dev-summit-2019/";
+    this.page.title = "Android Dev Summit 2019 笔记";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://https-deweyreed-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
