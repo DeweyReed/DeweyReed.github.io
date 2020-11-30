@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="April Down">
 <meta property="og:description" content="记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-10-31T14:28:29.755Z">
+<meta property="og:updated_time" content="2020-11-30T03:32:24.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="天天坏，天天修的Android Studio">
 <meta name="twitter:description" content="记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。">
@@ -235,6 +235,7 @@
 <p>“坏掉”指的是所有不是自己代码问题的问题。</p>
 <h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158" target="_blank" rel="noopener">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
 <p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
+<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
 <h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
 <h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
 <p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
