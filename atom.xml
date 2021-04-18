@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aprildown.xyz/"/>
-  <updated>2021-03-16T13:25:08.955Z</updated>
+  <updated>2021-04-18T13:46:17.511Z</updated>
   <id>http://aprildown.xyz/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>个人偏爱的Android应用架构</title>
+    <link href="http://aprildown.xyz/2021/04/18/android-opinoinated-arch/"/>
+    <id>http://aprildown.xyz/2021/04/18/android-opinoinated-arch/</id>
+    <published>2021-04-18T00:00:00.000Z</published>
+    <updated>2021-04-18T13:46:17.511Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了&lt;a href=&quot;https://github.com/google/iosched&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;iosched&lt;/a&gt;，尽可能地照顾到测试和扩展。&lt;/p&gt;
+&lt;p&gt;不定期更新新的想法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Android开发牢骚</title>
     <link href="http://aprildown.xyz/2021/02/06/android-thoughts-20210206/"/>
     <id>http://aprildown.xyz/2021/02/06/android-thoughts-20210206/</id>
     <published>2021-02-06T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -39,7 +58,7 @@
     <link href="http://aprildown.xyz/2020/09/20/android-studio-is-broken/"/>
     <id>http://aprildown.xyz/2020/09/20/android-studio-is-broken/</id>
     <published>2020-09-20T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -57,7 +76,7 @@
     <link href="http://aprildown.xyz/2020/09/07/timer-cloud-backup/"/>
     <id>http://aprildown.xyz/2020/09/07/timer-cloud-backup/</id>
     <published>2020-09-07T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.515Z</updated>
     
     <summary type="html">
     
@@ -75,7 +94,7 @@
     <link href="http://aprildown.xyz/2020/08/06/clean-browser-history/"/>
     <id>http://aprildown.xyz/2020/08/06/clean-browser-history/</id>
     <published>2020-08-06T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -94,7 +113,7 @@
     <link href="http://aprildown.xyz/2020/05/07/android-dark-theme/"/>
     <id>http://aprildown.xyz/2020/05/07/android-dark-theme/</id>
     <published>2020-05-07T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -112,7 +131,7 @@
     <link href="http://aprildown.xyz/2020/04/21/android-feature-flags/"/>
     <id>http://aprildown.xyz/2020/04/21/android-feature-flags/</id>
     <published>2020-04-21T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -130,7 +149,7 @@
     <link href="http://aprildown.xyz/2020/01/25/android-storage/"/>
     <id>http://aprildown.xyz/2020/01/25/android-storage/</id>
     <published>2020-01-25T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -149,7 +168,7 @@
     <link href="http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/"/>
     <id>http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/</id>
     <published>2020-01-19T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.515Z</updated>
     
     <summary type="html">
     
@@ -168,7 +187,7 @@
     <link href="http://aprildown.xyz/2020/01/12/android-resources-test/"/>
     <id>http://aprildown.xyz/2020/01/12/android-resources-test/</id>
     <published>2020-01-12T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -186,7 +205,7 @@
     <link href="http://aprildown.xyz/2020/01/01/android-oh-my-dagger/"/>
     <id>http://aprildown.xyz/2020/01/01/android-oh-my-dagger/</id>
     <published>2020-01-01T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -204,7 +223,7 @@
     <link href="http://aprildown.xyz/2019/11/27/android-animated_vector_drawables/"/>
     <id>http://aprildown.xyz/2019/11/27/android-animated_vector_drawables/</id>
     <published>2019-11-27T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -222,7 +241,7 @@
     <link href="http://aprildown.xyz/2019/11/24/github-stars/"/>
     <id>http://aprildown.xyz/2019/11/24/github-stars/</id>
     <published>2019-11-24T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -241,7 +260,7 @@
     <link href="http://aprildown.xyz/2019/11/13/android-dev-summit-2019/"/>
     <id>http://aprildown.xyz/2019/11/13/android-dev-summit-2019/</id>
     <published>2019-11-13T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -261,7 +280,7 @@
     <link href="http://aprildown.xyz/2019/10/02/android-coordinator-layout-hack/"/>
     <id>http://aprildown.xyz/2019/10/02/android-coordinator-layout-hack/</id>
     <published>2019-10-02T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -279,7 +298,7 @@
     <link href="http://aprildown.xyz/2019/10/02/android-mock-server/"/>
     <id>http://aprildown.xyz/2019/10/02/android-mock-server/</id>
     <published>2019-10-02T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -299,7 +318,7 @@
     <link href="http://aprildown.xyz/2019/09/07/android-appcompt110-fading-dark/"/>
     <id>http://aprildown.xyz/2019/09/07/android-appcompt110-fading-dark/</id>
     <published>2019-09-07T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -317,7 +336,7 @@
     <link href="http://aprildown.xyz/2019/08/25/android-chinese-pitfalls/"/>
     <id>http://aprildown.xyz/2019/08/25/android-chinese-pitfalls/</id>
     <published>2019-08-25T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.511Z</updated>
     
     <summary type="html">
     
@@ -335,7 +354,7 @@
     <link href="http://aprildown.xyz/2019/07/07/personal-info/"/>
     <id>http://aprildown.xyz/2019/07/07/personal-info/</id>
     <published>2019-07-07T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.515Z</updated>
     
     <summary type="html">
     
@@ -353,7 +372,7 @@
     <link href="http://aprildown.xyz/2019/07/06/timer-death/"/>
     <id>http://aprildown.xyz/2019/07/06/timer-death/</id>
     <published>2019-07-06T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
+    <updated>2021-04-18T13:46:17.515Z</updated>
     
     <summary type="html">
     
@@ -363,24 +382,6 @@
     </summary>
     
       <category term="Android" scheme="http://aprildown.xyz/categories/android/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>两种安慰别人的方式</title>
-    <link href="http://aprildown.xyz/2019/07/05/thoughts-comfort/"/>
-    <id>http://aprildown.xyz/2019/07/05/thoughts-comfort/</id>
-    <published>2019-07-05T00:00:00.000Z</published>
-    <updated>2021-03-16T13:25:08.955Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Thoughts" scheme="http://aprildown.xyz/categories/thoughts/"/>
     
     
   </entry>
