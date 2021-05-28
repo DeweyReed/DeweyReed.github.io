@@ -19,28 +19,28 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;aprildown.xyz&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="这里做个大概的总结，文中出现的所有排列都分先后，只选取了数据最多的前几名进行展示和说明。 因为我发现这些数据没啥用，从4.1.0开始将不再统计了。">
+<meta name="description" content="随着androidx.core1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="截至到2020年1月19日三个月内计时机器的统计数据">
-<meta property="og:url" content="http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/index.html">
+<meta property="og:title" content="简单的Android软键盘动画">
+<meta property="og:url" content="http://aprildown.xyz/2021/05/28/android-naive-keyboard-animation/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="这里做个大概的总结，文中出现的所有排列都分先后，只选取了数据最多的前几名进行展示和说明。 因为我发现这些数据没啥用，从4.1.0开始将不再统计了。">
+<meta property="og:description" content="随着androidx.core1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-19T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-28T10:45:36.326Z">
+<meta property="article:published_time" content="2021-05-28T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-28T10:45:36.322Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/">
+<link rel="canonical" href="http://aprildown.xyz/2021/05/28/android-naive-keyboard-animation/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;aprildown.xyz&#x2F;2020&#x2F;01&#x2F;19&#x2F;timer-analytics-2020-1-19&#x2F;&quot;,&quot;path&quot;:&quot;2020&#x2F;01&#x2F;19&#x2F;timer-analytics-2020-1-19&#x2F;&quot;,&quot;title&quot;:&quot;截至到2020年1月19日三个月内计时机器的统计数据&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;aprildown.xyz&#x2F;2021&#x2F;05&#x2F;28&#x2F;android-naive-keyboard-animation&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;05&#x2F;28&#x2F;android-naive-keyboard-animation&#x2F;&quot;,&quot;title&quot;:&quot;简单的Android软键盘动画&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>截至到2020年1月19日三个月内计时机器的统计数据 | April Down</title><script src="/js/config.js"></script>
+<title>简单的Android软键盘动画 | April Down</title><script src="/js/config.js"></script>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116348482-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{&quot;tracking_id&quot;:&quot;UA-116348482-1&quot;,&quot;only_pageview&quot;:false}</script>
@@ -109,7 +109,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -122,7 +122,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%95%8C%E9%9D%A2%E4%B8%8B%E6%96%B9%E6%8C%89%E9%92%AE"><span class="nav-number">2.</span> <span class="nav-text">运行界面下方按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E6%97%B6%E5%99%A8%E9%80%89%E9%A1%B9%EF%BC%88%E6%89%93%E5%BC%80%E6%AD%A4%E9%80%89%E9%A1%B9%E5%B9%B6%E4%BF%9D%E5%AD%98%E7%9A%84%E7%94%A8%E6%88%B7%E4%B8%AD%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">计时器选项（打开此选项并保存的用户中）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%A7%8B%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">起始步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.</span> <span class="nav-text">普通步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5%E6%AD%A5%E9%AA%A4"><span class="nav-number">6.</span> <span class="nav-text">通知步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F%E6%AD%A5%E9%AA%A4"><span class="nav-number">7.</span> <span class="nav-text">结束步骤</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -198,7 +197,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2020/01/19/timer-analytics-2020-1-19/">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2021/05/28/android-naive-keyboard-animation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          截至到2020年1月19日三个月内计时机器的统计数据
+          简单的Android软键盘动画
         </h1>
 
         <div class="post-meta-container">
@@ -222,7 +221,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-01-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-19T00:00:00+00:00">2020-01-19</time>
+      <time title="创建时间：2021-05-28 00:00:00" itemprop="dateCreated datePublished" datetime="2021-05-28T00:00:00+00:00">2021-05-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -243,8 +242,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2020/01/19/timer-analytics-2020-1-19/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/19/timer-analytics-2020-1-19/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/05/28/android-naive-keyboard-animation/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/28/android-naive-keyboard-animation/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -258,26 +257,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+        <p>随着<code>androidx.core</code>1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。</p>
 <span id="more"></span>
 
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+<ol>
+<li><p>设置<code>windowSoftInputMode</code></p>
+<p> 给Activity增加 <code>android:windowSoftInputMode=&quot;adjustResize&quot;</code></p>
+<p> 根据<a target="_blank" rel="noopener" href="https://developer.android.com/training/keyboard-input/visibility#Respond">官方文档</a>：</p>
+<blockquote>
+<p>To ensure the best behavior for your app, you should specify how you’d like the system to display your UI in the remaining space.</p>
+</blockquote>
+<p> 而且不同的系统版本，默认的行为不同，所以这里加一个确保行为一致。</p>
+<p> 根据<a target="_blank" rel="noopener" href="https://developer.android.com/training/keyboard-input/visibility#ShowOnStart">官方文档</a>，还可以加一个<code>stateHidden</code>来避免在一些系统版本上一打开Activity，软键盘就弹出的问题。</p>
+</li>
+<li><p>全屏/让内容显示在系统界面之后</p>
+<p> <code>WindowCompat.setDecorFitsSystemWindows(window, false)</code></p>
+</li>
+<li><p>透明状态栏和导航栏</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">window.run &#123;</span><br><span class="line">    statusBarColor = Color.TRANSPARENT</span><br><span class="line">    navigationBarColor = Color.TRANSPARENT</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 更完美的颜色参照<a target="_blank" rel="noopener" href="https://medium.com/androiddevelopers/gesture-navigation-going-edge-to-edge-812f62e4e83e">Gesture Navigation: going edge-to-edge (I)</a>。</p>
+</li>
+<li><p>避免View和系统界面重叠</p>
+<p> 如果顶部是<code>AppBarLayout</code>，就增加一个<code>android:fitsSystemWindows=&quot;true&quot;</code>来让它自己处理顶部。底部也可以用默认处理，但通常效果不理想。</p>
+<p> 如果是普通View：</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setOnApplyWindowInsetsListener(binding.root) &#123; v, insets -&gt;</span><br><span class="line">    <span class="keyword">val</span> bottomInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())</span><br><span class="line">    v.updatePadding(bottom = bottomInsets.bottom)</span><br><span class="line">    <span class="keyword">val</span> keyboardShown = insets.isVisible(WindowInsetsCompat.Type.ime())</span><br><span class="line">    insets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里只用<code>systemBars</code>来避免键盘弹出时界面跳动。</li>
+<li>这里也是检测键盘是否弹出的地方。</li>
+<li>在键盘弹出时，导航栏高度算在软键盘高度的一部分中的。</li>
+</ul>
+</li>
+<li><p>增加动画</p>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setWindowInsetsAnimationCallback(</span><br><span class="line">    binding.root,</span><br><span class="line">    <span class="keyword">object</span> : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onProgress</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            insets: <span class="type">WindowInsetsCompat</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">            runningAnimations: <span class="type">MutableList</span>&lt;<span class="type">WindowInsetsAnimationCompat</span>&gt;</span></span></span><br><span class="line"><span class="params"><span class="function">        )</span></span>: WindowInsetsCompat &#123;</span><br><span class="line">            <span class="keyword">val</span> bottomInsets = insets.getInsets(</span><br><span class="line">                WindowInsetsCompat.Type.ime() or</span><br><span class="line">                    WindowInsetsCompat.Type.systemBars()</span><br><span class="line">            )</span><br><span class="line">            binding.root.updatePadding(bottom = bottomInsets.bottom)</span><br><span class="line">            <span class="keyword">return</span> insets</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+<li><p>其他考虑</p>
+<ul>
+<li>如果要显示Snackbar，需要额外测试。Padding可能不是最好的方法，可能需要Margin或额外的<code>Space</code> View。</li>
+<li>显示软键盘，似乎<a target="_blank" rel="noopener" href="https://developer.squareup.com/blog/showing-the-android-keyboard-reliably/">Showing the Android Keyboard Reliably</a>比<code>WindowInsetsController</code>处理的情况更多且更好用。关闭的话，<code>WindowInsetsController</code>就可以。</li>
+</ul>
+</li>
+</ol>
 
     </div>
 
@@ -291,14 +311,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/01/12/android-resources-test/" rel="prev" title="Android Resources小研究">
-                  <i class="fa fa-chevron-left"></i> Android Resources小研究
+                <a href="/2021/04/18/android-opinoinated-arch/" rel="prev" title="个人偏爱的Android应用架构">
+                  <i class="fa fa-chevron-left"></i> 个人偏爱的Android应用架构
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/01/25/android-storage/" rel="next" title="Android储存方案研究及分析">
-                  Android储存方案研究及分析 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
