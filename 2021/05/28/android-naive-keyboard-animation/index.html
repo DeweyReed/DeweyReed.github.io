@@ -19,15 +19,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;aprildown.xyz&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="随着androidx.core1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。">
+<meta name="description" content="随着androidx.core1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。 2021年7月7日 更新收起键盘时闪烁问题的临时解决办法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的Android软键盘动画">
 <meta property="og:url" content="http://aprildown.xyz/2021/05/28/android-naive-keyboard-animation/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="随着androidx.core1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。">
+<meta property="og:description" content="随着androidx.core1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。 2021年7月7日 更新收起键盘时闪烁问题的临时解决办法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-28T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-03T09:34:48.666Z">
+<meta property="article:modified_time" content="2021-07-07T10:55:00.004Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -258,6 +258,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>随着<code>androidx.core</code>1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。</p>
+<p><strong>2021年7月7日 更新收起键盘时闪烁问题的临时解决办法</strong></p>
 <span id="more"></span>
 
 <ol>
@@ -281,20 +282,25 @@
 <li><p>避免View和系统界面重叠</p>
 <p> 如果顶部是<code>AppBarLayout</code>，就增加一个<code>android:fitsSystemWindows=&quot;true&quot;</code>来让它自己处理顶部。底部也可以用默认处理，但通常效果不理想。</p>
 <p> 如果是普通View：</p>
- <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setOnApplyWindowInsetsListener(binding.root) &#123; v, insets -&gt;</span><br><span class="line">    <span class="keyword">val</span> bottomInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())</span><br><span class="line">    v.updatePadding(bottom = bottomInsets.bottom)</span><br><span class="line">    <span class="keyword">val</span> keyboardShown = insets.isVisible(WindowInsetsCompat.Type.ime())</span><br><span class="line">    insets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setOnApplyWindowInsetsListener(binding.root) &#123; v, insets -&gt;</span><br><span class="line">    <span class="keyword">val</span> bottomInsets = insets.getInsets(</span><br><span class="line">        WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.ime()</span><br><span class="line">    )</span><br><span class="line">    v.updatePadding(bottom = bottomInsets.bottom)</span><br><span class="line">    <span class="keyword">val</span> keyboardShown = insets.isVisible(WindowInsetsCompat.Type.ime())</span><br><span class="line">    insets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>这里只用<code>systemBars</code>来避免键盘弹出时界面跳动。</li>
 <li>这里也是检测键盘是否弹出的地方。</li>
 <li>在键盘弹出时，导航栏高度算在软键盘高度的一部分中的。</li>
+<li>在下一步增加动画前，在这里先确保应用可以正常显示。</li>
 </ul>
 </li>
 <li><p>增加动画</p>
- <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setWindowInsetsAnimationCallback(</span><br><span class="line">    binding.root,</span><br><span class="line">    <span class="keyword">object</span> : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onProgress</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            insets: <span class="type">WindowInsetsCompat</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">            runningAnimations: <span class="type">MutableList</span>&lt;<span class="type">WindowInsetsAnimationCompat</span>&gt;</span></span></span><br><span class="line"><span class="params"><span class="function">        )</span></span>: WindowInsetsCompat &#123;</span><br><span class="line">            <span class="keyword">val</span> bottomInsets = insets.getInsets(</span><br><span class="line">                WindowInsetsCompat.Type.ime() or</span><br><span class="line">                    WindowInsetsCompat.Type.systemBars()</span><br><span class="line">            )</span><br><span class="line">            binding.root.updatePadding(bottom = bottomInsets.bottom)</span><br><span class="line">            <span class="keyword">return</span> insets</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ViewCompat.setWindowInsetsAnimationCallback(</span><br><span class="line">    binding.root,</span><br><span class="line">    <span class="keyword">object</span> : WindowInsetsAnimationCompat.Callback(DISPATCH_MODE_STOP) &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onProgress</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            insets: <span class="type">WindowInsetsCompat</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">            runningAnimations: <span class="type">MutableList</span>&lt;<span class="type">WindowInsetsAnimationCompat</span>&gt;</span></span></span><br><span class="line"><span class="params"><span class="function">        )</span></span>: WindowInsetsCompat &#123;</span><br><span class="line">            <span class="keyword">val</span> bottomInsets = insets.getInsets(</span><br><span class="line">                WindowInsetsCompat.Type.ime() or</span><br><span class="line">                    WindowInsetsCompat.Type.systemBars()</span><br><span class="line">            )</span><br><span class="line">            binding.root.updatePadding(bottom = bottomInsets.bottom)</span><br><span class="line">            <span class="keyword">return</span> insets</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p> 上述方法有一个问题，在收起键盘时，会闪烁一下。原因似乎是在<code>onPrepare</code>和<code>onStart</code>之间的，使用动画结束状态调用<code>OnApplyWindowInsetsListener</code>出了问题，但官方文档中提到了这之间是不会发生Layout的。另外根据官方示例使用<code>translationY</code>的话，是没有问题的。因此原因尚不明了。</p>
+<p> 现在的一个临时解决方案是在，<code>onPrepare</code>中开启一个Flag，在<code>onEnd</code>中关闭，然后在<code>OnApplyWindowInsetsListener</code>中，如果Flag开启，就不应用Padding。</p>
+</li>
 <li><p>其他考虑</p>
 <ul>
 <li>如果要显示Snackbar，需要额外测试。Padding可能不是最好的方法，可能需要Margin或额外的<code>Space</code> View。</li>
 <li>显示软键盘，似乎<a target="_blank" rel="noopener" href="https://developer.squareup.com/blog/showing-the-android-keyboard-reliably/">Showing the Android Keyboard Reliably</a>比<code>WindowInsetsController</code>处理的情况更多且更好用。关闭的话，<code>WindowInsetsController</code>就可以。</li>
+<li>去开发者选项中把动画速度调成10倍，不然根本看不清楚效果。</li>
 </ul>
 </li>
 </ol>
