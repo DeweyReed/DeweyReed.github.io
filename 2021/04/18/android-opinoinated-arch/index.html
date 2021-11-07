@@ -27,7 +27,7 @@
 <meta property="og:description" content="根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了iosched，尽可能地照顾到测试和扩展。 不定期更新新的想法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-19T13:57:05.121Z">
+<meta property="article:modified_time" content="2021-11-07T10:23:24.634Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -295,6 +295,8 @@
 <li>业务逻辑应该在UseCase中，所以ViewModel中尽可能保持简单。</li>
 <li>虽然Google官方建议在Kotlin-only的项目中用Flow替代LiveData，但我习惯在ViweModel中将Flow调用<code>asLiveData()</code>转换后给UI层使用，因为在UI层使用Flow坑太多。</li>
 </ul>
+<p>2021年11月6日更新：</p>
+<p>Google官方铁了心要在UI层用Flow，而我依然和大佬（<a target="_blank" rel="noopener" href="https://bladecoder.medium.com/kotlins-flow-in-viewmodels-it-s-complicated-556b472e281a">Kotlin’s Flow in ViewModels: it’s complicated</a>）站在UI层使用LiveData的队。<code>flowWithLifecycle</code>等API又把开发者需要担心Lifecycle的问题带回来了嘛。</p>
 <h2 id="app-base"><a href="#app-base" class="headerlink" title="app-base"></a><code>app-base</code></h2><p>以<code>app-</code>开头的Module将会按应用的不同功能分类，而本Module是它们的基础Module。</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">api project(<span class="string">&quot;:domain&quot;</span>)</span><br></pre></td></tr></table></figure>
 
@@ -327,6 +329,9 @@
 <p>2021年7月2日更新：</p>
 <p>刚刚看了<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4srssoBo0HU">Navigation - Live Q&amp;A - MAD Skills</a>，连同<a target="_blank" rel="noopener" href="https://developer.android.com/guide/navigation/navigation-multi-module#across">刚刚更新的文档</a>，都是推荐使用DeepLink来在子Module间跳转。这个方法看起来也比一开始的方法要好。</p>
 <p>Graph + DeepLink是一个不错的组合，也是我考虑未来会使用的方法。</p>
+<p>2021年11月6日更新：</p>
+<p>用了一段时间的Graph + DeepLink，发现体验就像一堆狗屎。它需要在<code>onDestinationChanged</code>判断Destination时，同时查询父Graph的ID，代码复杂度翻倍。DeepLink也同样不能保证编译时安全。</p>
+<p>我还是用回了自定义ID的方案，同时在需要支持跳转时再用DeepLink。</p>
 </li>
 </ul>
 <h2 id="各种使用场景"><a href="#各种使用场景" class="headerlink" title="各种使用场景"></a>各种使用场景</h2><ul>
