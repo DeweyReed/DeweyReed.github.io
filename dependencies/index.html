@@ -20,28 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"aprildown.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android开发牢骚 - 2021年2月6日">
-<meta property="og:url" content="http://aprildown.xyz/2021/02/06/android-thoughts-20210206/index.html">
+  <meta name="description" content="Gradle 7.3.3: ✔ 7.1.1: ✔  Kotlin org.jetbrains.kotlin:kotlin  1.6.10: ✔  buildList, buildSet, and buildMap   1.5.31: ✔    org.jetbrains.kotlinx:kotlinx-coroutines  1.6.0: ✔ 1.5.2: ✔    Google com.andr">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Is the dependency safe to upgrade?">
+<meta property="og:url" content="http://aprildown.xyz/dependencies/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。">
+<meta property="og:description" content="Gradle 7.3.3: ✔ 7.1.1: ✔  Kotlin org.jetbrains.kotlin:kotlin  1.6.10: ✔  buildList, buildSet, and buildMap   1.5.31: ✔    org.jetbrains.kotlinx:kotlinx-coroutines  1.6.0: ✔ 1.5.2: ✔    Google com.andr">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-06T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-17T02:52:31.747Z">
+<meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-17T02:52:31.751Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://aprildown.xyz/2021/02/06/android-thoughts-20210206/">
+<link rel="canonical" href="http://aprildown.xyz/dependencies/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2021/02/06/android-thoughts-20210206/","path":"2021/02/06/android-thoughts-20210206/","title":"Android开发牢骚 - 2021年2月6日"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/dependencies/index.html","path":"dependencies/index.html","title":"Is the dependency safe to upgrade?"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Android开发牢骚 - 2021年2月6日 | April Down</title>
+<title>Is the dependency safe to upgrade? | April Down</title>
   
 
 
@@ -122,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#StateFlow%E5%92%8CSharedFlow"><span class="nav-number">1.</span> <span class="nav-text">StateFlow和SharedFlow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hilt"><span class="nav-number">2.</span> <span class="nav-text">Hilt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio"><span class="nav-number">3.</span> <span class="nav-text">Android Studio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle"><span class="nav-number">1.</span> <span class="nav-text">Gradle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kotlin"><span class="nav-number">2.</span> <span class="nav-text">Kotlin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google"><span class="nav-number">3.</span> <span class="nav-text">Google</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Third-party"><span class="nav-number">4.</span> <span class="nav-text">Third-party</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chinese"><span class="nav-number">5.</span> <span class="nav-text">Chinese</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,6 +186,8 @@
 
 
     <div class="main-inner post posts-expand">
+  
+  
 
 
   
@@ -196,7 +198,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2021/02/06/android-thoughts-20210206/">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/dependencies/index.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -209,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Android开发牢骚 - 2021年2月6日<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/android-thoughts-20210206.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          Is the dependency safe to upgrade?<a href="https://github.com/DeweyReed/site/tree/master/source/dependencies/index.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -220,16 +222,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-02-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-06T00:00:00+00:00">2021-02-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
-        </span>
+      <time title="创建时间：2022-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-02-16T00:00:00+00:00">2022-02-16</time>
     </span>
 
   
@@ -242,21 +235,310 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
-<span id="more"></span>
-
-<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
-<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a target="_blank" rel="noopener" href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
-<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
-<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
-<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
-<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
-<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
-<p>语义化版本是不是只算加分项？</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
-<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
-<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
+        <h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><ul>
+<li>7.3.3: ✔</li>
+<li>7.1.1: ✔</li>
+</ul>
+<h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><ul>
+<li><p>org.jetbrains.kotlin:kotlin</p>
+<ul>
+<li><p>1.6.10: ✔</p>
+<ul>
+<li><code>buildList</code>, <code>buildSet</code>, and <code>buildMap</code></li>
+</ul>
+</li>
+<li><p>1.5.31: ✔</p>
+</li>
+</ul>
+</li>
+<li><p>org.jetbrains.kotlinx:kotlinx-coroutines</p>
+<ul>
+<li>1.6.0: ✔</li>
+<li>1.5.2: ✔</li>
+</ul>
+</li>
+</ul>
+<h2 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h2><ul>
+<li><p>com.android.tools.build:gradle</p>
+<ul>
+<li>7.0.4: ✔</li>
+</ul>
+</li>
+<li><p>androidx.appcompat:appcompat</p>
+<ul>
+<li>1.4.1: ✔(Android 12(31))</li>
+<li>1.3.1: ✔</li>
+</ul>
+</li>
+<li><p>androidx.fragment:fragment</p>
+<ul>
+<li><p>1.4.1: ✔(Android 12(31))</p>
+<ul>
+<li>FragmentContainerView.getFragment</li>
+</ul>
+</li>
+<li><p>1.3.6: ✔</p>
+</li>
+</ul>
+</li>
+<li><p>androidx.lifecycle:lifecycle</p>
+<ul>
+<li><p>2.4.1: 🚧(Android 12(31))</p>
+<ul>
+<li><del>lifecycle-common-java8</del></li>
+</ul>
+</li>
+<li><p>2.3.1: ✔</p>
+</li>
+</ul>
+</li>
+<li><p>androidx.core:core-ktx</p>
+<ul>
+<li>1.7.0: ✔(Android 12(31))</li>
+<li>1.6.0: ✔</li>
+</ul>
+</li>
+<li><p>androidx.collection:collection-ktx</p>
+<ul>
+<li>1.2.0: ✔</li>
+</ul>
+</li>
+<li><p>com.android.tools:desugar_jdk_libs</p>
+<ul>
+<li><p>1.1.5: ✔</p>
+<ul>
+<li><code>getDisplayName</code> doesn’t work.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>androidx.constraintlayout:constraintlayout</p>
+<ul>
+<li>2.1.3: ✔</li>
+</ul>
+</li>
+<li><p>androidx.recyclerview:recyclerview</p>
+<ul>
+<li>1.2.1: ✔</li>
+</ul>
+</li>
+<li><p>androidx.navigation:navigation</p>
+<ul>
+<li>2.4.x: 🚧</li>
+<li>2.3.5: ✔</li>
+</ul>
+</li>
+<li><p>androidx.room:room</p>
+<ul>
+<li><p>2.4.1: ✔(Android 12(31))</p>
+<ul>
+<li>Auto Migrations👍</li>
+</ul>
+</li>
+<li><p>2.3.0: ✔</p>
+</li>
+</ul>
+</li>
+<li><p>androidx.preference:preference</p>
+<ul>
+<li>1.2.0: 🚧</li>
+<li>1.1.1: ✔</li>
+</ul>
+</li>
+<li><p>androidx.work:work</p>
+<ul>
+<li>2.7.1: ✔(Android 12(31))</li>
+<li>2.6.0: ✔</li>
+</ul>
+</li>
+<li><p>androidx.security:security-crypto:</p>
+<ul>
+<li>1.1.0-alpha03: ✔</li>
+</ul>
+</li>
+<li><p>androidx.swiperefreshlayout:swiperefreshlayout</p>
+<ul>
+<li>1.1.0: ✔</li>
+</ul>
+</li>
+<li><p>com.google.android.material:material</p>
+<ul>
+<li>1.5.0: 🚧</li>
+<li>1.4.0: ✔</li>
+</ul>
+</li>
+<li><p>com.google.android.flexbox:flexbox</p>
+<ul>
+<li>3.0.0: ✔</li>
+</ul>
+</li>
+<li><p>com.google.dagger:dagger</p>
+<ul>
+<li>2.40.5: ✔</li>
+</ul>
+</li>
+<li><p>androidx.hilt:hilt-navigation-fragment</p>
+<ul>
+<li>1.0.0: ✔</li>
+</ul>
+</li>
+<li><p>androidx.hilt:hilt-work</p>
+<ul>
+<li>1.0.0: ✔</li>
+</ul>
+</li>
+<li><p>androidx.hilt:hilt-compiler</p>
+<ul>
+<li>1.0.0: ✔</li>
+</ul>
+</li>
+<li><p>com.android.billingclient:billing</p>
+<ul>
+<li>4.0.0: ✔</li>
+<li>3.0.2: ✔</li>
+</ul>
+</li>
+<li><p>com.google.android.gms:play-services-ads</p>
+<ul>
+<li>20.3.0: ✔</li>
+</ul>
+</li>
+</ul>
+<h2 id="Third-party"><a href="#Third-party" class="headerlink" title="Third-party"></a>Third-party</h2><ul>
+<li><p>com.squareup.okhttp3:okhttp</p>
+<ul>
+<li>4.9.3: ✔</li>
+</ul>
+</li>
+<li><p>com.squareup.retrofit2:retrofit</p>
+<ul>
+<li>2.9.0: ✔</li>
+</ul>
+</li>
+<li><p>com.squareup.moshi:moshi</p>
+<ul>
+<li><p>1.13.0: ✔</p>
+<ul>
+<li>Kotlin 1.6.0</li>
+<li>AGP 7.0.x(and 7.1.x?): <code>android.jetifier.ignorelist=moshi-1.13.0</code> in <code>gradle.properties</code></li>
+</ul>
+</li>
+<li><p>1.12.0: ✔</p>
+</li>
+</ul>
+</li>
+<li><p>com.squareup.okio:okio</p>
+<ul>
+<li>3.0.0: ✔</li>
+<li>2.10.0: ✔</li>
+</ul>
+</li>
+<li><p>com.squareup.leakcanary:leakcanary-android-startup</p>
+<ul>
+<li>2.8.1: ✔</li>
+</ul>
+</li>
+<li><p>com.jakewharton.timber:timber</p>
+<ul>
+<li>5.0.1: ✔</li>
+</ul>
+</li>
+<li><p>com.github.bumptech.glide</p>
+<ul>
+<li>4.13.0: 🚧</li>
+<li>4.12.0: ✔</li>
+</ul>
+</li>
+<li><p>com.airbnb.android:lottie</p>
+<ul>
+<li>4.2.2: ✔</li>
+</ul>
+</li>
+<li><p>com.github.chuckerteam.chucker:library</p>
+<ul>
+<li>3.5.2: ✔</li>
+</ul>
+</li>
+<li><p>com.evernote:android-job</p>
+<ul>
+<li>1.4.2: ✔(Doesn’t work on Android 12(31))</li>
+</ul>
+</li>
+<li><p>pub.devrel:easypermissions</p>
+<ul>
+<li>3.0.0: ✔</li>
+</ul>
+</li>
+<li><p>com.mikepenz:fastadapter</p>
+<ul>
+<li>5.6.0: ✔(Android 12(31))</li>
+<li>5.5.1: ✔</li>
+</ul>
+</li>
+<li><p>org.greenrobot:eventbus</p>
+<ul>
+<li>3.3.1: ✔</li>
+<li>3.2.0: ✔</li>
+</ul>
+</li>
+<li><p>net.lingala.zip4j:zip4j</p>
+<ul>
+<li>2.9.1: ✔</li>
+</ul>
+</li>
+<li><p>com.github.kizitonwose:CalendarView</p>
+<ul>
+<li>1.0.4: ✔(java.time)</li>
+<li>0.3.5: ✔(ThreeTenABP)</li>
+</ul>
+</li>
+<li><p>com.github.ben-manes:gradle-versions-plugin</p>
+<ul>
+<li>0.42.0: ✔</li>
+</ul>
+</li>
+</ul>
+<h2 id="Chinese"><a href="#Chinese" class="headerlink" title="Chinese"></a>Chinese</h2><ul>
+<li><p>com.tencent.bugly:crashreport</p>
+<ul>
+<li>4.0.0: ❌ no release notes</li>
+<li>3.4.4: ✔</li>
+</ul>
+</li>
+<li><p>com.umeng.umsdk:common</p>
+<ul>
+<li>9.4.7: ✔</li>
+<li>9.4.5, 9.4.6: ❌ broken</li>
+<li>9.4.4: ✔</li>
+</ul>
+</li>
+<li><p>com.umeng.umsdk:asms</p>
+<ul>
+<li>1.6.0: ✔</li>
+<li>1.4.1: ✔</li>
+</ul>
+</li>
+<li><p>com.tencent.mm.opensdk:wechat-sdk-android-without-mta</p>
+<ul>
+<li>6.8.0: ✔</li>
+</ul>
+</li>
+<li><p>com.qiniu:qiniu-android-sdk</p>
+<ul>
+<li>8.4.1: 🚧</li>
+<li>8.4.0: ✔</li>
+<li>8.0.3: ✔(APK bloats afterwards)</li>
+</ul>
+</li>
+<li><p>com.meituan.android.walle:library</p>
+<ul>
+<li>1.1.7: ❌ no release notes</li>
+<li>1.1.6: ✔</li>
+</ul>
+</li>
+<li><p>QQ、穿山甲、支付宝需要手动添加</p>
+</li>
+</ul>
 
     </div>
 
@@ -285,18 +567,6 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2020/09/20/android-studio-is-broken/" rel="prev" title="天天坏，天天修的Android Studio">
-                  <i class="fa fa-chevron-left"></i> 天天坏，天天修的Android Studio
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2021/04/18/android-opinoinated-arch/" rel="next" title="个人偏爱的Android应用架构">
-                  个人偏爱的Android应用架构 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
     </footer>
   </article>
 </div>

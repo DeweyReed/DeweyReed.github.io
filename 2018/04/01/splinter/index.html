@@ -2,9 +2,8 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.1">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -16,10 +15,12 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;aprildown.xyz&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script>
-<meta name="description" content="之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。 然后找到了这篇文章。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。 内容大同小异，说明几个坑。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"aprildown.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。 然后找到了这篇文章。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。 内容大同小异，说明几个坑。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Splinter模拟网页操作">
 <meta property="og:url" content="http://aprildown.xyz/2018/04/01/splinter/index.html">
@@ -27,7 +28,7 @@
 <meta property="og:description" content="之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。 然后找到了这篇文章。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。 内容大同小异，说明几个坑。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-04-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-01-31T05:47:04.255Z">
+<meta property="article:modified_time" content="2022-02-17T02:52:31.747Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -37,11 +38,12 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;aprildown.xyz&#x2F;2018&#x2F;04&#x2F;01&#x2F;splinter&#x2F;&quot;,&quot;path&quot;:&quot;2018&#x2F;04&#x2F;01&#x2F;splinter&#x2F;&quot;,&quot;title&quot;:&quot;使用Splinter模拟网页操作&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2018/04/01/splinter/","path":"2018/04/01/splinter/","title":"使用Splinter模拟网页操作"}</script>
 
-<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>使用Splinter模拟网页操作 | April Down</title><script src="/js/config.js"></script>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用Splinter模拟网页操作 | April Down</title>
   
+
 
 
 
@@ -51,7 +53,7 @@
   </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
 
   <main class="main">
@@ -69,7 +71,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">April Down</h1>
+      <p class="site-title">April Down</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Android Development</p>
@@ -86,6 +88,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-依赖"><a href="/dependencies/" rel="section"><i class="fa fa-code fa-fw"></i>依赖</a></li>
         <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-code fa-fw"></i>资源</a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
@@ -133,15 +136,13 @@
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+        <a href="/archives/">
           <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
@@ -208,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用Splinter模拟网页操作
+          使用Splinter模拟网页操作<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/splinter.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -253,7 +254,7 @@
 <h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
 <li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
 <li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
-<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_dict</span>(<span class="params">name</span>):</span></span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
 <p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
@@ -265,6 +266,23 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
 
         
 
@@ -288,7 +306,7 @@
 
 
 
-<script src="/js/comments.js"></script>
+
 </div>
   </main>
 
@@ -304,18 +322,17 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
     </div>
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
-
 
 
 
