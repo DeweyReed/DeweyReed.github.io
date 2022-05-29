@@ -27,7 +27,7 @@
 <meta property="og:description" content="根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了iosched，尽可能地照顾到测试和扩展。 不定期更新新的想法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-26T02:35:23.884Z">
+<meta property="article:modified_time" content="2022-05-29T12:59:52.726Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -136,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -261,6 +261,8 @@
 <li><p>关于在应用的哪一层捕获异常，是一个见仁见智的问题。<del>我个人偏向在UseCase中捕获异常。有异常就封装到一个<code>Result&lt;Xxx&gt;</code>（和Kotlin中的<code>Result</code>类似，为了避免烦人的警告而手动定义）中，没异常就直接返回。</del></p>
 <p>2022年1月20日更新：我还是决定在Repository中捕获异常。</p>
 </li>
+<li><p>2022年5月28日更新：在看了<a target="_blank" rel="noopener" href="https://www.reddit.com/r/androiddev/comments/uwkj2w/usecase_vs_repository/">UseCase vs Repository</a>谈论后，个人偏爱的做法是：当Repository的某个操作仅在一处使用时，不把它包装为UseCase。此外，某个操作在多处使用或需要多个Repository时，包装为UseCase。</p>
+</li>
 </ul>
 </li>
 <li><p>常量、日志、异常、Feature Flag等基础配置</p>
@@ -290,7 +292,7 @@
 <h2 id="presentation"><a href="#presentation" class="headerlink" title="presentation"></a><code>presentation</code></h2><p><strong>在有了Hilt之后，本Module可以被删除，而将ViewModel移动到各个功能Module中。</strong></p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">api project(<span class="string">&quot;:domain&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<p>定义了所有用到的ViewModel，ViewModel中被注入了各个需要的UseCase。</p>
+<p>定义了所有用到的ViewModel，ViewModel中被注入了各个需要的UseCase或Repository。</p>
 <ul>
 <li>业务逻辑应该在UseCase中，所以ViewModel中尽可能保持简单。</li>
 <li>虽然Google官方建议在Kotlin-only的项目中用Flow替代LiveData，但我习惯在ViweModel中将Flow调用<code>asLiveData()</code>转换后给UI层使用，因为在UI层使用Flow坑太多。</li>
