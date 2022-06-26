@@ -19,28 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"aprildown.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="来自于：  Understanding Different Gradle Caches for Android Projects, part 1. Understanding Different Gradle Caches for Android Projects, part 2 Understanding Different Gradle Caches for Android Projects,">
+  <meta name="description" content="有些东西就是做不到，除非，加很多很多钱和时间。 一些V2EX帖子整理。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gradle缓存笔记">
-<meta property="og:url" content="http://aprildown.xyz/2022/03/06/gradle-cache/index.html">
+<meta property="og:title" content="一些Android开发死局">
+<meta property="og:url" content="http://aprildown.xyz/2022/06/26/android-forbidden-topics/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="来自于：  Understanding Different Gradle Caches for Android Projects, part 1. Understanding Different Gradle Caches for Android Projects, part 2 Understanding Different Gradle Caches for Android Projects,">
+<meta property="og:description" content="有些东西就是做不到，除非，加很多很多钱和时间。 一些V2EX帖子整理。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-06T00:00:00.000Z">
+<meta property="article:published_time" content="2022-06-26T00:00:00.000Z">
 <meta property="article:modified_time" content="2022-06-26T02:59:01.978Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://aprildown.xyz/2022/03/06/gradle-cache/">
+<link rel="canonical" href="http://aprildown.xyz/2022/06/26/android-forbidden-topics/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2022/03/06/gradle-cache/","path":"2022/03/06/gradle-cache/","title":"Gradle缓存笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2022/06/26/android-forbidden-topics/","path":"2022/06/26/android-forbidden-topics/","title":"一些Android开发死局"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Gradle缓存笔记 | April Down</title>
+<title>一些Android开发死局 | April Down</title>
   
 
 
@@ -108,7 +108,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -121,6 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">抓包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E6%8C%A3%E6%89%8E"><span class="nav-number">1.1.</span> <span class="nav-text">客户端的挣扎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E6%B4%BB"><span class="nav-number">2.</span> <span class="nav-text">保活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E5%BC%80%E5%8F%91%E8%80%85-%E6%B5%B7%E5%A4%96%E6%94%B6%E6%AC%BE"><span class="nav-number">3.</span> <span class="nav-text">个人开发者 海外收款</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -194,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2022/03/06/gradle-cache/">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2022/06/26/android-forbidden-topics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -207,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Gradle缓存笔记<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/gradle-cache.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          一些Android开发死局<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/android-forbidden-topics.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -218,7 +219,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2022-03-06T00:00:00+00:00">2022-03-06</time>
+      <time title="创建时间：2022-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-26T00:00:00+00:00">2022-06-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,26 +241,71 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>来自于：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://jasonatwood.io/archives/1966">Understanding Different Gradle Caches for Android Projects, part 1.</a></li>
-<li><a target="_blank" rel="noopener" href="https://jasonatwood.io/archives/1995">Understanding Different Gradle Caches for Android Projects, part 2</a></li>
-<li><a target="_blank" rel="noopener" href="https://jasonatwood.io/archives/2127">Understanding Different Gradle Caches for Android Projects, part 3</a></li>
-</ul>
+        <p>有些东西就是做不到，除非，加很多很多钱和时间。</p>
+<p>一些V2EX帖子整理。</p>
 <span id="more"></span>
 
-<p>[Build]-[Clean Project]和<code>gradlew clean</code>都是仅删除根目录和Module目录下的<code>build</code>文件夹。<code>build</code>文件夹是Gradle自带的、默认的缓存策略。</p>
-<p>Build Cache（现在默认关闭，通过<code>--build-cache</code>或<code>org.gradle.caching=true</code>打开），使用了默认单项目缓存一样的机制，会把部分缓存保存到<code>~/.gradle/caches/build-cache-*</code>，机器上所有项目可共享。这也就是为什么Dagger偶尔失效时，需要删除系统Gradle缓存的原因。</p>
-<ul>
-<li>文中提到<code>R.java</code>，但记得在某个AGP版本中，文件已经变成<code>jar</code>，轻易找不到了。</li>
-<li><code>kapt</code>的<code>useBuildCache</code><a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/caching_android_projects.html#annotation_processors_and_kotlin">在某个版本中默认开启了</a>。<a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/kapt.html#gradle-build-cache-support">关闭文档</a>。</li>
+<h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/802359">问下安卓如何防止 root 下抓包， app 接口请求并没有做加密措施</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/806211">怎么防止用户自己调用网站 API 发送 POST 请求篡改数据</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/842130">如何对 Android APP 抓取 HTTPS 包？</a></li>
+<li><a target="_blank" rel="noopener" href="https://lxnchan.cn/app-package-grab.html">APP抓包研究</a></li>
 </ul>
-<p>Gradle Deamon默认开启。</p>
-<p>依赖储存在<code>~/.gradle/caches/*</code>中。其中<code>transform-*</code>保存了本地修改后的依赖，非下载内容。</p>
-<p>Invalidate Caches / Restart只清理IDE缓存，不清理上述缓存。</p>
-<p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
-<p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
-<p>还有一些<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
+<p>TL;DR: 功夫不负有心人。没有彻底的办法。最好的办法永远是在服务端控制数据。</p>
+<p>如果能用Firebase的话，可以第三方接入AppCheck来防止中间人。</p>
+<p>一些精彩发言：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">kings0527</span><br><span class="line"></span><br><span class="line">永远无法防止</span><br><span class="line">只能提高门槛</span><br><span class="line">https 仅仅防止中间人</span><br><span class="line">证书信任 仅仅防止不会过 ssl pinning 的人</span><br><span class="line">证书校验 仅仅防止没有逆向能力的人</span><br><span class="line">参数加密 仅仅防止逆向能力很低的人</span><br><span class="line">自写协议 仅仅防止逆向能力不高的人</span><br><span class="line"></span><br><span class="line">所以 看情况 看成本 加策略</span><br><span class="line">不要为了防止抓包而防止抓包</span><br><span class="line">应该是 你为什么要防止抓包？？？</span><br><span class="line"></span><br><span class="line">防爬虫？？？那可以加请求频率限制 可以加风险等级评估</span><br><span class="line">比如是不是正常用户？？？？是不是正常手机？？？是不是正常操作流程？？？</span><br><span class="line"></span><br><span class="line">防攻击？？？</span><br><span class="line">那可以加 web 防火墙 可以提高自己 router 容错率</span><br><span class="line"></span><br><span class="line">防刷推广安装量？？？</span><br><span class="line">加溯源 加留存 加异常打点 建数据模型观察</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">icyalala</span><br><span class="line"></span><br><span class="line">ssl pinning (也就是客户端内置证书) 来防止初级的抓包</span><br><span class="line">参数签名+客户端防逆向</span><br><span class="line">服务端风控，这是最主要的</span><br><span class="line">根据我待过的几个公司的经验，就算大厂也基本就是这些了</span><br><span class="line">整体来说就是增加成本降低风险，完全避免是不可能</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端的挣扎"><a href="#客户端的挣扎" class="headerlink" title="客户端的挣扎"></a>客户端的挣扎</h3><p>有证书就可以抓包。</p>
+<p>Root后在任何API版本都可以装任何证书。</p>
+<p>Android N（API 24）及之后，应用才可以强制只信任系统证书。之前可以不Root装用户证书。</p>
+<p>据说iPhone装证书很容易。</p>
+<p>搬起石头砸自己的脚的办法：</p>
+<ul>
+<li><p>禁止代理 <code>connection = (HttpURLConnection) url.openConnection(Proxy.NO_PROXY)</code></p>
+<ul>
+<li>容易绕过（路由器抓包、开热点抓包）</li>
+<li>谁还用<code>HttpURLConnection</code>呀，不适合现代应用</li>
+</ul>
+</li>
+<li><p>检测Root</p>
+<ul>
+<li>容易绕过</li>
+<li>可能检测错误</li>
+<li>牺牲无辜的Root用户的体验</li>
+</ul>
+</li>
+<li><p>自定义证书、SSL Pinning</p>
+<ul>
+<li>Android N及之后才可以强制证书</li>
+<li>复杂</li>
+</ul>
+</li>
+</ul>
+<h2 id="保活"><a href="#保活" class="headerlink" title="保活"></a>保活</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/861328">安卓 MQTT 客户端如何保证 Service 一直运行在后台？</a></li>
+</ul>
+<p>终极方案：</p>
+<ul>
+<li>成为系统应用</li>
+<li>成为国民应用，厂商会主动增加白名单</li>
+<li>使用FCM（不适用于中国大陆）</li>
+</ul>
+<p>现在已经没有更多奇技淫巧了。虽然一直有人声称有黑科技，但从未亲眼见过。</p>
+<p>Foreground Service + Wake Lock是普通应用唯二能做的。此外可以多接入一些推送。</p>
+<p>最后，也是最重要的一步，引导用户设置应用白名单，这样基本可以确保正常使用。</p>
+<h2 id="个人开发者-海外收款"><a href="#个人开发者-海外收款" class="headerlink" title="个人开发者 海外收款"></a>个人开发者 海外收款</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/801035">个人开发者如何进行海外收款？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/847307">人在国内，钱在国外，如何消费？</a></li>
+</ul>
+<p>TL;DR: 需要八仙过海各自踩坑</p>
+<p>有公司专人来解决这个问题最好了：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/859166">深圳注册公司的坑，一些经验分享（视频和文档）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/747843">公司注册下来了，分享一下费用、流程以及遇到的坑</a></li>
+</ul>
 
     </div>
 
@@ -273,14 +319,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/01/31/android-paging3/" rel="prev" title="Android Jetpack Paging3 从入门到入土">
-                  <i class="fa fa-chevron-left"></i> Android Jetpack Paging3 从入门到入土
+                <a href="/2022/06/25/android-code-snippets-android-makers22/" rel="prev" title="一些可能有用的Android代码 - Android Makers 2022版">
+                  <i class="fa fa-chevron-left"></i> 一些可能有用的Android代码 - Android Makers 2022版
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/04/21/thoughts-junzi/" rel="next" title="万恶淫为首，论迹不论心，论心世上无完人">
-                  万恶淫为首，论迹不论心，论心世上无完人 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
