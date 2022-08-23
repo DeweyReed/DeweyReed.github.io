@@ -1023,6 +1023,8 @@
 <p>Google官方铁了心要在UI层用Flow，而我依然和大佬（<a href="https://bladecoder.medium.com/kotlins-flow-in-viewmodels-it-s-complicated-556b472e281a">Kotlin’s Flow in ViewModels: it’s complicated</a>）站在UI层使用LiveData的队。<code>flowWithLifecycle</code>等API又把开发者需要担心Lifecycle的问题带回来了嘛。</p>
 <p>2022年1月20日更新：</p>
 <p>如果Repository中的一个方法可以被直接使用，套一层UseCase也只是简单包装API的话，我觉得是可以直接在ViewModel中注入Repository的。仅把多于一个操作的情况抽象为UseCase。</p>
+<p>2022年8月13日：</p>
+<p>根据<a href="https://developer.android.com/topic/modularization/patterns#communication">Common modularization patterns</a>，在ViewModel中使用SavedStateHandle时，后者会自带Fragment的arguements，未找到更新日志。</p>
 <h2 id="app-base"><a href="#app-base" class="headerlink" title="app-base"></a><code>app-base</code></h2><p>以<code>app-</code>开头的Module将会按应用的不同功能分类，而本Module是它们的基础Module。</p>
 <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">api project(<span class="string">&quot;:domain&quot;</span>)</span><br></pre></td></tr></table></figure>
 
