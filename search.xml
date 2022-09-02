@@ -1526,7 +1526,7 @@
   <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
-    <content><![CDATA[<p>更新日期：2020年8月22日</p>
+    <content><![CDATA[<p>更新日期：2022年9月2日</p>
 <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>第三方厂商生产的Android设备（包括但不限于一加、华为、三星、小米、魅族、华硕、Wiko、联想、OPPO、VIVO、诺基亚、索尼等，排名根据严重程度分先后），都存在不同程度的强杀后台的问题。具体表现为应用在熄屏或切换到其他应用时，经过短则几十秒，长则十几分钟后，应用被系统强制关闭。</p>
 <p>需要用户自行进入系统设置中，设置一些选项才可让应用正常运行。这一过程在本文中称为“白名单”。</p>
 <span id="more"></span>
@@ -1536,8 +1536,11 @@
 <p>答：生产厂商给予了这些流行的大众应用默认白名单的特别优待。</p>
 </blockquote>
 <p>以下资料搜集自网络，请自行参考使用。</p>
-<h2 id="指南"><a href="#指南" class="headerlink" title="指南"></a>指南</h2><ol>
+<h2 id="指南"><a href="#指南" class="headerlink" title="指南"></a>指南</h2><p><strong>根据推荐度排名分先后</strong></p>
+<ol>
 <li><p>Github项目<a href="https://dontkillmyapp.com/">dont-kill-my-app</a>，记录了一些流行设备的白名单指南（英文）</p>
+</li>
+<li><p><a href="https://tasker.joaoapps.com/userguide/en/faqs/faq-problem.html#00">Tasker的白名单指南</a>（英文）</p>
 </li>
 <li><p><a href="https://sspai.com/post/55264">少数派 - 手机里有无法正常运行的 Android 应用？用这四步手动排查问题</a>（中文）</p>
 </li>
