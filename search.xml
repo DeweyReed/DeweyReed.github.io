@@ -169,54 +169,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些可能有用的Android代码 - IO22版</title>
-    <url>/2022/05/29/android-code-snippets-io22/</url>
-    <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
-<span id="more"></span>
-
-<h2 id="搜索按钮的触发事件"><a href="#搜索按钮的触发事件" class="headerlink" title="搜索按钮的触发事件"></a>搜索按钮的触发事件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">btnSearch.setOnEditorActionListener &#123; _, actionId, _ -&gt;</span><br><span class="line">    <span class="keyword">if</span> (actionId == EditorInfo.IME_ACTION_SEARCH) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">btnSearch.setOnKeyListener &#123; _, keyCode, event -&gt;</span><br><span class="line">    <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_ENTER &amp;&amp; event.action == KeyEvent.ACTION_UP) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="ViewPager中的Fragment获取ViewModel"><a href="#ViewPager中的Fragment获取ViewModel" class="headerlink" title="ViewPager中的Fragment获取ViewModel"></a>ViewPager中的Fragment获取ViewModel</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Scope the fragment to the parent fragment</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> sharedViewModel: PagerViewModel</span><br><span class="line">  <span class="keyword">by</span> viewModels(ownerProducer = &#123; requireParentFragment() &#125; )</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取硬盘剩余空间"><a href="#获取硬盘剩余空间" class="headerlink" title="获取硬盘剩余空间"></a>获取硬盘剩余空间</h2><p><a href="https://stackoverflow.com/questions/8133417/android-get-free-size-of-internal-external-memory">Stackoverflow上</a>说：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> sf = StatFs(file.absolutePath)</span><br><span class="line"><span class="keyword">val</span> availableBytes = sf.availableBlocksLong * sf.blockSizeLong</span><br></pre></td></tr></table></figure>
-
-<p>IO上说：</p>
-<p>Use <code>File.getUsableSpace</code> to check available space on storage.</p>
-<p>二者数据似乎相等。</p>
-<h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> target = <span class="keyword">if</span> (filesDir.usableSpace &gt; fileSize) &#123;</span><br><span class="line">    filesDir</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    getExternalFilesDir(<span class="literal">null</span>)</span><br><span class="line">&#125;</span><br><span class="line">requireNotNull(target) &#123; <span class="string">&quot;Not enough space&quot;</span> &#125;</span><br><span class="line">bigInputStream.use &#123; input -&gt;</span><br><span class="line">    File(target, <span class="string">&quot;big-file.zip&quot;</span>).outputStream().use &#123; output -&gt;</span><br><span class="line">        input.copyTo(output)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取屏幕大小"><a href="#获取屏幕大小" class="headerlink" title="获取屏幕大小"></a>获取屏幕大小</h2><p>使用<a href="https://developer.android.com/jetpack/androidx/releases/window">Jetpack WindowManager</a>：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> current = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</span><br><span class="line"><span class="keyword">val</span> max = WindowMetricsCalculator.getOrCreate().computeMaximumWindowMetrics(activity)</span><br></pre></td></tr></table></figure>
-
-<p>但如果没有Activity呢？先用古法凑活一下：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> wm = context.getSystemService&lt;WindowManager&gt;()</span><br><span class="line">requireNotNull(wm)</span><br><span class="line"><span class="keyword">val</span> point = Point()</span><br><span class="line"><span class="keyword">val</span> defaultDisplay = wm.defaultDisplay</span><br><span class="line">defaultDisplay.getRealSize(point)</span><br><span class="line"><span class="keyword">if</span> (point.x &lt;= <span class="number">0</span> || point.y &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">val</span> rect = Rect()</span><br><span class="line">    defaultDisplay.getRectSize(rect)</span><br><span class="line">    point.<span class="keyword">set</span>(rect.right, rect.bottom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码部分来自于<code>WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</code>。</p>
-<p>注意：</p>
-<ol>
-<li>所有方法都会根据屏幕旋转进行数值调换。</li>
-<li><code>Resources.getSystem().displayMetrics.heightPixels</code>并不包括状态栏和（或）状态栏。</li>
-</ol>
-<h2 id="相机旋转和设备旋转"><a href="#相机旋转和设备旋转" class="headerlink" title="相机旋转和设备旋转"></a>相机旋转和设备旋转</h2><p><a href="https://developer.android.com/codelabs/android-camera2-preview">Support resizable surfaces in your camera app</a>，或者用1.1.0及以上的CameraX。</p>
-<h2 id="实现列表特殊Footer效果"><a href="#实现列表特殊Footer效果" class="headerlink" title="实现列表特殊Footer效果"></a>实现列表特殊Footer效果</h2><ol>
-<li>内容不满一屏幕时，Footer显示在屏幕底端。</li>
-<li>屏幕超过一屏幕时，Footer和其他条目一样排排坐。</li>
-</ol>
-<p>使用Jetpack Compose来实现：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">LazyColumn(</span><br><span class="line">    modifier = Modifier.fillMaxHeight(),</span><br><span class="line">    verticalArrangement = TopWithFooter,</span><br><span class="line">) &#123;</span><br><span class="line">    items(list) &#123;</span><br><span class="line">        Item()</span><br><span class="line">    &#125;</span><br><span class="line">    item &#123;</span><br><span class="line">        Footer()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，LazyColumn不满一屏幕会<code>WRAP_CONTENT</code>，用<code>fillMaxHeight()</code>来指定高度。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">object</span> TopWithFooter : Arrangement.Vertical &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> Density.<span class="title">arrange</span><span class="params">(totalSize: <span class="type">Int</span>, sizes: <span class="type">IntArray</span>, outPositions: <span class="type">IntArray</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> y = <span class="number">0</span></span><br><span class="line">        sizes.forEachIndexed &#123; index, size -&gt;</span><br><span class="line">            outPositions[index] = y</span><br><span class="line">            y += size</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (y &lt; totalSize) &#123;</span><br><span class="line">            outPositions[outPositions.lastIndex] = totalSize - (sizes.lastOrNull() ?: <span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
-<p>代码过于简单以至于不需要其他解释了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一些可能有用的Android代码</title>
     <url>/2019/06/15/android-code-snippets/</url>
     <content><![CDATA[<p><strong>2020年11月6日 更新<code>View.outlineProvider</code></strong></p>
@@ -274,6 +226,54 @@
 
 <h2 id="clipToPadidng"><a href="#clipToPadidng" class="headerlink" title="clipToPadidng"></a><code>clipToPadidng</code></h2><p><code>Enables our items to still be drawn within the parent&#39;s padding.</code></p>
 <h2 id="View-outlineProvider"><a href="#View-outlineProvider" class="headerlink" title="View.outlineProvider"></a><code>View.outlineProvider</code></h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">binding.imageView.run &#123;</span><br><span class="line">    clipToOutline = <span class="literal">true</span></span><br><span class="line">    outlineProvider = <span class="keyword">object</span> : ViewOutlineProvider() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getOutline</span><span class="params">(view: <span class="type">View</span>, outline: <span class="type">Outline</span>)</span></span> &#123;</span><br><span class="line">            outline.setOval(</span><br><span class="line">                view.paddingLeft,</span><br><span class="line">                view.paddingTop,</span><br><span class="line">                view.width - view.paddingRight,</span><br><span class="line">                view.height - view.paddingBottom</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一些可能有用的Android代码 - IO22版</title>
+    <url>/2022/05/29/android-code-snippets-io22/</url>
+    <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
+<span id="more"></span>
+
+<h2 id="搜索按钮的触发事件"><a href="#搜索按钮的触发事件" class="headerlink" title="搜索按钮的触发事件"></a>搜索按钮的触发事件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">btnSearch.setOnEditorActionListener &#123; _, actionId, _ -&gt;</span><br><span class="line">    <span class="keyword">if</span> (actionId == EditorInfo.IME_ACTION_SEARCH) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">btnSearch.setOnKeyListener &#123; _, keyCode, event -&gt;</span><br><span class="line">    <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_ENTER &amp;&amp; event.action == KeyEvent.ACTION_UP) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ViewPager中的Fragment获取ViewModel"><a href="#ViewPager中的Fragment获取ViewModel" class="headerlink" title="ViewPager中的Fragment获取ViewModel"></a>ViewPager中的Fragment获取ViewModel</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Scope the fragment to the parent fragment</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> sharedViewModel: PagerViewModel</span><br><span class="line">  <span class="keyword">by</span> viewModels(ownerProducer = &#123; requireParentFragment() &#125; )</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取硬盘剩余空间"><a href="#获取硬盘剩余空间" class="headerlink" title="获取硬盘剩余空间"></a>获取硬盘剩余空间</h2><p><a href="https://stackoverflow.com/questions/8133417/android-get-free-size-of-internal-external-memory">Stackoverflow上</a>说：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> sf = StatFs(file.absolutePath)</span><br><span class="line"><span class="keyword">val</span> availableBytes = sf.availableBlocksLong * sf.blockSizeLong</span><br></pre></td></tr></table></figure>
+
+<p>IO上说：</p>
+<p>Use <code>File.getUsableSpace</code> to check available space on storage.</p>
+<p>二者数据似乎相等。</p>
+<h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> target = <span class="keyword">if</span> (filesDir.usableSpace &gt; fileSize) &#123;</span><br><span class="line">    filesDir</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    getExternalFilesDir(<span class="literal">null</span>)</span><br><span class="line">&#125;</span><br><span class="line">requireNotNull(target) &#123; <span class="string">&quot;Not enough space&quot;</span> &#125;</span><br><span class="line">bigInputStream.use &#123; input -&gt;</span><br><span class="line">    File(target, <span class="string">&quot;big-file.zip&quot;</span>).outputStream().use &#123; output -&gt;</span><br><span class="line">        input.copyTo(output)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取屏幕大小"><a href="#获取屏幕大小" class="headerlink" title="获取屏幕大小"></a>获取屏幕大小</h2><p>使用<a href="https://developer.android.com/jetpack/androidx/releases/window">Jetpack WindowManager</a>：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> current = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</span><br><span class="line"><span class="keyword">val</span> max = WindowMetricsCalculator.getOrCreate().computeMaximumWindowMetrics(activity)</span><br></pre></td></tr></table></figure>
+
+<p>但如果没有Activity呢？先用古法凑活一下：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> wm = context.getSystemService&lt;WindowManager&gt;()</span><br><span class="line">requireNotNull(wm)</span><br><span class="line"><span class="keyword">val</span> point = Point()</span><br><span class="line"><span class="keyword">val</span> defaultDisplay = wm.defaultDisplay</span><br><span class="line">defaultDisplay.getRealSize(point)</span><br><span class="line"><span class="keyword">if</span> (point.x &lt;= <span class="number">0</span> || point.y &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">val</span> rect = Rect()</span><br><span class="line">    defaultDisplay.getRectSize(rect)</span><br><span class="line">    point.<span class="keyword">set</span>(rect.right, rect.bottom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码部分来自于<code>WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</code>。</p>
+<p>注意：</p>
+<ol>
+<li>所有方法都会根据屏幕旋转进行数值调换。</li>
+<li><code>Resources.getSystem().displayMetrics.heightPixels</code>并不包括状态栏和（或）状态栏。</li>
+</ol>
+<h2 id="相机旋转和设备旋转"><a href="#相机旋转和设备旋转" class="headerlink" title="相机旋转和设备旋转"></a>相机旋转和设备旋转</h2><p><a href="https://developer.android.com/codelabs/android-camera2-preview">Support resizable surfaces in your camera app</a>，或者用1.1.0及以上的CameraX。</p>
+<h2 id="实现列表特殊Footer效果"><a href="#实现列表特殊Footer效果" class="headerlink" title="实现列表特殊Footer效果"></a>实现列表特殊Footer效果</h2><ol>
+<li>内容不满一屏幕时，Footer显示在屏幕底端。</li>
+<li>屏幕超过一屏幕时，Footer和其他条目一样排排坐。</li>
+</ol>
+<p>使用Jetpack Compose来实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">LazyColumn(</span><br><span class="line">    modifier = Modifier.fillMaxHeight(),</span><br><span class="line">    verticalArrangement = TopWithFooter,</span><br><span class="line">) &#123;</span><br><span class="line">    items(list) &#123;</span><br><span class="line">        Item()</span><br><span class="line">    &#125;</span><br><span class="line">    item &#123;</span><br><span class="line">        Footer()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，LazyColumn不满一屏幕会<code>WRAP_CONTENT</code>，用<code>fillMaxHeight()</code>来指定高度。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">object</span> TopWithFooter : Arrangement.Vertical &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> Density.<span class="title">arrange</span><span class="params">(totalSize: <span class="type">Int</span>, sizes: <span class="type">IntArray</span>, outPositions: <span class="type">IntArray</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> y = <span class="number">0</span></span><br><span class="line">        sizes.forEachIndexed &#123; index, size -&gt;</span><br><span class="line">            outPositions[index] = y</span><br><span class="line">            y += size</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (y &lt; totalSize) &#123;</span><br><span class="line">            outPositions[outPositions.lastIndex] = totalSize - (sizes.lastOrNull() ?: <span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
+<p>代码过于简单以至于不需要其他解释了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
