@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -27,7 +27,7 @@
 <meta property="og:description" content="根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了iosched，尽可能地照顾到测试和扩展。 不定期更新新的想法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-06T10:41:15.992Z">
+<meta property="article:modified_time" content="2022-09-17T04:57:32.129Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#domain"><span class="nav-number">1.</span> <span class="nav-text">domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data"><span class="nav-number">2.</span> <span class="nav-text">data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#presentation"><span class="nav-number">3.</span> <span class="nav-text">presentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app-base"><span class="nav-number">4.</span> <span class="nav-text">app-base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app-xxx"><span class="nav-number">5.</span> <span class="nav-text">app-xxx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app"><span class="nav-number">6.</span> <span class="nav-text">app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">7.</span> <span class="nav-text">各种使用场景</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#domain"><span class="nav-number">1.</span> <span class="nav-text">domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data"><span class="nav-number">2.</span> <span class="nav-text">data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#presentation"><span class="nav-number">3.</span> <span class="nav-text">presentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app-base"><span class="nav-number">4.</span> <span class="nav-text">app-base</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app-xxx"><span class="nav-number">5.</span> <span class="nav-text">app-xxx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#app"><span class="nav-number">6.</span> <span class="nav-text">app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">7.</span> <span class="nav-text">各种使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E6%83%B3%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">其他的想法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2022%E5%B9%B49%E6%9C%8817%E6%97%A5"><span class="nav-number">8.1.</span> <span class="nav-text">2022年9月17日</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -341,6 +341,9 @@
 <h2 id="app-xxx"><a href="#app-xxx" class="headerlink" title="app-xxx"></a><code>app-xxx</code></h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">api project(<span class="string">&quot;:app-base&quot;</span>)</span><br><span class="line"><span class="comment">// api project(&quot;:prentation&quot;) // Hilt之前</span></span><br></pre></td></tr></table></figure>
 
 <p>将应用按功能分类，包含了功能的界面、Activity、Framgnet等。用了Hilt之后，也可以把ViewModel放进来。</p>
+<ul>
+<li>app-analytics也应该是一个单独的Module，用于替换不同实现。</li>
+</ul>
 <h2 id="app"><a href="#app" class="headerlink" title="app"></a><code>app</code></h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">implementation project(<span class="string">&quot;:domain&quot;</span>)</span><br><span class="line">implementation project(<span class="string">&quot;:data&quot;</span>)</span><br><span class="line"><span class="comment">// implementation project(&quot;:prentation&quot;) // Hilt之前</span></span><br><span class="line">implementation project(<span class="string">&quot;:app-base&quot;</span>)</span><br><span class="line">implementation project(<span class="string">&quot;:app-xxx&quot;</span>)</span><br><span class="line"></span><br><span class="line">compileOnly ... <span class="comment">// Dagger可能会抱怨找不到data中使用的一些类，所以加进来就可以。</span></span><br></pre></td></tr></table></figure>
 
 <p>应用入口，也是仅有依赖了<code>data</code> Module的一处。这样将应用实现细节通过依赖注入抽象出来，可以达到代码不互相污染、提升编译速度、方便测试、提高逆向难度、提高可扩展性等的效果。</p>
@@ -379,6 +382,30 @@
 </li>
 <li><p>MVI</p>
 <p>因为现有的MVI框架还不够成气候，所以现在还是MVVM。但MVI最重要的是思想，Jetpack Compose也是有类似的思想。在将ViewModel精简、将逻辑放到UseCase后，实现起来还是容易的。</p>
+</li>
+</ul>
+<h2 id="其他的想法"><a href="#其他的想法" class="headerlink" title="其他的想法"></a>其他的想法</h2><h3 id="2022年9月17日"><a href="#2022年9月17日" class="headerlink" title="2022年9月17日"></a>2022年9月17日</h3><p>最近看了<a target="_blank" rel="noopener" href="https://developer.android.com/topic/modularization/patterns">Common modularization patterns</a>。文中提到了多个domain和data的实现，这里提出一些类似的想法，还未亲自实现过。</p>
+<ul>
+<li><p>domain拆为</p>
+<ul>
+<li>domain-base: 存放和具体实现无关的类，例如工具类、接口类等。</li>
+<li>domain-xxx: 依赖于domain-base，存放对应功能的Entity、Repository和UseCase。</li>
+</ul>
+</li>
+<li><p>data拆为</p>
+<ul>
+<li>data-base: 存放一些工具类。</li>
+<li>data-xxx: 依赖于data-base。似乎只能实现各自的数据库、网络、Repository实现。</li>
+</ul>
+</li>
+<li><p>app-base</p>
+<p>不再依赖于domain，依旧保留公用的资源、工具类。此外不修改。</p>
+</li>
+<li><p>app-xxx</p>
+<p>依赖于各自对应的domain-xxx。</p>
+</li>
+<li><p>app</p>
+<p>根据flavor依赖不同的app-xxx和其对应的data-xxx。</p>
 </li>
 </ul>
 
