@@ -1528,6 +1528,37 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发后悔的九件事</title>
+    <url>/2022/12/20/android-things-i-wish-i-knew/</url>
+    <content><![CDATA[<p>RT</p>
+<span id="more"></span>
+
+<h2 id="本应适度使用Material-Components"><a href="#本应适度使用Material-Components" class="headerlink" title="本应适度使用Material Components"></a>本应适度使用Material Components</h2><p>虽说部分组件，诸如<code>MaterialButton</code>、<code>MaterialCardView</code>和<code>CoordinatorLayout</code>，自定义程度很高，用起来也很顺手。但另外一些，诸如<code>TabLayout</code>、<code>BottomAppBar</code>和<code>TopAppBar</code>等，需要诸多奇技淫巧才能符合UI。到头来，其实不如用<code>TextView</code>和<code>ImageView</code>从头攒一个，来得容易实现和维护。</p>
+<p>更别提从Material 3开始，想要把背景颜色设置为一个特定值都变得困难起来。</p>
+<h2 id="本应谨慎使用Post"><a href="#本应谨慎使用Post" class="headerlink" title="本应谨慎使用Post"></a>本应谨慎使用Post</h2><p>在<code>onCreate</code>或<code>onCreateView</code>中，所有View还未被定位和绘制。这时获取其宽度或高度会为0。一个常见的方法是将获取尺寸的代码放到一个<code>post &#123;&#125;</code>中（我最早从AdMob的早期文档中看到类似的用法）。大多数情况下，问题会得到解决。</p>
+<p>但这会打开一个潘多拉魔盒。这个方案意味着每次修改<code>View</code>的属性后，想要得到修改后的状态，就得Post一次。逻辑复杂之后，代码库很快就会充斥着Post嵌套Post多次的糟糕实现。</p>
+<p>根据<a href="https://cheesecakelabs.com/blog/understanding-android-views-dimensions-set/">Understanding when and how Android Views have dimensions set</a>，<code>View.doOnLayout()</code>是比<code>Post</code>更好的方案。但这依然解决不了嵌套太多的问题。而最终解决方案则和下一条有关。</p>
+<h2 id="本应在View层少放业务逻辑"><a href="#本应在View层少放业务逻辑" class="headerlink" title="本应在View层少放业务逻辑"></a>本应在View层少放业务逻辑</h2><p>想法和MVI或Jetpack Compose类似，View收到的永远是UI的状态数据，而业务逻辑全都在ViewModel中。虽然只是把一个文件分为两个文件，但UI实现的复杂度会得到惊人的下降。配合<code>SavedStateHandle</code>，还可以存活过Configuration changes。</p>
+<p>常见的Configuration changes不仅是旋转屏幕，还包括深色模式切换、时区变化、一些破手机切换个应用就会被杀等情况。这里还是要早做打算。</p>
+<p>这样也可以缓解不少上一条Post嵌套太多的问题。</p>
+<h2 id="本应适度使用Single-Activity"><a href="#本应适度使用Single-Activity" class="headerlink" title="本应适度使用Single Activity"></a>本应适度使用Single Activity</h2><p>没人会告诉你，在面对一些核心操作时，Single Activity就力不从心了。</p>
+<p>比如在Fragment中放相机预览，每次切换页面后返回时，相机都得重新启动一遍，使用体验很糟糕。</p>
+<p>在一些应用核心操作时，最好单独使用一个Activity。这并不意味不需要控制好UI状态，只是不让这些核心状态太容易地被丢失。</p>
+<h2 id="本应细心规划Navigation"><a href="#本应细心规划Navigation" class="headerlink" title="本应细心规划Navigation"></a>本应细心规划Navigation</h2><p>如果要在不同屏幕间做约定，最好在顶层设计一些通用抽象的功能。不然未来就看不懂代码了。</p>
+<h2 id="本应记录更多日志"><a href="#本应记录更多日志" class="headerlink" title="本应记录更多日志"></a>本应记录更多日志</h2><p>面对一些棘手的Bug，在尝试各种方案的同时，要确保多留一些日志。</p>
+<h2 id="本应谨慎使用null"><a href="#本应谨慎使用null" class="headerlink" title="本应谨慎使用null"></a>本应谨慎使用null</h2><p>null代表的是不存在，而不是默认值。使用null就意味需要在之后不断地判断是否为null。</p>
+<p>比如用户的主题设置怎么会不存在，最多也就是默认主题。对吧！</p>
+<p>能不用null就不用。使用enum、sealed interface或者继承都会优雅的多。</p>
+<h2 id="本应注释废弃的功能"><a href="#本应注释废弃的功能" class="headerlink" title="本应注释废弃的功能"></a>本应注释废弃的功能</h2><p>把废弃功能入口关掉就好，谁不知道未来会不会有用。</p>
+<h2 id="本应适度使用Singleton"><a href="#本应适度使用Singleton" class="headerlink" title="本应适度使用Singleton"></a>本应适度使用Singleton</h2><p>这里不是用多了，而是用少了。</p>
+<p>都怪Android一开始鼓吹不用Singleton，导致我尽可能用依赖注入的<code>@Resuable</code>来控制内存。但是这会让一些简单的操作都复杂起来。</p>
+<p>既然一个对象从应用开始之初就会被分配并一直使用，就乖乖用Singleton。性能问题几乎永远不会在于几个Singleton。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发牢骚 - 2021年2月6日</title>
     <url>/2021/02/06/android-thoughts-20210206/</url>
     <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
