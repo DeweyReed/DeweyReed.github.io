@@ -171,6 +171,12 @@
 <p>系统会选择和用户设置地区不同的文件夹，这里是最反直觉的地方。这是因为找不到地区对应的翻译时，系统会选择同语言的其他地区翻译，来确保至少是语言是正确的。</p>
 <h2 id="奖励1"><a href="#奖励1" class="headerlink" title="奖励1"></a>奖励1</h2><p><code>build.gradle</code>中的指定语言的<code>resConfigs</code>是要和对应文件夹一致的。比如<code>resConfigs &#39;en&#39;, &#39;zh-rCN&#39;, &#39;zh-rTW&#39;</code></p>
 <h2 id="奖励2"><a href="#奖励2" class="headerlink" title="奖励2"></a>奖励2</h2><p>在<a href="https://developer.android.com/guide/topics/resources/app-languages">Per-app language preferences</a>，Android依然沿用了<a href="https://developer.android.com/guide/topics/resources/app-languages#sample-config">反直觉的缩写</a>。这里似乎和<code>Locale.toLanguageTag()</code>是一致的。</p>
+<h2 id="更新1"><a href="#更新1" class="headerlink" title="更新1"></a>更新1</h2><p>不要假设简体中文只有<code>values-rCN</code>、<code>values-rSG</code>等几个地区标签。有的手机允许用户分别任意选择语言和地区，这样会有很多很多的组合。不过文件夹的检测顺序是通用的。</p>
+<h2 id="更新2"><a href="#更新2" class="headerlink" title="更新2"></a>更新2</h2><p>如何检测应用当前是否是简体中文？</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> languageTag = Locale.getDefault().toLanguageTag()</span><br><span class="line"><span class="keyword">if</span> (languageTag == <span class="string">&quot;zh-CN&quot;</span> || languageTag.startsWith(<span class="string">&quot;zh-Hans&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>暂时并没有找到更靠谱的办法。</p>
+<p>往对应<code>values</code>文件夹中放对应语言的标识<code>string</code>似乎可以，但这让翻译协作变得困难。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://developer.android.com/guide/topics/resources/localization">https://developer.android.com/guide/topics/resources/localization</a></li>
 <li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
@@ -987,6 +993,108 @@
 <p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
 <p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
 <p>死鱼安乐啊死鱼安乐。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android OpenGL学习笔记</title>
+    <url>/2023/01/02/android-opengl-basics/</url>
+    <content><![CDATA[<p><a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a> 学习笔记。</p>
+<p>不过发现OpenGL不靠笔记，全靠内力，所以后期复杂的内容就记不过来了。</p>
+<span id="more"></span>
+
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>现代GPU更新了算法，<strong>每帧清屏重新绘制</strong>比在上一帧基础上修改要更效率、更可靠。</p>
+<p><code>SurfaceView</code>是个<code>Surface</code>，屏幕上单独挖了个洞来高效率显示；<code>TextureView</code>是个<code>View</code>，继承了<code>SurfaceView</code>的功能且可以当成<code>View</code>来操作，代价是性能牺牲。</p>
+<p><code>GLSurfaceView.Renderer</code>中的代码会<strong>在子线程执行</strong>。主线程到子线程：<code>GLSurfaceView.queueEvent</code>。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">glSurfaceView.setEGLContextClientVersion(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sometimes necessary</span></span><br><span class="line"><span class="comment">// glSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0)</span></span><br><span class="line"></span><br><span class="line">glSurfaceView.setRenderer(AirHockeyRenderer(<span class="keyword">this</span>))</span><br><span class="line">glSurfaceView.withLifecycleOwner(<span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSurfaceCreated</span><span class="params">(gl: <span class="type">GL10</span>?, config: <span class="type">EGLConfig</span>?)</span></span> &#123;</span><br><span class="line">    GLES20.glClearColor(<span class="number">1f</span>, <span class="number">0f</span>, <span class="number">0f</span>, <span class="number">0f</span>) <span class="comment">// Alpha is disabled by default</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSurfaceChanged</span><span class="params">(gl: <span class="type">GL10</span>?, width: <span class="type">Int</span>, height: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">    GLES20.glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDrawFrame</span><span class="params">(gl: <span class="type">GL10</span>?)</span></span> &#123;</span><br><span class="line">    <span class="comment">// We must draw something, even if it’s only to clear the screen.</span></span><br><span class="line">    <span class="comment">// If we don’t draw anything, we’ll probably get a bad flickering effect.</span></span><br><span class="line">    <span class="comment">// This will wipe out all colors on the screen and fill the screen with the color</span></span><br><span class="line">    <span class="comment">// previously defined by our call to glClearColor().</span></span><br><span class="line">    GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Defining-Vertices-and-Shaders"><a href="#Defining-Vertices-and-Shaders" class="headerlink" title="Defining Vertices and Shaders"></a>Defining Vertices and Shaders</h2><p>Vertex, Vertices: 点。包含位置、颜色等信息。</p>
+<p>用多个三角形去近似任意图形。描述时使用<strong>逆时针（倒带）方向可以优化性能</strong>。</p>
+<p>使用<code>ByteBuffer.allocateDirect</code>定义不被垃圾回收影响的Native Memory。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> vertexData: FloatBuffer = ByteBuffer</span><br><span class="line">    .allocateDirect(tableVerticesWithTriangles.size * BYTES_PER_FLOAT)</span><br><span class="line">    .order(ByteOrder.nativeOrder())</span><br><span class="line">    .asFloatBuffer()</span><br><span class="line">    .put(floatArray)</span><br></pre></td></tr></table></figure>
+
+<p>Shader: 渲染管线单元。</p>
+<p>Shader使用GLSL（OpenGL’s shading language）</p>
+<h3 id="Vertex-Shader"><a href="#Vertex-Shader" class="headerlink" title="Vertex Shader"></a>Vertex Shader</h3><p>每个点运行一次，得到最后的点。OpenGL生成点、线和三角形。</p>
+<p>坐标为(-1, 1), (-1, 1)。</p>
+<figure class="highlight glsl"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Simple Vertex Shader</span></span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> a_Position;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">gl_Position</span> = a_Position;</span><br><span class="line">    <span class="comment">// gl_PointSize = 10.0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>vec4</code>: x, y, z, w 坐标</p>
+<p><code>attribute</code>: 添加颜色信息，自带默认值（0, 0, 0, 1）。</p>
+<p>默认有着最高精度<code>highp</code>（见Fragment Shader精度介绍）。</p>
+<h3 id="Fragment-Shader"><a href="#Fragment-Shader" class="headerlink" title="Fragment Shader"></a>Fragment Shader</h3><p>计算得到上述生成的点、线和三角形中每个像素点的颜色。Fragment相当于Pixel。</p>
+<figure class="highlight glsl"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Simple Fragment Shader</span></span><br><span class="line"><span class="keyword">precision</span> <span class="keyword">mediump</span> <span class="type">float</span>;</span><br><span class="line"><span class="keyword">uniform</span> <span class="type">vec4</span> u_Color;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">gl_FragColor</span> = u_Color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>precision mediump float;</code>: 定义所有浮点数的精度。在<code>lowp</code>, <code>mediump</code>, <code>highp</code>中选择。</p>
+<p>无默认精度（未定义的行为？），必须手动定义。</p>
+<p>最高精度旨<strong>在某些实现中未支持</strong>。</p>
+<p><code>int</code>的默认精度是<code>mediump</code>。</p>
+<p><code>uniform</code>: 保持不变直至手动修改。无默认值，需要手动指定。</p>
+<p><code>vec4</code>: 这里是颜色<code>RGBA</code>。</p>
+<h2 id="Compiling-Shaders-and-Drawing-to-the-Screen"><a href="#Compiling-Shaders-and-Drawing-to-the-Screen" class="headerlink" title="Compiling Shaders and Drawing to the Screen"></a>Compiling Shaders and Drawing to the Screen</h2><ol>
+<li><p>在<code>onSurfaceCreated</code>中获得两种Shader的String。</p>
+</li>
+<li><p>编译两种Shader，得到对应的shaderObjectId(int)。</p>
+<ul>
+<li>OpenGL内部并不抛异常，只是返回特定的值或通过<code>glGetError</code>读取。</li>
+</ul>
+</li>
+<li><p>把Shaders合成为Program，得到programObjectId。</p>
+</li>
+<li><p>检测Program状态。</p>
+</li>
+<li><p>使用Program。</p>
+</li>
+<li><p>获取变量Attribute和Uniform的Location值。</p>
+</li>
+<li><p>设置变量值</p>
+<p> 方法有很多，一些是：</p>
+<ul>
+<li><code>glVertexAttribPointer</code> + <code>glEnableVertexAttribArray</code>设置Attribute值。</li>
+<li><code>glUniform4f</code>设置Uniform值。</li>
+</ul>
+</li>
+<li><p>绘制</p>
+<ul>
+<li><code>glDrawArrays</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="Adding-Color-and-Shade"><a href="#Adding-Color-and-Shade" class="headerlink" title="Adding Color and Shade"></a>Adding Color and Shade</h2><p><code>GL_TRIANGLE_FAN</code>: 一次画四个三角形。</p>
+<figure class="highlight glsl"><table><tr><td class="code"><pre><span class="line"><span class="comment">// New Vertex Shader</span></span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> a_Position;</span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> a_Color;</span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> v_Color;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    v_Color = a_Color;</span><br><span class="line">    <span class="built_in">gl_Position</span> = a_Position;</span><br><span class="line">    <span class="built_in">gl_PointSize</span> = <span class="number">10.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>varying</code>: 在一条线或三角形中，渐变颜色后，交给Fragment Shader。</p>
+<figure class="highlight glsl"><table><tr><td class="code"><pre><span class="line"><span class="comment">// New Fragment Shader</span></span><br><span class="line"><span class="keyword">precision</span> <span class="keyword">mediump</span> <span class="type">float</span>;</span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> v_Color;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">gl_FragColor</span> = v_Color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就不用手动设置Fragment Shader颜色了。</p>
+<h2 id="Adjusting-to-the-Screen’s-Aspect-Ratio"><a href="#Adjusting-to-the-Screen’s-Aspect-Ratio" class="headerlink" title="Adjusting to the Screen’s Aspect Ratio"></a>Adjusting to the Screen’s Aspect Ratio</h2><p>线性代数、矩阵相乘！</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1 0 0 translateX     x     x + translateX</span><br><span class="line">0 1 0 translateY  x  y  =  y + translateY</span><br><span class="line">0 0 1 translateZ     z     z + translateZ</span><br><span class="line">0 0 0 1              1     1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight glsl"><table><tr><td class="code"><pre><span class="line"><span class="comment">// New Vertex Shader</span></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">mat4</span> u_Matrix;</span><br><span class="line">...</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">gl_Position</span> = u_Matrix * a_Position;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>Matrix.orthoM</code>根据屏幕比例，缩放长边，使内容显示在中心的正方形中。</p>
+<h2 id="Entering-the-Third-Dimension"><a href="#Entering-the-Third-Dimension" class="headerlink" title="Entering the Third Dimension"></a>Entering the Third Dimension</h2><p>坐标处理流程：</p>
+<ol>
+<li><p>Clip Space</p>
+<p> 在<code>Vertex Shader</code>中的<code>gl_Position</code>首先被裁剪到[-w, w]的范围中。</p>
+<p> 此时的坐标也被称为Homogenous Coordinates。</p>
+</li>
+<li><p>Perspective Division</p>
+<p> x, y, z = x / w, y / w, z / w</p>
+<p> w代表距离。距离越大，结果越小，结果越靠近原点，越像消失点。</p>
+<p> 此阶段结束后，所有坐标都在[-1, 1]。多个Homogenous Coordinates会对应一个Normalized device coordinates。</p>
+<p> w不为1时，(x, y, z)并不是实际坐标，(x / w, y / w, z / w)才是。</p>
+</li>
+<li><p>Viewport Transformation</p>
+<p> 和显示区域长宽相乘得到最终坐标Window coordinates。</p>
+</li>
+</ol>
+<p>给坐标增加各种矩阵，实现3D模拟。</p>
+<h2 id="Adding-Detail-with-Textures"><a href="#Adding-Detail-with-Textures" class="headerlink" title="Adding Detail with Textures"></a>Adding Detail with Textures</h2><p>之后书中的内容就复杂起来，记笔记也变得难了起来。</p>
 ]]></content>
       <categories>
         <category>Android</category>

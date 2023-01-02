@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"aprildown.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="OpenGL ES 2.0 for Android 学习笔记。 不过发现OpenGL不靠笔记，全靠内力，所以后期复杂的内容就记不过来了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android OpenGL学习笔记">
+<meta property="og:url" content="http://aprildown.xyz/2023/01/02/android-opengl-basics/index.html">
+<meta property="og:site_name" content="April Down">
+<meta property="og:description" content="OpenGL ES 2.0 for Android 学习笔记。 不过发现OpenGL不靠笔记，全靠内力，所以后期复杂的内容就记不过来了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-02T13:02:38.539Z">
+<meta property="article:author" content="Dewey Reed">
+<meta property="article:tag" content="Android Development">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://aprildown.xyz/2023/01/02/android-opengl-basics/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2023/01/02/android-opengl-basics/","path":"2023/01/02/android-opengl-basics/","title":"Android OpenGL学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android OpenGL学习笔记 | April Down</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">April Down</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Android Development</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-依赖"><a href="/dependencies/" rel="section"><i class="fa fa-code fa-fw"></i>依赖</a></li>
+        <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-code fa-fw"></i>资源</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Defining-Vertices-and-Shaders"><span class="nav-number">2.</span> <span class="nav-text">Defining Vertices and Shaders</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vertex-Shader"><span class="nav-number">2.1.</span> <span class="nav-text">Vertex Shader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fragment-Shader"><span class="nav-number">2.2.</span> <span class="nav-text">Fragment Shader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compiling-Shaders-and-Drawing-to-the-Screen"><span class="nav-number">3.</span> <span class="nav-text">Compiling Shaders and Drawing to the Screen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adding-Color-and-Shade"><span class="nav-number">4.</span> <span class="nav-text">Adding Color and Shade</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adjusting-to-the-Screen%E2%80%99s-Aspect-Ratio"><span class="nav-number">5.</span> <span class="nav-text">Adjusting to the Screen’s Aspect Ratio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entering-the-Third-Dimension"><span class="nav-number">6.</span> <span class="nav-text">Entering the Third Dimension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adding-Detail-with-Textures"><span class="nav-number">7.</span> <span class="nav-text">Adding Detail with Textures</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dewey Reed"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dewey Reed</p>
+  <div class="site-description" itemprop="description">Hang in there, hang in there.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DeweyReed" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;DeweyReed" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5507158/dewey-reed" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5507158&#x2F;dewey-reed" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/DeweyReed" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2023/01/02/android-opengl-basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dewey Reed">
+      <meta itemprop="description" content="Hang in there, hang in there.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="April Down">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android OpenGL学习笔记<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/android-opengl-basics.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-02 00:00:00" itemprop="dateCreated datePublished" datetime="2023-01-02T00:00:00+00:00">2023-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a> 学习笔记。</p>
+<p>不过发现OpenGL不靠笔记，全靠内力，所以后期复杂的内容就记不过来了。</p>
+<span id="more"></span>
+
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>现代GPU更新了算法，<strong>每帧清屏重新绘制</strong>比在上一帧基础上修改要更效率、更可靠。</p>
+<p><code>SurfaceView</code>是个<code>Surface</code>，屏幕上单独挖了个洞来高效率显示；<code>TextureView</code>是个<code>View</code>，继承了<code>SurfaceView</code>的功能且可以当成<code>View</code>来操作，代价是性能牺牲。</p>
+<p><code>GLSurfaceView.Renderer</code>中的代码会<strong>在子线程执行</strong>。主线程到子线程：<code>GLSurfaceView.queueEvent</code>。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">glSurfaceView.setEGLContextClientVersion(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sometimes necessary</span></span><br><span class="line"><span class="comment">// glSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0)</span></span><br><span class="line"></span><br><span class="line">glSurfaceView.setRenderer(AirHockeyRenderer(<span class="keyword">this</span>))</span><br><span class="line">glSurfaceView.withLifecycleOwner(<span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSurfaceCreated</span><span class="params">(gl: <span class="type">GL10</span>?, config: <span class="type">EGLConfig</span>?)</span></span> &#123;</span><br><span class="line">    GLES20.glClearColor(<span class="number">1f</span>, <span class="number">0f</span>, <span class="number">0f</span>, <span class="number">0f</span>) <span class="comment">// Alpha is disabled by default</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSurfaceChanged</span><span class="params">(gl: <span class="type">GL10</span>?, width: <span class="type">Int</span>, height: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">    GLES20.glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDrawFrame</span><span class="params">(gl: <span class="type">GL10</span>?)</span></span> &#123;</span><br><span class="line">    <span class="comment">// We must draw something, even if it’s only to clear the screen.</span></span><br><span class="line">    <span class="comment">// If we don’t draw anything, we’ll probably get a bad flickering effect.</span></span><br><span class="line">    <span class="comment">// This will wipe out all colors on the screen and fill the screen with the color</span></span><br><span class="line">    <span class="comment">// previously defined by our call to glClearColor().</span></span><br><span class="line">    GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Defining-Vertices-and-Shaders"><a href="#Defining-Vertices-and-Shaders" class="headerlink" title="Defining Vertices and Shaders"></a>Defining Vertices and Shaders</h2><p>Vertex, Vertices: 点。包含位置、颜色等信息。</p>
+<p>用多个三角形去近似任意图形。描述时使用<strong>逆时针（倒带）方向可以优化性能</strong>。</p>
+<p>使用<code>ByteBuffer.allocateDirect</code>定义不被垃圾回收影响的Native Memory。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> vertexData: FloatBuffer = ByteBuffer</span><br><span class="line">    .allocateDirect(tableVerticesWithTriangles.size * BYTES_PER_FLOAT)</span><br><span class="line">    .order(ByteOrder.nativeOrder())</span><br><span class="line">    .asFloatBuffer()</span><br><span class="line">    .put(floatArray)</span><br></pre></td></tr></table></figure>
+
+<p>Shader: 渲染管线单元。</p>
+<p>Shader使用GLSL（OpenGL’s shading language）</p>
+<h3 id="Vertex-Shader"><a href="#Vertex-Shader" class="headerlink" title="Vertex Shader"></a>Vertex Shader</h3><p>每个点运行一次，得到最后的点。OpenGL生成点、线和三角形。</p>
+<p>坐标为(-1, 1), (-1, 1)。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Simple Vertex Shader</span></span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> a_Position;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">gl_Position</span> = a_Position;</span><br><span class="line">    <span class="comment">// gl_PointSize = 10.0;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>vec4</code>: x, y, z, w 坐标</p>
+<p><code>attribute</code>: 添加颜色信息，自带默认值（0, 0, 0, 1）。</p>
+<p>默认有着最高精度<code>highp</code>（见Fragment Shader精度介绍）。</p>
+<h3 id="Fragment-Shader"><a href="#Fragment-Shader" class="headerlink" title="Fragment Shader"></a>Fragment Shader</h3><p>计算得到上述生成的点、线和三角形中每个像素点的颜色。Fragment相当于Pixel。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Simple Fragment Shader</span></span><br><span class="line"><span class="keyword">precision</span> <span class="keyword">mediump</span> <span class="type">float</span>;</span><br><span class="line"><span class="keyword">uniform</span> <span class="type">vec4</span> u_Color;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">gl_FragColor</span> = u_Color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>precision mediump float;</code>: 定义所有浮点数的精度。在<code>lowp</code>, <code>mediump</code>, <code>highp</code>中选择。</p>
+<p>无默认精度（未定义的行为？），必须手动定义。</p>
+<p>最高精度旨<strong>在某些实现中未支持</strong>。</p>
+<p><code>int</code>的默认精度是<code>mediump</code>。</p>
+<p><code>uniform</code>: 保持不变直至手动修改。无默认值，需要手动指定。</p>
+<p><code>vec4</code>: 这里是颜色<code>RGBA</code>。</p>
+<h2 id="Compiling-Shaders-and-Drawing-to-the-Screen"><a href="#Compiling-Shaders-and-Drawing-to-the-Screen" class="headerlink" title="Compiling Shaders and Drawing to the Screen"></a>Compiling Shaders and Drawing to the Screen</h2><ol>
+<li><p>在<code>onSurfaceCreated</code>中获得两种Shader的String。</p>
+</li>
+<li><p>编译两种Shader，得到对应的shaderObjectId(int)。</p>
+<ul>
+<li>OpenGL内部并不抛异常，只是返回特定的值或通过<code>glGetError</code>读取。</li>
+</ul>
+</li>
+<li><p>把Shaders合成为Program，得到programObjectId。</p>
+</li>
+<li><p>检测Program状态。</p>
+</li>
+<li><p>使用Program。</p>
+</li>
+<li><p>获取变量Attribute和Uniform的Location值。</p>
+</li>
+<li><p>设置变量值</p>
+<p> 方法有很多，一些是：</p>
+<ul>
+<li><code>glVertexAttribPointer</code> + <code>glEnableVertexAttribArray</code>设置Attribute值。</li>
+<li><code>glUniform4f</code>设置Uniform值。</li>
+</ul>
+</li>
+<li><p>绘制</p>
+<ul>
+<li><code>glDrawArrays</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="Adding-Color-and-Shade"><a href="#Adding-Color-and-Shade" class="headerlink" title="Adding Color and Shade"></a>Adding Color and Shade</h2><p><code>GL_TRIANGLE_FAN</code>: 一次画四个三角形。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// New Vertex Shader</span></span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> a_Position;</span><br><span class="line"><span class="keyword">attribute</span> <span class="type">vec4</span> a_Color;</span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> v_Color;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    v_Color = a_Color;</span><br><span class="line">    <span class="built_in">gl_Position</span> = a_Position;</span><br><span class="line">    <span class="built_in">gl_PointSize</span> = <span class="number">10.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>varying</code>: 在一条线或三角形中，渐变颜色后，交给Fragment Shader。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// New Fragment Shader</span></span><br><span class="line"><span class="keyword">precision</span> <span class="keyword">mediump</span> <span class="type">float</span>;</span><br><span class="line"><span class="keyword">varying</span> <span class="type">vec4</span> v_Color;</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">gl_FragColor</span> = v_Color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就不用手动设置Fragment Shader颜色了。</p>
+<h2 id="Adjusting-to-the-Screen’s-Aspect-Ratio"><a href="#Adjusting-to-the-Screen’s-Aspect-Ratio" class="headerlink" title="Adjusting to the Screen’s Aspect Ratio"></a>Adjusting to the Screen’s Aspect Ratio</h2><p>线性代数、矩阵相乘！</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 0 0 translateX     x     x + translateX</span><br><span class="line">0 1 0 translateY  x  y  =  y + translateY</span><br><span class="line">0 0 1 translateZ     z     z + translateZ</span><br><span class="line">0 0 0 1              1     1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// New Vertex Shader</span></span><br><span class="line"><span class="keyword">uniform</span> <span class="type">mat4</span> u_Matrix;</span><br><span class="line">...</span><br><span class="line"><span class="type">void</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">gl_Position</span> = u_Matrix * a_Position;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>Matrix.orthoM</code>根据屏幕比例，缩放长边，使内容显示在中心的正方形中。</p>
+<h2 id="Entering-the-Third-Dimension"><a href="#Entering-the-Third-Dimension" class="headerlink" title="Entering the Third Dimension"></a>Entering the Third Dimension</h2><p>坐标处理流程：</p>
+<ol>
+<li><p>Clip Space</p>
+<p> 在<code>Vertex Shader</code>中的<code>gl_Position</code>首先被裁剪到[-w, w]的范围中。</p>
+<p> 此时的坐标也被称为Homogenous Coordinates。</p>
+</li>
+<li><p>Perspective Division</p>
+<p> x, y, z = x / w, y / w, z / w</p>
+<p> w代表距离。距离越大，结果越小，结果越靠近原点，越像消失点。</p>
+<p> 此阶段结束后，所有坐标都在[-1, 1]。多个Homogenous Coordinates会对应一个Normalized device coordinates。</p>
+<p> w不为1时，(x, y, z)并不是实际坐标，(x / w, y / w, z / w)才是。</p>
+</li>
+<li><p>Viewport Transformation</p>
+<p> 和显示区域长宽相乘得到最终坐标Window coordinates。</p>
+</li>
+</ol>
+<p>给坐标增加各种矩阵，实现3D模拟。</p>
+<h2 id="Adding-Detail-with-Textures"><a href="#Adding-Detail-with-Textures" class="headerlink" title="Adding Detail with Textures"></a>Adding Detail with Textures</h2><p>之后书中的内容就复杂起来，记笔记也变得难了起来。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/12/25/android-chinese-strings/" rel="prev" title="Android简繁体翻译到底该放哪儿？">
+                  <i class="fa fa-chevron-left"></i> Android简繁体翻译到底该放哪儿？
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
