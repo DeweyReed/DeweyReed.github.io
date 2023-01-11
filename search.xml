@@ -1536,6 +1536,48 @@
       </categories>
   </entry>
   <entry>
+    <title>在Activity启动时弹出软键盘并在其之上显示内容</title>
+    <url>/2023/01/11/android-soft-keyboard-oncreate/</url>
+    <content><![CDATA[<p>想要在Activity一启动就显示如下状态，还要有一个不乱跳的动画，这比预想中要复杂不少。</p>
+<table>
+<thead>
+<tr>
+<th align="center">屏幕</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">状态栏<br>空白<br>内容<br>紧贴着<br>软键盘<br>导航栏</td>
+</tr>
+</tbody></table>
+<span id="more"></span>
+
+<p>第一次尝试了<code>WindowCompat.setDecorFitsSystemWindows(window, false)</code> + <code>ViewCompat.setWindowInsetsAnimationCallback</code>，但问题在于：</p>
+<ol>
+<li><p>有的手机上，在动画结束后，软键盘的高度有时会少十几二十个dp。</p>
+<p> 在onCreate中唤起动画时，一定几率出现。原因不明。</p>
+<p> 如果是用户点击某个按钮后再唤起动画，是没问题的。</p>
+</li>
+<li><p>软键盘从底部升起时，内容会先显示在底部，然后跟随动画升起。</p>
+<p> 这样的效果还行，但很突兀。除非让内容跟随升起时，有一个从小变大动画。</p>
+</li>
+</ol>
+<p>无奈之下，不再使用Edge-to-edge。而使用Activity的<code>android:windowSoftInputMode=&quot;adjustResize&quot;</code>。效果立竿见影，不会再出现高度缺少的问题了。</p>
+<p>但第二个问题依然有。一直以为无能为力了，但直到前几天发现Todoist的一个快捷方式做到了。</p>
+<p>在一顿反编译后，发现它们也用了<code>adjustResize</code>。虽然没能找到具体实现，但我有了新的想法。</p>
+<p><code>adjustResize</code>的实现是Activity自动给Root view增加Padding。那么如果我们记忆之前的Padding，并在之后的onCreate中重复使用，那么就不会跳跃了。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里用了JetpackCompose，所以override这个。</span></span><br><span class="line"><span class="comment">// 如果用XML，就override只有一个参数的setContentView。</span></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setContentView</span><span class="params">(view: <span class="type">View</span>?, params: <span class="type">ViewGroup</span>.<span class="type">LayoutParams</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.setContentView(view, params)</span><br><span class="line">    <span class="keyword">if</span> (view == <span class="literal">null</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用之前储存的底部Padding</span></span><br><span class="line">    view.updatePadding(bottom = viewModel.bottomHeight)</span><br><span class="line"></span><br><span class="line">    ViewCompat.setOnApplyWindowInsetsListener(view) &#123; _, insets -&gt;</span><br><span class="line">        <span class="keyword">val</span> bottom = insets.getInsets(</span><br><span class="line">            WindowInsetsCompat.Type.ime() or WindowInsetsCompat.Type.navigationBars()</span><br><span class="line">        ).bottom</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (bottom &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            view.updatePadding(bottom = bottom)</span><br><span class="line">            <span class="comment">// 储存好底部Padding，供下次启动使用</span></span><br><span class="line">            viewModel.setBottomPadding(bottom)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        insets</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方案的优点是：</p>
+<ol>
+<li>内容只会在第一次时跳跃。</li>
+<li>可以跟随软键盘高度变化，比如切换语言时。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android储存方案研究及分析</title>
     <url>/2020/01/25/android-storage/</url>
     <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
