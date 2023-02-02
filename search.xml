@@ -1031,6 +1031,7 @@
 
 <p><code>precision mediump float;</code>: 定义所有浮点数的精度。在<code>lowp</code>, <code>mediump</code>, <code>highp</code>中选择。</p>
 <p>无默认精度（未定义的行为？），必须手动定义。</p>
+<p>2023年1月13日更新：如果FragmentShader不定义精度，有的手机上会无法显示。</p>
 <p>最高精度旨<strong>在某些实现中未支持</strong>。</p>
 <p><code>int</code>的默认精度是<code>mediump</code>。</p>
 <p><code>uniform</code>: 保持不变直至手动修改。无默认值，需要手动指定。</p>
@@ -1815,6 +1816,62 @@
 <h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
 <h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
 <p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 13升级笔记</title>
+    <url>/2022/02/22/android13-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><p>Notifications</p>
+<ul>
+<li><a href="https://developer.android.com/about/versions/13/behavior-changes-all#notification-permission">https://developer.android.com/about/versions/13/behavior-changes-all#notification-permission</a></li>
+<li><a href="https://developer.android.com/about/versions/13/behavior-changes-all#dismissible-fgs-notifs">https://developer.android.com/about/versions/13/behavior-changes-all#dismissible-fgs-notifs</a></li>
+</ul>
+</li>
+<li><p>RecognitionService</p>
+<ul>
+<li><a href="https://developer.android.com/about/versions/13/behavior-changes-all#speech-service">https://developer.android.com/about/versions/13/behavior-changes-all#speech-service</a></li>
+</ul>
+</li>
+<li><p>Storage</p>
+<ul>
+<li><a href="https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions">https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions</a></li>
+</ul>
+</li>
+<li><p>Intent</p>
+<ul>
+<li><a href="https://developer.android.com/about/versions/13/behavior-changes-all#intents">https://developer.android.com/about/versions/13/behavior-changes-all#intents</a></li>
+</ul>
+</li>
+<li><p>GMS</p>
+<ul>
+<li><a href="https://developer.android.com/about/versions/13/behavior-changes-13#ad-id">https://developer.android.com/about/versions/13/behavior-changes-13#ad-id</a></li>
+</ul>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#app-languages">Per-app language preferences</a></p>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#copy-paste">Clipboard preview</a></p>
+<ul>
+<li><a href="https://developer.android.com/guide/topics/text/copy-paste#duplicate-notifications">Avoid duplicate notifications</a></li>
+</ul>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#predictive-back-nav">Predictive back gesture</a></p>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#runtime-receivers">Safer exporting of context-registered receivers</a></p>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#photo-picker">Photo picker</a></p>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#use-exact-alarm-permission">New permission to use exact alarms</a></p>
+</li>
+<li><p><a href="https://developer.android.com/about/versions/13/features#large-screens">Tablet and large screen support</a></p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
