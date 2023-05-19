@@ -2004,6 +2004,50 @@
       </categories>
   </entry>
   <entry>
+    <title>Github Stars整理</title>
+    <url>/2019/11/24/github-stars/</url>
+    <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
+<p><a href="https://github.com/DeweyReed?tab=stars">Github的Stars页</a></p>
+<span id="more"></span>
+
+<p><a href="https://github.com/ncase/wbwwb">wbwwb(We Become What We Behold – a minigame about the news!)</a></p>
+<p><a href="https://github.com/javiersantos/MaterialStyledDialogs">MaterialStyledDialogs(A library that shows a beautiful and customizable Material-based dialog with header. API 11+ required.)</a></p>
+<p><a href="https://github.com/FoxxMD/intellij-jvm-options-explained">intellij-jvm-options-explained(Common JVM options used with Intellij and what they do)</a></p>
+<p><a href="https://github.com/rock3r/uplift">uplift(A playground for elevation on Android)</a></p>
+<p><a href="https://github.com/lopspower/GradientView">GradientView(Create gradient view in Android in the simplest way possible 🌈)</a></p>
+<p><a href="https://github.com/PandoraMedia/BottomNavigator">BottomNavigator(Android Bottom Navigation multiple stack manager)</a></p>
+<p><a href="https://github.com/skydoves/Balloon">Balloon(🎈 A lightweight popup like tooltips, fully customizable with arrow and animations.)</a></p>
+<p><a href="https://github.com/skydoves/Only">Only(💐 An easy way to persist and run code block only as many times as necessary on Android.)</a></p>
+<p><a href="https://github.com/roughike/SwipeSelector">SwipeSelector(A nicer-looking, more intuitive and highly customizable alternative for radio buttons and dropdowns for Android.)</a></p>
+<p><a href="https://github.com/skydoves/Submarine">Submarine(🚤 Floating navigation view for listing items dynamically on Android.)</a></p>
+<p><a href="https://github.com/zhanghai/SystemUiHelper">SystemUiHelper(Helper for dealing with Android System UI visibility)</a></p>
+<p><a href="https://github.com/bernaferrari/ChangeDetection">ChangeDetection(Automatically track websites changes on Android in background.)</a></p>
+<p><a href="https://github.com/Dimowner/AudioRecorder">AudioRecorder(Audio Recording Android application)</a></p>
+<p><a href="https://github.com/SimonMarquis/InternalAppStore">InternalAppStore(Manage your own internal Android App Store.)</a></p>
+<p><a href="https://github.com/ashishb/adb-enhanced">adb-enhanced(🔪Swiss-army knife for Android testing and development 🔪 ⛺)</a></p>
+<p><a href="https://github.com/jaredrummler/Cyanea">Cyanea(A theme engine for Android)</a></p>
+<p><a href="https://github.com/novoda/bintray-release">bintray-release(A helper for releasing from gradle up to bintray)</a></p>
+<p><a href="https://github.com/Karn/notify">notify(Simplified notification construction and delivery for Android.)</a></p>
+<p><a href="https://github.com/afollestad/aesthetic">aesthetic(🔮 A fast, easy to use, dynamic theme engine. Powered by Rx and Kotlin, for Android apps.)</a></p>
+<p><a href="https://github.com/rubensousa/BottomSheetBuilder">BottomSheetBuilder(A simple library that creates BottomSheets according to the Material Design specs)</a></p>
+<p><a href="https://github.com/Tinder/StateMachine">StateMachine(A Kotlin DSL for finite state machine)</a></p>
+<p><a href="https://github.com/aritraroy/Flashbar">Flashbar(⚡️A highly customizable, powerful and easy-to-use alerting library for Android.)</a></p>
+<p><a href="https://github.com/vanniktech/gradle-dependency-graph-generator-plugin">gradle-dependency-graph-generator-plugin(Gradle plugin that generates dependency graphs from your project.)</a></p>
+<p><a href="https://github.com/willowtreeapps/Hyperion-Android">Hyperion-Android(App Debugging &amp; Inspection Tool for Android)</a></p>
+<p><a href="https://github.com/JetradarMobile/desertplaceholder">desertplaceholder(Animated placeholder in desert style.)</a></p>
+<p><a href="https://github.com/KeepSafe/dexcount-gradle-plugin">dexcount-gradle-plugin(A Gradle plugin to report the number of method references in your APK on every build.)</a></p>
+<p><a href="https://github.com/openstf/stf">stf(Control and manage Android devices from your browser.)</a></p>
+<p><a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll(✨ Build a beautiful and simple website in literally minutes.)</a></p>
+<p><a href="https://github.com/MEiDIK/Cipher.so">Cipher.so(A simple way to encrypt your secure data like passwords into a native .so library.)</a></p>
+<p><a href="https://github.com/Ereza/CustomActivityOnCrash">CustomActivityOnCrash(Android library that allows launching a custom activity when your app crashes, instead of showing the hated “Unfortunately, X has stopped” dialog.)</a></p>
+<p><a href="https://github.com/Triple-T/gradle-play-publisher">gradle-play-publisher(GPP is Android’s unofficial release automation Gradle Plugin. It can do anything from building, uploading, and then promoting your App Bundle or APK to publishing app listings and other metadata.)</a></p>
+<p><a href="https://github.com/akexorcist/Android-LocalizationActivity">Android-LocalizationActivity(Let’s make language swithching in your app with easy way)</a></p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Docker快速搭建Wordpress + HTTPS</title>
     <url>/2018/03/20/docker-wordpress/</url>
     <content><![CDATA[<p>虽然最终选择了GithubPages + Hexo，但之前使用Docker搭的Wordpress + HTTPS。搭完后才发现维护起来又累又贵，就把整个流程贴出来留给有缘人吧。</p>
@@ -2098,50 +2142,6 @@
 ]]></content>
       <categories>
         <category>Website</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Github Stars整理</title>
-    <url>/2019/11/24/github-stars/</url>
-    <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
-<p><a href="https://github.com/DeweyReed?tab=stars">Github的Stars页</a></p>
-<span id="more"></span>
-
-<p><a href="https://github.com/ncase/wbwwb">wbwwb(We Become What We Behold – a minigame about the news!)</a></p>
-<p><a href="https://github.com/javiersantos/MaterialStyledDialogs">MaterialStyledDialogs(A library that shows a beautiful and customizable Material-based dialog with header. API 11+ required.)</a></p>
-<p><a href="https://github.com/FoxxMD/intellij-jvm-options-explained">intellij-jvm-options-explained(Common JVM options used with Intellij and what they do)</a></p>
-<p><a href="https://github.com/rock3r/uplift">uplift(A playground for elevation on Android)</a></p>
-<p><a href="https://github.com/lopspower/GradientView">GradientView(Create gradient view in Android in the simplest way possible 🌈)</a></p>
-<p><a href="https://github.com/PandoraMedia/BottomNavigator">BottomNavigator(Android Bottom Navigation multiple stack manager)</a></p>
-<p><a href="https://github.com/skydoves/Balloon">Balloon(🎈 A lightweight popup like tooltips, fully customizable with arrow and animations.)</a></p>
-<p><a href="https://github.com/skydoves/Only">Only(💐 An easy way to persist and run code block only as many times as necessary on Android.)</a></p>
-<p><a href="https://github.com/roughike/SwipeSelector">SwipeSelector(A nicer-looking, more intuitive and highly customizable alternative for radio buttons and dropdowns for Android.)</a></p>
-<p><a href="https://github.com/skydoves/Submarine">Submarine(🚤 Floating navigation view for listing items dynamically on Android.)</a></p>
-<p><a href="https://github.com/zhanghai/SystemUiHelper">SystemUiHelper(Helper for dealing with Android System UI visibility)</a></p>
-<p><a href="https://github.com/bernaferrari/ChangeDetection">ChangeDetection(Automatically track websites changes on Android in background.)</a></p>
-<p><a href="https://github.com/Dimowner/AudioRecorder">AudioRecorder(Audio Recording Android application)</a></p>
-<p><a href="https://github.com/SimonMarquis/InternalAppStore">InternalAppStore(Manage your own internal Android App Store.)</a></p>
-<p><a href="https://github.com/ashishb/adb-enhanced">adb-enhanced(🔪Swiss-army knife for Android testing and development 🔪 ⛺)</a></p>
-<p><a href="https://github.com/jaredrummler/Cyanea">Cyanea(A theme engine for Android)</a></p>
-<p><a href="https://github.com/novoda/bintray-release">bintray-release(A helper for releasing from gradle up to bintray)</a></p>
-<p><a href="https://github.com/Karn/notify">notify(Simplified notification construction and delivery for Android.)</a></p>
-<p><a href="https://github.com/afollestad/aesthetic">aesthetic(🔮 A fast, easy to use, dynamic theme engine. Powered by Rx and Kotlin, for Android apps.)</a></p>
-<p><a href="https://github.com/rubensousa/BottomSheetBuilder">BottomSheetBuilder(A simple library that creates BottomSheets according to the Material Design specs)</a></p>
-<p><a href="https://github.com/Tinder/StateMachine">StateMachine(A Kotlin DSL for finite state machine)</a></p>
-<p><a href="https://github.com/aritraroy/Flashbar">Flashbar(⚡️A highly customizable, powerful and easy-to-use alerting library for Android.)</a></p>
-<p><a href="https://github.com/vanniktech/gradle-dependency-graph-generator-plugin">gradle-dependency-graph-generator-plugin(Gradle plugin that generates dependency graphs from your project.)</a></p>
-<p><a href="https://github.com/willowtreeapps/Hyperion-Android">Hyperion-Android(App Debugging &amp; Inspection Tool for Android)</a></p>
-<p><a href="https://github.com/JetradarMobile/desertplaceholder">desertplaceholder(Animated placeholder in desert style.)</a></p>
-<p><a href="https://github.com/KeepSafe/dexcount-gradle-plugin">dexcount-gradle-plugin(A Gradle plugin to report the number of method references in your APK on every build.)</a></p>
-<p><a href="https://github.com/openstf/stf">stf(Control and manage Android devices from your browser.)</a></p>
-<p><a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll(✨ Build a beautiful and simple website in literally minutes.)</a></p>
-<p><a href="https://github.com/MEiDIK/Cipher.so">Cipher.so(A simple way to encrypt your secure data like passwords into a native .so library.)</a></p>
-<p><a href="https://github.com/Ereza/CustomActivityOnCrash">CustomActivityOnCrash(Android library that allows launching a custom activity when your app crashes, instead of showing the hated “Unfortunately, X has stopped” dialog.)</a></p>
-<p><a href="https://github.com/Triple-T/gradle-play-publisher">gradle-play-publisher(GPP is Android’s unofficial release automation Gradle Plugin. It can do anything from building, uploading, and then promoting your App Bundle or APK to publishing app listings and other metadata.)</a></p>
-<p><a href="https://github.com/akexorcist/Android-LocalizationActivity">Android-LocalizationActivity(Let’s make language swithching in your app with easy way)</a></p>
-]]></content>
-      <categories>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
