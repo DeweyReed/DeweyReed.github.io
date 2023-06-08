@@ -19,28 +19,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"aprildown.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="一些笔记没地方放了就决定丢这里。">
+  <meta name="description" content="最近依然在研读OpenGL ES 2.0 for Android。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。 理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 13升级笔记">
-<meta property="og:url" content="http://aprildown.xyz/2023/02/22/android13-upgrade-notes/index.html">
+<meta property="og:title" content="Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？">
+<meta property="og:url" content="http://aprildown.xyz/2023/06/08/android-opengl-matrix/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="一些笔记没地方放了就决定丢这里。">
+<meta property="og:description" content="最近依然在研读OpenGL ES 2.0 for Android。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。 理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-22T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-08T01:56:14.329Z">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png">
+<meta property="og:image" content="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png">
+<meta property="article:published_time" content="2023-06-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-08T01:56:14.325Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png">
 
 
-<link rel="canonical" href="http://aprildown.xyz/2023/02/22/android13-upgrade-notes/">
+<link rel="canonical" href="http://aprildown.xyz/2023/06/08/android-opengl-matrix/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2023/02/22/android13-upgrade-notes/","path":"2023/02/22/android13-upgrade-notes/","title":"Android 13升级笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://aprildown.xyz/2023/06/08/android-opengl-matrix/","path":"2023/06/08/android-opengl-matrix/","title":"Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Android 13升级笔记 | April Down</title>
+<title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？ | April Down</title>
   
 
 
@@ -221,7 +224,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2023/02/22/android13-upgrade-notes/">
+    <link itemprop="mainEntityOfPage" href="http://aprildown.xyz/2023/06/08/android-opengl-matrix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -234,7 +237,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Android 13升级笔记<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/android13-upgrade-notes.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/android-opengl-matrix.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -245,7 +248,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2023-02-22T00:00:00+00:00">2023-02-22</time>
+      <time title="创建时间：2023-06-08 00:00:00" itemprop="dateCreated datePublished" datetime="2023-06-08T00:00:00+00:00">2023-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -267,54 +270,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>一些笔记没地方放了就决定丢这里。</p>
+        <p>最近依然在研读<a target="_blank" rel="noopener" href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
+<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
 <span id="more"></span>
 
-<ul>
-<li><p>Notifications</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/behavior-changes-all#notification-permission">https://developer.android.com/about/versions/13/behavior-changes-all#notification-permission</a></li>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/behavior-changes-all#dismissible-fgs-notifs">https://developer.android.com/about/versions/13/behavior-changes-all#dismissible-fgs-notifs</a></li>
-</ul>
-</li>
-<li><p>RecognitionService</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/behavior-changes-all#speech-service">https://developer.android.com/about/versions/13/behavior-changes-all#speech-service</a></li>
-</ul>
-</li>
-<li><p>Storage</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions">https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions</a></li>
-</ul>
-</li>
-<li><p>Intent</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/behavior-changes-all#intents">https://developer.android.com/about/versions/13/behavior-changes-all#intents</a></li>
-</ul>
-</li>
-<li><p>GMS</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/behavior-changes-13#ad-id">https://developer.android.com/about/versions/13/behavior-changes-13#ad-id</a></li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#app-languages">Per-app language preferences</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#copy-paste">Clipboard preview</a></p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/text/copy-paste#duplicate-notifications">Avoid duplicate notifications</a></li>
-</ul>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#predictive-back-nav">Predictive back gesture</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#runtime-receivers">Safer exporting of context-registered receivers</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#photo-picker">Photo picker</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#use-exact-alarm-permission">New permission to use exact alarms</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/13/features#large-screens">Tablet and large screen support</a></p>
-</li>
-</ul>
+<hr>
+<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
+<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
+
+<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
+<p>参考了<a target="_blank" rel="noopener" href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
+<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
+<hr>
+<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
+<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
+<hr>
+<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
+<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
+<hr>
+<p>Q: Orthographic Projection是个啥？</p>
+<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
+<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
+<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
+<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
+<p>Source: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
+<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
+<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
+<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
+<ol>
+<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
+<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
+</ol>
+<p>参考了<a target="_blank" rel="noopener" href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
+<hr>
+<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
+<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
+<p>这里有一个没人跟我说的小秘密。</p>
+<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
+<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
+<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
+<p>Source: <a target="_blank" rel="noopener" href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
+<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
+<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
+<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
+<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
+<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
+<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
+<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
+<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
 
     </div>
 
@@ -328,14 +333,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/01/11/android-soft-keyboard-oncreate/" rel="prev" title="在Activity启动时弹出软键盘并在其之上显示内容">
-                  <i class="fa fa-chevron-left"></i> 在Activity启动时弹出软键盘并在其之上显示内容
+                <a href="/2023/02/22/android13-upgrade-notes/" rel="prev" title="Android 13升级笔记">
+                  <i class="fa fa-chevron-left"></i> Android 13升级笔记
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/06/08/android-opengl-matrix/" rel="next" title="Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？">
-                  Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？ <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
