@@ -200,7 +200,7 @@
 
 <h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
 <h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="">
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2811,7 +2811,7 @@
 <p><strong>同时也考虑到维护这个应用的资金基本转不起来、应用推广困难重重等原因，索性不破不立，转免费吧。</strong></p>
 <h2 id="谢谢各位"><a href="#谢谢各位" class="headerlink" title="谢谢各位"></a>谢谢各位</h2><p>谢谢各位使用计时机器，谢谢各位在应用商店里的打分和评论，谢谢各位早期对我的赞赏，谢谢各位专业版用户的支持！</p>
 <p>一直以来，哪怕看到各位的只有一次支持和鼓励，都让我充满了继续更新下去的决心。再次谢谢各位！</p>
-<img src="/2019/07/06/timer-death/bananice.jpg" class="">
+<img src="/2019/07/06/timer-death/bananice.jpg" class="" title="[bananice.jpg](.&#x2F;timer-death&#x2F;bananice.jpg)">
 
 <p>以后的更新随缘，也会更加放飞自我。</p>
 <blockquote>
@@ -2829,7 +2829,7 @@
 <span id="more"></span>
 
 <p>华为用户：感谢酷安用户@无野 提供的华为设备在锁屏后无法运行的解决方案。我顺便修了一下图。</p>
-<img src="/2017/12/10/timer-huawei-solution/huawei-solution.jpg" class="">
+<img src="/2017/12/10/timer-huawei-solution/huawei-solution.jpg" class="" title="[huawei-solution.jpg](.&#x2F;timer-huawei-solution&#x2F;huawei-solution.jpg)">
 
 <p>其他用户：最近发现了一个链接<a href="https://bitbucket.org/copluk/acr/issues/607">ACR is automatically closed on some phones</a>，是个国外应用处理一些应用在国产设备上后台被杀时如何白名单的文章。虽然是英文，但下面有各个设备的链接，里面有一些示范图片，各位可以参考一下。</p>
 ]]></content>
@@ -2972,7 +2972,7 @@
 <h2 id="2020年9月7日"><a href="#2020年9月7日" class="headerlink" title="2020年9月7日"></a>2020年9月7日</h2><p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-cloud-backup.md">关于计时机器在Google Play渠道引入订阅制云备份的决定</a></p>
 <h2 id="2020年8月27日"><a href="#2020年8月27日" class="headerlink" title="2020年8月27日"></a>2020年8月27日</h2><p>云备份一直在测试，各种小错误不断。</p>
 <p>另外，文件夹功能已经在做了，这里是<del>仅有的一张</del>设计图：</p>
-<img src="/2017/12/10/timer-devLog/timer_folder.png" class="">
+<img src="/2017/12/10/timer-devLog/timer_folder.png" class="" title="[timer_folder.png](.&#x2F;timer-devLog&#x2F;timer_folder.png)">
 
 <h2 id="2020年7月27日"><a href="#2020年7月27日" class="headerlink" title="2020年7月27日"></a>2020年7月27日</h2><p>应用数据云端备份和保存的功能终于完成了基础部分，都拖了一个月了，不过距离最终完成还需要一段时间。</p>
 <p>除了代码，我还需要处理UI、文案、服务器等等。像是前段时间写了个小应用，代码半天搞定，图标却活活憋了三天，而且最后看起来也很一般。ㄟ( ▔, ▔ )ㄏ</p>
