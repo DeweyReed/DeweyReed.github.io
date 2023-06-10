@@ -1937,6 +1937,23 @@
       </categories>
   </entry>
   <entry>
+    <title>换域名啦</title>
+    <url>/2023/06/10/changing-domain/</url>
+    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
+<p>本文记录换域名和重定向的历程。</p>
+<span id="more"></span>
+
+<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
+<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
+<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
+<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
+<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
     <title>想要自动清空浏览记录</title>
     <url>/2020/08/06/clean-browser-history/</url>
     <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
