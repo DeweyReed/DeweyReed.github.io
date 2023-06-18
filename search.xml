@@ -27,6 +27,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Animation</title>
     <url>/2018/12/11/android-animation/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=N_x7SV3I3P0">Get Animated (Android Dev Summit ‘18)</a>，解释那复杂的Android动画框架和工具。</p>
@@ -67,16 +77,6 @@
 <li><p>MotionLayout：饼，真香。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
 ]]></content>
       <categories>
         <category>Android</category>

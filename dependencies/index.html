@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"deweyreed.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="Gradle 8.1.1: 🚧  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.)   8.0.2: ✔  7.5.1: ✔  7.4.2: ✔  7.3.3: ✔  7.1.1: ✔   Kotlin org.jetbrains.kotlin:kotlin  1.8.21: 🚧  kot">
+  <meta name="description" content="Gradle 8.1.1: 🚧  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.) 1234567compileOptions &amp;#123;    sourceCompatibility &#x3D; JavaVersion.VERSION_17    targetCompatibility &#x3D; Ja">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Is the dependency safe to upgrade?">
 <meta property="og:url" content="http://deweyreed.github.io/dependencies/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="Gradle 8.1.1: 🚧  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.)   8.0.2: ✔  7.5.1: ✔  7.4.2: ✔  7.3.3: ✔  7.1.1: ✔   Kotlin org.jetbrains.kotlin:kotlin  1.8.21: 🚧  kot">
+<meta property="og:description" content="Gradle 8.1.1: 🚧  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.) 1234567compileOptions &amp;#123;    sourceCompatibility &#x3D; JavaVersion.VERSION_17    targetCompatibility &#x3D; Ja">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-10T01:08:21.197Z">
+<meta property="article:modified_time" content="2023-06-18T11:46:20.333Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -264,7 +264,8 @@
         <h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><ul>
 <li><p>8.1.1: 🚧</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.gradle.org/8.1.1/userguide/configuration_cache.html">Configuration cache stable</a>(requires Kotlin 1.8 and <code>sourceCompatibility</code>, etc.)</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.gradle.org/8.1.1/userguide/configuration_cache.html">Configuration cache stable</a>(requires Kotlin 1.8 and <code>sourceCompatibility</code>, etc.)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">compileOptions &#123;</span><br><span class="line">    sourceCompatibility = JavaVersion.VERSION_17</span><br><span class="line">    targetCompatibility = JavaVersion.VERSION_17</span><br><span class="line">&#125;</span><br><span class="line">kotlinOptions &#123;</span><br><span class="line">    jvmTarget = JavaVersion.VERSION_17.toString()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>8.0.2: ✔</p>
@@ -281,7 +282,7 @@
 <h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><ul>
 <li><p>org.jetbrains.kotlin:kotlin</p>
 <ul>
-<li><p>1.8.21: 🚧</p>
+<li><p>1.8.22: 🚧</p>
 <ul>
 <li>kotlin-stdlib-jdk7 and kotlin-stdlib-jdk8 -&gt; kotlin-stdlib</li>
 </ul>
@@ -418,7 +419,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/core">androidx.core:core-ktx</a></p>
 <ul>
-<li><p>1.10.0: 🚧(Kotlin 1.8)</p>
+<li><p>1.10.1: 🚧(Kotlin 1.8)</p>
 <ul>
 <li>Adds compatibility methods for new APIs introduced in Android 13 for Parcels, Bundles, and Intents.</li>
 </ul>
