@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"deweyreed.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="Gradle 8.1.1: 🚧  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.) 1234567compileOptions &amp;#123;    sourceCompatibility &#x3D; JavaVersion.VERSION_17    targetCompatibility &#x3D; Ja">
+  <meta name="description" content="Gradle 8.1.1: ✔  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.) 1234567compileOptions &amp;#123;    sourceCompatibility &#x3D; JavaVersion.VERSION_17    targetCompatibility &#x3D; Jav">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Is the dependency safe to upgrade?">
 <meta property="og:url" content="http://deweyreed.github.io/dependencies/index.html">
 <meta property="og:site_name" content="April Down">
-<meta property="og:description" content="Gradle 8.1.1: 🚧  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.) 1234567compileOptions &amp;#123;    sourceCompatibility &#x3D; JavaVersion.VERSION_17    targetCompatibility &#x3D; Ja">
+<meta property="og:description" content="Gradle 8.1.1: ✔  Configuration cache stable(requires Kotlin 1.8 and sourceCompatibility, etc.) 1234567compileOptions &amp;#123;    sourceCompatibility &#x3D; JavaVersion.VERSION_17    targetCompatibility &#x3D; Jav">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-18T11:46:20.333Z">
+<meta property="article:modified_time" content="2023-06-29T03:25:30.222Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -262,7 +262,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><ul>
-<li><p>8.1.1: 🚧</p>
+<li><p>8.1.1: ✔</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://docs.gradle.org/8.1.1/userguide/configuration_cache.html">Configuration cache stable</a>(requires Kotlin 1.8 and <code>sourceCompatibility</code>, etc.)</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">compileOptions &#123;</span><br><span class="line">    sourceCompatibility = JavaVersion.VERSION_17</span><br><span class="line">    targetCompatibility = JavaVersion.VERSION_17</span><br><span class="line">&#125;</span><br><span class="line">kotlinOptions &#123;</span><br><span class="line">    jvmTarget = JavaVersion.VERSION_17.toString()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
@@ -282,9 +282,10 @@
 <h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><ul>
 <li><p>org.jetbrains.kotlin:kotlin</p>
 <ul>
-<li><p>1.8.22: 🚧</p>
+<li><p>1.8.22: ✔</p>
 <ul>
 <li>kotlin-stdlib-jdk7 and kotlin-stdlib-jdk8 -&gt; kotlin-stdlib</li>
+<li><del><code>kotlinx-android-extension</code></del></li>
 </ul>
 </li>
 <li><p>1.7.20: ✔</p>
@@ -314,7 +315,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlinx.coroutines/releases">org.jetbrains.kotlinx:kotlinx-coroutines</a></p>
 <ul>
-<li><p>1.7.1: 🚧(Kotlin 1.8)</p>
+<li><p>1.7.1: ✔(Kotlin 1.8)</p>
 <ul>
 <li><code>TestCoroutineScheduler</code>, <code>runTest</code>, and <code>TestScope</code> API are promoted to stable</li>
 </ul>
@@ -329,9 +330,7 @@
 <h2 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h2><ul>
 <li><p>com.android.tools.build:gradle(&amp; Android Studio)</p>
 <ul>
-<li><p>8.0.1: 🚧</p>
-</li>
-<li><p>8.0.0: ✔</p>
+<li><p>8.0.2: ✔</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/square/retrofit/issues/3751">🟠 Retrofit After enable R8 full mode getting ParameterizedType error</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/square/okhttp/issues/6258">🟠 Proguard Rules (OkHttp 4.7.2)</a></li>
@@ -399,7 +398,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/lifecycle">androidx.lifecycle:lifecycle</a></p>
 <ul>
-<li><p>2.6.1: 🚧(Kotlin 1.8)</p>
+<li><p>2.6.1: ✔(Kotlin 1.8)</p>
 <ul>
 <li><code>LiveData.isInitialized</code></li>
 <li><del><code>Lifecycle.launchWhenX</code></del></li>
@@ -419,7 +418,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/core">androidx.core:core-ktx</a></p>
 <ul>
-<li><p>1.10.1: 🚧(Kotlin 1.8)</p>
+<li><p>1.10.1: ✔(Kotlin 1.8)</p>
 <ul>
 <li>Adds compatibility methods for new APIs introduced in Android 13 for Parcels, Bundles, and Intents.</li>
 </ul>
@@ -441,7 +440,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/google/desugar_jdk_libs">com.android.tools:desugar_jdk_libs</a></p>
 <ul>
-<li><p>2.0.3: 🚧(AGP 7.4)</p>
+<li><p>2.0.3: ✔(AGP 7.4)</p>
 </li>
 <li><p>1.2.2: ✔(AGP 7.3, Android 13(33))</p>
 </li>
@@ -590,12 +589,14 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developers.google.com/admob/android/rel-notes">com.google.android.gms:play-services-ads</a></p>
 <ul>
+<li>22.0.0: ✔</li>
 <li>21.4.0: ✔</li>
 <li>20.6.0: ✔</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developers.google.com/android/guides/releases">com.google.android.gms:play-services-auth</a></p>
 <ul>
+<li>20.5.0: ✔</li>
 <li>20.2.0: ✔</li>
 </ul>
 </li>
@@ -631,13 +632,14 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/square/okio/blob/master/CHANGELOG.md">com.squareup.okio:okio</a></p>
 <ul>
-<li>3.3.0: 🚧(Kotlin 1.8)</li>
+<li>3.3.0: ✔(Kotlin 1.8)</li>
 <li>3.2.0: ✔</li>
 <li>2.10.0: ✔</li>
 </ul>
 </li>
 <li><p>com.squareup.leakcanary:leakcanary-android-startup</p>
 <ul>
+<li>2.11: ✔</li>
 <li>2.10(Android 13(33)): ✔</li>
 <li>2.9.1: ✔</li>
 </ul>
@@ -649,7 +651,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/bumptech/glide/releases">com.github.bumptech.glide</a></p>
 <ul>
-<li>4.15.1: 🚧</li>
+<li>4.15.1: ✔</li>
 <li>4.14.2: ✔(Android 13(33))</li>
 <li>4.13.2: ✔</li>
 <li>4.12.0: ✔</li>
@@ -657,7 +659,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/airbnb/lottie-android/releases">com.airbnb.android:lottie</a></p>
 <ul>
-<li><p>6.0.0: ✔</p>
+<li><p>6.0.1: ✔</p>
 <ul>
 <li>Allow animations in zip files to contain embedded base64 encoded images</li>
 </ul>
@@ -713,7 +715,7 @@
 </li>
 <li><p>com.github.ben-manes:gradle-versions-plugin</p>
 <ul>
-<li>0.46.0: ✔</li>
+<li>0.47.0: ✔</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/dropbox/dependency-guard">com.dropbox.dependency-guard:dependency-guard</a></p>
@@ -742,7 +744,7 @@
 <h2 id="Chinese"><a href="#Chinese" class="headerlink" title="Chinese"></a>Chinese</h2><ul>
 <li><p><a target="_blank" rel="noopener" href="https://bugly.qq.com/docs/release-notes/release-android-bugly/">com.tencent.bugly:crashreport</a></p>
 <ul>
-<li><p>4.1.9: ✔</p>
+<li><p>4.1.9.2: ✔</p>
 </li>
 <li><p>4.0.4: ✔</p>
 <ul>
@@ -755,6 +757,7 @@
 </li>
 <li><p>com.umeng.umsdk:common</p>
 <ul>
+<li>9.6.1: ✔</li>
 <li>9.5.2: ✔</li>
 <li>9.4.7: ✔</li>
 <li>9.4.5, 9.4.6: ❌ broken</li>
@@ -763,6 +766,7 @@
 </li>
 <li><p>com.umeng.umsdk:asms</p>
 <ul>
+<li>1.8.0: ✔</li>
 <li>1.6.3: ✔</li>
 <li>1.4.1: ✔</li>
 </ul>
@@ -793,6 +797,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://opendocs.alipay.com/common/02km9l">com.alipay.sdk:alipaysdk-android</a></p>
 <ul>
+<li>15.8.14: ✔</li>
 <li>15.8.11: ✔</li>
 </ul>
 </li>
