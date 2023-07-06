@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"deweyreed.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="终于打完了Fire Emblem Engage。过程极度痛苦，在此深刻检讨并反省。有剧透。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论如何避免垃圾游戏">
+<meta property="og:url" content="http://deweyreed.github.io/2023/07/06/how-to-avoid-trash-games/index.html">
+<meta property="og:site_name" content="April Down">
+<meta property="og:description" content="终于打完了Fire Emblem Engage。过程极度痛苦，在此深刻检讨并反省。有剧透。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://deweyreed.github.io/2023/07/06/how-to-avoid-trash-games/engage.jpg">
+<meta property="article:published_time" content="2023-07-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-06T05:52:49.486Z">
+<meta property="article:author" content="Dewey Reed">
+<meta property="article:tag" content="Android Development">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://deweyreed.github.io/2023/07/06/how-to-avoid-trash-games/engage.jpg">
+
+
+<link rel="canonical" href="http://deweyreed.github.io/2023/07/06/how-to-avoid-trash-games/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://deweyreed.github.io/2023/07/06/how-to-avoid-trash-games/","path":"2023/07/06/how-to-avoid-trash-games/","title":"论如何避免垃圾游戏"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>论如何避免垃圾游戏 | April Down</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">April Down</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Android Development</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-依赖"><a href="/dependencies/" rel="section"><i class="fa fa-code fa-fw"></i>依赖</a></li>
+        <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-code fa-fw"></i>资源</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E4%B8%80%E4%BD%9C%E7%AE%97%E5%BE%97%E4%B8%8A%E5%9E%83%E5%9C%BE%E6%B8%B8%E6%88%8F%E5%90%97%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">这一作算得上垃圾游戏吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E7%9A%84%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">错误的开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E7%9A%84%E4%BD%93%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">游戏的体验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%A7%E6%83%85"><span class="nav-number">3.1.</span> <span class="nav-text">剧情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%89%A9"><span class="nav-number">3.2.</span> <span class="nav-text">人物</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%BB%E9%9D%A2"><span class="nav-number">3.3.</span> <span class="nav-text">画面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%A9%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">玩法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E6%88%90%E5%B0%B1%E8%B8%A9%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">全成就踩坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">如果？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%80%9D"><span class="nav-number">6.</span> <span class="nav-text">反思</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dewey Reed"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dewey Reed</p>
+  <div class="site-description" itemprop="description">Hang in there, hang in there.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DeweyReed" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;DeweyReed" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5507158/dewey-reed" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5507158&#x2F;dewey-reed" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/DeweyReed" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://deweyreed.github.io/2023/07/06/how-to-avoid-trash-games/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dewey Reed">
+      <meta itemprop="description" content="Hang in there, hang in there.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="April Down">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          论如何避免垃圾游戏<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/how-to-avoid-trash-games.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-06 00:00:00" itemprop="dateCreated datePublished" datetime="2023-07-06T00:00:00+00:00">2023-07-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/gaming/" itemprop="url" rel="index"><span itemprop="name">Gaming</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>终于打完了Fire Emblem Engage。过程极度痛苦，在此深刻检讨并反省。<strong>有剧透</strong>。</p>
+<span id="more"></span>
+
+<p>先假定这是一部想要用游戏换钞票的作品。文末讨论另外一种情况。</p>
+<h2 id="这一作算得上垃圾游戏吗？"><a href="#这一作算得上垃圾游戏吗？" class="headerlink" title="这一作算得上垃圾游戏吗？"></a>这一作算得上垃圾游戏吗？</h2><p>看到一些中文社区对该游戏总体上持有正面评价，因此先论证标题的合理度。</p>
+<p>正如评价一道菜时，不会因为其中有喜欢的材料和佐料，就忽略掉其他不好的味道。考虑到游戏优秀的画面和出色的难度，还有其他方面的灾难，只能说瑜不掩<strong>瑕</strong>。</p>
+<img src="/2023/07/06/how-to-avoid-trash-games/engage.jpg" class="" title="[engage.jpg](.&#x2F;how-to-avoid-trash-games&#x2F;engage.jpg)">
+
+<p>游戏<a target="_blank" rel="noopener" href="https://www.metacritic.com/game/switch/fire-emblem-engage">此时在Metacritic用户评分6.6</a>，可见一些愤怒玩家的极端情绪。</p>
+<p>在IS自家手游Fire Emblem Heroes中，游戏发布的一月，同步发布了一个卡池。而六个月后，终于有一位新角色（不是一个Engage卡池喔）出现了！可惜不出意外地是游戏中最媚宅的那位。</p>
+<p>相比之下，三房发布后，手游中三房的池子接二连三，多到了有些令人厌烦的程度。</p>
+<p>在手游中，为了赚钱，人气高的角色的换皮都快用脚趾头来数了。而Engage迄今为止只有个位数的角色。</p>
+<p>游戏本体的质量已经不会再变了。过了游戏发售的宣发期，Engage在手游中的人气很凄惨。</p>
+<h2 id="错误的开始"><a href="#错误的开始" class="headerlink" title="错误的开始"></a>错误的开始</h2><p>三房由光荣开发，而Engage是IS自己操刀。因此和Engage相比的是应该是上一作回声，而不是三房。也可以看到游戏继承了回声和IF的很多设定，比如不停刷新且越来越难的大地图遭遇战、虽然有提升但依旧难受的3D转弯手感、一个皇族配两个家臣的偷懒设定、用一个离谱标签来定义某个角色的方法等。相比回声，进步不少；相比三房，一言难尽。</p>
+<p>而对于硬核的战旗玩家则是另一种情况，在文末讨论。</p>
+<p>现在想起来，在观看游戏发售前的预告片时，我曾有过不详的预感。</p>
+<p>二次元 + 低幼向的画风配合亮丽的低多边形的场景，让我不经想起了另外一款风靡全球的手游。这也让我不仅怀疑自己是不是已经和主流游戏玩家群体的审美脱钩了。</p>
+<p>看着那么多小学生和初中生模样的队友谈论着拯救世界和伸张正义，可信度很低。虽然三房中五年后成长为年轻人的学生们年纪也不大，也比Engage中这帮未成年要可信吧。</p>
+<p>似乎自从苍晓之后，火纹主角团的年纪越来越小了。</p>
+<h2 id="游戏的体验"><a href="#游戏的体验" class="headerlink" title="游戏的体验"></a>游戏的体验</h2><h3 id="剧情"><a href="#剧情" class="headerlink" title="剧情"></a>剧情</h3><p>这是我心目中火纹系列中最差的剧情。相比之下，IF等作品的剧情只是平淡、无聊、让人犯困，但这一作可以让催生负面情绪，让人只想快进。</p>
+<p>游戏剧情中有着常见的带动情绪的情节，但其呈现方式非常糟糕。对细节的忽略和演出的敷衍，让一个最差只是平淡的故事，变成了让人苦笑的尴尬桥段。</p>
+<p>反派会制造“异形兵”，这和觉醒和回声中“尸兵”类似，虽然解决了敌人哪里来的问题（凭空捏造出来的），但这样的偷懒到头来却催生了更加偷懒的反派刻画。</p>
+<p>整个故事中，完全没有皇城士兵奋勇作战保家卫国的刻画，有的只是几个反派长驱直入，直取各个国家光杆儿司令的桥段儿。而绝大多数反派都会反水，构成了主角团的不小的一部分。真是最大程度地不浪费建模和立绘。</p>
+<p>另外，在IS上一部作品，纸片马力欧折纸国王中，几乎完美的箱庭解谜游戏却有一个离谱的成就和莫名其妙的结局，让人唏嘘不已。剧情的确不是IS的长项。万年不变的王子复仇记哟。</p>
+<h3 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h3><p>琉尔是第一位在剧情中完全不提变身为龙的龙族。是剧情被砍了吗？</p>
+<p>纹章士的设定虽然让系列老玩家很兴奋，但也决定了老角色无法有新剧情。没有了成长的各位老角色，最后只沦为了辅助战斗和填充对话的工具人。从故事和剧情上来说，纹章士系统也决定了剧情无法有太多波折。</p>
+<h3 id="画面"><a href="#画面" class="headerlink" title="画面"></a>画面</h3><p>画面和立绘非常精致。但正如世间万物，精致不会长久。</p>
+<p>游戏播片几乎都是站桩对话，且都集中游戏后半段，没有什么大场面。IF还有几段激动人心的播片（龙马的雷神刀记忆犹新），但对于这一作的播片，只恨不能二倍速。</p>
+<p>在主角第一次在预告片中亮相时，我的第一反应是“大饼脸”。也许是新纹谜留下了心里阴影，对类似于大饼脸的造型都很排斥。巧了，马大饼在这一部中也是主角。</p>
+<p>客气地说，Engage的角色建模保持了统一的风格；老实地说，在建模上很偷懒。看起来像是，同样的脸型，移动移动五官，换点配饰就得到了新角色。这也解释了为何都是大饼脸。</p>
+<h3 id="玩法"><a href="#玩法" class="headerlink" title="玩法"></a>玩法</h3><p>由于建模精度的提升，且游戏会在UI中加载选中角色的3D模型，导致在打开角色界面时，总会等几百毫秒才能看到角色全貌。同时，所有的UI都无法在操作动画结束前进行下一步。这些特点让整个UI非常难用、卡顿。在不断地买卖武器、切换装备和更改配置时，像是玩几百延迟的FPS。</p>
+<p>由于喜欢秒杀反派，所以游戏都开最低难度，于是我也不知道这作战旗有多精妙咯。</p>
+<h2 id="全成就踩坑"><a href="#全成就踩坑" class="headerlink" title="全成就踩坑"></a>全成就踩坑</h2><p>游戏中的家园仿佛是一帮大学生头脑风暴后，将草稿案甩给了开发团队后得到的系统。数量多、不完善、无深度且意义不明。全成就列表中的条目更像是用Excel直接拖拽得到的数值设计。</p>
+<ul>
+<li>收留动物和捡食材只用于料理</li>
+<li>料理结果取决于厨师，不要数值的话可以空气拌饭</li>
+<li>不要数值而选择空气拌饭的话，就没必要收留动物和捡食材</li>
+<li>研磨戒指只服务于成就</li>
+<li>戒指抽卡主要服务于成就。似乎在高难度的特定几章有点用。要刷一万年才能把戒指都抽齐。</li>
+<li>小游戏（飞龙、肌肉锻炼、钓鱼）全皇冠只有好看这么一个奖励</li>
+<li>俯卧撑要根据速度在黄色区域上方按键</li>
+<li>最高难度的仰卧起坐需要三千分，不需要使劲浪费手柄</li>
+<li>其他小游戏多练习几次就能拿皇冠了</li>
+<li>主角和其他角色提升好感的最快方法是疯狂送最便宜的礼物。礼物商店后期解锁。高价格礼物的用处只是为了显得商店不会太空</li>
+<li>小王八需要持续喂养，不然好感会降</li>
+<li>钓鱼池有九个区，特定时间特定区出特定鱼</li>
+<li>最花时间的成就是全支援和联网战斗相关的成就</li>
+<li>联网战斗只是用玩家的数据，操作是电脑控制的</li>
+<li>想要全角色全纹章士满羁绊要刷一万年。奖励是每队组合的不痛不痒的八句台词</li>
+</ul>
+<h2 id="如果？"><a href="#如果？" class="headerlink" title="如果？"></a>如果？</h2><p>如果Engage是一部只服务于高难度战旗小众玩家的作品，那么一切都可以解释地通！</p>
+<ul>
+<li>为什么除了战斗都很糟糕？因为目标玩家只战斗。画面和其他系统都算加分项。</li>
+<li>为什么要引入纹章士这种对新玩家不友好的设定？因为目标玩家必玩火纹。</li>
+<li>为什么手游不出新池子？因为手游面向大众玩家。</li>
+<li>为什么买之前没人告诉我这些？因为IS要赚钱。老任可不会因为游戏不好玩而退款。</li>
+<li>为什么IS不怕销量差？估计是因为手游赚太多了。</li>
+</ul>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>虽然有着等游戏发售后几个月再买游戏的习惯，但由于火纹系列都有在玩，Engage在发布之初就抓紧了我的钱包。另外，由于四月五日是游戏和手游联动奖励的截止日期，让我买之前也没花太多时间认真思考。然而，联动奖励之后在DLC中永久可领取。</p>
+<p>最简单的方案是在游戏发售后几个月后买游戏时，再次调查评分和评测来决定是否购买。</p>
+<p>而更重要的是，要记牢未来的不确定，而自己能做的是只是欣赏当下已有的优秀作品。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/10/changing-domain/" rel="prev" title="换域名啦">
+                  <i class="fa fa-chevron-left"></i> 换域名啦
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
