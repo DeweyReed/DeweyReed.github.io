@@ -27,7 +27,7 @@
 <meta property="og:description" content="Gradle1gradle wrapper --gradle-version latest   Note, you need to run this command twice to upgrade both Gradle and the Gradle Wrapper itself   8.2.1: ✔  8.1.1: ✔  Configuration cache stable(requires">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-07T02:41:46.738Z">
+<meta property="article:modified_time" content="2023-11-17T11:41:57.598Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -339,7 +339,7 @@
 <h2 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h2><ul>
 <li><p>com.android.tools.build:gradle(&amp; Android Studio)</p>
 <ul>
-<li><p>8.1.1: 🚧</p>
+<li><p>8.1.4: 🚧</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/build/releases/gradle-plugin#kotlin-dsl">Kotlin DSL is the default for build configuration</a></p>
 <p><a target="_blank" rel="noopener" href="https://developer.android.com/build/migrate-to-kotlin-dsl">Migrate your build configuration from Groovy to Kotlin</a></p>
@@ -397,7 +397,13 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/activity">androidx.activity:activity</a></p>
 <ul>
-<li>1.7.2: ✔(Kotlin 1.8, Compose 2023.06.01)</li>
+<li><p>1.8.1: 🚧</p>
+<ul>
+<li><code>ComponentActivity.enableEdgeToEdge()</code> has been added to easily set up the edge-to-edge display in a backward-compatible manner.</li>
+</ul>
+</li>
+<li><p>1.7.2: ✔(Kotlin 1.8, Compose 2023.06.01)</p>
+</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/fragment">androidx.fragment:fragment</a></p>
@@ -417,6 +423,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/lifecycle">androidx.lifecycle:lifecycle</a></p>
 <ul>
+<li><p>2.6.2: 🚧</p>
+</li>
 <li><p>2.6.1: ✔(Kotlin 1.8)</p>
 <ul>
 <li><code>LiveData.isInitialized</code></li>
@@ -437,6 +445,12 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/core">androidx.core:core-ktx</a></p>
 <ul>
+<li><p>1.12.0: 🚧(Android 14)</p>
+<ul>
+<li>New <code>LocalePreferences</code> APIs to help developers to easily access locale data or user’s locale preferences.</li>
+<li>Added <code>LinkMovementMethodCompat</code> that fixes link touch handling</li>
+</ul>
+</li>
 <li><p>1.10.1: ✔(Kotlin 1.8)</p>
 <ul>
 <li>Adds compatibility methods for new APIs introduced in Android 13 for Parcels, Bundles, and Intents.</li>
@@ -454,7 +468,13 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/collection">androidx.collection:collection-ktx</a></p>
 <ul>
-<li>1.2.0: ✔</li>
+<li><p>1.3.0: 🚧</p>
+<ul>
+<li>You can safely drop any dependencies on <code>collection:collection-ktx</code> in favor of <code>collection:collection</code> as <code>collection-ktx</code> is now empty.</li>
+</ul>
+</li>
+<li><p>1.2.0: ✔</p>
+</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/google/desugar_jdk_libs">com.android.tools:desugar_jdk_libs</a></p>
@@ -495,7 +515,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/navigation">androidx.navigation:navigation</a></p>
 <ul>
-<li>2.7.1: 🚧(Android 14(34))</li>
+<li>2.7.5: 🚧(Android 14(34))</li>
 <li>2.5.3: ✔</li>
 <li>2.4.2: ✔</li>
 <li>2.3.5: ✔</li>
@@ -690,6 +710,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/coil-kt/coil">io.coil-kt</a></p>
 <ul>
+<li>2.5.0: 🚧(Kotlin 1.9, Android 14(34))</li>
 <li>2.4.0: ✔</li>
 </ul>
 </li>
