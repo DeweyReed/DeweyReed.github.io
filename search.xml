@@ -1,42 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Android Animated Vector Drawable搜集</title>
-    <url>/2019/11/27/android-animated_vector_drawables/</url>
-    <content><![CDATA[<p>各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><p><a href="https://github.com/StylingAndroid/AnimatedIcons/">StylingAndroid/AnimatedIcons</a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-max-min/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/MaxMin.gif" alt="AnimatedIcons: Max / Min"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v3/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/LoadingV3.gif" alt="AnimatedIcons: Loading V3"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animated-icons-plus-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/PlusX.gif" alt="AnimatedIcons: Plus / X"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-strikethru/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Strikethru.gif" alt="AnimatedIcons: Strikethru"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v2/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Loading_V2.gif" alt="AnimatedIcons: Loading V2"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-search-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/12/search_x-1.gif" alt="AnimatedIcons: Search / X"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animated-icons-burger-menu/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2020/01/BurgerMenu.gif" alt="Animated Icons: Burger Menu"></a></p>
-</li>
-<li><p><a href="https://github.com/alexjlockwood/adp-delightful-details"><img src="https://camo.githubusercontent.com/079cd7f1079153cd0489dc58bc0fa121b3ecb767/687474703a2f2f692e696d6775722e636f6d2f306146646a4a6e2e676966" alt="A lot of icons"></a></p>
-</li>
-<li><p><a href="https://github.com/tarek360/RichPath"><img src="https://github.com/tarek360/RichPath/raw/develop/screenshots/samples.gif" alt="tarek360/RichPath"></a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Animation</title>
     <url>/2018/12/11/android-animation/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=N_x7SV3I3P0">Get Animated (Android Dev Summit ‘18)</a>，解释那复杂的Android动画框架和工具。</p>
@@ -83,6 +47,42 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Animated Vector Drawable搜集</title>
+    <url>/2019/11/27/android-animated_vector_drawables/</url>
+    <content><![CDATA[<p>各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><p><a href="https://github.com/StylingAndroid/AnimatedIcons/">StylingAndroid/AnimatedIcons</a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-max-min/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/MaxMin.gif" alt="AnimatedIcons: Max / Min"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v3/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/LoadingV3.gif" alt="AnimatedIcons: Loading V3"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animated-icons-plus-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/PlusX.gif" alt="AnimatedIcons: Plus / X"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-strikethru/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Strikethru.gif" alt="AnimatedIcons: Strikethru"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v2/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Loading_V2.gif" alt="AnimatedIcons: Loading V2"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-search-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/12/search_x-1.gif" alt="AnimatedIcons: Search / X"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animated-icons-burger-menu/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2020/01/BurgerMenu.gif" alt="Animated Icons: Burger Menu"></a></p>
+</li>
+<li><p><a href="https://github.com/alexjlockwood/adp-delightful-details"><img src="https://camo.githubusercontent.com/079cd7f1079153cd0489dc58bc0fa121b3ecb767/687474703a2f2f692e696d6775722e636f6d2f306146646a4a6e2e676966" alt="A lot of icons"></a></p>
+</li>
+<li><p><a href="https://github.com/tarek360/RichPath"><img src="https://github.com/tarek360/RichPath/raw/develop/screenshots/samples.gif" alt="tarek360/RichPath"></a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android自动切换深色主题</title>
     <url>/2018/10/04/android-auto-night/</url>
     <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
@@ -105,6 +105,45 @@
 
 <p>然后在MainActivity里：</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>在国内做Android开发踩过的坑</title>
+    <url>/2019/08/25/android-chinese-pitfalls/</url>
+    <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
+<span id="more"></span>
+
+<h2 id="android-in-chia-Compatility"><a href="#android-in-chia-Compatility" class="headerlink" title="android-in-chia/Compatility"></a><a href="https://github.com/android-in-china/Compatibility/issues">android-in-chia/Compatility</a></h2><p>前人踩过的坑，以此祭天。</p>
+<h2 id="LeanCloud混淆规则"><a href="#LeanCloud混淆规则" class="headerlink" title="LeanCloud混淆规则"></a>LeanCloud混淆规则</h2><p>官网的当然是keep所有喽，但我发现使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-dontwarn com.avos.**</span><br><span class="line">-dontnote com.avos.**</span><br><span class="line">-keepnames class com.avos.** &#123; *;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>似乎并不影响。</p>
+<h2 id="fastjson混淆规则"><a href="#fastjson混淆规则" class="headerlink" title="fastjson混淆规则"></a>fastjson混淆规则</h2><p>这里指的是Java版并不是fastjson-android版。</p>
+<p>官网的当然是。。没有啦，所以民间流传的当然是keep所有喽，但我发现使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-dontwarn com.alibaba.fastjson.**</span><br><span class="line">-dontnote com.alibaba.fastjson.**</span><br></pre></td></tr></table></figure>
+
+<p>似乎并不影响。</p>
+<h2 id="抖音SDK没有混淆规则"><a href="#抖音SDK没有混淆规则" class="headerlink" title="抖音SDK没有混淆规则"></a>抖音SDK没有混淆规则</h2><p>它们的“开放”平台没有混淆规则，但不加混淆会调用失败，只能keep所有了。感兴趣的可以试一试<code>-keepnames</code>。</p>
+<h2 id="QQ钱包的Android-SDK接入"><a href="#QQ钱包的Android-SDK接入" class="headerlink" title="QQ钱包的Android SDK接入"></a>QQ钱包的Android SDK接入</h2><p><a href="https://qpay.qq.com/buss/wiki/99/1233">官网的文档</a>有错。</p>
+<p>参数<code>serialNumber</code>为<code>null</code>或为空会导致失败，而服务端又没有提供，但填个任意字符串（我用了当前时间）就能调用了。</p>
+<p>另外，在它们的SDK里发现了这个：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.isEmpty(<span class="string">&quot;native&quot;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;native&quot;</span>.compareTo(<span class="string">&quot;native&quot;</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>看不懂有啥用，希望哪位大佬点拨一下。</p>
+<p>另外的另外，它们的SDK也应该没提供混淆，只能惯例keep所有。</p>
+<h2 id="友盟Share-SDK"><a href="#友盟Share-SDK" class="headerlink" title="友盟Share SDK"></a>友盟Share SDK</h2><p>QQ配置文档有错。用了AAR的依赖后，不需要修改Manifest，而要在app module中添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        manifestPlaceholders = [<span class="attr">qqappid:</span> <span class="string">&#x27;appid&#x27;</span>]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，不需要分享的回调结果时，就不需要在<code>onActivityResult</code>调用它们的API的。</p>
+<h2 id="BitmapFactory返回旧图像"><a href="#BitmapFactory返回旧图像" class="headerlink" title="BitmapFactory返回旧图像"></a><code>BitmapFactory</code>返回旧图像</h2><p>在一些特定的设备（只在华为设备上遇到过，其他未知）上，对一些特定尺寸的图片（640 * 640），使用<code>BitmapFactory.decodeFile/Stream</code>等类似方法解码<code>Bitmap</code>时，返回的不是此时此刻文件里的图片，而是上一次保存的图片。</p>
+<p>最后换了<code>Glide</code>加载图片解决的。简单看了下源码，<code>Glide</code>似乎是用<code>ByteBuffer</code>加载本地图片的。</p>
+<p>此问题的发生原因和解决方法暂时未知。</p>
+<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><blockquote>
+<p>你觉得我喜欢去研究这些东西嘛？</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -149,39 +188,19 @@
       </categories>
   </entry>
   <entry>
-    <title>在国内做Android开发踩过的坑</title>
-    <url>/2019/08/25/android-chinese-pitfalls/</url>
-    <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
 <span id="more"></span>
 
-<h2 id="android-in-chia-Compatility"><a href="#android-in-chia-Compatility" class="headerlink" title="android-in-chia/Compatility"></a><a href="https://github.com/android-in-china/Compatibility/issues">android-in-chia/Compatility</a></h2><p>前人踩过的坑，以此祭天。</p>
-<h2 id="LeanCloud混淆规则"><a href="#LeanCloud混淆规则" class="headerlink" title="LeanCloud混淆规则"></a>LeanCloud混淆规则</h2><p>官网的当然是keep所有喽，但我发现使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-dontwarn com.avos.**</span><br><span class="line">-dontnote com.avos.**</span><br><span class="line">-keepnames class com.avos.** &#123; *;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>似乎并不影响。</p>
-<h2 id="fastjson混淆规则"><a href="#fastjson混淆规则" class="headerlink" title="fastjson混淆规则"></a>fastjson混淆规则</h2><p>这里指的是Java版并不是fastjson-android版。</p>
-<p>官网的当然是。。没有啦，所以民间流传的当然是keep所有喽，但我发现使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-dontwarn com.alibaba.fastjson.**</span><br><span class="line">-dontnote com.alibaba.fastjson.**</span><br></pre></td></tr></table></figure>
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-<p>似乎并不影响。</p>
-<h2 id="抖音SDK没有混淆规则"><a href="#抖音SDK没有混淆规则" class="headerlink" title="抖音SDK没有混淆规则"></a>抖音SDK没有混淆规则</h2><p>它们的“开放”平台没有混淆规则，但不加混淆会调用失败，只能keep所有了。感兴趣的可以试一试<code>-keepnames</code>。</p>
-<h2 id="QQ钱包的Android-SDK接入"><a href="#QQ钱包的Android-SDK接入" class="headerlink" title="QQ钱包的Android SDK接入"></a>QQ钱包的Android SDK接入</h2><p><a href="https://qpay.qq.com/buss/wiki/99/1233">官网的文档</a>有错。</p>
-<p>参数<code>serialNumber</code>为<code>null</code>或为空会导致失败，而服务端又没有提供，但填个任意字符串（我用了当前时间）就能调用了。</p>
-<p>另外，在它们的SDK里发现了这个：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.isEmpty(<span class="string">&quot;native&quot;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;native&quot;</span>.compareTo(<span class="string">&quot;native&quot;</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
-
-<p>看不懂有啥用，希望哪位大佬点拨一下。</p>
-<p>另外的另外，它们的SDK也应该没提供混淆，只能惯例keep所有。</p>
-<h2 id="友盟Share-SDK"><a href="#友盟Share-SDK" class="headerlink" title="友盟Share SDK"></a>友盟Share SDK</h2><p>QQ配置文档有错。用了AAR的依赖后，不需要修改Manifest，而要在app module中添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        manifestPlaceholders = [<span class="attr">qqappid:</span> <span class="string">&#x27;appid&#x27;</span>]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外，不需要分享的回调结果时，就不需要在<code>onActivityResult</code>调用它们的API的。</p>
-<h2 id="BitmapFactory返回旧图像"><a href="#BitmapFactory返回旧图像" class="headerlink" title="BitmapFactory返回旧图像"></a><code>BitmapFactory</code>返回旧图像</h2><p>在一些特定的设备（只在华为设备上遇到过，其他未知）上，对一些特定尺寸的图片（640 * 640），使用<code>BitmapFactory.decodeFile/Stream</code>等类似方法解码<code>Bitmap</code>时，返回的不是此时此刻文件里的图片，而是上一次保存的图片。</p>
-<p>最后换了<code>Glide</code>加载图片解决的。简单看了下源码，<code>Glide</code>似乎是用<code>ByteBuffer</code>加载本地图片的。</p>
-<p>此问题的发生原因和解决方法暂时未知。</p>
-<h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><blockquote>
-<p>你觉得我喜欢去研究这些东西嘛？</p>
-</blockquote>
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -230,25 +249,6 @@
 
 <p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
 <p>代码过于简单以至于不需要其他解释了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -412,6 +412,57 @@
       </categories>
   </entry>
   <entry>
+    <title>Android动态主题</title>
+    <url>/2018/09/14/android-dynamic-theme/</url>
+    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
+<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
+<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
+<span id="more"></span>
+
+<p>2018年12月1日 更新Cyanea</p>
+<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
+<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
+<p>好强啊。</p>
+<p>【完】2018年12月1日 更新Cyanea</p>
+<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
+<p>优点：简单到做这种应用的开发者都用不着找资料</p>
+<p>缺点：使用体验很一般</p>
+<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
+<p>优点：</p>
+<ul>
+<li>简简单单</li>
+<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
+</ul>
+<p>缺点：除了不能让用户随便选，没有缺点</p>
+<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
+<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
+<p>优点：用户体验++<br>缺点</p>
+<ul>
+<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
+<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
+</ul>
+<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
+<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
+<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
+<p>优点：用户体验#</p>
+<p>缺点：</p>
+<ul>
+<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
+<li>实现起来很繁琐</li>
+</ul>
+<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
+<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
+<p>夜间模式也有两种实现方式：</p>
+<ol>
+<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
+<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Dev Summit 2019 笔记</title>
     <url>/2019/11/13/android-dev-summit-2019/</url>
     <content><![CDATA[<p>RT</p>
@@ -534,57 +585,6 @@
 </li>
 </ol>
 <p>来源：AOSP的DeskClock</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android动态主题</title>
-    <url>/2018/09/14/android-dynamic-theme/</url>
-    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
-<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
-<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
-<span id="more"></span>
-
-<p>2018年12月1日 更新Cyanea</p>
-<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
-<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
-<p>好强啊。</p>
-<p>【完】2018年12月1日 更新Cyanea</p>
-<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
-<p>优点：简单到做这种应用的开发者都用不着找资料</p>
-<p>缺点：使用体验很一般</p>
-<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
-<p>优点：</p>
-<ul>
-<li>简简单单</li>
-<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
-</ul>
-<p>缺点：除了不能让用户随便选，没有缺点</p>
-<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
-<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
-<p>优点：用户体验++<br>缺点</p>
-<ul>
-<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
-<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
-</ul>
-<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
-<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
-<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
-<p>优点：用户体验#</p>
-<p>缺点：</p>
-<ul>
-<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
-<li>实现起来很繁琐</li>
-</ul>
-<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
-<p>夜间模式也有两种实现方式：</p>
-<ol>
-<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
-<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
-</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -855,6 +855,28 @@
       </categories>
   </entry>
   <entry>
+    <title>使用json-server模拟后台</title>
+    <url>/2019/10/02/android-mock-server/</url>
+    <content><![CDATA[<p>笔记。</p>
+<span id="more"></span>
+
+<p><a href="https://github.com/typicode/json-server">json-server</a></p>
+<ol>
+<li><p><code>yarn global add json-server</code></p>
+</li>
+<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
+<p> <code>db.json</code>: 数据文件</p>
+<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
+<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android依赖笔记</title>
     <url>/2022/06/02/android-library-dependency/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
@@ -898,46 +920,6 @@
 <li><p>设置为必须声明Class Visibility</p>
   <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>使用json-server模拟后台</title>
-    <url>/2019/10/02/android-mock-server/</url>
-    <content><![CDATA[<p>笔记。</p>
-<span id="more"></span>
-
-<p><a href="https://github.com/typicode/json-server">json-server</a></p>
-<ol>
-<li><p><code>yarn global add json-server</code></p>
-</li>
-<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
-<p> <code>db.json</code>: 数据文件</p>
-<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
-<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些关于Dagger2及其未来的思考</title>
-    <url>/2020/01/01/android-oh-my-dagger/</url>
-    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
-<span id="more"></span>
-
-<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
-<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
-<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
-<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
-<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
-<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
-<p>死鱼安乐啊死鱼安乐。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1102,6 +1084,24 @@
       </categories>
   </entry>
   <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <url>/2020/01/01/android-oh-my-dagger/</url>
+    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+<span id="more"></span>
+
+<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
+<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
+<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
+<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
+<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
+<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
+<p>死鱼安乐啊死鱼安乐。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android OpenGL Texture 坐标原点问题</title>
     <url>/2023/08/23/android-opengl-coordinates/</url>
     <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
@@ -1193,6 +1193,102 @@
 <p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
 <p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
 <p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Jetpack Paging3 从入门到入土</title>
+    <url>/2022/01/31/android-paging3/</url>
+    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
+<p>本文记录了个人实现分页的一些弯路与经验。</p>
+<span id="more"></span>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
+<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
+<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
+</ol>
+<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
+<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
+<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
+<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
+<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
+<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
+<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
+<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
+<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
+<p><strong>可是</strong>，</p>
+<ol>
+<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
+<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
+<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
+</li>
+<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
+<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
+</li>
+<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
+<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
+<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
+ <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
+<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
+<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
+<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
+<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
+</li>
+</ol>
+<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
+<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
+<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
+<ul>
+<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Proguard Hell</title>
+    <url>/2018/12/16/android-proguard-hell/</url>
+    <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
+<span id="more"></span>
+
+<p>Proguard基本上有个任务，精简（删除），混淆，优化。</p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><ul>
+<li><p>-keep 不精简且不混淆这个类和它的成员，“别摸这个类”</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keep class android.support.annotation.Keep</span><br><span class="line">-keep class androidx.annotation.Keep</span><br><span class="line"></span><br><span class="line">-keep @android.support.annotation.Keep class * &#123;*;&#125;</span><br><span class="line">-keep @androidx.annotation.Keep class * &#123;*;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepclasseswithmemebers 效果跟上一条一致，但可以更具体地声明包含某种成员的类。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepclassmembers -keep针对某个类，这个针对某个成员，效果一致（不精简且不混淆）。“别摸这个类的这个成员”</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final ** CREATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Preserve annotated Javascript interface methods.</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    @android.webkit.JavascriptInterface &lt;methods&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepnames 只精简不混淆</p>
+</li>
+<li><p>-keepclasseswithmembernames 效果跟上一条一致，但可以更具体地声明包含某种成员的类</p>
+</li>
+<li><p>-keepclassmembernames 只针对这个类的这个成员，只精简不混淆。不影响这个类。</p>
+</li>
+</ul>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>seeds.txt：第一步(Read Input)的产物。内容是所有匹配proguard-rules的类和成员。是Proguard没有摸过的内容。</p>
+<p>usage.txt：第二步(Shrink)的产物。在知道不能摸的内容后，这里是所有Proguard摸过的内容。</p>
+<p>mapping.txt：第三步(Obfuscate)的产物，记录了Proguard怎么摸的。是一个混淆前后的对应表。</p>
+<p>dump.txt：第四步(Dump)的产物，Progurad处理后的，未压缩或未优化的结果。体量巨大，但可以用于不反编译APK就可以看到APK的内容。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p><a href="https://developer.android.com/studio/build/shrink-code">Shrink your code and resources</a></p>
+</li>
+<li><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74">Troubleshooting ProGuard issues on Android</a></p>
+</li>
+<li><p><a href="https://jebware.com/blog/?p=484">Reading ProGuard’s Outputs</a></p>
+</li>
+<li><p><a href="https://jebware.com/blog/?p=498">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
+</li>
+<li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1348,102 +1444,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Jetpack Paging3 从入门到入土</title>
-    <url>/2022/01/31/android-paging3/</url>
-    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
-<p>本文记录了个人实现分页的一些弯路与经验。</p>
-<span id="more"></span>
-
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
-<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
-<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
-<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
-</ol>
-<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
-<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
-<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
-<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
-<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
-<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
-<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
-<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
-<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
-<p><strong>可是</strong>，</p>
-<ol>
-<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
-<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
-<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
-</li>
-<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
-<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
-</li>
-<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
-<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
-<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
- <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
-<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
-<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
-<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
-<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
-</li>
-</ol>
-<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
-<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
-<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
-<ul>
-<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Proguard Hell</title>
-    <url>/2018/12/16/android-proguard-hell/</url>
-    <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
-<span id="more"></span>
-
-<p>Proguard基本上有个任务，精简（删除），混淆，优化。</p>
-<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><ul>
-<li><p>-keep 不精简且不混淆这个类和它的成员，“别摸这个类”</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keep class android.support.annotation.Keep</span><br><span class="line">-keep class androidx.annotation.Keep</span><br><span class="line"></span><br><span class="line">-keep @android.support.annotation.Keep class * &#123;*;&#125;</span><br><span class="line">-keep @androidx.annotation.Keep class * &#123;*;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepclasseswithmemebers 效果跟上一条一致，但可以更具体地声明包含某种成员的类。</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepclassmembers -keep针对某个类，这个针对某个成员，效果一致（不精简且不混淆）。“别摸这个类的这个成员”</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final ** CREATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Preserve annotated Javascript interface methods.</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    @android.webkit.JavascriptInterface &lt;methods&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepnames 只精简不混淆</p>
-</li>
-<li><p>-keepclasseswithmembernames 效果跟上一条一致，但可以更具体地声明包含某种成员的类</p>
-</li>
-<li><p>-keepclassmembernames 只针对这个类的这个成员，只精简不混淆。不影响这个类。</p>
-</li>
-</ul>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>seeds.txt：第一步(Read Input)的产物。内容是所有匹配proguard-rules的类和成员。是Proguard没有摸过的内容。</p>
-<p>usage.txt：第二步(Shrink)的产物。在知道不能摸的内容后，这里是所有Proguard摸过的内容。</p>
-<p>mapping.txt：第三步(Obfuscate)的产物，记录了Proguard怎么摸的。是一个混淆前后的对应表。</p>
-<p>dump.txt：第四步(Dump)的产物，Progurad处理后的，未压缩或未优化的结果。体量巨大，但可以用于不反编译APK就可以看到APK的内容。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><p><a href="https://developer.android.com/studio/build/shrink-code">Shrink your code and resources</a></p>
-</li>
-<li><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74">Troubleshooting ProGuard issues on Android</a></p>
-</li>
-<li><p><a href="https://jebware.com/blog/?p=484">Reading ProGuard’s Outputs</a></p>
-</li>
-<li><p><a href="https://jebware.com/blog/?p=498">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
-</li>
-<li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识：Android框架</title>
     <url>/2019/02/03/android-requirements-architecture/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
@@ -1526,28 +1526,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1580,6 +1558,28 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1770,6 +1770,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发牢骚 - 2021年2月6日</title>
+    <url>/2021/02/06/android-thoughts-20210206/</url>
+    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
+<span id="more"></span>
+
+<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
+<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
+<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
+<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
+<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
+<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
+<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
+<p>语义化版本是不是只算加分项？</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
+<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
+<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android System UI</title>
     <url>/2019/05/06/android-system-ui/</url>
     <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
@@ -1834,29 +1857,6 @@
 <li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
 <li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发牢骚 - 2021年2月6日</title>
-    <url>/2021/02/06/android-thoughts-20210206/</url>
-    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
-<span id="more"></span>
-
-<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
-<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
-<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
-<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
-<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
-<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
-<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
-<p>语义化版本是不是只算加分项？</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
-<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
-<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2216,6 +2216,15 @@
       </categories>
   </entry>
   <entry>
+    <title>aprildown.xyz将会在未来到期</title>
+    <url>/2023/08/12/domain-expiration/</url>
+    <content><![CDATA[<p>惊闻XYZ域名即将涨价，索性决定再续费一两年后放弃该域名。之后继续乖乖地使用无需多虑的Github域名。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2260,38 +2269,6 @@
       </categories>
   </entry>
   <entry>
-    <title>aprildown.xyz将会在未来到期</title>
-    <url>/2023/08/12/domain-expiration/</url>
-    <content><![CDATA[<p>惊闻XYZ域名即将涨价，索性决定再续费一两年后放弃该域名。之后继续乖乖地使用无需多虑的Github域名。</p>
-]]></content>
-      <categories>
-        <category>Website</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2314,6 +2291,29 @@
 <p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
 <p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
 <p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2642,6 +2642,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Nexus 5 购入 刷机 升级 笔记</title>
     <url>/2022/07/08/nexus5/</url>
     <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
@@ -2662,13 +2672,27 @@
       </categories>
   </entry>
   <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
+    <title>使用Splinter模拟网页操作</title>
+    <url>/2018/04/01/splinter/</url>
+    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
+<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
+<p>内容大同小异，说明几个坑。</p>
 <span id="more"></span>
+
+<p>我用的是Py3.6和Chrome.</p>
+<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
+<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
+<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
+<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
+<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
 ]]></content>
       <categories>
-        <category>What</category>
+        <category>Automation</category>
       </categories>
   </entry>
   <entry>
@@ -2717,30 +2741,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>使用Splinter模拟网页操作</title>
-    <url>/2018/04/01/splinter/</url>
-    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
-<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
-<p>内容大同小异，说明几个坑。</p>
-<span id="more"></span>
-
-<p>我用的是Py3.6和Chrome.</p>
-<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
-<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
-<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
-<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
-<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
-]]></content>
-      <categories>
-        <category>Automation</category>
       </categories>
   </entry>
   <entry>
