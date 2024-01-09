@@ -150,6 +150,25 @@
       </categories>
   </entry>
   <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android简繁体翻译到底该放哪儿？</title>
     <url>/2022/12/25/android-chinese-strings/</url>
     <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
@@ -182,25 +201,6 @@
 <li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
 <li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -412,84 +412,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android动态主题</title>
-    <url>/2018/09/14/android-dynamic-theme/</url>
-    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
-<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
-<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
-<span id="more"></span>
-
-<p>2018年12月1日 更新Cyanea</p>
-<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
-<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
-<p>好强啊。</p>
-<p>【完】2018年12月1日 更新Cyanea</p>
-<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
-<p>优点：简单到做这种应用的开发者都用不着找资料</p>
-<p>缺点：使用体验很一般</p>
-<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
-<p>优点：</p>
-<ul>
-<li>简简单单</li>
-<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
-</ul>
-<p>缺点：除了不能让用户随便选，没有缺点</p>
-<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
-<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
-<p>优点：用户体验++<br>缺点</p>
-<ul>
-<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
-<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
-</ul>
-<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
-<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
-<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
-<p>优点：用户体验#</p>
-<p>缺点：</p>
-<ul>
-<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
-<li>实现起来很繁琐</li>
-</ul>
-<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
-<p>夜间模式也有两种实现方式：</p>
-<ol>
-<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
-<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
-    <url>/2018/10/26/android-expandable-recyclerview/</url>
-    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
-<span id="more"></span>
-
-<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
-<p>用实现一个Expandable RecyclerView来举例子：</p>
-<ol>
-<li><p>首先要使用不同的ViewType：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
-</li>
-<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
-</li>
-</ol>
-<p>来源：AOSP的DeskClock</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Dev Summit 2019 笔记</title>
     <url>/2019/11/13/android-dev-summit-2019/</url>
     <content><![CDATA[<p>RT</p>
@@ -588,6 +510,84 @@
       <categories>
         <category>Android</category>
         <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android动态主题</title>
+    <url>/2018/09/14/android-dynamic-theme/</url>
+    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
+<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
+<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
+<span id="more"></span>
+
+<p>2018年12月1日 更新Cyanea</p>
+<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
+<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
+<p>好强啊。</p>
+<p>【完】2018年12月1日 更新Cyanea</p>
+<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
+<p>优点：简单到做这种应用的开发者都用不着找资料</p>
+<p>缺点：使用体验很一般</p>
+<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
+<p>优点：</p>
+<ul>
+<li>简简单单</li>
+<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
+</ul>
+<p>缺点：除了不能让用户随便选，没有缺点</p>
+<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
+<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
+<p>优点：用户体验++<br>缺点</p>
+<ul>
+<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
+<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
+</ul>
+<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
+<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
+<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
+<p>优点：用户体验#</p>
+<p>缺点：</p>
+<ul>
+<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
+<li>实现起来很繁琐</li>
+</ul>
+<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
+<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
+<p>夜间模式也有两种实现方式：</p>
+<ol>
+<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
+<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
+    <url>/2018/10/26/android-expandable-recyclerview/</url>
+    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
+<span id="more"></span>
+
+<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
+<p>用实现一个Expandable RecyclerView来举例子：</p>
+<ol>
+<li><p>首先要使用不同的ViewType：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
+</li>
+<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
+</li>
+</ol>
+<p>来源：AOSP的DeskClock</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -926,24 +926,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些关于Dagger2及其未来的思考</title>
-    <url>/2020/01/01/android-oh-my-dagger/</url>
-    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
-<span id="more"></span>
-
-<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
-<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
-<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
-<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
-<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
-<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
-<p>死鱼安乐啊死鱼安乐。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>简单的Android软键盘动画</title>
     <url>/2021/05/28/android-naive-keyboard-animation/</url>
     <content><![CDATA[<p>随着<code>androidx.core</code>1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。</p>
@@ -993,6 +975,24 @@
 </ul>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <url>/2020/01/01/android-oh-my-dagger/</url>
+    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+<span id="more"></span>
+
+<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
+<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
+<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
+<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
+<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
+<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
+<p>死鱼安乐啊死鱼安乐。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1403,27 +1403,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
-
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1527,22 +1506,21 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
 <span id="more"></span>
 
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1581,6 +1559,28 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1864,24 +1864,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -1915,6 +1897,24 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2226,29 +2226,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2293,6 +2270,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2318,32 +2318,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>灰度显示</title>
-    <url>/2018/11/04/greyscale/</url>
-    <content><![CDATA[<p>搜集的一些如何在电子设备上打开灰度显示的设置。</p>
-<span id="more"></span>
-
-<ul>
-<li><p>Windows10</p>
-<ul>
-<li>设置搜索“颜色滤镜”，勾选“允许使用快捷键打开或关闭滤镜”，把滤镜设置为“灰度”。使用Windows + Ctrl + C切换灰度。</li>
-<li><a href="https://justgetflux.com/">flux</a>，最新版(4.84)有灰度设置。</li>
-</ul>
-</li>
-<li><p>Android 5.0及以后</p>
-<ul>
-<li>开发者设置，从最后开始找“模拟颜色空间”，设置为“全色盲”。</li>
-<li>应用<a href="https://github.com/fei-ke/Greyscale">灰度</a>，或在酷安搜索。</li>
-</ul>
-</li>
-</ul>
-<p>其他的，有缘再添加吧。</p>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -2470,90 +2444,29 @@
       </categories>
   </entry>
   <entry>
-    <title>用于展示的Markdown徽章集合</title>
-    <url>/2018/04/19/markdown-badges/</url>
-    <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
+    <title>灰度显示</title>
+    <url>/2018/11/04/greyscale/</url>
+    <content><![CDATA[<p>搜集的一些如何在电子设备上打开灰度显示的设置。</p>
+<span id="more"></span>
 
-<ol>
-<li><p><a href="http://shields.io/">Shields.io</a></p>
-<p> 满足绝大部分需求，可以自定义内容和样式。没时间看剩下的内容的话，学会这么一个就够了。</p>
-<p> 在搜索栏中输入“github”可以找到一些常用的勋章。</p>
+<ul>
+<li><p>Windows10</p>
+<ul>
+<li>设置搜索“颜色滤镜”，勾选“允许使用快捷键打开或关闭滤镜”，把滤镜设置为“灰度”。使用Windows + Ctrl + C切换灰度。</li>
+<li><a href="https://justgetflux.com/">flux</a>，最新版(4.84)有灰度设置。</li>
+</ul>
 </li>
-<li><p><a href="https://badge.fury.io/">https://badge.fury.io/</a></p>
-<p> 输入项目名（需要项目有版本号（Tag）），生成各种格式的版本勋章。</p>
+<li><p>Android 5.0及以后</p>
+<ul>
+<li>开发者设置，从最后开始找“模拟颜色空间”，设置为“全色盲”。</li>
+<li>应用<a href="https://github.com/fei-ke/Greyscale">灰度</a>，或在酷安搜索。</li>
+</ul>
 </li>
-<li><p><a href="https://github.com/ellerbrock/open-source-badges">open-source-badges</a></p>
-<p> 提供带有爱心的开源勋章，还有Linceses勋章</p>
-</li>
-<li><p><a href="https://github.com/jitpack/jitpack.io#badges">Jitpack</a></p>
-<p> 如果使用Jitpack发布，可以使用这个链接直接嵌入Jitpack为你设计好的版本勋章。</p>
- <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Release</span>](<span class="link">https://jitpack.io/v/User/Repo.svg</span>)](<span class="link">https://jitpack.io/#User/Repo</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p><a href="https://github.com/KotlinBy/awesome-kotlin#spread-awesome-kotlin">Awesome Kotlin Badge</a></p>
-<p> 如果是awesome kotlin，就又有一个很酷的勋章</br></p>
- <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Awesome Kotlin Badge</span>](<span class="link">https://kotlin.link/awesome-kotlin.svg</span>)](<span class="link">https://github.com/KotlinBy/awesome-kotlin</span>)</span><br></pre></td></tr></table></figure>
-
-<p> <a href="https://github.com/KotlinBy/awesome-kotlin"><img src="https://kotlin.link/awesome-kotlin.svg" alt="Awesome Kotlin Badge"></a></p>
-</li>
-<li><p><a href="https://github.com/jirutka/maven-badges#usags">Maven central</a></p>
-<p> 一个第三方的针对maven central的版本勋章</p>
-</li>
-<li><p>Android Arsenal</p>
-<p> 在项目信息中间一栏的下方，有“Badge”选项，点击右边”Generate”就可以生成一个链接。</p>
-</li>
-<li><p>Emoji</p>
-<p> 虽然算不上勋章，但可以起到勋章的作用。</p>
-<p> 常见的就是使用:cn::us:表示支持的语言、国家。<br> 可以直接使用<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">Emoji Cheat Sheet</a>中的内容表示。</p>
-</li>
-<li><p><a href="https://github.com/larsenwork/web.svg.min">Web.svg.min</a></p>
-<p> 一些常用图标的Vector格式。</p>
-<p> <img src="http://upload-images.jianshu.io/upload_images/5450520-b5058065eb46307d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="preview"></p>
-</li>
-<li><p><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">各种Licenses</a></p>
-</li>
-<li><p><a href="https://circleci.com/docs/1.0/status-badges/">Circleci</a></p>
-</li>
-<li><p><a href="https://docs.travis-ci.com/user/status-images/">Travis CI</a></p>
-</li>
-<li><p><a href="https://support.codacy.com/hc/en-us/articles/212799365-Badges">Codacy</a></p>
-</li>
-<li><p><a href="https://play.google.com/intl/en_us/badges/">Google Play链接</a></p>
-</li>
-<li><p><a href="https://ko-fi.com/">Bug me a coffee</a></p>
-</li>
-<li><p>其他勋章集合</p>
-<p> <a href="https://github.com/boennemann/badges">Badges</a></p>
-<p> <a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></p>
-<p> <a href="https://github.com/dwyl/repo-badges">repo-badges</a></p>
-</li>
-</ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>使用各种服务时，服务商提供了Badge -&gt; 使用它; 没有 -&gt; 2</p>
-</li>
-<li><p>使用Shields.io自己做一个</p>
-</li>
-</ol>
+</ul>
+<p>其他的，有缘再添加吧。</p>
 ]]></content>
       <categories>
         <category>What</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Kotlin + JSON 默认参数适配问题</title>
-    <url>/2018/05/18/kotlin-json/</url>
-    <content><![CDATA[<p>2018年5月18日更新：Moshi 1.6增加了Codegen的选项，可以取代Kotshi。原方案依旧可行。</p>
-<p>之前用Gson序列化Kotlin的data class一直都没问题，但一天当data class中出现了默认参数时，问题就来了。</p>
-<p>如果JSON中没有对应的Field，按道理Gson应该生成一个使用了默认参数的data class，但它没有，而且会无视Kotlin的不可null，直接生成一个null。</p>
-<p>那换一个支持Kotlin的JSON库呗。这时Moshi就很厉害了，自带一个Kotlin的Adapter，用起来很舒服。但是在最后生成Release版本时，才发现安装包大了600+KB。原因是Moshi对Kotlin的支持使用了Kotlin的Reflection，这个就很占空间，虽然也有Kotlin Relection Lite这个轻量级版本，但目前并不支持。</p>
-<p>所以，我在</p>
-<span id="more"></span>
-
-<p>在Gson的Issue<a href="https://github.com/google/gson/issues/1148">讨论</a>中，还有Moshi的讨论中，找到了<a href="https://github.com/ansman/kotshi">Kotshi</a>，问题才最终解决。</p>
-<p>Kotlin + Moshi（不带Kotlin插件）+ Kotshi就是最终解决方案。当然AutoValue之类的也可以，不过没深入研究。</p>
-<p>Kotshi没有采用一劳永逸的方案，而是让每个Kotlin data class类都加一个annotation，再根据它生成一个adapter，<br>在序列化和反序列化时手动处理。</p>
-<p>不算很方便的方案，但也算比<a href="https://medium.com/@MaxMello/most-elegant-way-of-using-gson-kotlin-with-default-values-and-null-safety-b6216ac5328c">通过Backing field处理</a>来的舒服。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2643,6 +2556,93 @@
       </categories>
   </entry>
   <entry>
+    <title>用于展示的Markdown徽章集合</title>
+    <url>/2018/04/19/markdown-badges/</url>
+    <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
+
+<ol>
+<li><p><a href="http://shields.io/">Shields.io</a></p>
+<p> 满足绝大部分需求，可以自定义内容和样式。没时间看剩下的内容的话，学会这么一个就够了。</p>
+<p> 在搜索栏中输入“github”可以找到一些常用的勋章。</p>
+</li>
+<li><p><a href="https://badge.fury.io/">https://badge.fury.io/</a></p>
+<p> 输入项目名（需要项目有版本号（Tag）），生成各种格式的版本勋章。</p>
+</li>
+<li><p><a href="https://github.com/ellerbrock/open-source-badges">open-source-badges</a></p>
+<p> 提供带有爱心的开源勋章，还有Linceses勋章</p>
+</li>
+<li><p><a href="https://github.com/jitpack/jitpack.io#badges">Jitpack</a></p>
+<p> 如果使用Jitpack发布，可以使用这个链接直接嵌入Jitpack为你设计好的版本勋章。</p>
+ <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Release</span>](<span class="link">https://jitpack.io/v/User/Repo.svg</span>)](<span class="link">https://jitpack.io/#User/Repo</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p><a href="https://github.com/KotlinBy/awesome-kotlin#spread-awesome-kotlin">Awesome Kotlin Badge</a></p>
+<p> 如果是awesome kotlin，就又有一个很酷的勋章</br></p>
+ <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Awesome Kotlin Badge</span>](<span class="link">https://kotlin.link/awesome-kotlin.svg</span>)](<span class="link">https://github.com/KotlinBy/awesome-kotlin</span>)</span><br></pre></td></tr></table></figure>
+
+<p> <a href="https://github.com/KotlinBy/awesome-kotlin"><img src="https://kotlin.link/awesome-kotlin.svg" alt="Awesome Kotlin Badge"></a></p>
+</li>
+<li><p><a href="https://github.com/jirutka/maven-badges#usags">Maven central</a></p>
+<p> 一个第三方的针对maven central的版本勋章</p>
+</li>
+<li><p>Android Arsenal</p>
+<p> 在项目信息中间一栏的下方，有“Badge”选项，点击右边”Generate”就可以生成一个链接。</p>
+</li>
+<li><p>Emoji</p>
+<p> 虽然算不上勋章，但可以起到勋章的作用。</p>
+<p> 常见的就是使用:cn::us:表示支持的语言、国家。<br> 可以直接使用<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">Emoji Cheat Sheet</a>中的内容表示。</p>
+</li>
+<li><p><a href="https://github.com/larsenwork/web.svg.min">Web.svg.min</a></p>
+<p> 一些常用图标的Vector格式。</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/5450520-b5058065eb46307d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="preview"></p>
+</li>
+<li><p><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">各种Licenses</a></p>
+</li>
+<li><p><a href="https://circleci.com/docs/1.0/status-badges/">Circleci</a></p>
+</li>
+<li><p><a href="https://docs.travis-ci.com/user/status-images/">Travis CI</a></p>
+</li>
+<li><p><a href="https://support.codacy.com/hc/en-us/articles/212799365-Badges">Codacy</a></p>
+</li>
+<li><p><a href="https://play.google.com/intl/en_us/badges/">Google Play链接</a></p>
+</li>
+<li><p><a href="https://ko-fi.com/">Bug me a coffee</a></p>
+</li>
+<li><p>其他勋章集合</p>
+<p> <a href="https://github.com/boennemann/badges">Badges</a></p>
+<p> <a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></p>
+<p> <a href="https://github.com/dwyl/repo-badges">repo-badges</a></p>
+</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>使用各种服务时，服务商提供了Badge -&gt; 使用它; 没有 -&gt; 2</p>
+</li>
+<li><p>使用Shields.io自己做一个</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Kotlin + JSON 默认参数适配问题</title>
+    <url>/2018/05/18/kotlin-json/</url>
+    <content><![CDATA[<p>2018年5月18日更新：Moshi 1.6增加了Codegen的选项，可以取代Kotshi。原方案依旧可行。</p>
+<p>之前用Gson序列化Kotlin的data class一直都没问题，但一天当data class中出现了默认参数时，问题就来了。</p>
+<p>如果JSON中没有对应的Field，按道理Gson应该生成一个使用了默认参数的data class，但它没有，而且会无视Kotlin的不可null，直接生成一个null。</p>
+<p>那换一个支持Kotlin的JSON库呗。这时Moshi就很厉害了，自带一个Kotlin的Adapter，用起来很舒服。但是在最后生成Release版本时，才发现安装包大了600+KB。原因是Moshi对Kotlin的支持使用了Kotlin的Reflection，这个就很占空间，虽然也有Kotlin Relection Lite这个轻量级版本，但目前并不支持。</p>
+<p>所以，我在</p>
+<span id="more"></span>
+
+<p>在Gson的Issue<a href="https://github.com/google/gson/issues/1148">讨论</a>中，还有Moshi的讨论中，找到了<a href="https://github.com/ansman/kotshi">Kotshi</a>，问题才最终解决。</p>
+<p>Kotlin + Moshi（不带Kotlin插件）+ Kotshi就是最终解决方案。当然AutoValue之类的也可以，不过没深入研究。</p>
+<p>Kotshi没有采用一劳永逸的方案，而是让每个Kotlin data class类都加一个annotation，再根据它生成一个adapter，<br>在序列化和反序列化时手动处理。</p>
+<p>不算很方便的方案，但也算比<a href="https://medium.com/@MaxMello/most-elegant-way-of-using-gson-kotlin-with-default-values-and-null-safety-b6216ac5328c">通过Backing field处理</a>来的舒服。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Nexus 5 购入 刷机 升级 笔记</title>
     <url>/2022/07/08/nexus5/</url>
     <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
@@ -2670,6 +2670,30 @@
 ]]></content>
       <categories>
         <category>What</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用Splinter模拟网页操作</title>
+    <url>/2018/04/01/splinter/</url>
+    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
+<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
+<p>内容大同小异，说明几个坑。</p>
+<span id="more"></span>
+
+<p>我用的是Py3.6和Chrome.</p>
+<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
+<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
+<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
+<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
+<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
+]]></content>
+      <categories>
+        <category>Automation</category>
       </categories>
   </entry>
   <entry>
@@ -2721,27 +2745,20 @@
       </categories>
   </entry>
   <entry>
-    <title>使用Splinter模拟网页操作</title>
-    <url>/2018/04/01/splinter/</url>
-    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
-<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
-<p>内容大同小异，说明几个坑。</p>
+    <title>我们为什么不相信狼来了中的那个孩子</title>
+    <url>/2018/12/25/thoughts-cry-wolf/</url>
+    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
 <span id="more"></span>
 
-<p>我用的是Py3.6和Chrome.</p>
-<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
+<p>所以我们的逻辑成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
 
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
-<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
-<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
-<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
-<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
+<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
+<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
 ]]></content>
       <categories>
-        <category>Automation</category>
+        <category>Thoughts</category>
       </categories>
   </entry>
   <entry>
@@ -2773,23 +2790,6 @@
 </ol>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>具体要说什么话，还是要对人对事。</p>
 <h2 id="嗯…………"><a href="#嗯…………" class="headerlink" title="嗯…………"></a>嗯…………</h2><p>我总感觉还有些东西没有挖掘出来，但找不到是哪些。</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>我们为什么不相信狼来了中的那个孩子</title>
-    <url>/2018/12/25/thoughts-cry-wolf/</url>
-    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
-<span id="more"></span>
-
-<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
-<p>所以我们的逻辑成了：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
-
-<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
-<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
 ]]></content>
       <categories>
         <category>Thoughts</category>
