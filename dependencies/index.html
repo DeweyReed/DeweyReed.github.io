@@ -27,7 +27,7 @@
 <meta property="og:description" content="Gradle1gradle wrapper --gradle-version 8.2.1   Note, you need to run this command twice to upgrade both Gradle and the Gradle Wrapper itself   8.2.1: ✔  8.1.1: ✔  Configuration cache stable(requires K">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-09T00:48:38.716Z">
+<meta property="article:modified_time" content="2024-01-15T13:06:51.349Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -430,6 +430,14 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/lifecycle">androidx.lifecycle:lifecycle</a></p>
 <ul>
+<li><p>2.7.0: 🚧(Android 14(34))</p>
+<ul>
+<li>if the <code>LiveData</code> has a value set, the <code>map</code>/<code>switchMap</code> function will be immediately called to populate the <code>value</code> of the returned <code>LiveData</code>.</li>
+<li>arrays of custom Parcelables require additional work</li>
+<li>The proguard keep rules associated with <code>LifecycleObserver</code> have been removed.</li>
+<li>Jetpack Compose users can now use <code>LifecycleEventEffect</code> to run Compose side effects based on <code>Lifecycle.Event</code></li>
+</ul>
+</li>
 <li><p>2.6.2: 🚧</p>
 </li>
 <li><p>2.6.1: ✔(Kotlin 1.8)</p>
@@ -452,10 +460,11 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/core">androidx.core:core-ktx</a></p>
 <ul>
-<li><p>1.12.0: 🚧(Android 14)</p>
+<li><p>1.12.0: 🚧(Android 14(34))</p>
 <ul>
 <li>New <code>LocalePreferences</code> APIs to help developers to easily access locale data or user’s locale preferences.</li>
 <li>Added <code>LinkMovementMethodCompat</code> that fixes link touch handling</li>
+<li>Added a <code>SoftwareKeyboardControllerCompat</code> to provide direct methods to show and hide the software keyboard given a View.</li>
 </ul>
 </li>
 <li><p>1.10.1: ✔(Kotlin 1.8)</p>
@@ -478,7 +487,7 @@
 <li><p>1.3.0: 🚧</p>
 <ul>
 <li>You can safely drop any dependencies on <code>collection:collection-ktx</code> in favor of <code>collection:collection</code> as <code>collection-ktx</code> is now empty.</li>
-<li>❗ <code>ArrayMap.isEmpty</code> -&gt; <code>ArrayMap.isEmpty()</code>(Flamingo)</li>
+<li>❗ <code>ArrayMap.isEmpty</code> -&gt; <code>ArrayMap.isEmpty()</code></li>
 </ul>
 </li>
 <li><p>1.2.0: ✔</p>
@@ -514,6 +523,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/recyclerview">androidx.recyclerview:recyclerview</a></p>
 <ul>
+<li><p>1.3.2, 1.3.2: ❌ Depending on other beta libraries</p>
+</li>
 <li><p>1.3.0: ✔</p>
 <ul>
 <li><code>ConcatAdapter.getWrappedAdapterAndPosition</code></li>
@@ -525,7 +536,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/navigation">androidx.navigation:navigation</a></p>
 <ul>
-<li>2.7.5: 🚧(Android 14(34))</li>
+<li>2.7.6: 🚧(Android 14(34))</li>
 <li>2.5.3: ✔</li>
 <li>2.4.2: ✔</li>
 <li>2.3.5: ✔</li>
@@ -533,6 +544,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/room">androidx.room:room</a></p>
 <ul>
+<li><p>2.6.1: 🚧(Android 14(34))</p>
+</li>
 <li><p>2.5.2: ✔</p>
 </li>
 <li><p>2.4.3: ✔(Kotlin 1.7)</p>
@@ -554,9 +567,18 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/work">androidx.work:work</a></p>
 <ul>
-<li>2.8.1: ✔(Kotlin 1.7.21)</li>
-<li>2.7.1: ✔(Android 12(31))</li>
-<li>2.6.0: ✔</li>
+<li><p>2.9.0: 🚧(Android 14(34))</p>
+<ul>
+<li><code>work-runtime-ktx</code> is now empty.</li>
+<li><code>override val workManagerConfiguration: androidx.work.Configuration</code></li>
+</ul>
+</li>
+<li><p>2.8.1: ✔(Kotlin 1.7.21)</p>
+</li>
+<li><p>2.7.1: ✔(Android 12(31))</p>
+</li>
+<li><p>2.6.0: ✔</p>
+</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/startup">androidx.startup:startup</a></p>
@@ -613,7 +635,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/google/dagger/releases">com.google.dagger:dagger</a></p>
 <ul>
-<li>2.50: 🚧</li>
+<li>2.50: 🚧(Hilt Kotlin 1.9)</li>
 <li>2.47: ✔</li>
 <li>2.46.1: ✔</li>
 <li>2.45: ✔</li>
@@ -625,16 +647,19 @@
 </li>
 <li><p>androidx.hilt:hilt-navigation-fragment</p>
 <ul>
+<li>1.1.0: 🚧(Android 1.9)</li>
 <li>1.0.0: ✔</li>
 </ul>
 </li>
 <li><p>androidx.hilt:hilt-work</p>
 <ul>
+<li>1.1.0: 🚧(Android 1.9)</li>
 <li>1.0.0: ✔</li>
 </ul>
 </li>
 <li><p>androidx.hilt:hilt-compiler</p>
 <ul>
+<li>1.1.0: 🚧(Android 1.9)</li>
 <li>1.0.0: ✔</li>
 </ul>
 </li>
@@ -693,7 +718,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/square/okio/blob/master/CHANGELOG.md">com.squareup.okio:okio</a></p>
 <ul>
-<li>3.6.0: 🚧(Kotlin 1.9)</li>
+<li>3.7.0: 🚧(Kotlin 1.9)</li>
 <li>3.3.0: ✔(Kotlin 1.8)</li>
 <li>3.2.0: ✔</li>
 <li>2.10.0: ✔</li>
@@ -701,6 +726,7 @@
 </li>
 <li><p>com.squareup.leakcanary:leakcanary-android-startup</p>
 <ul>
+<li>2.13: 🚧</li>
 <li>2.12: ✔</li>
 <li>2.10(Android 13(33)): ✔</li>
 <li>2.9.1: ✔</li>
