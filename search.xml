@@ -1141,6 +1141,64 @@
       </categories>
   </entry>
   <entry>
+    <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
+    <url>/2023/06/08/android-opengl-matrix/</url>
+    <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
+<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
+<span id="more"></span>
+
+<hr>
+<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
+<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
+
+<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
+<p>参考了<a href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
+<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
+<hr>
+<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
+<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
+<hr>
+<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
+<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
+<hr>
+<p>Q: Orthographic Projection是个啥？</p>
+<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
+<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
+<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
+<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
+<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
+<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
+<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
+<ol>
+<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
+<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
+</ol>
+<p>参考了<a href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
+<hr>
+<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
+<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
+<p>这里有一个没人跟我说的小秘密。</p>
+<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
+<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
+<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
+<p>Source: <a href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
+<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
+<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
+<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
+<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
+<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
+<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
+<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
+<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>个人偏爱的Android应用架构</title>
     <url>/2021/04/18/android-opinoinated-arch/</url>
     <content><![CDATA[<p>根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了<a href="https://github.com/google/iosched">iosched</a>（新的<a href="https://github.com/android/nowinandroid">nowinandroid</a>大同小异），尽可能地照顾到测试和扩展。</p>
@@ -1285,64 +1343,6 @@
 </li>
 </ul>
 <h3 id="2023年12月19日"><a href="#2023年12月19日" class="headerlink" title="2023年12月19日"></a>2023年12月19日</h3><p>最近看了<a href="https://github.com/android/nowinandroid">nowinandroid</a>。从架构上来讲，并没有什么新增的地方。但我发现整个项目比较零碎，并没有之前iosched的浑然一体的感觉。大量的实验API和不少TODO都让这个项目变得对新人不是很友好。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
-    <url>/2023/06/08/android-opengl-matrix/</url>
-    <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
-<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
-<span id="more"></span>
-
-<hr>
-<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
-<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
-
-<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
-<p>参考了<a href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
-<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
-<hr>
-<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
-<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
-<hr>
-<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
-<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
-<hr>
-<p>Q: Orthographic Projection是个啥？</p>
-<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
-<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
-<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
-<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
-<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
-<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
-<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
-<ol>
-<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
-<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
-</ol>
-<p>参考了<a href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
-<hr>
-<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
-<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
-<p>这里有一个没人跟我说的小秘密。</p>
-<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
-<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
-<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
-<p>Source: <a href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
-<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
-<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
-<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
-<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
-<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
-<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
-<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
-<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1615,21 +1615,36 @@
       </categories>
   </entry>
   <entry>
-    <title>Android创建快捷方式图标的简单快速方法</title>
-    <url>/2019/03/11/android-shortcut-icon/</url>
-    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
+    <title>Android储存方案研究及分析</title>
+    <url>/2020/01/25/android-storage/</url>
+    <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
+<p>本文只考虑棒棒糖之后的设备。因为<code>SharedPreference</code>和<code>Sqlite(Room)</code>没啥好说的，本文主要研究<code>MediaStore</code>、<code>File</code>和<code>SAF</code>。</p>
 <span id="more"></span>
 
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a><code>File</code></h2><p>指的是用于内部储存的<code>getFilesDir()</code>和<code>getCacheDir()</code>和外部的<code>getExternalFilesDir()</code>和<code>getExternalCacheDir()</code>，不要权限，卸载后会消失。</p>
+<p>除了直接用<code>File</code>的API外，还可以用<code>Context</code>的<code>context.openFileOutput(filename, Context.MODE_PRIVATE)</code>及其其他方法来达到同样的效果（虽然我觉得后者挺难用而且有点坑）。</p>
+<h2 id="MediaStore"><a href="#MediaStore" class="headerlink" title="MediaStore"></a><code>MediaStore</code></h2><blockquote>
+<p>READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE when accessing other apps’ files on Android 10 (API level 29) or higher</p>
+<p>Permissions are required for all files on Android 9 (API level 28) or lower</p>
+</blockquote>
+<p>官方文档中说，用这个API(<code>MediaStore</code> + <code>ContentResolver</code>)来读写三种内容：图片、音频和视频。Q之前必须要权限，Q及之后读别人的文件才要权限。</p>
+<p>这句话意味着Q及之后，用这个方法<strong>写入</strong>和<strong>读取自己的写入的文件(Uri)<strong>是</strong>不需要权限</strong>的，测试结果也的确是这样的。</p>
+<p>这里有个问题，Q及之后是可以通过<code>RELATIVE_PATH</code>把图片保存进相册文件夹中的，但在之前是不能的，这时只能用已被废弃的硬编码 + <code>File</code>来储存了。</p>
+<p>此外有一个<code>MediaStore.Downloads</code>，只针对Q及之后，但似乎没啥用？</p>
+<p>此外有一个<code>MediaStore.Files</code>，Q之后显示应用创建的图片、音频和视频。</p>
+<p>总结一下，Q之前需要读写外部需要权限，Q及之后如果只是读写自己的内容，完全可以不要权限啦。</p>
+<h2 id="SAF"><a href="#SAF" class="headerlink" title="SAF"></a>SAF</h2><p>上述未包含的其他文件，不需要权限，读写单个文件很方便，<a href="https://developer.android.com/training/data-storage/shared/documents-files">文档里很清楚</a>。</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>这里列举一些我常用到的情况。</p>
+<h3 id="导出-导入一个备份文件"><a href="#导出-导入一个备份文件" class="headerlink" title="导出/导入一个备份文件"></a>导出/导入一个备份文件</h3><p>SAF。导出时还能让用户命名和选择位置。不要权限。</p>
+<h3 id="分享一个文件"><a href="#分享一个文件" class="headerlink" title="分享一个文件"></a>分享一个文件</h3><p><code>FileProvider</code> + <code>FLAG_GRANT_READ_URI_PERMISSION</code>导出为Uri，然后用<code>ShareCompat</code>分享。文件放内部储存居然也可以。</p>
+<p>但是呢，如果项目中用了一些撒币的第三方分享库，而这些垃圾玩意儿只支持分享<code>File</code>和路径，这就有点麻烦了。解决方案有：</p>
 <ol>
-<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
-</li>
-<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
-</li>
+<li>把文件放到应用的外部私有文件夹中，然后把<code>File</code>或路径交给那些没有实现Scoped Storage的应用。但这意味着未来某个Android版本如果强制要求Scoped Storage，又得改代码。</li>
+<li>如果文件是图片的话，可以考虑分享一张小尺寸的Bitmap。</li>
+<li>偷梁换柱。依然使用<code>FileProvider</code>生成的Uri搭配<code>ShareCompat</code>分享，但设置<code>Intent</code>的package为对应应用的包名，如果解析Activity后没有对应的可启动Activity，就清除package后再启动分享选择器。但这么做难以处理某个应用的多种分享方式，比如微信分享和朋友圈分享，要么自己去找对应的Activity名字并承担可能失效的后果，要么只能用对应应用的难用且坑多分享库了。</li>
 </ol>
+<h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
+<h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1678,42 +1693,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android储存方案研究及分析</title>
-    <url>/2020/01/25/android-storage/</url>
-    <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
-<p>本文只考虑棒棒糖之后的设备。因为<code>SharedPreference</code>和<code>Sqlite(Room)</code>没啥好说的，本文主要研究<code>MediaStore</code>、<code>File</code>和<code>SAF</code>。</p>
-<span id="more"></span>
-
-<h2 id="File"><a href="#File" class="headerlink" title="File"></a><code>File</code></h2><p>指的是用于内部储存的<code>getFilesDir()</code>和<code>getCacheDir()</code>和外部的<code>getExternalFilesDir()</code>和<code>getExternalCacheDir()</code>，不要权限，卸载后会消失。</p>
-<p>除了直接用<code>File</code>的API外，还可以用<code>Context</code>的<code>context.openFileOutput(filename, Context.MODE_PRIVATE)</code>及其其他方法来达到同样的效果（虽然我觉得后者挺难用而且有点坑）。</p>
-<h2 id="MediaStore"><a href="#MediaStore" class="headerlink" title="MediaStore"></a><code>MediaStore</code></h2><blockquote>
-<p>READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE when accessing other apps’ files on Android 10 (API level 29) or higher</p>
-<p>Permissions are required for all files on Android 9 (API level 28) or lower</p>
-</blockquote>
-<p>官方文档中说，用这个API(<code>MediaStore</code> + <code>ContentResolver</code>)来读写三种内容：图片、音频和视频。Q之前必须要权限，Q及之后读别人的文件才要权限。</p>
-<p>这句话意味着Q及之后，用这个方法<strong>写入</strong>和<strong>读取自己的写入的文件(Uri)<strong>是</strong>不需要权限</strong>的，测试结果也的确是这样的。</p>
-<p>这里有个问题，Q及之后是可以通过<code>RELATIVE_PATH</code>把图片保存进相册文件夹中的，但在之前是不能的，这时只能用已被废弃的硬编码 + <code>File</code>来储存了。</p>
-<p>此外有一个<code>MediaStore.Downloads</code>，只针对Q及之后，但似乎没啥用？</p>
-<p>此外有一个<code>MediaStore.Files</code>，Q之后显示应用创建的图片、音频和视频。</p>
-<p>总结一下，Q之前需要读写外部需要权限，Q及之后如果只是读写自己的内容，完全可以不要权限啦。</p>
-<h2 id="SAF"><a href="#SAF" class="headerlink" title="SAF"></a>SAF</h2><p>上述未包含的其他文件，不需要权限，读写单个文件很方便，<a href="https://developer.android.com/training/data-storage/shared/documents-files">文档里很清楚</a>。</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>这里列举一些我常用到的情况。</p>
-<h3 id="导出-导入一个备份文件"><a href="#导出-导入一个备份文件" class="headerlink" title="导出/导入一个备份文件"></a>导出/导入一个备份文件</h3><p>SAF。导出时还能让用户命名和选择位置。不要权限。</p>
-<h3 id="分享一个文件"><a href="#分享一个文件" class="headerlink" title="分享一个文件"></a>分享一个文件</h3><p><code>FileProvider</code> + <code>FLAG_GRANT_READ_URI_PERMISSION</code>导出为Uri，然后用<code>ShareCompat</code>分享。文件放内部储存居然也可以。</p>
-<p>但是呢，如果项目中用了一些撒币的第三方分享库，而这些垃圾玩意儿只支持分享<code>File</code>和路径，这就有点麻烦了。解决方案有：</p>
-<ol>
-<li>把文件放到应用的外部私有文件夹中，然后把<code>File</code>或路径交给那些没有实现Scoped Storage的应用。但这意味着未来某个Android版本如果强制要求Scoped Storage，又得改代码。</li>
-<li>如果文件是图片的话，可以考虑分享一张小尺寸的Bitmap。</li>
-<li>偷梁换柱。依然使用<code>FileProvider</code>生成的Uri搭配<code>ShareCompat</code>分享，但设置<code>Intent</code>的package为对应应用的包名，如果解析Activity后没有对应的可启动Activity，就清除package后再启动分享选择器。但这么做难以处理某个应用的多种分享方式，比如微信分享和朋友圈分享，要么自己去找对应的Activity名字并承担可能失效的后果，要么只能用对应应用的难用且坑多分享库了。</li>
-</ol>
-<h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
-<h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>天天坏，天天修的Android Studio</title>
     <url>/2020/09/20/android-studio-is-broken/</url>
     <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
@@ -1734,6 +1713,111 @@
 <p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
 <p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
 <h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android创建快捷方式图标的简单快速方法</title>
+    <url>/2019/03/11/android-shortcut-icon/</url>
+    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
+</li>
+<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>个人使用的Android Studio配置</title>
+    <url>/2024/02/12/android-studio-settings/</url>
+    <content><![CDATA[<p>Android Studio的每个新版本都或多或少有点问题，因此每次都重新安装并手动配置来避免配置继承的问题。</p>
+<span id="more"></span>
+
+<ul>
+<li><code>Appearance &amp; Behavior</code><ul>
+<li><code>Appearance</code><ul>
+<li><code>Theme</code>: <code>Darcula</code></li>
+<li><code>UI Options</code> - Disable <code>Smooth scrolling</code></li>
+</ul>
+</li>
+<li><code>System Settings</code><ul>
+<li><code>HTTP Proxy</code></li>
+<li><code>Memory Settings</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Keymap</code><ul>
+<li><code>ShowProjectStructureSettings</code>: Empty</li>
+<li><code>Type alias</code>: Empty</li>
+<li><code>Show vcs Log</code>: Alt + 3</li>
+<li><code>Logcat</code>: Alt + 4</li>
+<li><code>Build</code>: Alt + 5</li>
+<li><code>Show Local Changes</code>: Alt + 2</li>
+<li><code>Maximize/Restore Active Dialog</code>: Ctrl + Alt + Shift + M</li>
+</ul>
+</li>
+<li><code>Editor</code><ul>
+<li><code>General</code> - <code>On Save</code> - Enable <code>Ensure every saved file ends with a line break</code><ul>
+<li><code>Auto Import</code>: Enable 2 <code>Add unambiguous imports on the fly</code></li>
+<li><code>Appearance</code><ul>
+<li>Disable <code>Caret blinking</code></li>
+<li>Disable <code>Show line numbers</code></li>
+<li>Enable <code>Show method separators</code></li>
+<li>Disable <code>Render documentation comments</code></li>
+</ul>
+</li>
+<li>Clean <code>Gutter Icons</code> manually</li>
+<li><code>Smart Keys</code>: Enable <code>Use &quot;CamelHumps&quot; Words</code></li>
+</ul>
+</li>
+<li><code>Font</code> - <code>Font</code>: <code>Consolas</code>; <code>Size</code>: <code>22.0</code></li>
+<li><code>Code Style</code> - <code>Kotlin</code>: Set from <code>Kotlin style guide</code></li>
+<li><code>Live Template</code>: Import from settings zip</li>
+<li><code>Design Tools</code>: <code>Split</code>, <code>Split</code>, <code>Code</code>, <code>Code</code></li>
+<li><code>Inlay Hints</code>: Disable <code>Code Vision</code></li>
+<li>Disable <code>Reader Mode</code></li>
+</ul>
+</li>
+<li><code>Plugins</code><ul>
+<li><code>ADB Idea</code></li>
+<li><code>Archive Browser</code></li>
+<li>[Optinal] <code>GLSL Support</code></li>
+<li><code>JsonToKotlinClass</code></li>
+<li><code>Kotlin Multiplatform Mobile</code></li>
+<li><code>Nyan Progress Bar</code></li>
+<li><code>String Manipulation</code></li>
+<li>[Optinal] <code>Wavefront OBJ</code></li>
+</ul>
+</li>
+<li><code>Version Control</code> - <code>Commit</code> - <code>Before Commit</code>: Enable all</li>
+<li><code>Build, Execution, Deployment</code> - <code>Deployment</code>: Enable all</li>
+<li><code>Tools</code><ul>
+<li><code>External Tools</code><ul>
+<li><code>Avocado</code><ul>
+<li><code>Program</code>: <code>...\Yarn\bin\avocado.cmd</code></li>
+<li><code>Argument</code>: <code>-i $FileName$</code></li>
+<li><code>Working directory</code>: <code>$FileDir$</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Emulator</code>: Disable <code>Launch in the Running Devices tool window</code></li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1994,38 +2078,6 @@
       </categories>
   </entry>
   <entry>
-    <title>想要自动清空浏览记录</title>
-    <url>/2020/08/06/clean-browser-history/</url>
-    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
-<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
-<span id="more"></span>
-
-<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
-<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
-<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
-<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
-<p>我开始寻找下一个替代品。</p>
-<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
-<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
-<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
-<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
-<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
-<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
-<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
-<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
-<p>用了一段时间，发现有几个小缺点：</p>
-<ul>
-<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
-<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
-<li>不知为何会导致Adobe CC退出登录。</li>
-</ul>
-<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Dagger2 入门路线图 (2018年5月)</title>
     <url>/2018/05/20/dagger2-roadmap/</url>
     <content><![CDATA[<p><strong>2019年11月22日 本文已过时 请查看Android官方的<a href="https://developer.android.com/training/dependency-injection">Dependency Injection</a>教程和<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a> <del>谁能想到dagger-android要凉凉了呢？</del></strong></p>
@@ -2117,6 +2169,38 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>想要自动清空浏览记录</title>
+    <url>/2020/08/06/clean-browser-history/</url>
+    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
+<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
+<span id="more"></span>
+
+<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
+<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
+<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
+<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
+<p>我开始寻找下一个替代品。</p>
+<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
+<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
+<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
+<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
+<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
+<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
+<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
+<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
+<p>用了一段时间，发现有几个小缺点：</p>
+<ul>
+<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
+<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
+<li>不知为何会导致Adobe CC退出登录。</li>
+</ul>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -2226,6 +2310,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2267,29 +2374,6 @@
 ]]></content>
       <categories>
         <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2557,26 +2641,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Nexus 5 购入 刷机 升级 笔记</title>
-    <url>/2022/07/08/nexus5/</url>
-    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
-<span id="more"></span>
-
-<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
-<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
-<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
-<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
-<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
-<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
-
-<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2657,6 +2721,26 @@
 <li><code>CardView</code>被囊括在design library中，更名为<code>MaterialCardView</code></li>
 <li><code>?attr/textAppearanceHeadline6</code>：新的(?)<code>textAppearance</code>，符合Design中的Type Scale</li>
 </ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Nexus 5 购入 刷机 升级 笔记</title>
+    <url>/2022/07/08/nexus5/</url>
+    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
+<span id="more"></span>
+
+<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
+<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
+<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
+<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
+<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
+<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
+
+<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2878,6 +2962,34 @@
       </categories>
   </entry>
   <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
     <url>/2020/09/07/timer-cloud-backup/</url>
     <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
@@ -2924,34 +3036,6 @@
 <blockquote>
 <p>I’ve seen things you people wouldn’t believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die. - Blade Runner</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3008,35 +3092,6 @@
       </categories>
   </entry>
   <entry>
-    <title>更新，还是不更新，这是个问题</title>
-    <url>/2022/05/25/update-or-not/</url>
-    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
-<span id="more"></span>
-
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
-<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
-<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
-<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
-<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
-<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
-<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
-<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
-<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
-<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
-<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
-<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
-<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
-<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
-<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
-<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
-<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
-<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android文字转语音(TTS)引擎</title>
     <url>/2019/03/11/tts/</url>
     <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
@@ -3060,6 +3115,35 @@
 </blockquote>
 <p>怕是不靠谱。</p>
 <h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>更新，还是不更新，这是个问题</title>
+    <url>/2022/05/25/update-or-not/</url>
+    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
+<span id="more"></span>
+
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
+<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
+<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
+<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
+<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
+<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
+<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
+<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
+<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
+<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
+<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
+<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
+<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
+<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
+<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
+<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
+<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
+<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
 ]]></content>
       <categories>
         <category>Android</category>
