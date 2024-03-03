@@ -1466,6 +1466,28 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1521,28 +1543,6 @@
 <li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
 <li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1615,36 +1615,21 @@
       </categories>
   </entry>
   <entry>
-    <title>Android储存方案研究及分析</title>
-    <url>/2020/01/25/android-storage/</url>
-    <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
-<p>本文只考虑棒棒糖之后的设备。因为<code>SharedPreference</code>和<code>Sqlite(Room)</code>没啥好说的，本文主要研究<code>MediaStore</code>、<code>File</code>和<code>SAF</code>。</p>
+    <title>Android创建快捷方式图标的简单快速方法</title>
+    <url>/2019/03/11/android-shortcut-icon/</url>
+    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
 <span id="more"></span>
 
-<h2 id="File"><a href="#File" class="headerlink" title="File"></a><code>File</code></h2><p>指的是用于内部储存的<code>getFilesDir()</code>和<code>getCacheDir()</code>和外部的<code>getExternalFilesDir()</code>和<code>getExternalCacheDir()</code>，不要权限，卸载后会消失。</p>
-<p>除了直接用<code>File</code>的API外，还可以用<code>Context</code>的<code>context.openFileOutput(filename, Context.MODE_PRIVATE)</code>及其其他方法来达到同样的效果（虽然我觉得后者挺难用而且有点坑）。</p>
-<h2 id="MediaStore"><a href="#MediaStore" class="headerlink" title="MediaStore"></a><code>MediaStore</code></h2><blockquote>
-<p>READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE when accessing other apps’ files on Android 10 (API level 29) or higher</p>
-<p>Permissions are required for all files on Android 9 (API level 28) or lower</p>
-</blockquote>
-<p>官方文档中说，用这个API(<code>MediaStore</code> + <code>ContentResolver</code>)来读写三种内容：图片、音频和视频。Q之前必须要权限，Q及之后读别人的文件才要权限。</p>
-<p>这句话意味着Q及之后，用这个方法<strong>写入</strong>和<strong>读取自己的写入的文件(Uri)<strong>是</strong>不需要权限</strong>的，测试结果也的确是这样的。</p>
-<p>这里有个问题，Q及之后是可以通过<code>RELATIVE_PATH</code>把图片保存进相册文件夹中的，但在之前是不能的，这时只能用已被废弃的硬编码 + <code>File</code>来储存了。</p>
-<p>此外有一个<code>MediaStore.Downloads</code>，只针对Q及之后，但似乎没啥用？</p>
-<p>此外有一个<code>MediaStore.Files</code>，Q之后显示应用创建的图片、音频和视频。</p>
-<p>总结一下，Q之前需要读写外部需要权限，Q及之后如果只是读写自己的内容，完全可以不要权限啦。</p>
-<h2 id="SAF"><a href="#SAF" class="headerlink" title="SAF"></a>SAF</h2><p>上述未包含的其他文件，不需要权限，读写单个文件很方便，<a href="https://developer.android.com/training/data-storage/shared/documents-files">文档里很清楚</a>。</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>这里列举一些我常用到的情况。</p>
-<h3 id="导出-导入一个备份文件"><a href="#导出-导入一个备份文件" class="headerlink" title="导出/导入一个备份文件"></a>导出/导入一个备份文件</h3><p>SAF。导出时还能让用户命名和选择位置。不要权限。</p>
-<h3 id="分享一个文件"><a href="#分享一个文件" class="headerlink" title="分享一个文件"></a>分享一个文件</h3><p><code>FileProvider</code> + <code>FLAG_GRANT_READ_URI_PERMISSION</code>导出为Uri，然后用<code>ShareCompat</code>分享。文件放内部储存居然也可以。</p>
-<p>但是呢，如果项目中用了一些撒币的第三方分享库，而这些垃圾玩意儿只支持分享<code>File</code>和路径，这就有点麻烦了。解决方案有：</p>
 <ol>
-<li>把文件放到应用的外部私有文件夹中，然后把<code>File</code>或路径交给那些没有实现Scoped Storage的应用。但这意味着未来某个Android版本如果强制要求Scoped Storage，又得改代码。</li>
-<li>如果文件是图片的话，可以考虑分享一张小尺寸的Bitmap。</li>
-<li>偷梁换柱。依然使用<code>FileProvider</code>生成的Uri搭配<code>ShareCompat</code>分享，但设置<code>Intent</code>的package为对应应用的包名，如果解析Activity后没有对应的可启动Activity，就清除package后再启动分享选择器。但这么做难以处理某个应用的多种分享方式，比如微信分享和朋友圈分享，要么自己去找对应的Activity名字并承担可能失效的后果，要么只能用对应应用的难用且坑多分享库了。</li>
+<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
+</li>
+<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
+</li>
 </ol>
-<h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
-<h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1693,6 +1678,42 @@
       </categories>
   </entry>
   <entry>
+    <title>Android储存方案研究及分析</title>
+    <url>/2020/01/25/android-storage/</url>
+    <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
+<p>本文只考虑棒棒糖之后的设备。因为<code>SharedPreference</code>和<code>Sqlite(Room)</code>没啥好说的，本文主要研究<code>MediaStore</code>、<code>File</code>和<code>SAF</code>。</p>
+<span id="more"></span>
+
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a><code>File</code></h2><p>指的是用于内部储存的<code>getFilesDir()</code>和<code>getCacheDir()</code>和外部的<code>getExternalFilesDir()</code>和<code>getExternalCacheDir()</code>，不要权限，卸载后会消失。</p>
+<p>除了直接用<code>File</code>的API外，还可以用<code>Context</code>的<code>context.openFileOutput(filename, Context.MODE_PRIVATE)</code>及其其他方法来达到同样的效果（虽然我觉得后者挺难用而且有点坑）。</p>
+<h2 id="MediaStore"><a href="#MediaStore" class="headerlink" title="MediaStore"></a><code>MediaStore</code></h2><blockquote>
+<p>READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE when accessing other apps’ files on Android 10 (API level 29) or higher</p>
+<p>Permissions are required for all files on Android 9 (API level 28) or lower</p>
+</blockquote>
+<p>官方文档中说，用这个API(<code>MediaStore</code> + <code>ContentResolver</code>)来读写三种内容：图片、音频和视频。Q之前必须要权限，Q及之后读别人的文件才要权限。</p>
+<p>这句话意味着Q及之后，用这个方法<strong>写入</strong>和<strong>读取自己的写入的文件(Uri)<strong>是</strong>不需要权限</strong>的，测试结果也的确是这样的。</p>
+<p>这里有个问题，Q及之后是可以通过<code>RELATIVE_PATH</code>把图片保存进相册文件夹中的，但在之前是不能的，这时只能用已被废弃的硬编码 + <code>File</code>来储存了。</p>
+<p>此外有一个<code>MediaStore.Downloads</code>，只针对Q及之后，但似乎没啥用？</p>
+<p>此外有一个<code>MediaStore.Files</code>，Q之后显示应用创建的图片、音频和视频。</p>
+<p>总结一下，Q之前需要读写外部需要权限，Q及之后如果只是读写自己的内容，完全可以不要权限啦。</p>
+<h2 id="SAF"><a href="#SAF" class="headerlink" title="SAF"></a>SAF</h2><p>上述未包含的其他文件，不需要权限，读写单个文件很方便，<a href="https://developer.android.com/training/data-storage/shared/documents-files">文档里很清楚</a>。</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>这里列举一些我常用到的情况。</p>
+<h3 id="导出-导入一个备份文件"><a href="#导出-导入一个备份文件" class="headerlink" title="导出/导入一个备份文件"></a>导出/导入一个备份文件</h3><p>SAF。导出时还能让用户命名和选择位置。不要权限。</p>
+<h3 id="分享一个文件"><a href="#分享一个文件" class="headerlink" title="分享一个文件"></a>分享一个文件</h3><p><code>FileProvider</code> + <code>FLAG_GRANT_READ_URI_PERMISSION</code>导出为Uri，然后用<code>ShareCompat</code>分享。文件放内部储存居然也可以。</p>
+<p>但是呢，如果项目中用了一些撒币的第三方分享库，而这些垃圾玩意儿只支持分享<code>File</code>和路径，这就有点麻烦了。解决方案有：</p>
+<ol>
+<li>把文件放到应用的外部私有文件夹中，然后把<code>File</code>或路径交给那些没有实现Scoped Storage的应用。但这意味着未来某个Android版本如果强制要求Scoped Storage，又得改代码。</li>
+<li>如果文件是图片的话，可以考虑分享一张小尺寸的Bitmap。</li>
+<li>偷梁换柱。依然使用<code>FileProvider</code>生成的Uri搭配<code>ShareCompat</code>分享，但设置<code>Intent</code>的package为对应应用的包名，如果解析Activity后没有对应的可启动Activity，就清除package后再启动分享选择器。但这么做难以处理某个应用的多种分享方式，比如微信分享和朋友圈分享，要么自己去找对应的Activity名字并承担可能失效的后果，要么只能用对应应用的难用且坑多分享库了。</li>
+</ol>
+<h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
+<h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>天天坏，天天修的Android Studio</title>
     <url>/2020/09/20/android-studio-is-broken/</url>
     <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
@@ -1713,27 +1734,6 @@
 <p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
 <p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
 <h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android创建快捷方式图标的简单快速方法</title>
-    <url>/2019/03/11/android-shortcut-icon/</url>
-    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
-<span id="more"></span>
-
-<ol>
-<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
-</li>
-<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1767,6 +1767,7 @@
 <li><code>Build</code>: Alt + 5</li>
 <li><code>Show Local Changes</code>: Alt + 2</li>
 <li><code>Maximize/Restore Active Dialog</code>: Ctrl + Alt + Shift + M</li>
+<li><code>Compare with Clipboard</code>: Ctrl + Alt + Shift + C</li>
 </ul>
 </li>
 <li><code>Editor</code><ul>
@@ -1948,6 +1949,24 @@
       </categories>
   </entry>
   <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -1981,24 +2000,6 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2075,6 +2076,38 @@
 ]]></content>
       <categories>
         <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>想要自动清空浏览记录</title>
+    <url>/2020/08/06/clean-browser-history/</url>
+    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
+<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
+<span id="more"></span>
+
+<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
+<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
+<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
+<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
+<p>我开始寻找下一个替代品。</p>
+<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
+<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
+<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
+<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
+<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
+<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
+<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
+<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
+<p>用了一段时间，发现有几个小缺点：</p>
+<ul>
+<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
+<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
+<li>不知为何会导致Adobe CC退出登录。</li>
+</ul>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -2169,38 +2202,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>想要自动清空浏览记录</title>
-    <url>/2020/08/06/clean-browser-history/</url>
-    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
-<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
-<span id="more"></span>
-
-<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
-<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
-<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
-<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
-<p>我开始寻找下一个替代品。</p>
-<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
-<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
-<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
-<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
-<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
-<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
-<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
-<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
-<p>用了一段时间，发现有几个小缺点：</p>
-<ul>
-<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
-<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
-<li>不知为何会导致Adobe CC退出登录。</li>
-</ul>
-<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
-]]></content>
-      <categories>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -2310,29 +2311,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2374,6 +2352,29 @@
 ]]></content>
       <categories>
         <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2727,6 +2728,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Nexus 5 购入 刷机 升级 笔记</title>
     <url>/2022/07/08/nexus5/</url>
     <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
@@ -2744,16 +2755,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
