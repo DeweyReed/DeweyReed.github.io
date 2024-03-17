@@ -27,7 +27,7 @@
 <meta property="og:description" content="Gradle1gradle wrapper --gradle-version 8.2.1   Note, you need to run this command twice to upgrade both Gradle and the Gradle Wrapper itself   8.2.1: ✔  8.1.1: ✔  Configuration cache stable(requires K">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-03T13:48:55.611Z">
+<meta property="article:modified_time" content="2024-03-17T05:00:56.349Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -283,7 +283,7 @@
 <h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><ul>
 <li><p>org.jetbrains.kotlin:kotlin</p>
 <ul>
-<li><p>1.9.22: 🚧</p>
+<li><p>1.9.23: 🚧</p>
 <ul>
 <li><code>Enum.values()</code> -&gt; <code>Enum.entries</code></li>
 <li><code>data object EndOfFile : ReadResult</code></li>
@@ -323,6 +323,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlinx.coroutines/releases">org.jetbrains.kotlinx:kotlinx-coroutines</a></p>
 <ul>
+<li><p>1.8.0: 🚧(Kotlin 1.9)</p>
+</li>
 <li><p>1.7.3: ✔</p>
 </li>
 <li><p>1.7.1: ✔(Kotlin 1.8)</p>
@@ -345,7 +347,13 @@
 <h2 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h2><ul>
 <li><p>com.android.tools.build:gradle(&amp; Android Studio)</p>
 <ul>
-<li><p>8.1.4: 🚧</p>
+<li><p>8.2.2(Android Studio Hedgehog | 2023.1.1): 🚧</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/past-releases/as-hedgehog-release-notes#live-edit-manual-mode">Live Edit updated manual mode shortcut</a>(<code>Control</code>+<code>\</code>)</li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/past-releases/as-hedgehog-release-notes#sdk-upgrade-assistant">SDK Upgrade Assistant updates</a></li>
+</ul>
+</li>
+<li><p>8.1.4(Giraffe): 🚧</p>
 <ul>
 <li><p>❗ Upgrade all dependencies to the latest first</p>
 </li>
@@ -546,7 +554,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/navigation">androidx.navigation:navigation</a></p>
 <ul>
-<li>2.7.6: 🚧(Android 14(34))</li>
+<li>2.7.7: 🚧(Android 14(34))</li>
 <li>2.5.3: ✔</li>
 <li>2.4.2: ✔</li>
 <li>2.3.5: ✔</li>
@@ -640,6 +648,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/google/dagger/releases">com.google.dagger:dagger</a></p>
 <ul>
+<li>2.51: 🚧</li>
 <li>2.50: ✔(Hilt Kotlin 1.9)</li>
 <li>2.47: ✔</li>
 <li>2.46.1: ✔</li>
@@ -652,24 +661,25 @@
 </li>
 <li><p>androidx.hilt:hilt-navigation-fragment</p>
 <ul>
-<li>1.1.0: 🚧(Android 1.9)</li>
+<li>1.2.0: 🚧(Android 1.9)</li>
 <li>1.0.0: ✔</li>
 </ul>
 </li>
 <li><p>androidx.hilt:hilt-work</p>
 <ul>
-<li>1.1.0: 🚧(Android 1.9)</li>
+<li>1.2.0: 🚧(Android 1.9)</li>
 <li>1.0.0: ✔</li>
 </ul>
 </li>
 <li><p>androidx.hilt:hilt-compiler</p>
 <ul>
-<li>1.1.0: 🚧(Android 1.9)</li>
+<li>1.2.0: 🚧(Android 1.9)</li>
 <li>1.0.0: ✔</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/google/play/billing/release-notes">com.android.billingclient:billing</a></p>
 <ul>
+<li>6.2.0: 🚧</li>
 <li>6.0.1: ✔</li>
 <li>4.1.0: ✔</li>
 <li>3.0.2: ✔</li>
@@ -704,6 +714,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/square/moshi/blob/master/CHANGELOG.md">com.squareup.moshi:moshi</a></p>
 <ul>
+<li><p>1.15.1: 🚧(Kotlin 1.9)</p>
+</li>
 <li><p>1.15.0: ✔(Kotlin 1.8)</p>
 </li>
 <li><p>1.14.0: ✔(Kotlin 1.7, Android 13(33))</p>
@@ -723,7 +735,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/square/okio/blob/master/CHANGELOG.md">com.squareup.okio:okio</a></p>
 <ul>
-<li>3.7.0: 🚧(Kotlin 1.9)</li>
+<li>3.9.0: 🚧(Kotlin 1.9)</li>
 <li>3.3.0: ✔(Kotlin 1.8)</li>
 <li>3.2.0: ✔</li>
 <li>2.10.0: ✔</li>
