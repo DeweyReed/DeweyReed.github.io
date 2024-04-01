@@ -1466,6 +1466,28 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1527,22 +1549,28 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+    <title>Android Resources小研究</title>
+    <url>/2020/01/12/android-resources-test/</url>
+    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
 <span id="more"></span>
 
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
+<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
+<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
+<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
+<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
+<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
+<p>新建<code>attrs.xml</code>并塞入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1581,34 +1609,6 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Resources小研究</title>
-    <url>/2020/01/12/android-resources-test/</url>
-    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
-<span id="more"></span>
-
-<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
-<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
-<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
-<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
-<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
-<p>新建<code>attrs.xml</code>并塞入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就可以</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1787,7 +1787,7 @@
 </ul>
 </li>
 <li><code>Font</code> - <code>Font</code>: <code>Consolas</code>; <code>Size</code>: <code>22.0</code></li>
-<li><code>Color Scheme</code> - <code>Console Font</code> - <code>Size</code>: <code>18</code>; <code>Line height</code>: <code>1.0</code></li>
+<li><code>Color Scheme</code> - <code>Console Font</code> - <code>Size</code>: <code>16</code>; <code>Line height</code>: <code>0.8</code></li>
 <li><code>Code Style</code> - <code>Kotlin</code>: Set from <code>Kotlin style guide</code></li>
 <li><code>Design Tools</code>: <code>Split</code>, <code>Split</code>, <code>Code</code>, <code>Code</code></li>
 <li><code>Inlay Hints</code>: Disable <code>Code Vision</code></li>
@@ -1797,11 +1797,11 @@
 <li><code>Plugins</code><ul>
 <li><code>ADB Idea</code></li>
 <li><code>Archive Browser</code></li>
-<li>[Optinal] <code>GLSL Support</code></li>
-<li><code>JsonToKotlinClass</code></li>
-<li>[Optinal] <code>Kotlin Multiplatform Mobile</code></li>
+<li><code>JsonToKotlinClass</code> + Configure manually</li>
 <li><code>Nyan Progress Bar</code></li>
 <li><code>String Manipulation</code></li>
+<li>[Optinal] <code>Kotlin Multiplatform Mobile</code></li>
+<li>[Optinal] <code>GLSL Support</code></li>
 <li>[Optinal] <code>Wavefront OBJ</code></li>
 </ul>
 </li>
@@ -1936,29 +1936,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发牢骚 - 2021年2月6日</title>
-    <url>/2021/02/06/android-thoughts-20210206/</url>
-    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
-<span id="more"></span>
-
-<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
-<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
-<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
-<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
-<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
-<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
-<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
-<p>语义化版本是不是只算加分项？</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
-<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
-<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -1992,6 +1969,29 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发牢骚 - 2021年2月6日</title>
+    <url>/2021/02/06/android-thoughts-20210206/</url>
+    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
+<span id="more"></span>
+
+<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
+<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
+<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
+<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
+<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
+<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
+<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
+<p>语义化版本是不是只算加分项？</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
+<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
+<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2584,6 +2584,74 @@
       </categories>
   </entry>
   <entry>
+    <title>用于展示的Markdown徽章集合</title>
+    <url>/2018/04/19/markdown-badges/</url>
+    <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
+
+<ol>
+<li><p><a href="http://shields.io/">Shields.io</a></p>
+<p> 满足绝大部分需求，可以自定义内容和样式。没时间看剩下的内容的话，学会这么一个就够了。</p>
+<p> 在搜索栏中输入“github”可以找到一些常用的勋章。</p>
+</li>
+<li><p><a href="https://badge.fury.io/">https://badge.fury.io/</a></p>
+<p> 输入项目名（需要项目有版本号（Tag）），生成各种格式的版本勋章。</p>
+</li>
+<li><p><a href="https://github.com/ellerbrock/open-source-badges">open-source-badges</a></p>
+<p> 提供带有爱心的开源勋章，还有Linceses勋章</p>
+</li>
+<li><p><a href="https://github.com/jitpack/jitpack.io#badges">Jitpack</a></p>
+<p> 如果使用Jitpack发布，可以使用这个链接直接嵌入Jitpack为你设计好的版本勋章。</p>
+ <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Release</span>](<span class="link">https://jitpack.io/v/User/Repo.svg</span>)](<span class="link">https://jitpack.io/#User/Repo</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p><a href="https://github.com/KotlinBy/awesome-kotlin#spread-awesome-kotlin">Awesome Kotlin Badge</a></p>
+<p> 如果是awesome kotlin，就又有一个很酷的勋章</br></p>
+ <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Awesome Kotlin Badge</span>](<span class="link">https://kotlin.link/awesome-kotlin.svg</span>)](<span class="link">https://github.com/KotlinBy/awesome-kotlin</span>)</span><br></pre></td></tr></table></figure>
+
+<p> <a href="https://github.com/KotlinBy/awesome-kotlin"><img src="https://kotlin.link/awesome-kotlin.svg" alt="Awesome Kotlin Badge"></a></p>
+</li>
+<li><p><a href="https://github.com/jirutka/maven-badges#usags">Maven central</a></p>
+<p> 一个第三方的针对maven central的版本勋章</p>
+</li>
+<li><p>Android Arsenal</p>
+<p> 在项目信息中间一栏的下方，有“Badge”选项，点击右边”Generate”就可以生成一个链接。</p>
+</li>
+<li><p>Emoji</p>
+<p> 虽然算不上勋章，但可以起到勋章的作用。</p>
+<p> 常见的就是使用:cn::us:表示支持的语言、国家。<br> 可以直接使用<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">Emoji Cheat Sheet</a>中的内容表示。</p>
+</li>
+<li><p><a href="https://github.com/larsenwork/web.svg.min">Web.svg.min</a></p>
+<p> 一些常用图标的Vector格式。</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/5450520-b5058065eb46307d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="preview"></p>
+</li>
+<li><p><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">各种Licenses</a></p>
+</li>
+<li><p><a href="https://circleci.com/docs/1.0/status-badges/">Circleci</a></p>
+</li>
+<li><p><a href="https://docs.travis-ci.com/user/status-images/">Travis CI</a></p>
+</li>
+<li><p><a href="https://support.codacy.com/hc/en-us/articles/212799365-Badges">Codacy</a></p>
+</li>
+<li><p><a href="https://play.google.com/intl/en_us/badges/">Google Play链接</a></p>
+</li>
+<li><p><a href="https://ko-fi.com/">Bug me a coffee</a></p>
+</li>
+<li><p>其他勋章集合</p>
+<p> <a href="https://github.com/boennemann/badges">Badges</a></p>
+<p> <a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></p>
+<p> <a href="https://github.com/dwyl/repo-badges">repo-badges</a></p>
+</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>使用各种服务时，服务商提供了Badge -&gt; 使用它; 没有 -&gt; 2</p>
+</li>
+<li><p>使用Shields.io自己做一个</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2667,74 +2735,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>用于展示的Markdown徽章集合</title>
-    <url>/2018/04/19/markdown-badges/</url>
-    <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
-
-<ol>
-<li><p><a href="http://shields.io/">Shields.io</a></p>
-<p> 满足绝大部分需求，可以自定义内容和样式。没时间看剩下的内容的话，学会这么一个就够了。</p>
-<p> 在搜索栏中输入“github”可以找到一些常用的勋章。</p>
-</li>
-<li><p><a href="https://badge.fury.io/">https://badge.fury.io/</a></p>
-<p> 输入项目名（需要项目有版本号（Tag）），生成各种格式的版本勋章。</p>
-</li>
-<li><p><a href="https://github.com/ellerbrock/open-source-badges">open-source-badges</a></p>
-<p> 提供带有爱心的开源勋章，还有Linceses勋章</p>
-</li>
-<li><p><a href="https://github.com/jitpack/jitpack.io#badges">Jitpack</a></p>
-<p> 如果使用Jitpack发布，可以使用这个链接直接嵌入Jitpack为你设计好的版本勋章。</p>
- <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Release</span>](<span class="link">https://jitpack.io/v/User/Repo.svg</span>)](<span class="link">https://jitpack.io/#User/Repo</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p><a href="https://github.com/KotlinBy/awesome-kotlin#spread-awesome-kotlin">Awesome Kotlin Badge</a></p>
-<p> 如果是awesome kotlin，就又有一个很酷的勋章</br></p>
- <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Awesome Kotlin Badge</span>](<span class="link">https://kotlin.link/awesome-kotlin.svg</span>)](<span class="link">https://github.com/KotlinBy/awesome-kotlin</span>)</span><br></pre></td></tr></table></figure>
-
-<p> <a href="https://github.com/KotlinBy/awesome-kotlin"><img src="https://kotlin.link/awesome-kotlin.svg" alt="Awesome Kotlin Badge"></a></p>
-</li>
-<li><p><a href="https://github.com/jirutka/maven-badges#usags">Maven central</a></p>
-<p> 一个第三方的针对maven central的版本勋章</p>
-</li>
-<li><p>Android Arsenal</p>
-<p> 在项目信息中间一栏的下方，有“Badge”选项，点击右边”Generate”就可以生成一个链接。</p>
-</li>
-<li><p>Emoji</p>
-<p> 虽然算不上勋章，但可以起到勋章的作用。</p>
-<p> 常见的就是使用:cn::us:表示支持的语言、国家。<br> 可以直接使用<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">Emoji Cheat Sheet</a>中的内容表示。</p>
-</li>
-<li><p><a href="https://github.com/larsenwork/web.svg.min">Web.svg.min</a></p>
-<p> 一些常用图标的Vector格式。</p>
-<p> <img src="http://upload-images.jianshu.io/upload_images/5450520-b5058065eb46307d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="preview"></p>
-</li>
-<li><p><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">各种Licenses</a></p>
-</li>
-<li><p><a href="https://circleci.com/docs/1.0/status-badges/">Circleci</a></p>
-</li>
-<li><p><a href="https://docs.travis-ci.com/user/status-images/">Travis CI</a></p>
-</li>
-<li><p><a href="https://support.codacy.com/hc/en-us/articles/212799365-Badges">Codacy</a></p>
-</li>
-<li><p><a href="https://play.google.com/intl/en_us/badges/">Google Play链接</a></p>
-</li>
-<li><p><a href="https://ko-fi.com/">Bug me a coffee</a></p>
-</li>
-<li><p>其他勋章集合</p>
-<p> <a href="https://github.com/boennemann/badges">Badges</a></p>
-<p> <a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></p>
-<p> <a href="https://github.com/dwyl/repo-badges">repo-badges</a></p>
-</li>
-</ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>使用各种服务时，服务商提供了Badge -&gt; 使用它; 没有 -&gt; 2</p>
-</li>
-<li><p>使用Shields.io自己做一个</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -2874,23 +2874,6 @@
       </categories>
   </entry>
   <entry>
-    <title>我们为什么不相信狼来了中的那个孩子</title>
-    <url>/2018/12/25/thoughts-cry-wolf/</url>
-    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
-<span id="more"></span>
-
-<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
-<p>所以我们的逻辑成了：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
-
-<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
-<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
     <title>万恶淫为首，论迹不论心，论心世上无完人</title>
     <url>/2022/04/21/thoughts-junzi/</url>
     <content><![CDATA[<p>今日网上冲浪，遇到了一句“君子论迹不论心，论心世上少完人”，于是有了本文。</p>
@@ -2942,6 +2925,23 @@
       </categories>
   </entry>
   <entry>
+    <title>我们为什么不相信狼来了中的那个孩子</title>
+    <url>/2018/12/25/thoughts-cry-wolf/</url>
+    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
+<span id="more"></span>
+
+<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
+<p>所以我们的逻辑成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
+
+<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
+<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -2973,6 +2973,27 @@
       </categories>
   </entry>
   <entry>
+    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
+    <url>/2020/09/07/timer-cloud-backup/</url>
+    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
+<span id="more"></span>
+
+<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
+<p>酷安版本独占：开发日志、打赏</p>
+<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
+<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
+<li>在Google Play搜索“计时机器”并安装。</li>
+<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
+<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
+<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
+</ol>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
     <url>/2020/01/19/timer-analytics-2020-1-19/</url>
     <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
@@ -2995,27 +3016,6 @@
 <p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
 <h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
 <p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
-    <url>/2020/09/07/timer-cloud-backup/</url>
-    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
-<span id="more"></span>
-
-<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
-<p>酷安版本独占：开发日志、打赏</p>
-<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
-<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
-<li>在Google Play搜索“计时机器”并安装。</li>
-<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
-<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
-<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
-</ol>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
 ]]></content>
       <categories>
         <category>Android</category>
