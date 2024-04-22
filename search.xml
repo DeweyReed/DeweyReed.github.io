@@ -717,6 +717,33 @@
       </categories>
   </entry>
   <entry>
+    <title>Android故障艺术</title>
+    <url>/2019/06/05/android-glitch/</url>
+    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
+<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+<span id="more"></span>
+
+<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
+<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
+<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
+<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
+<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
+<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
+<details>
+  <summary></summary>
+  <p>这个项目的代码是真的看得我头大。</p>
+</details>
+
+<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
+<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -874,33 +901,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android故障艺术</title>
-    <url>/2019/06/05/android-glitch/</url>
-    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
-<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
-<span id="more"></span>
-
-<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
-<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
-<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
-<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
-<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
-<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
-<details>
-  <summary></summary>
-  <p>这个项目的代码是真的看得我头大。</p>
-</details>
-
-<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
-<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1403,27 +1403,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
-
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1460,6 +1439,27 @@
 <li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
+<span id="more"></span>
+
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1678,32 +1678,6 @@
       </categories>
   </entry>
   <entry>
-    <title>天天坏，天天修的Android Studio</title>
-    <url>/2020/09/20/android-studio-is-broken/</url>
-    <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
-<span id="more"></span>
-
-<p>“坏掉”指的是所有不是自己代码问题的问题。</p>
-<h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
-<p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
-<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
-<p>2021新发现的方法！给类改名字。</p>
-<h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
-<h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
-<p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
-<h2 id="删除Gradle缓存"><a href="#删除Gradle缓存" class="headerlink" title="删除Gradle缓存"></a>删除Gradle缓存</h2><p>最近遇到一个问题，Kotlin Extension Functions不被识别，上述方案都试过了没用。最后只好打起了Gradle的主意。</p>
-<p>除了<code>.gradle/gradle.properties</code>，把<code>.gradle</code>和<code>.m2</code>都删掉。因为小文件很多，删除时间很长，所以要一次性永久删除，如果先丢到回收站，等待时间要翻倍。</p>
-<h2 id="删除Android-Studio缓存"><a href="#删除Android-Studio缓存" class="headerlink" title="删除Android Studio缓存"></a>删除Android Studio缓存</h2><p>最近升级到4.2后，遇到问题仅删除Gradle缓存已经不够了。导出AS设置，然后把所有AS缓存都删光，然后重启。相当于重装了。</p>
-<h2 id="deep-clean"><a href="#deep-clean" class="headerlink" title="deep-clean"></a><code>deep-clean</code></h2><p>使用Github的<a href="https://github.com/rock3r/deep-clean">deep-clean</a>。</p>
-<p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
-<p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
-<h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android储存方案研究及分析</title>
     <url>/2020/01/25/android-storage/</url>
     <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
@@ -1734,6 +1708,32 @@
 </ol>
 <h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
 <h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>天天坏，天天修的Android Studio</title>
+    <url>/2020/09/20/android-studio-is-broken/</url>
+    <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
+<span id="more"></span>
+
+<p>“坏掉”指的是所有不是自己代码问题的问题。</p>
+<h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
+<p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
+<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
+<p>2021新发现的方法！给类改名字。</p>
+<h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
+<h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
+<p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
+<h2 id="删除Gradle缓存"><a href="#删除Gradle缓存" class="headerlink" title="删除Gradle缓存"></a>删除Gradle缓存</h2><p>最近遇到一个问题，Kotlin Extension Functions不被识别，上述方案都试过了没用。最后只好打起了Gradle的主意。</p>
+<p>除了<code>.gradle/gradle.properties</code>，把<code>.gradle</code>和<code>.m2</code>都删掉。因为小文件很多，删除时间很长，所以要一次性永久删除，如果先丢到回收站，等待时间要翻倍。</p>
+<h2 id="删除Android-Studio缓存"><a href="#删除Android-Studio缓存" class="headerlink" title="删除Android Studio缓存"></a>删除Android Studio缓存</h2><p>最近升级到4.2后，遇到问题仅删除Gradle缓存已经不够了。导出AS设置，然后把所有AS缓存都删光，然后重启。相当于重装了。</p>
+<h2 id="deep-clean"><a href="#deep-clean" class="headerlink" title="deep-clean"></a><code>deep-clean</code></h2><p>使用Github的<a href="https://github.com/rock3r/deep-clean">deep-clean</a>。</p>
+<p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
+<p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
+<h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1977,24 +1977,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -2028,6 +2010,24 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2090,7 +2090,7 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 13升级笔记</title>
+    <title>Android 14升级笔记</title>
     <url>/2024/04/22/android14-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
 <span id="more"></span>
@@ -2125,6 +2125,38 @@
 ]]></content>
       <categories>
         <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>想要自动清空浏览记录</title>
+    <url>/2020/08/06/clean-browser-history/</url>
+    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
+<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
+<span id="more"></span>
+
+<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
+<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
+<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
+<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
+<p>我开始寻找下一个替代品。</p>
+<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
+<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
+<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
+<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
+<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
+<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
+<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
+<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
+<p>用了一段时间，发现有几个小缺点：</p>
+<ul>
+<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
+<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
+<li>不知为何会导致Adobe CC退出登录。</li>
+</ul>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -2325,38 +2357,6 @@
 ]]></content>
       <categories>
         <category>Website</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>想要自动清空浏览记录</title>
-    <url>/2020/08/06/clean-browser-history/</url>
-    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
-<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
-<span id="more"></span>
-
-<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
-<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
-<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
-<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
-<p>我开始寻找下一个替代品。</p>
-<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
-<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
-<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
-<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
-<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
-<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
-<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
-<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
-<p>用了一段时间，发现有几个小缺点：</p>
-<ul>
-<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
-<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
-<li>不知为何会导致Adobe CC退出登录。</li>
-</ul>
-<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
-]]></content>
-      <categories>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
