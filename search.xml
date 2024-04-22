@@ -188,25 +188,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一些可能有用的Android代码 - IO22版</title>
     <url>/2022/05/29/android-code-snippets-io22/</url>
     <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
@@ -249,6 +230,25 @@
 
 <p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
 <p>代码过于简单以至于不需要其他解释了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -591,59 +591,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android上一个简单的Feature Flag实现</title>
-    <url>/2020/04/21/android-feature-flags/</url>
-    <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
-<span id="more"></span>
-
-<p>我个人的需求没原文中那么复杂，只需要一个可以在代码里手动调整的开关，一个可以在运行时进行修改的面板，同时要让R8把未使用的所有代码剔除。</p>
-<p>首先是可以在代码里手动调整的开关，用<code>buildConfigField</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>&quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</code>确保IDE不会警告，就像<code>BuildConfig.DEBUG</code>一样。</li>
-</ul>
-<p>整个框架，抄了就走：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Feature</span>(</span><br><span class="line">    <span class="keyword">val</span> key: String,</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> description: String,</span><br><span class="line">    <span class="keyword">val</span> default: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line">) &#123;</span><br><span class="line">    Log(</span><br><span class="line">        key = <span class="string">&quot;feature_log&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;All log to console&quot;</span></span><br><span class="line">    ),</span><br><span class="line">    Network(</span><br><span class="line">        key = <span class="string">&quot;feature_network&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Network&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;Inspect network requests&quot;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> FeatureFlagManager &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> sharedPreferences: SharedPreferences</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">init</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        sharedPreferences = context.safeSharedPreference</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">     * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">     * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">manageFeatures</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">val</span> features = Feature.values()</span><br><span class="line">        MaterialAlertDialogBuilder(context)</span><br><span class="line">            .setCancelable(<span class="literal">false</span>)</span><br><span class="line">            .setTitle(<span class="string">&quot;Feature Flag Manager&quot;</span>)</span><br><span class="line">            .setAdapter(</span><br><span class="line">                <span class="keyword">object</span> : BaseAdapter() &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> = features.size</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Any = features[position]</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemId</span><span class="params">(position: <span class="type">Int</span>)</span></span>: <span class="built_in">Long</span> =</span><br><span class="line">                        features[position].ordinal.toLong()</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">                        position: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                        convertView: <span class="type">View</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">                        parent: <span class="type">ViewGroup</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    )</span></span>: View &#123;</span><br><span class="line">                        <span class="keyword">val</span> view = convertView ?: LayoutInflater.from(context)</span><br><span class="line">                            .inflate(R.layout.list_item_feature_flag, parent, <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">val</span> layout = view.findViewById&lt;ListItemWithLayout&gt;(R.id.listItemFeatureFlag)</span><br><span class="line">                        <span class="keyword">val</span> feature = features[position]</span><br><span class="line">                        layout.listItem.run &#123;</span><br><span class="line">                            setPrimaryText(feature.title)</span><br><span class="line">                            setSecondaryText(feature.description)</span><br><span class="line">                        &#125;</span><br><span class="line">                        layout.getLayoutView&lt;CompoundButton&gt;().run &#123;</span><br><span class="line">                            setOnCheckedChangeListener(<span class="literal">null</span>)</span><br><span class="line">                            isChecked = feature.enabled</span><br><span class="line">                            setOnCheckedChangeListener &#123; buttonView, isChecked -&gt;</span><br><span class="line">                                feature.enabled = isChecked</span><br><span class="line">                                buttonView.indefiniteSnackbar(</span><br><span class="line">                                    message = <span class="string">&quot;Restart the app&quot;</span>,</span><br><span class="line">                                    actionText = <span class="string">&quot;Now&quot;</span>,</span><br><span class="line">                                    action = &#123;</span><br><span class="line">                                        ProcessPhoenix.triggerRebirth(context)</span><br><span class="line">                                    &#125;</span><br><span class="line">                                )</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">return</span> view</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="literal">null</span></span><br><span class="line">            )</span><br><span class="line">            .setPositiveButton(android.R.string.ok, <span class="literal">null</span>)</span><br><span class="line">            .setNegativeButton(android.R.string.cancel, <span class="literal">null</span>)</span><br><span class="line">            .show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> Feature.enabled</span><br><span class="line">        <span class="keyword">get</span>() = sharedPreferences.getBoolean(key, default)</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            sharedPreferences.storeBoolean(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">FeatureFlagManager.<span class="keyword">init</span>(<span class="keyword">this</span>)</span><br><span class="line"><span class="keyword">if</span> (FeatureFlagManager.isFeatureEnabled &#123; Feature.Log &#125;) &#123;</span><br><span class="line">    Timber.plant(Timber.DebugTree())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运作原理：</p>
-<ul>
-<li><p><code>isFeatureEnabled</code></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">    * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">    * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>顾名思义，传Lambda而不是直接传Feature确保R8可以在这段代码没被使用时移除掉它，不然Feature会留在最终的APK里。</p>
-<p>担心性能问题？</p>
-<ul>
-<li>我没做Benchkmark，所以不考虑优化。</li>
-<li>我寻思以大部分应用的水平，这个Lambda根本不在瓶颈上。</li>
-<li>请信任智能的R8，人家比咱上心，也比咱厉害，也许人家已经搞定了。</li>
-<li>Romain Guy大佬怎么做，我就怎么做！</li>
-</ul>
-</li>
-<li><p><code>setAdapter</code></p>
-<p>之所以使用<code>AlertDialog</code>的<code>setAdapter</code>而不是自定义<code>View</code>，是因为这样可以让列表滚动时在顶端和底端有一个分割线，我挺喜欢这个设计，但缺点就是要处理<code>ListView</code>😢</p>
-</li>
-<li><p><code>ListView</code>的每个条目的命名<code>R.layout.list_item_feature_flag</code></p>
-<p>我之前用的是<code>R.layout.item_feature_flag</code>，但发现R8在把整个<code>Feature</code>移除后死活不把这个文件处理掉，查看<code>resources.txt</code>并研究后才发现，所有以<code>item</code>开头的资源，都不会被处理（当然还有其它各种开头，<a href="https://android.googlesource.com/platform/tools/base/+/master/build-system/gradle-core/src/main/groovy/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java#827">具体在这里</a>）。修改为<code>list</code>开头后就好了，虽然文件还在，但里面的内容已经没了。</p>
-<p>另一种方法是根据<a href="https://developer.android.com/studio/build/shrink-code.html#troubleshoot-resource-shrink">官方文档底部的方法</a>来确保这些文件被移除。我懒，所以没试这种方法。</p>
-</li>
-<li><p><code>getView</code>绑定</p>
-<p> <code>ListItemWithLayout</code>就是一个<code>CompoundButton</code>配一个<code>TextView</code>，不稀奇。包括其他的一些方法，都是简单包装了一下，顾名思义。</p>
-</li>
-<li><p><code>ProcessPhoenix.triggerRebirth(context)</code></p>
-<p> 我这里用<a href="https://github.com/JakeWharton/ProcessPhoenix">ProcessPhoenix</a>来强制重启，但它有点Bug，需要你在启动的<code>Activity</code>加一个category：<code>&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</code>。</p>
-<p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一些Android开发死局</title>
     <url>/2022/06/26/android-forbidden-topics/</url>
     <content><![CDATA[<p>有些东西就是做不到，除非，加很多很多钱和时间。</p>
@@ -710,6 +657,59 @@
 <ul>
 <li><a href="https://www.v2ex.com/t/859166">深圳注册公司的坑，一些经验分享（视频和文档）</a></li>
 <li><a href="https://www.v2ex.com/t/747843">公司注册下来了，分享一下费用、流程以及遇到的坑</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android上一个简单的Feature Flag实现</title>
+    <url>/2020/04/21/android-feature-flags/</url>
+    <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
+<span id="more"></span>
+
+<p>我个人的需求没原文中那么复杂，只需要一个可以在代码里手动调整的开关，一个可以在运行时进行修改的面板，同时要让R8把未使用的所有代码剔除。</p>
+<p>首先是可以在代码里手动调整的开关，用<code>buildConfigField</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</code>确保IDE不会警告，就像<code>BuildConfig.DEBUG</code>一样。</li>
+</ul>
+<p>整个框架，抄了就走：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Feature</span>(</span><br><span class="line">    <span class="keyword">val</span> key: String,</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> description: String,</span><br><span class="line">    <span class="keyword">val</span> default: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line">) &#123;</span><br><span class="line">    Log(</span><br><span class="line">        key = <span class="string">&quot;feature_log&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;All log to console&quot;</span></span><br><span class="line">    ),</span><br><span class="line">    Network(</span><br><span class="line">        key = <span class="string">&quot;feature_network&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Network&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;Inspect network requests&quot;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> FeatureFlagManager &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> sharedPreferences: SharedPreferences</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">init</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        sharedPreferences = context.safeSharedPreference</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">     * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">     * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">manageFeatures</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">val</span> features = Feature.values()</span><br><span class="line">        MaterialAlertDialogBuilder(context)</span><br><span class="line">            .setCancelable(<span class="literal">false</span>)</span><br><span class="line">            .setTitle(<span class="string">&quot;Feature Flag Manager&quot;</span>)</span><br><span class="line">            .setAdapter(</span><br><span class="line">                <span class="keyword">object</span> : BaseAdapter() &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> = features.size</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Any = features[position]</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemId</span><span class="params">(position: <span class="type">Int</span>)</span></span>: <span class="built_in">Long</span> =</span><br><span class="line">                        features[position].ordinal.toLong()</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">                        position: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                        convertView: <span class="type">View</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">                        parent: <span class="type">ViewGroup</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    )</span></span>: View &#123;</span><br><span class="line">                        <span class="keyword">val</span> view = convertView ?: LayoutInflater.from(context)</span><br><span class="line">                            .inflate(R.layout.list_item_feature_flag, parent, <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">val</span> layout = view.findViewById&lt;ListItemWithLayout&gt;(R.id.listItemFeatureFlag)</span><br><span class="line">                        <span class="keyword">val</span> feature = features[position]</span><br><span class="line">                        layout.listItem.run &#123;</span><br><span class="line">                            setPrimaryText(feature.title)</span><br><span class="line">                            setSecondaryText(feature.description)</span><br><span class="line">                        &#125;</span><br><span class="line">                        layout.getLayoutView&lt;CompoundButton&gt;().run &#123;</span><br><span class="line">                            setOnCheckedChangeListener(<span class="literal">null</span>)</span><br><span class="line">                            isChecked = feature.enabled</span><br><span class="line">                            setOnCheckedChangeListener &#123; buttonView, isChecked -&gt;</span><br><span class="line">                                feature.enabled = isChecked</span><br><span class="line">                                buttonView.indefiniteSnackbar(</span><br><span class="line">                                    message = <span class="string">&quot;Restart the app&quot;</span>,</span><br><span class="line">                                    actionText = <span class="string">&quot;Now&quot;</span>,</span><br><span class="line">                                    action = &#123;</span><br><span class="line">                                        ProcessPhoenix.triggerRebirth(context)</span><br><span class="line">                                    &#125;</span><br><span class="line">                                )</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">return</span> view</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="literal">null</span></span><br><span class="line">            )</span><br><span class="line">            .setPositiveButton(android.R.string.ok, <span class="literal">null</span>)</span><br><span class="line">            .setNegativeButton(android.R.string.cancel, <span class="literal">null</span>)</span><br><span class="line">            .show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> Feature.enabled</span><br><span class="line">        <span class="keyword">get</span>() = sharedPreferences.getBoolean(key, default)</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            sharedPreferences.storeBoolean(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">FeatureFlagManager.<span class="keyword">init</span>(<span class="keyword">this</span>)</span><br><span class="line"><span class="keyword">if</span> (FeatureFlagManager.isFeatureEnabled &#123; Feature.Log &#125;) &#123;</span><br><span class="line">    Timber.plant(Timber.DebugTree())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运作原理：</p>
+<ul>
+<li><p><code>isFeatureEnabled</code></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">    * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">    * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>顾名思义，传Lambda而不是直接传Feature确保R8可以在这段代码没被使用时移除掉它，不然Feature会留在最终的APK里。</p>
+<p>担心性能问题？</p>
+<ul>
+<li>我没做Benchkmark，所以不考虑优化。</li>
+<li>我寻思以大部分应用的水平，这个Lambda根本不在瓶颈上。</li>
+<li>请信任智能的R8，人家比咱上心，也比咱厉害，也许人家已经搞定了。</li>
+<li>Romain Guy大佬怎么做，我就怎么做！</li>
+</ul>
+</li>
+<li><p><code>setAdapter</code></p>
+<p>之所以使用<code>AlertDialog</code>的<code>setAdapter</code>而不是自定义<code>View</code>，是因为这样可以让列表滚动时在顶端和底端有一个分割线，我挺喜欢这个设计，但缺点就是要处理<code>ListView</code>😢</p>
+</li>
+<li><p><code>ListView</code>的每个条目的命名<code>R.layout.list_item_feature_flag</code></p>
+<p>我之前用的是<code>R.layout.item_feature_flag</code>，但发现R8在把整个<code>Feature</code>移除后死活不把这个文件处理掉，查看<code>resources.txt</code>并研究后才发现，所有以<code>item</code>开头的资源，都不会被处理（当然还有其它各种开头，<a href="https://android.googlesource.com/platform/tools/base/+/master/build-system/gradle-core/src/main/groovy/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java#827">具体在这里</a>）。修改为<code>list</code>开头后就好了，虽然文件还在，但里面的内容已经没了。</p>
+<p>另一种方法是根据<a href="https://developer.android.com/studio/build/shrink-code.html#troubleshoot-resource-shrink">官方文档底部的方法</a>来确保这些文件被移除。我懒，所以没试这种方法。</p>
+</li>
+<li><p><code>getView</code>绑定</p>
+<p> <code>ListItemWithLayout</code>就是一个<code>CompoundButton</code>配一个<code>TextView</code>，不稀奇。包括其他的一些方法，都是简单包装了一下，顾名思义。</p>
+</li>
+<li><p><code>ProcessPhoenix.triggerRebirth(context)</code></p>
+<p> 我这里用<a href="https://github.com/JakeWharton/ProcessPhoenix">ProcessPhoenix</a>来强制重启，但它有点Bug，需要你在启动的<code>Activity</code>加一个category：<code>&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</code>。</p>
+<p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -1549,6 +1549,34 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Resources小研究</title>
+    <url>/2020/01/12/android-resources-test/</url>
+    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
+<span id="more"></span>
+
+<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
+<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
+<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
+<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
+<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
+<p>新建<code>attrs.xml</code>并塞入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1602,34 +1630,6 @@
 <li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Resources小研究</title>
-    <url>/2020/01/12/android-resources-test/</url>
-    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
-<span id="more"></span>
-
-<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
-<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
-<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
-<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
-<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
-<p>新建<code>attrs.xml</code>并塞入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就可以</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2691,6 +2691,26 @@
       </categories>
   </entry>
   <entry>
+    <title>Nexus 5 购入 刷机 升级 笔记</title>
+    <url>/2022/07/08/nexus5/</url>
+    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
+<span id="more"></span>
+
+<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
+<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
+<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
+<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
+<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
+<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
+
+<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2771,26 +2791,6 @@
 <li><code>CardView</code>被囊括在design library中，更名为<code>MaterialCardView</code></li>
 <li><code>?attr/textAppearanceHeadline6</code>：新的(?)<code>textAppearance</code>，符合Design中的Type Scale</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Nexus 5 购入 刷机 升级 笔记</title>
-    <url>/2022/07/08/nexus5/</url>
-    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
-<span id="more"></span>
-
-<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
-<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
-<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
-<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
-<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
-<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
-
-<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
 ]]></content>
       <categories>
         <category>Android</category>
