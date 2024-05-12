@@ -27,7 +27,7 @@
 <meta property="og:description" content="Gradle1gradle wrapper --gradle-version 8.2.1  Disable Reformat Code before committing  Note, you need to run this command twice to upgrade both Gradle and the Gradle Wrapper itself   8.2.1: ✔  8.1.1:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-10T01:38:29.598Z">
+<meta property="article:modified_time" content="2024-05-12T01:26:36.529Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -320,12 +320,15 @@
 </li>
 <li><p>Kotlin to IDE Compatibility Map</p>
 <ul>
+<li><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew19.html#ide-support">1.9.xx</a>: Hedgehog (231)</li>
 <li><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew1820.html#ide-support">1.8.2x</a>: Flamingo (222)</li>
 <li><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew18.html#ide-support">1.8.10</a>: Electric Eel (221), Flamingo (222)</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlinx.coroutines/releases">org.jetbrains.kotlinx:kotlinx-coroutines</a></p>
 <ul>
+<li><p>1.8.1: 🚧</p>
+</li>
 <li><p>1.8.0: ✔(Kotlin 1.9)</p>
 </li>
 <li><p>1.7.3: ✔</p>
@@ -370,8 +373,8 @@
 </li>
 <li><p>8.0.2: ✔</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/square/retrofit/issues/3751">🟠 Retrofit After enable R8 full mode getting ParameterizedType error</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/square/okhttp/issues/6258">🟠 Proguard Rules (OkHttp 4.7.2)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/square/retrofit/issues/3751">🟠 Retrofit After enable R8 full mode getting ParameterizedType error</a> Gone in retrofit 2.11.0</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/square/okhttp/issues/6258">🟠 Proguard Rules (OkHttp 4.7.2)</a> Gone in okhttp 4.12.0</li>
 <li>AGP Upgrade Assistant 👍</li>
 <li><a target="_blank" rel="noopener" href="https://developer.android.com/build/releases/past-releases/agp-8-0-0-release-notes#jdk-17-agp">JDK 17 required to run AGP 8.0</a></li>
 </ul>
@@ -458,7 +461,7 @@
 <ul>
 <li><p>2.7.0: ✔(Android 14(34))</p>
 <ul>
-<li>Read Important changes since 2.6.0</li>
+<li>Read <a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/lifecycle#2.7.0">Important changes since 2.6.0</a></li>
 </ul>
 </li>
 <li><p>2.6.2: ✔</p>
@@ -509,6 +512,11 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/collection">androidx.collection:collection-ktx</a></p>
 <ul>
+<li><p>1.4.0: 🚧</p>
+<ul>
+<li><code>ScatterMap</code>, <code>ScatterSet</code>, and <code>ObjectList</code>.</li>
+</ul>
+</li>
 <li><p>1.3.0: ✔</p>
 <ul>
 <li>You can safely drop any dependencies on <code>collection:collection-ktx</code> in favor of <code>collection:collection</code> as <code>collection-ktx</code> is now empty.</li>
@@ -629,11 +637,13 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/exifinterface">androidx.exifinterface:exifinterface</a></p>
 <ul>
+<li>1.3.7: 🚧</li>
 <li>1.3.6: ✔</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/window">androidx.window:window</a></p>
 <ul>
+<li>1.2.0: 🚧</li>
 <li>1.1.0: ✔</li>
 <li>1.0.0: ✔</li>
 </ul>
@@ -641,6 +651,7 @@
 <li><p>Jetpack Compose</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/compose-kotlin">Compose Compiler Plugin to Kotlin version</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/bom/bom-mapping">BOM to library version mapping</a></li>
 <li>2023.06.01: ✔(Compose UI 1.4 + Kotlin 1.8.22 + Compose Compiler Plugin 1.4.8 + accompanist 0.30.1)</li>
 </ul>
 </li>
@@ -725,15 +736,28 @@
 <h2 id="Third-party"><a href="#Third-party" class="headerlink" title="Third-party"></a>Third-party</h2><ul>
 <li><p>com.squareup.okhttp3:okhttp</p>
 <ul>
-<li>4.12.0: 🚧(Kotlin 1.9)</li>
-<li>4.11.0: ✔</li>
-<li>4.10.0: ✔</li>
-<li>4.9.3: ✔</li>
+<li><p>4.12.0: 🚧(Kotlin 1.9)</p>
+<ul>
+<li>No more proguard rules</li>
+</ul>
+</li>
+<li><p>4.11.0: ✔</p>
+</li>
+<li><p>4.10.0: ✔</p>
+</li>
+<li><p>4.9.3: ✔</p>
+</li>
 </ul>
 </li>
 <li><p>com.squareup.retrofit2:retrofit</p>
 <ul>
-<li>2.9.0: ✔</li>
+<li><p>2.11.0: 🚧</p>
+<ul>
+<li>No more proguard rules</li>
+</ul>
+</li>
+<li><p>2.9.0: ✔</p>
+</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/square/moshi/blob/master/CHANGELOG.md">com.squareup.moshi:moshi</a></p>
@@ -796,6 +820,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/airbnb/lottie-android/releases">com.airbnb.android:lottie</a></p>
 <ul>
+<li><p>6.4.0: 🚧</p>
+</li>
 <li><p>6.1.0: ❌ ImageAssetManager NPE</p>
 </li>
 <li><p>6.0.1: ✔</p>
@@ -813,7 +839,7 @@
 </li>
 <li><p>com.github.chuckerteam.chucker:library</p>
 <ul>
-<li>4.0.0: ✔(Materail 1.9.0)</li>
+<li>4.0.0: ✔(Material 1.9.0)</li>
 <li>3.5.2: ✔</li>
 </ul>
 </li>
@@ -855,11 +881,13 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/ben-manes/gradle-versions-plugin">com.github.ben-manes:gradle-versions-plugin</a></p>
 <ul>
+<li>0.51.0: 🚧</li>
 <li>0.50.0: ✔</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/dropbox/dependency-guard">com.dropbox.dependency-guard:dependency-guard</a></p>
 <ul>
+<li>0.5.0: 🚧</li>
 <li>0.4.3: ✔</li>
 <li>0.3.2: ✔</li>
 </ul>
@@ -900,6 +928,7 @@
 </li>
 <li><p>com.umeng.umsdk:common</p>
 <ul>
+<li>9.7.1: 🚧</li>
 <li>9.6.8: 🚧</li>
 <li>9.6.7: ✔</li>
 <li>9.6.5: ✔</li>
@@ -911,6 +940,7 @@
 </li>
 <li><p>com.umeng.umsdk:asms</p>
 <ul>
+<li>1.8.2: 🚧</li>
 <li>1.8.0: ✔</li>
 <li>1.6.3: ✔</li>
 <li>1.4.1: ✔</li>
@@ -931,6 +961,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/qiniu/android-sdk/releases">com.qiniu:qiniu-android-sdk</a></p>
 <ul>
+<li>8.7.0: 🚧</li>
 <li>8.5.2: ✔</li>
 <li>8.4.4: ✔</li>
 <li>8.0.3: ✔(APK bloats afterwards)</li>
