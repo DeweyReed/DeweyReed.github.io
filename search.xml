@@ -27,16 +27,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Animation</title>
     <url>/2018/12/11/android-animation/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=N_x7SV3I3P0">Get Animated (Android Dev Summit ‘18)</a>，解释那复杂的Android动画框架和工具。</p>
@@ -77,6 +67,16 @@
 <li><p>MotionLayout：饼，真香。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -904,6 +904,28 @@
       </categories>
   </entry>
   <entry>
+    <title>使用json-server模拟后台</title>
+    <url>/2019/10/02/android-mock-server/</url>
+    <content><![CDATA[<p>笔记。</p>
+<span id="more"></span>
+
+<p><a href="https://github.com/typicode/json-server">json-server</a></p>
+<ol>
+<li><p><code>yarn global add json-server</code></p>
+</li>
+<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
+<p> <code>db.json</code>: 数据文件</p>
+<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
+<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>简单的Android软键盘动画</title>
     <url>/2021/05/28/android-naive-keyboard-animation/</url>
     <content><![CDATA[<p>随着<code>androidx.core</code>1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。</p>
@@ -956,28 +978,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>使用json-server模拟后台</title>
-    <url>/2019/10/02/android-mock-server/</url>
-    <content><![CDATA[<p>笔记。</p>
-<span id="more"></span>
-
-<p><a href="https://github.com/typicode/json-server">json-server</a></p>
-<ol>
-<li><p><code>yarn global add json-server</code></p>
-</li>
-<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
-<p> <code>db.json</code>: 数据文件</p>
-<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
-<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1587,34 +1587,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Resources小研究</title>
-    <url>/2020/01/12/android-resources-test/</url>
-    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
-<span id="more"></span>
-
-<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
-<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
-<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
-<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
-<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
-<p>新建<code>attrs.xml</code>并塞入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就可以</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android创建快捷方式图标的简单快速方法</title>
     <url>/2019/03/11/android-shortcut-icon/</url>
     <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
@@ -1672,6 +1644,34 @@
 <li>内容只会在第一次时跳跃。</li>
 <li>可以跟随软键盘高度变化，比如切换语言时。</li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Resources小研究</title>
+    <url>/2020/01/12/android-resources-test/</url>
+    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
+<span id="more"></span>
+
+<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
+<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
+<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
+<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
+<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
+<p>新建<code>attrs.xml</code>并塞入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1977,24 +1977,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -2028,6 +2010,24 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2777,6 +2777,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Nexus 5 购入 刷机 升级 笔记</title>
     <url>/2022/07/08/nexus5/</url>
     <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
@@ -2794,16 +2804,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3026,34 +3026,6 @@
       </categories>
   </entry>
   <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -3082,6 +3054,34 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
