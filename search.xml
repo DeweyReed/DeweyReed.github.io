@@ -73,6 +73,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android自动切换深色主题</title>
     <url>/2018/10/04/android-auto-night/</url>
     <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
@@ -95,16 +105,6 @@
 
 <p>然后在MainActivity里：</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -150,6 +150,25 @@
       </categories>
   </entry>
   <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android简繁体翻译到底该放哪儿？</title>
     <url>/2022/12/25/android-chinese-strings/</url>
     <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
@@ -182,25 +201,6 @@
 <li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
 <li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -926,6 +926,35 @@
       </categories>
   </entry>
   <entry>
+    <title>Android多进程开发笔记</title>
+    <url>/2024/06/23/android-multiprocessing/</url>
+    <content><![CDATA[<p>RT</p>
+<span id="more"></span>
+
+<ul>
+<li><p><a href="https://x.com/oasisfeng/status/1633822931523612676">把需要长期后台运行的服务放到单独的进程中来降低被杀几率</a></p>
+</li>
+<li><p>通过<a href="https://developer.android.com/guide/topics/manifest/service-element#proc"><code>android:process=&quot;:process&quot;</code></a>指定运行于新的进程</p>
+</li>
+<li><p>自定义的<code>Application</code>（<code>android:name=&quot;.App&quot;</code>）会被每个进程运行一次</p>
+<p>应在自定义的<code>Application</code>中提前考虑多进程使用：</p>
+<ol>
+<li>在<code>Application</code>判断进程名，按需初始化组件<ul>
+<li><a href="https://stackoverflow.com/a/55842542/5507158">Is there a way to get current process name in Android</a></li>
+</ul>
+</li>
+<li>将组件放到<code>androidx.startup</code>中并手动初始化</li>
+</ol>
+</li>
+<li><p><code>SharedPreference</code>无法跨进程使用，因此<a href="https://developer.android.com/topic/libraries/architecture/datastore#multiprocess">Use DataStore in multi-process code</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>简单的Android软键盘动画</title>
     <url>/2021/05/28/android-naive-keyboard-animation/</url>
     <content><![CDATA[<p>随着<code>androidx.core</code>1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。</p>
@@ -1403,27 +1432,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
-
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1460,6 +1468,27 @@
 <li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
+<span id="more"></span>
+
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1549,34 +1578,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Resources小研究</title>
-    <url>/2020/01/12/android-resources-test/</url>
-    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
-<span id="more"></span>
-
-<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
-<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
-<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
-<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
-<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
-<p>新建<code>attrs.xml</code>并塞入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就可以</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1609,6 +1610,34 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Resources小研究</title>
+    <url>/2020/01/12/android-resources-test/</url>
+    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
+<span id="more"></span>
+
+<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
+<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
+<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
+<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
+<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
+<p>新建<code>attrs.xml</code>并塞入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1678,32 +1707,6 @@
       </categories>
   </entry>
   <entry>
-    <title>天天坏，天天修的Android Studio</title>
-    <url>/2020/09/20/android-studio-is-broken/</url>
-    <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
-<span id="more"></span>
-
-<p>“坏掉”指的是所有不是自己代码问题的问题。</p>
-<h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
-<p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
-<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
-<p>2021新发现的方法！给类改名字。</p>
-<h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
-<h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
-<p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
-<h2 id="删除Gradle缓存"><a href="#删除Gradle缓存" class="headerlink" title="删除Gradle缓存"></a>删除Gradle缓存</h2><p>最近遇到一个问题，Kotlin Extension Functions不被识别，上述方案都试过了没用。最后只好打起了Gradle的主意。</p>
-<p>除了<code>.gradle/gradle.properties</code>，把<code>.gradle</code>和<code>.m2</code>都删掉。因为小文件很多，删除时间很长，所以要一次性永久删除，如果先丢到回收站，等待时间要翻倍。</p>
-<h2 id="删除Android-Studio缓存"><a href="#删除Android-Studio缓存" class="headerlink" title="删除Android Studio缓存"></a>删除Android Studio缓存</h2><p>最近升级到4.2后，遇到问题仅删除Gradle缓存已经不够了。导出AS设置，然后把所有AS缓存都删光，然后重启。相当于重装了。</p>
-<h2 id="deep-clean"><a href="#deep-clean" class="headerlink" title="deep-clean"></a><code>deep-clean</code></h2><p>使用Github的<a href="https://github.com/rock3r/deep-clean">deep-clean</a>。</p>
-<p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
-<p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
-<h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android储存方案研究及分析</title>
     <url>/2020/01/25/android-storage/</url>
     <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
@@ -1734,6 +1737,32 @@
 </ol>
 <h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
 <h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>天天坏，天天修的Android Studio</title>
+    <url>/2020/09/20/android-studio-is-broken/</url>
+    <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
+<span id="more"></span>
+
+<p>“坏掉”指的是所有不是自己代码问题的问题。</p>
+<h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
+<p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
+<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
+<p>2021新发现的方法！给类改名字。</p>
+<h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
+<h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
+<p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
+<h2 id="删除Gradle缓存"><a href="#删除Gradle缓存" class="headerlink" title="删除Gradle缓存"></a>删除Gradle缓存</h2><p>最近遇到一个问题，Kotlin Extension Functions不被识别，上述方案都试过了没用。最后只好打起了Gradle的主意。</p>
+<p>除了<code>.gradle/gradle.properties</code>，把<code>.gradle</code>和<code>.m2</code>都删掉。因为小文件很多，删除时间很长，所以要一次性永久删除，如果先丢到回收站，等待时间要翻倍。</p>
+<h2 id="删除Android-Studio缓存"><a href="#删除Android-Studio缓存" class="headerlink" title="删除Android Studio缓存"></a>删除Android Studio缓存</h2><p>最近升级到4.2后，遇到问题仅删除Gradle缓存已经不够了。导出AS设置，然后把所有AS缓存都删光，然后重启。相当于重装了。</p>
+<h2 id="deep-clean"><a href="#deep-clean" class="headerlink" title="deep-clean"></a><code>deep-clean</code></h2><p>使用Github的<a href="https://github.com/rock3r/deep-clean">deep-clean</a>。</p>
+<p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
+<p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
+<h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1790,6 +1819,14 @@
 <li><code>Color Scheme</code> - <code>Console Font</code> - <code>Size</code>: <code>16</code>; <code>Line height</code>: <code>0.8</code></li>
 <li><code>Code Style</code><ul>
 <li><code>Formatter</code>: Disable <code>Reformat again to remove custom line breaks</code></li>
+<li><code>Groovy</code><ul>
+<li><code>Code Generation</code><ul>
+<li>Disable <code>Line comment at first column</code></li>
+<li>Enable <code>Add a space at line comment start</code> and <code>Enforce on reformat</code></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>Kotlin</code><ul>
 <li>Set from <code>Kotlin style guide</code></li>
 <li><code>Tabs and Indents</code> - <code>Continuation Indent</code>: 4</li>
@@ -2128,38 +2165,6 @@
       </categories>
   </entry>
   <entry>
-    <title>想要自动清空浏览记录</title>
-    <url>/2020/08/06/clean-browser-history/</url>
-    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
-<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
-<span id="more"></span>
-
-<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
-<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
-<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
-<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
-<p>我开始寻找下一个替代品。</p>
-<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
-<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
-<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
-<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
-<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
-<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
-<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
-<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
-<p>用了一段时间，发现有几个小缺点：</p>
-<ul>
-<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
-<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
-<li>不知为何会导致Adobe CC退出登录。</li>
-</ul>
-<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Dagger2 入门路线图 (2018年5月)</title>
     <url>/2018/05/20/dagger2-roadmap/</url>
     <content><![CDATA[<p><strong>2019年11月22日 本文已过时 请查看Android官方的<a href="https://developer.android.com/training/dependency-injection">Dependency Injection</a>教程和<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a> <del>谁能想到dagger-android要凉凉了呢？</del></strong></p>
@@ -2351,6 +2356,38 @@
       </categories>
   </entry>
   <entry>
+    <title>想要自动清空浏览记录</title>
+    <url>/2020/08/06/clean-browser-history/</url>
+    <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
+<p>每个浏览器都有手动清空包括浏览记录在内的各种信息的一个选项，但是在每次使用完浏览器后，都要手动清空一次太机械、太重复了，而且重复的操作是要抽象出来复用的。于是，我踏上了一条自动清空浏览记录之路。</p>
+<span id="more"></span>
+
+<h2 id="不争气的Chrome"><a href="#不争气的Chrome" class="headerlink" title="不争气的Chrome"></a>不争气的Chrome</h2><p>Chrome的设置中并没有退出浏览器时，自动清空浏览记录的设置，反而有一个退出时自动清空Cookie的设置，但我不需要它，因为我还是想要下次启动浏览器时，登陆状态被保存。而且如果在搜索引擎中搜索如何自动清空浏览记录时，几乎全都是这个清空Cookie设置相关的链接。</p>
+<p>于是，我求助于Chrome扩展。的确有这么一个扩展<a href="https://chrome.google.com/webstore/detail/clickclean/ghgabhipcejejjmhhchfonmamedcbeod">Click&amp;Clean</a>可以在关闭浏览器时，自动清空浏览记录。它的设置很齐全，也很方便，而且还时不时弹出各种保护隐私的小技巧。</p>
+<p>我用了很长一段时间，但是应该是从2019年的某个时候，它的小技巧弹窗开始烦人了，不仅不能永久关闭，还一直循环弹出那些重复的内容。再看Chrome扩展商店中它的评论，会发现有大量的机器人好评，有限的看起来像真人的评论也几乎都在抱怨弹窗。进一步在网络上搜索后，还发现有人怀疑它是间谍软件，但我没找到什么确凿的证据。</p>
+<p>这让我不禁思考：它为什么这么做？如果它的弹窗内容是广告，可以理解为要盈利。但它弹的是自己的文章，而且此外也没有什么赢利点。同时考虑到它并不开源，却一直在更新，我对这个扩展的运营模式产生了深深的怀疑。其实，我对不少浏览器扩展的盈利模式都挺疑惑的，除了不少用爱发电的开源扩展，那些成功却又没有明显赢利点的扩展，是怎么存活的呢？</p>
+<p>我开始寻找下一个替代品。</p>
+<h2 id="开源但还需完善BleachBit"><a href="#开源但还需完善BleachBit" class="headerlink" title="开源但还需完善BleachBit"></a>开源但还需完善BleachBit</h2><p>稍加搜索后，我发现了开源的<a href="https://www.bleachbit.org/">BleachBit</a>，据说希拉里用了都说好（在以前的软件主页中提到过，估计为了避免不必要的麻烦，现在没有了，但<a href="https://en.wikipedia.org/wiki/BleachBit">在维基中还有记录</a>）。</p>
+<p>这个软件并不支持关闭浏览器时，自动清空浏览记录，但是我发现可以通过命令行，在某个特定时间或每次开关机时，运行该软件清理浏览记录，而BleachBit也确实提供了<a href="https://docs.bleachbit.org/doc/command-line-interface.html">这么做的详细文档</a>，还包括了各个平台的具体操作指南。</p>
+<p>用了一段时间后，我发现它失效了。在翻看它的<a href="https://github.com/bleachbit/bleachbit/issues">Github Issues</a>后，发现的确是个Bug，同时也发现Chrome存放历史记录的方案还挺复杂的。</p>
+<p>我等不及Bug修复了，于是决定寻找下一个替代品。</p>
+<h2 id="还差临门一脚的Chromium-Edge"><a href="#还差临门一脚的Chromium-Edge" class="headerlink" title="还差临门一脚的Chromium Edge"></a>还差临门一脚的Chromium Edge</h2><p>微软的新Edge现在应该正式推送了，而它也正好内置了关闭浏览器时，自动清空浏览记录的功能，这让我非常满意，也产生了迁移到新Edge的念头。</p>
+<p>在把新Edge的设置舔了个干净，并初步尝试后，发现新Edge整体上不错，但在一些糟糕的小细节很破坏<strong>我的体验</strong>，比如语言设置对有些网站不起作用、Google系网站一直推荐Chrome（尤其对我这种给Google Android写代码的人来说）等。</p>
+<p>当然，未采用新Edge只是因为现阶段的个人需求造成的。没有类似的需求，且不介意从别的浏览器迁移的话，新版Edge就是完美的解决方案。</p>
+<h2 id="目前的解决方案：CCleaner"><a href="#目前的解决方案：CCleaner" class="headerlink" title="目前的解决方案：CCleaner"></a>目前的解决方案：CCleaner</h2><p>BleachBit启发了我：只要清理垃圾的软件支持清理浏览记录和命令行，就可以通过系统中计划任务的机制来达成目的。因为我一直在用<a href="https://www.ccleaner.com/">CCleaner</a>清理垃圾，所以在稍加搜索后，的确发现了<a href="https://www.ccleaner.com/docs/ccleaner/advanced-usage/command-line-parameters">它的命令行接口</a>。尝试后发现效果令人满意。另外，如果是Pro版的话，可以直接用它的智能清理。免费版的话，就需要命令行了。</p>
+<p>用了一段时间，发现有几个小缺点：</p>
+<ul>
+<li>CCleaner默认会清理Cookie，需要在软件中手动关掉。</li>
+<li>命令行调用是异步的，且一次清理比较费时，从而导致有时候清理的同时浏览器正在打开的话，会安静地失败。使用了一段时候后，发现是真的有点慢。</li>
+<li>不知为何会导致Adobe CC退出登录。</li>
+</ul>
+<h2 id="完"><a href="#完" class="headerlink" title="完"></a>完</h2><p>历时几年的旅途终于告一段落了。如果未来CCleaner也成了流氓软件（现在也有一些还算克制的流氓行为，比如安装时尝试捆绑一个杀毒软件，不过拒绝按钮很大很明显），或者新Edge一骑绝尘，再来更新。</p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>aprildown.xyz将会在未来到期</title>
     <url>/2023/08/12/domain-expiration/</url>
     <content><![CDATA[<p>惊闻XYZ域名即将涨价，索性决定再续费一两年后放弃该域名。之后继续乖乖地使用无需多虑的Github域名。</p>
@@ -2481,60 +2518,6 @@
       </categories>
   </entry>
   <entry>
-    <title>在Android Studio中引入AAR文件</title>
-    <url>/2018/08/13/include-aar/</url>
-    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
-<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
-<p>要解决的问题在于</p>
-<ol>
-<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
-<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
-<li>Module该有好处自然有的了</li>
-<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
-<li>修改后直接复制粘贴AAR就可使用</li>
-</ol>
-<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
-<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
-<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
-<li>修改后复制粘贴AAR才能使用</li>
-<li>AAR的版本被保存在了另一个项目中</li>
-<li>AAR的依赖需要手动添加到项目的依赖中</li>
-<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
-<li>似乎并不能跨module使用</li>
-</ol>
-<p><del>缺点比优点多可还行</del></p>
-<p>个人习惯：</p>
-<ul>
-<li>把名字改为library名+git commit编号</li>
-<li>另建一个文件夹专门放各种AAR</li>
-<li>把修改的项目丢到Github或GitBucket</li>
-<li>在版本控制中删掉所有AAR</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
-<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
-<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
-<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
-<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
-<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
-<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
-<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
-<p>注意<code>name</code>中不带后缀。</p>
-<p>Ta-Da。完成！</p>
-<p>参考:</p>
-<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>论如何避免垃圾游戏</title>
     <url>/2023/07/06/how-to-avoid-trash-games/</url>
     <content><![CDATA[<p>终于打完了Fire Emblem Engage。过程极度痛苦，在此深刻检讨并反省。<strong>有剧透</strong>。</p>
@@ -2601,6 +2584,60 @@
 ]]></content>
       <categories>
         <category>Gaming</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>在Android Studio中引入AAR文件</title>
+    <url>/2018/08/13/include-aar/</url>
+    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
+<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
+<p>要解决的问题在于</p>
+<ol>
+<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
+<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
+<li>Module该有好处自然有的了</li>
+<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
+<li>修改后直接复制粘贴AAR就可使用</li>
+</ol>
+<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
+<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
+<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
+<li>修改后复制粘贴AAR才能使用</li>
+<li>AAR的版本被保存在了另一个项目中</li>
+<li>AAR的依赖需要手动添加到项目的依赖中</li>
+<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
+<li>似乎并不能跨module使用</li>
+</ol>
+<p><del>缺点比优点多可还行</del></p>
+<p>个人习惯：</p>
+<ul>
+<li>把名字改为library名+git commit编号</li>
+<li>另建一个文件夹专门放各种AAR</li>
+<li>把修改的项目丢到Github或GitBucket</li>
+<li>在版本控制中删掉所有AAR</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
+<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
+<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
+<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
+<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
+<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
+<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
+<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
+<p>注意<code>name</code>中不带后缀。</p>
+<p>Ta-Da。完成！</p>
+<p>参考:</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2924,6 +2961,23 @@
       </categories>
   </entry>
   <entry>
+    <title>我们为什么不相信狼来了中的那个孩子</title>
+    <url>/2018/12/25/thoughts-cry-wolf/</url>
+    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
+<span id="more"></span>
+
+<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
+<p>所以我们的逻辑成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
+
+<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
+<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
     <title>两种安慰别人的方式</title>
     <url>/2019/07/05/thoughts-comfort/</url>
     <content><![CDATA[<p>生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。</p>
@@ -2958,20 +3012,83 @@
       </categories>
   </entry>
   <entry>
-    <title>我们为什么不相信狼来了中的那个孩子</title>
-    <url>/2018/12/25/thoughts-cry-wolf/</url>
-    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
+    <title>三个和尚没水喝</title>
+    <url>/2018/10/30/thoughts-three-monks/</url>
+    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
 <span id="more"></span>
 
-<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
-<p>所以我们的逻辑成了：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
-
-<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
-<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
+<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
+<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
+<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
+<p>我们要利用它，让它利于我们 =&gt;</p>
+<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
+<ol>
+<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
+</li>
+<li><p>侧面回避，让问题消失</p>
+<ol>
+<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
+</li>
+<li><p>拉第四个人入伙，配对挑水。</p>
+</li>
+</ol>
+</li>
+<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
+</li>
+</ol>
+<p>=&gt; 这些把戏很常见吧，这就对了。</p>
 ]]></content>
       <categories>
         <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
+    <url>/2020/09/07/timer-cloud-backup/</url>
+    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
+<span id="more"></span>
+
+<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
+<p>酷安版本独占：开发日志、打赏</p>
+<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
+<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
+<li>在Google Play搜索“计时机器”并安装。</li>
+<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
+<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
+<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
+</ol>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3023,86 +3140,6 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>三个和尚没水喝</title>
-    <url>/2018/10/30/thoughts-three-monks/</url>
-    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
-<span id="more"></span>
-
-<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
-<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
-<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
-<p>我们要利用它，让它利于我们 =&gt;</p>
-<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
-<ol>
-<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
-</li>
-<li><p>侧面回避，让问题消失</p>
-<ol>
-<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
-</li>
-<li><p>拉第四个人入伙，配对挑水。</p>
-</li>
-</ol>
-</li>
-<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
-</li>
-</ol>
-<p>=&gt; 这些把戏很常见吧，这就对了。</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
-    <url>/2020/09/07/timer-cloud-backup/</url>
-    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
-<span id="more"></span>
-
-<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
-<p>酷安版本独占：开发日志、打赏</p>
-<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
-<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
-<li>在Google Play搜索“计时机器”并安装。</li>
-<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
-<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
-<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
-</ol>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3216,26 +3253,6 @@
       </categories>
   </entry>
   <entry>
-    <title>个人常用的视频下载及处理命令整理</title>
-    <url>/2023/11/23/youtube-dl-commands/</url>
-    <content><![CDATA[<p>RT</p>
-<span id="more"></span>
-
-<h2 id="下载视频的音频"><a href="#下载视频的音频" class="headerlink" title="下载视频的音频"></a>下载视频的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 </span><br></pre></td></tr></table></figure>
-
-<p><a href="https://askubuntu.com/a/178991">https://askubuntu.com/a/178991</a></p>
-<h2 id="下载视频列表的音频"><a href="#下载视频列表的音频" class="headerlink" title="下载视频列表的音频"></a>下载视频列表的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 -o <span class="string">&quot;%(title)s.%(ext)s&quot;</span> </span><br></pre></td></tr></table></figure>
-
-<p><a href="https://askubuntu.com/a/564571">https://askubuntu.com/a/564571</a></p>
-<h2 id="转换视频文件夹为音频文件夹"><a href="#转换视频文件夹为音频文件夹" class="headerlink" title="转换视频文件夹为音频文件夹"></a>转换视频文件夹为音频文件夹</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> %i <span class="keyword">in</span> (*.mp4) <span class="keyword">do</span> ffmpeg -i &quot;%i&quot; &quot;%~ni.mp3&quot;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/a/56244203/5507158">https://stackoverflow.com/a/56244203/5507158</a></p>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>更新，还是不更新，这是个问题</title>
     <url>/2022/05/25/update-or-not/</url>
     <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
@@ -3262,6 +3279,26 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>个人常用的视频下载及处理命令整理</title>
+    <url>/2023/11/23/youtube-dl-commands/</url>
+    <content><![CDATA[<p>RT</p>
+<span id="more"></span>
+
+<h2 id="下载视频的音频"><a href="#下载视频的音频" class="headerlink" title="下载视频的音频"></a>下载视频的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 </span><br></pre></td></tr></table></figure>
+
+<p><a href="https://askubuntu.com/a/178991">https://askubuntu.com/a/178991</a></p>
+<h2 id="下载视频列表的音频"><a href="#下载视频列表的音频" class="headerlink" title="下载视频列表的音频"></a>下载视频列表的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 -o <span class="string">&quot;%(title)s.%(ext)s&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<p><a href="https://askubuntu.com/a/564571">https://askubuntu.com/a/564571</a></p>
+<h2 id="转换视频文件夹为音频文件夹"><a href="#转换视频文件夹为音频文件夹" class="headerlink" title="转换视频文件夹为音频文件夹"></a>转换视频文件夹为音频文件夹</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> %i <span class="keyword">in</span> (*.mp4) <span class="keyword">do</span> ffmpeg -i &quot;%i&quot; &quot;%~ni.mp3&quot;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/a/56244203/5507158">https://stackoverflow.com/a/56244203/5507158</a></p>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
