@@ -73,6 +73,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android自动切换深色主题</title>
     <url>/2018/10/04/android-auto-night/</url>
     <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
@@ -95,16 +105,6 @@
 
 <p>然后在MainActivity里：</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -207,54 +207,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些可能有用的Android代码 - IO22版</title>
-    <url>/2022/05/29/android-code-snippets-io22/</url>
-    <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
-<span id="more"></span>
-
-<h2 id="搜索按钮的触发事件"><a href="#搜索按钮的触发事件" class="headerlink" title="搜索按钮的触发事件"></a>搜索按钮的触发事件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">btnSearch.setOnEditorActionListener &#123; _, actionId, _ -&gt;</span><br><span class="line">    <span class="keyword">if</span> (actionId == EditorInfo.IME_ACTION_SEARCH) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">btnSearch.setOnKeyListener &#123; _, keyCode, event -&gt;</span><br><span class="line">    <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_ENTER &amp;&amp; event.action == KeyEvent.ACTION_UP) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="ViewPager中的Fragment获取ViewModel"><a href="#ViewPager中的Fragment获取ViewModel" class="headerlink" title="ViewPager中的Fragment获取ViewModel"></a>ViewPager中的Fragment获取ViewModel</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Scope the fragment to the parent fragment</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> sharedViewModel: PagerViewModel</span><br><span class="line">  <span class="keyword">by</span> viewModels(ownerProducer = &#123; requireParentFragment() &#125; )</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取硬盘剩余空间"><a href="#获取硬盘剩余空间" class="headerlink" title="获取硬盘剩余空间"></a>获取硬盘剩余空间</h2><p><a href="https://stackoverflow.com/questions/8133417/android-get-free-size-of-internal-external-memory">Stackoverflow上</a>说：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> sf = StatFs(file.absolutePath)</span><br><span class="line"><span class="keyword">val</span> availableBytes = sf.availableBlocksLong * sf.blockSizeLong</span><br></pre></td></tr></table></figure>
-
-<p>IO上说：</p>
-<p>Use <code>File.getUsableSpace</code> to check available space on storage.</p>
-<p>二者数据似乎相等。</p>
-<h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> target = <span class="keyword">if</span> (filesDir.usableSpace &gt; fileSize) &#123;</span><br><span class="line">    filesDir</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    getExternalFilesDir(<span class="literal">null</span>)</span><br><span class="line">&#125;</span><br><span class="line">requireNotNull(target) &#123; <span class="string">&quot;Not enough space&quot;</span> &#125;</span><br><span class="line">bigInputStream.use &#123; input -&gt;</span><br><span class="line">    File(target, <span class="string">&quot;big-file.zip&quot;</span>).outputStream().use &#123; output -&gt;</span><br><span class="line">        input.copyTo(output)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取屏幕大小"><a href="#获取屏幕大小" class="headerlink" title="获取屏幕大小"></a>获取屏幕大小</h2><p>使用<a href="https://developer.android.com/jetpack/androidx/releases/window">Jetpack WindowManager</a>：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> current = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</span><br><span class="line"><span class="keyword">val</span> max = WindowMetricsCalculator.getOrCreate().computeMaximumWindowMetrics(activity)</span><br></pre></td></tr></table></figure>
-
-<p>但如果没有Activity呢？先用古法凑活一下：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> wm = context.getSystemService&lt;WindowManager&gt;()</span><br><span class="line">requireNotNull(wm)</span><br><span class="line"><span class="keyword">val</span> point = Point()</span><br><span class="line"><span class="keyword">val</span> defaultDisplay = wm.defaultDisplay</span><br><span class="line">defaultDisplay.getRealSize(point)</span><br><span class="line"><span class="keyword">if</span> (point.x &lt;= <span class="number">0</span> || point.y &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">val</span> rect = Rect()</span><br><span class="line">    defaultDisplay.getRectSize(rect)</span><br><span class="line">    point.<span class="keyword">set</span>(rect.right, rect.bottom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码部分来自于<code>WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</code>。</p>
-<p>注意：</p>
-<ol>
-<li>所有方法都会根据屏幕旋转进行数值调换。</li>
-<li><code>Resources.getSystem().displayMetrics.heightPixels</code>并不包括状态栏和（或）状态栏。</li>
-</ol>
-<h2 id="相机旋转和设备旋转"><a href="#相机旋转和设备旋转" class="headerlink" title="相机旋转和设备旋转"></a>相机旋转和设备旋转</h2><p><a href="https://developer.android.com/codelabs/android-camera2-preview">Support resizable surfaces in your camera app</a>，或者用1.1.0及以上的CameraX。</p>
-<h2 id="实现列表特殊Footer效果"><a href="#实现列表特殊Footer效果" class="headerlink" title="实现列表特殊Footer效果"></a>实现列表特殊Footer效果</h2><ol>
-<li>内容不满一屏幕时，Footer显示在屏幕底端。</li>
-<li>屏幕超过一屏幕时，Footer和其他条目一样排排坐。</li>
-</ol>
-<p>使用Jetpack Compose来实现：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">LazyColumn(</span><br><span class="line">    modifier = Modifier.fillMaxHeight(),</span><br><span class="line">    verticalArrangement = TopWithFooter,</span><br><span class="line">) &#123;</span><br><span class="line">    items(list) &#123;</span><br><span class="line">        Item()</span><br><span class="line">    &#125;</span><br><span class="line">    item &#123;</span><br><span class="line">        Footer()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，LazyColumn不满一屏幕会<code>WRAP_CONTENT</code>，用<code>fillMaxHeight()</code>来指定高度。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">object</span> TopWithFooter : Arrangement.Vertical &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> Density.<span class="title">arrange</span><span class="params">(totalSize: <span class="type">Int</span>, sizes: <span class="type">IntArray</span>, outPositions: <span class="type">IntArray</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> y = <span class="number">0</span></span><br><span class="line">        sizes.forEachIndexed &#123; index, size -&gt;</span><br><span class="line">            outPositions[index] = y</span><br><span class="line">            y += size</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (y &lt; totalSize) &#123;</span><br><span class="line">            outPositions[outPositions.lastIndex] = totalSize - (sizes.lastOrNull() ?: <span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
-<p>代码过于简单以至于不需要其他解释了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一些可能有用的Android代码</title>
     <url>/2019/06/15/android-code-snippets/</url>
     <content><![CDATA[<p><strong>2020年11月6日 更新<code>View.outlineProvider</code></strong></p>
@@ -318,50 +270,48 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Dark Theme/深色模式使用体验</title>
-    <url>/2020/05/07/android-dark-theme/</url>
-    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
+    <title>一些可能有用的Android代码 - IO22版</title>
+    <url>/2022/05/29/android-code-snippets-io22/</url>
+    <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
 <span id="more"></span>
 
-<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
-<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
-<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
-<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
-<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="搜索按钮的触发事件"><a href="#搜索按钮的触发事件" class="headerlink" title="搜索按钮的触发事件"></a>搜索按钮的触发事件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">btnSearch.setOnEditorActionListener &#123; _, actionId, _ -&gt;</span><br><span class="line">    <span class="keyword">if</span> (actionId == EditorInfo.IME_ACTION_SEARCH) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">btnSearch.setOnKeyListener &#123; _, keyCode, event -&gt;</span><br><span class="line">    <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_ENTER &amp;&amp; event.action == KeyEvent.ACTION_UP) &#123;</span><br><span class="line">        performSearch()</span><br><span class="line">        <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
-<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
-<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
-<p>这是因为文档中有一句话：</p>
-<blockquote>
-<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
-</blockquote>
-<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
-<p>我的第二次尝试是重写<code>recreate()</code>：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ViewPager中的Fragment获取ViewModel"><a href="#ViewPager中的Fragment获取ViewModel" class="headerlink" title="ViewPager中的Fragment获取ViewModel"></a>ViewPager中的Fragment获取ViewModel</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Scope the fragment to the parent fragment</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> sharedViewModel: PagerViewModel</span><br><span class="line">  <span class="keyword">by</span> viewModels(ownerProducer = &#123; requireParentFragment() &#125; )</span><br></pre></td></tr></table></figure>
 
-<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取硬盘剩余空间"><a href="#获取硬盘剩余空间" class="headerlink" title="获取硬盘剩余空间"></a>获取硬盘剩余空间</h2><p><a href="https://stackoverflow.com/questions/8133417/android-get-free-size-of-internal-external-memory">Stackoverflow上</a>说：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> sf = StatFs(file.absolutePath)</span><br><span class="line"><span class="keyword">val</span> availableBytes = sf.availableBlocksLong * sf.blockSizeLong</span><br></pre></td></tr></table></figure>
 
-<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
-<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
-<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
-<p>一个Switch显示是否使用了深色主题：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
+<p>IO上说：</p>
+<p>Use <code>File.getUsableSpace</code> to check available space on storage.</p>
+<p>二者数据似乎相等。</p>
+<h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> target = <span class="keyword">if</span> (filesDir.usableSpace &gt; fileSize) &#123;</span><br><span class="line">    filesDir</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    getExternalFilesDir(<span class="literal">null</span>)</span><br><span class="line">&#125;</span><br><span class="line">requireNotNull(target) &#123; <span class="string">&quot;Not enough space&quot;</span> &#125;</span><br><span class="line">bigInputStream.use &#123; input -&gt;</span><br><span class="line">    File(target, <span class="string">&quot;big-file.zip&quot;</span>).outputStream().use &#123; output -&gt;</span><br><span class="line">        input.copyTo(output)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>切换Switch时切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="获取屏幕大小"><a href="#获取屏幕大小" class="headerlink" title="获取屏幕大小"></a>获取屏幕大小</h2><p>使用<a href="https://developer.android.com/jetpack/androidx/releases/window">Jetpack WindowManager</a>：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> current = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</span><br><span class="line"><span class="keyword">val</span> max = WindowMetricsCalculator.getOrCreate().computeMaximumWindowMetrics(activity)</span><br></pre></td></tr></table></figure>
 
-<p>此外，在onCreate中根据需要自动切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但如果没有Activity呢？先用古法凑活一下：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> wm = context.getSystemService&lt;WindowManager&gt;()</span><br><span class="line">requireNotNull(wm)</span><br><span class="line"><span class="keyword">val</span> point = Point()</span><br><span class="line"><span class="keyword">val</span> defaultDisplay = wm.defaultDisplay</span><br><span class="line">defaultDisplay.getRealSize(point)</span><br><span class="line"><span class="keyword">if</span> (point.x &lt;= <span class="number">0</span> || point.y &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">val</span> rect = Rect()</span><br><span class="line">    defaultDisplay.getRectSize(rect)</span><br><span class="line">    point.<span class="keyword">set</span>(rect.right, rect.bottom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>有啥问题，有啥问题呀？</p>
-<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
-<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
-<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
-<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
-<p>完。</p>
+<p>代码部分来自于<code>WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)</code>。</p>
+<p>注意：</p>
+<ol>
+<li>所有方法都会根据屏幕旋转进行数值调换。</li>
+<li><code>Resources.getSystem().displayMetrics.heightPixels</code>并不包括状态栏和（或）状态栏。</li>
+</ol>
+<h2 id="相机旋转和设备旋转"><a href="#相机旋转和设备旋转" class="headerlink" title="相机旋转和设备旋转"></a>相机旋转和设备旋转</h2><p><a href="https://developer.android.com/codelabs/android-camera2-preview">Support resizable surfaces in your camera app</a>，或者用1.1.0及以上的CameraX。</p>
+<h2 id="实现列表特殊Footer效果"><a href="#实现列表特殊Footer效果" class="headerlink" title="实现列表特殊Footer效果"></a>实现列表特殊Footer效果</h2><ol>
+<li>内容不满一屏幕时，Footer显示在屏幕底端。</li>
+<li>屏幕超过一屏幕时，Footer和其他条目一样排排坐。</li>
+</ol>
+<p>使用Jetpack Compose来实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">LazyColumn(</span><br><span class="line">    modifier = Modifier.fillMaxHeight(),</span><br><span class="line">    verticalArrangement = TopWithFooter,</span><br><span class="line">) &#123;</span><br><span class="line">    items(list) &#123;</span><br><span class="line">        Item()</span><br><span class="line">    &#125;</span><br><span class="line">    item &#123;</span><br><span class="line">        Footer()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，LazyColumn不满一屏幕会<code>WRAP_CONTENT</code>，用<code>fillMaxHeight()</code>来指定高度。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">object</span> TopWithFooter : Arrangement.Vertical &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> Density.<span class="title">arrange</span><span class="params">(totalSize: <span class="type">Int</span>, sizes: <span class="type">IntArray</span>, outPositions: <span class="type">IntArray</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> y = <span class="number">0</span></span><br><span class="line">        sizes.forEachIndexed &#123; index, size -&gt;</span><br><span class="line">            outPositions[index] = y</span><br><span class="line">            y += size</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (y &lt; totalSize) &#123;</span><br><span class="line">            outPositions[outPositions.lastIndex] = totalSize - (sizes.lastOrNull() ?: <span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
+<p>代码过于简单以至于不需要其他解释了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -406,6 +356,56 @@
 
 <p>这样TabLayout一开始会跟随滚动，到达顶部后，就不动了，而下半部分的ViewPager会继续滚，相当于一个Sticky Header。如果一开始使用多类型Adapter + Header实现的话，要解决这个就需要点劳动了。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浓眉大眼的CoordinatorLayout和它的一帮小弟有时候还有点用。希望material 1.1.0不会出现陨石坑吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Dark Theme/深色模式使用体验</title>
+    <url>/2020/05/07/android-dark-theme/</url>
+    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
+<span id="more"></span>
+
+<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
+<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
+<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
+<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
+<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
+<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
+<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
+<p>这是因为文档中有一句话：</p>
+<blockquote>
+<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
+</blockquote>
+<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
+<p>我的第二次尝试是重写<code>recreate()</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
+<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
+<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
+<p>一个Switch显示是否使用了深色主题：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
+
+<p>切换Switch时切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，在onCreate中根据需要自动切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有啥问题，有啥问题呀？</p>
+<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
+<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
+<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
+<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
+<p>完。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -744,6 +744,74 @@
       </categories>
   </entry>
   <entry>
+    <title>Jetpack Compose Stability白话版</title>
+    <url>/2024/06/24/android-jetpack-compose-stability/</url>
+    <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
+<p>但优秀的开发者在点点滴滴中优化性能，而不是等到性能真出问题时再挠头。本文记录如何写Composable来得到最好的Stability。</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>书写Composable或用于Composable参数的类时，优先考虑Primitive类型</li>
+<li>把Android SDK、第三方依赖、其他Module的类放到<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>中</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="总是优先考虑Primitive类型"><a href="#总是优先考虑Primitive类型" class="headerlink" title="总是优先考虑Primitive类型"></a>总是优先考虑Primitive类型</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Tab</span> &#123; Home, Profile &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenPrimitive</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    int: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    float: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    string: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    tab: <span class="type">Tab</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lambda: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = <span class="string">&quot;<span class="variable">$int</span> <span class="variable">$float</span> <span class="variable">$string</span> <span class="variable">$tab</span>&quot;</span>,</span><br><span class="line">        modifier = modifier.clickable(onClick = lambda),</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenPrimitive(</span><br><span class="line">  stable int: Int</span><br><span class="line">  stable float: Float</span><br><span class="line">  stable string: String</span><br><span class="line">  stable tab: Tab</span><br><span class="line">  stable lambda: Function0&lt;Unit&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>除了Primitive类型，字符串、枚举和Lambda也是没问题的，因为<strong>Jetpack Compose Compiler确定在创建它们后，内容无法变化</strong>。这一句话也是Stability的核心，并将在之后得到更多解释。</p>
+<p>如果能用一些Primitive类型书写Composable是最好的，因为不仅Stable，还提高了复用度，但有时我们需要一个类，比如参数太多、需要特定功能、要一定抽象等，那么情况就不一样了。</p>
+<h2 id="同一Module的类"><a href="#同一Module的类" class="headerlink" title="同一Module的类"></a>同一Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Screen</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">    <span class="keyword">val</span> tab: Tab,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenInternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">Screen</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span> <span class="variable">$tab</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class Screen &#123;</span><br><span class="line">  stable val title: String</span><br><span class="line">  stable val time: Long</span><br><span class="line">  stable val tab: Tab</span><br><span class="line">  &lt;runtime stability&gt; = Stable</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenInternalClass(</span><br><span class="line">  stable screen: Screen</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果用到的类和Composable在同一个Module，且这个类的内容符合上述的全是Primitive类型，它也是没问题的。</p>
+<p>Jetpack Compose之所以能得出这个结论，是<strong>因为<code>Screen</code>所在Module启用了Jetpack Compose Compiler</strong>。因为当前Module要用Jetpack Compose，所以Compiler早已启用了，于是从结果上来看，同一Module的只带Primitive类型的类是没问题的。这一点在下一点更为重要。</p>
+<h2 id="不同Module的类"><a href="#不同Module的类" class="headerlink" title="不同Module的类"></a>不同Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在一个新建的Module中</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">ScreenFromLibrary</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在一个另外的Module中</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenExternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">ScreenFromLibrary</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenExternalClass(</span><br><span class="line">  unstable screen: ScreenFromLibrary</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这时有问题了。因为Jetpack Compose依赖于Jetpack Compose Compiler来推测一个类的Stability，而新建的Module没有启用Compiler，于是就<code>unstable</code>了。</p>
+<p>解决方法有几个：</p>
+<ul>
+<li>使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a></li>
+<li>在新建的Module中配置好Jetpack Compose及其依赖，让其检测各种类型。缺点是要污染新建的Module的依赖。<ul>
+<li>虽然也有第三方库来只引入少量依赖，但1. 第三方依赖越少越好。2. 大依赖小依赖都是污染。</li>
+</ul>
+</li>
+</ul>
+<h2 id="依赖中的类"><a href="#依赖中的类" class="headerlink" title="依赖中的类"></a>依赖中的类</h2><p>当参数来自于Android SDK或某个依赖时，又出问题了。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferences</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferences: <span class="type">SharedPreferences</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferences(</span><br><span class="line">  unstable sharedPreferences: SharedPreferences</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>因为Jetpack Compose Compiler无法触及<code>SharedPreferences</code>所处的位置，Android SDK，所以其无法确定Stability。解决方法有三个：</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>和上文一样的使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>。</p>
+<h3 id="二次包装"><a href="#二次包装" class="headerlink" title="二次包装"></a>二次包装</h3><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Immutable</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">SharedPreferencesWrapper</span>(</span><br><span class="line">    <span class="keyword">val</span> sharedPreferences: SharedPreferences,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferencesWrapper</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferencesWrapper: <span class="type">SharedPreferencesWrapper</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferencesWrapper.sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class SharedPreferencesWrapper &#123;</span><br><span class="line">  unstable val sharedPreferences: SharedPreferences</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferencesWrapper(</span><br><span class="line">  stable sharedPreferencesWrapper: SharedPreferencesWrapper</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>@Immutable</code>告诉Compiler：凡是跟我混的，都别管，懂了没！</p>
+<h3 id="打开Strong-Skipping-Mode"><a href="#打开Strong-Skipping-Mode" class="headerlink" title="打开Strong Skipping Mode"></a>打开Strong Skipping Mode</h3><p>Jetpack Compose面对Stable类型，通过<code>==</code>来决定是否触发Recomposition，面对Unstable类型，总是触发Recomposition。打开<a href="https://developer.android.com/develop/ui/compose/performance/stability/strongskipping">Strong skipping mode</a>后，面对Unstable类型，使用<code>===</code>来决定是否触发Recomposition。因为<code>SharedPreferences</code>通常是Singleton，那么这个方法可以避免多余的Recomposition。</p>
+<p>但是1. 这并不会让开发者理解性能优化。2. 该选项会在未来默认打开。</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenList</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    list: <span class="type">List</span>&lt;<span class="type">Int</span>&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = list.size.toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenList(</span><br><span class="line">  unstable list: List&lt;Int&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>您猜怎么着，Unstable！原因是<code>List</code>的本质上可能是个<code>MutableList</code>（<code>val list: List&lt;Int&gt; = mutableListOf()</code>），属于创建后内容可以变化的类型。</p>
+<p>解决方法有三个：</p>
+<h3 id="又是配置文件"><a href="#又是配置文件" class="headerlink" title="又是配置文件"></a>又是配置文件</h3><p>同上。</p>
+<h3 id="又是二次包装"><a href="#又是二次包装" class="headerlink" title="又是二次包装"></a>又是二次包装</h3><p>同上。</p>
+<h3 id="Immutable-collections"><a href="#Immutable-collections" class="headerlink" title="Immutable collections"></a>Immutable collections</h3><p>Jetpack Compose Compiler给 <a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#immutable-collections">Immutable collections</a> 偷偷开了绿灯。</p>
+<p>但要注意<strong>列表中的类<code>ImmutableList&lt;StableClass&gt;</code>也要Stable</strong>。</p>
+<h2 id="Stable"><a href="#Stable" class="headerlink" title="@Stable"></a>@Stable</h2><p>虽然是很重要的注释，会在类或接口中包含<code>mutableStateOf</code>时用到，但是我倾向于让Jetpack Compose只完成将数据转换为界面的任务。当不得不使用这个注释时，通常意味着UI代码职责不清晰，这才是更紧急的问题。</p>
+<p>因此出于个人偏好，会避免使用该注释，同时这里也将不再讨论。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>见开头。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -849,74 +917,6 @@
 <ol>
 <li><a href="https://www.youtube.com/watch?v=w7K0jio8afM">Understanding Android memory usage (Google I/O ‘18)</a></li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Jetpack Compose Stability白话版</title>
-    <url>/2024/06/24/android-jetpack-compose-stability/</url>
-    <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
-<p>但优秀的开发者在点点滴滴中优化性能，而不是等到性能真出问题时再挠头。本文记录如何写Composable来得到最好的Stability。</p>
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
-<li>书写Composable或用于Composable参数的类时，优先考虑Primitive类型</li>
-<li>把Android SDK、第三方依赖、其他Module的类放到<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>中</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="总是优先考虑Primitive类型"><a href="#总是优先考虑Primitive类型" class="headerlink" title="总是优先考虑Primitive类型"></a>总是优先考虑Primitive类型</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Tab</span> &#123; Home, Profile &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenPrimitive</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    int: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    float: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    string: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    tab: <span class="type">Tab</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lambda: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = <span class="string">&quot;<span class="variable">$int</span> <span class="variable">$float</span> <span class="variable">$string</span> <span class="variable">$tab</span>&quot;</span>,</span><br><span class="line">        modifier = modifier.clickable(onClick = lambda),</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenPrimitive(</span><br><span class="line">  stable int: Int</span><br><span class="line">  stable float: Float</span><br><span class="line">  stable string: String</span><br><span class="line">  stable tab: Tab</span><br><span class="line">  stable lambda: Function0&lt;Unit&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>除了Primitive类型，字符串、枚举和Lambda也是没问题的，因为<strong>Jetpack Compose Compiler确定在创建它们后，内容无法变化</strong>。这一句话也是Stability的核心，并将在之后得到更多解释。</p>
-<p>如果能用一些Primitive类型书写Composable是最好的，因为不仅Stable，还提高了复用度，但有时我们需要一个类，比如参数太多、需要特定功能、要一定抽象等，那么情况就不一样了。</p>
-<h2 id="同一Module的类"><a href="#同一Module的类" class="headerlink" title="同一Module的类"></a>同一Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Screen</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">    <span class="keyword">val</span> tab: Tab,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenInternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">Screen</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span> <span class="variable">$tab</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class Screen &#123;</span><br><span class="line">  stable val title: String</span><br><span class="line">  stable val time: Long</span><br><span class="line">  stable val tab: Tab</span><br><span class="line">  &lt;runtime stability&gt; = Stable</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenInternalClass(</span><br><span class="line">  stable screen: Screen</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>如果用到的类和Composable在同一个Module，且这个类的内容符合上述的全是Primitive类型，它也是没问题的。</p>
-<p>Jetpack Compose之所以能得出这个结论，是<strong>因为<code>Screen</code>所在Module启用了Jetpack Compose Compiler</strong>。因为当前Module要用Jetpack Compose，所以Compiler早已启用了，于是从结果上来看，同一Module的只带Primitive类型的类是没问题的。这一点在下一点更为重要。</p>
-<h2 id="不同Module的类"><a href="#不同Module的类" class="headerlink" title="不同Module的类"></a>不同Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在一个新建的Module中</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">ScreenFromLibrary</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在一个另外的Module中</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenExternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">ScreenFromLibrary</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenExternalClass(</span><br><span class="line">  unstable screen: ScreenFromLibrary</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>这时有问题了。因为Jetpack Compose依赖于Jetpack Compose Compiler来推测一个类的Stability，而新建的Module没有启用Compiler，于是就<code>unstable</code>了。</p>
-<p>解决方法有几个：</p>
-<ul>
-<li>使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a></li>
-<li>在新建的Module中配置好Jetpack Compose及其依赖，让其检测各种类型。缺点是要污染新建的Module的依赖。<ul>
-<li>虽然也有第三方库来只引入少量依赖，但1. 第三方依赖越少越好。2. 大依赖小依赖都是污染。</li>
-</ul>
-</li>
-</ul>
-<h2 id="依赖中的类"><a href="#依赖中的类" class="headerlink" title="依赖中的类"></a>依赖中的类</h2><p>当参数来自于Android SDK或某个依赖时，又出问题了。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferences</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferences: <span class="type">SharedPreferences</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferences(</span><br><span class="line">  unstable sharedPreferences: SharedPreferences</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>因为Jetpack Compose Compiler无法触及<code>SharedPreferences</code>所处的位置，Android SDK，所以其无法确定Stability。解决方法有三个：</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>和上文一样的使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>。</p>
-<h3 id="二次包装"><a href="#二次包装" class="headerlink" title="二次包装"></a>二次包装</h3><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Immutable</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">SharedPreferencesWrapper</span>(</span><br><span class="line">    <span class="keyword">val</span> sharedPreferences: SharedPreferences,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferencesWrapper</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferencesWrapper: <span class="type">SharedPreferencesWrapper</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferencesWrapper.sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class SharedPreferencesWrapper &#123;</span><br><span class="line">  unstable val sharedPreferences: SharedPreferences</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferencesWrapper(</span><br><span class="line">  stable sharedPreferencesWrapper: SharedPreferencesWrapper</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p><code>@Immutable</code>告诉Compiler：凡是跟我混的，都别管，懂了没！</p>
-<h3 id="打开Strong-Skipping-Mode"><a href="#打开Strong-Skipping-Mode" class="headerlink" title="打开Strong Skipping Mode"></a>打开Strong Skipping Mode</h3><p>Jetpack Compose面对Stable类型，通过<code>==</code>来决定是否触发Recomposition，面对Unstable类型，总是触发Recomposition。打开<a href="https://developer.android.com/develop/ui/compose/performance/stability/strongskipping">Strong skipping mode</a>后，面对Unstable类型，使用<code>===</code>来决定是否触发Recomposition。因为<code>SharedPreferences</code>通常是Singleton，那么这个方法可以避免多余的Recomposition。</p>
-<p>但是1. 这并不会让开发者理解性能优化。2. 该选项会在未来默认打开。</p>
-<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenList</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    list: <span class="type">List</span>&lt;<span class="type">Int</span>&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = list.size.toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenList(</span><br><span class="line">  unstable list: List&lt;Int&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>您猜怎么着，Unstable！原因是<code>List</code>的本质上可能是个<code>MutableList</code>（<code>val list: List&lt;Int&gt; = mutableListOf()</code>），属于创建后内容可以变化的类型。</p>
-<p>解决方法有三个：</p>
-<h3 id="又是配置文件"><a href="#又是配置文件" class="headerlink" title="又是配置文件"></a>又是配置文件</h3><p>同上。</p>
-<h3 id="又是二次包装"><a href="#又是二次包装" class="headerlink" title="又是二次包装"></a>又是二次包装</h3><p>同上。</p>
-<h3 id="Immutable-collections"><a href="#Immutable-collections" class="headerlink" title="Immutable collections"></a>Immutable collections</h3><p>Jetpack Compose Compiler给 <a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#immutable-collections">Immutable collections</a> 偷偷开了绿灯。</p>
-<p>但要注意<strong>列表中的类<code>ImmutableList&lt;StableClass&gt;</code>也要Stable</strong>。</p>
-<h2 id="Stable"><a href="#Stable" class="headerlink" title="@Stable"></a>@Stable</h2><p>虽然是很重要的注释，会在类或接口中包含<code>mutableStateOf</code>时用到，但是我倾向于让Jetpack Compose只完成将数据转换为界面的任务。当不得不使用这个注释时，通常意味着UI代码职责不清晰，这才是更紧急的问题。</p>
-<p>因此出于个人偏好，会避免使用该注释，同时这里也将不再讨论。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>见开头。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1733,6 +1733,42 @@
       </categories>
   </entry>
   <entry>
+    <title>Android储存方案研究及分析</title>
+    <url>/2020/01/25/android-storage/</url>
+    <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
+<p>本文只考虑棒棒糖之后的设备。因为<code>SharedPreference</code>和<code>Sqlite(Room)</code>没啥好说的，本文主要研究<code>MediaStore</code>、<code>File</code>和<code>SAF</code>。</p>
+<span id="more"></span>
+
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a><code>File</code></h2><p>指的是用于内部储存的<code>getFilesDir()</code>和<code>getCacheDir()</code>和外部的<code>getExternalFilesDir()</code>和<code>getExternalCacheDir()</code>，不要权限，卸载后会消失。</p>
+<p>除了直接用<code>File</code>的API外，还可以用<code>Context</code>的<code>context.openFileOutput(filename, Context.MODE_PRIVATE)</code>及其其他方法来达到同样的效果（虽然我觉得后者挺难用而且有点坑）。</p>
+<h2 id="MediaStore"><a href="#MediaStore" class="headerlink" title="MediaStore"></a><code>MediaStore</code></h2><blockquote>
+<p>READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE when accessing other apps’ files on Android 10 (API level 29) or higher</p>
+<p>Permissions are required for all files on Android 9 (API level 28) or lower</p>
+</blockquote>
+<p>官方文档中说，用这个API(<code>MediaStore</code> + <code>ContentResolver</code>)来读写三种内容：图片、音频和视频。Q之前必须要权限，Q及之后读别人的文件才要权限。</p>
+<p>这句话意味着Q及之后，用这个方法<strong>写入</strong>和<strong>读取自己的写入的文件(Uri)<strong>是</strong>不需要权限</strong>的，测试结果也的确是这样的。</p>
+<p>这里有个问题，Q及之后是可以通过<code>RELATIVE_PATH</code>把图片保存进相册文件夹中的，但在之前是不能的，这时只能用已被废弃的硬编码 + <code>File</code>来储存了。</p>
+<p>此外有一个<code>MediaStore.Downloads</code>，只针对Q及之后，但似乎没啥用？</p>
+<p>此外有一个<code>MediaStore.Files</code>，Q之后显示应用创建的图片、音频和视频。</p>
+<p>总结一下，Q之前需要读写外部需要权限，Q及之后如果只是读写自己的内容，完全可以不要权限啦。</p>
+<h2 id="SAF"><a href="#SAF" class="headerlink" title="SAF"></a>SAF</h2><p>上述未包含的其他文件，不需要权限，读写单个文件很方便，<a href="https://developer.android.com/training/data-storage/shared/documents-files">文档里很清楚</a>。</p>
+<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>这里列举一些我常用到的情况。</p>
+<h3 id="导出-导入一个备份文件"><a href="#导出-导入一个备份文件" class="headerlink" title="导出/导入一个备份文件"></a>导出/导入一个备份文件</h3><p>SAF。导出时还能让用户命名和选择位置。不要权限。</p>
+<h3 id="分享一个文件"><a href="#分享一个文件" class="headerlink" title="分享一个文件"></a>分享一个文件</h3><p><code>FileProvider</code> + <code>FLAG_GRANT_READ_URI_PERMISSION</code>导出为Uri，然后用<code>ShareCompat</code>分享。文件放内部储存居然也可以。</p>
+<p>但是呢，如果项目中用了一些撒币的第三方分享库，而这些垃圾玩意儿只支持分享<code>File</code>和路径，这就有点麻烦了。解决方案有：</p>
+<ol>
+<li>把文件放到应用的外部私有文件夹中，然后把<code>File</code>或路径交给那些没有实现Scoped Storage的应用。但这意味着未来某个Android版本如果强制要求Scoped Storage，又得改代码。</li>
+<li>如果文件是图片的话，可以考虑分享一张小尺寸的Bitmap。</li>
+<li>偷梁换柱。依然使用<code>FileProvider</code>生成的Uri搭配<code>ShareCompat</code>分享，但设置<code>Intent</code>的package为对应应用的包名，如果解析Activity后没有对应的可启动Activity，就清除package后再启动分享选择器。但这么做难以处理某个应用的多种分享方式，比如微信分享和朋友圈分享，要么自己去找对应的Activity名字并承担可能失效的后果，要么只能用对应应用的难用且坑多分享库了。</li>
+</ol>
+<h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
+<h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>在Activity启动时弹出软键盘并在其之上显示内容</title>
     <url>/2023/01/11/android-soft-keyboard-oncreate/</url>
     <content><![CDATA[<p>想要在Activity一启动就显示如下状态，还要有一个不乱跳的动画，这比预想中要复杂不少。</p>
@@ -1795,6 +1831,76 @@
 <p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
 <p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
 <h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android System UI</title>
+    <url>/2019/05/06/android-system-ui/</url>
+    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
+<p>只是一些笔记。</p>
+<span id="more"></span>
+
+<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
+<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>VISIBLE：让😲回来，重新显示</li>
+<li>LOW_PROFILE：让😲暗淡</li>
+<li>HIDE_NAVIGATION</li>
+<li>FULLSCREEN</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
+<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LIGHT_STATUS_BAR</li>
+<li>LIGHT_NAVIGATION_BAR</li>
+</ul>
+<p>让😲浅底深色。默认是深底浅色。</p>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LAYOUT_STABLE</li>
+<li>LAYOUT_HIDE_NAVIGATION</li>
+<li>LAYOUT_FULLSCREEN</li>
+</ul>
+<p>跟应用内容的显示有关系。</p>
+<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
+
+<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
+<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
+<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
+<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
+<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
+<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
+<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
+<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
+<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
+<p>可以给子View设置，选择是否让子View出现在😲后。</p>
+<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
+<ul>
+<li><code>app:statusBarBackground</code></li>
+</ul>
+<p><code>CollapsingToolbarLayout</code></p>
+<ul>
+<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
+<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
+</ul>
+<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
+<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
+<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
+<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
+<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
+<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1922,135 +2028,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android储存方案研究及分析</title>
-    <url>/2020/01/25/android-storage/</url>
-    <content><![CDATA[<p>自从Android Q引入了Scoped Storage，储存问题就像在Kotlin Coroutines之前的Android多线程，八仙过海，各显神通，而且每种方案的都有其长处和短处，Android也有了<del>一万</del>多种储存方案。那么在Google决定开发一个Android StorageX来解决这个问题之前，我自己先来捋一捋，正好最近<a href="https://developer.android.com/guide/topics/data">关于储存的官方文档</a>也更新了。</p>
-<p>本文只考虑棒棒糖之后的设备。因为<code>SharedPreference</code>和<code>Sqlite(Room)</code>没啥好说的，本文主要研究<code>MediaStore</code>、<code>File</code>和<code>SAF</code>。</p>
-<span id="more"></span>
-
-<h2 id="File"><a href="#File" class="headerlink" title="File"></a><code>File</code></h2><p>指的是用于内部储存的<code>getFilesDir()</code>和<code>getCacheDir()</code>和外部的<code>getExternalFilesDir()</code>和<code>getExternalCacheDir()</code>，不要权限，卸载后会消失。</p>
-<p>除了直接用<code>File</code>的API外，还可以用<code>Context</code>的<code>context.openFileOutput(filename, Context.MODE_PRIVATE)</code>及其其他方法来达到同样的效果（虽然我觉得后者挺难用而且有点坑）。</p>
-<h2 id="MediaStore"><a href="#MediaStore" class="headerlink" title="MediaStore"></a><code>MediaStore</code></h2><blockquote>
-<p>READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE when accessing other apps’ files on Android 10 (API level 29) or higher</p>
-<p>Permissions are required for all files on Android 9 (API level 28) or lower</p>
-</blockquote>
-<p>官方文档中说，用这个API(<code>MediaStore</code> + <code>ContentResolver</code>)来读写三种内容：图片、音频和视频。Q之前必须要权限，Q及之后读别人的文件才要权限。</p>
-<p>这句话意味着Q及之后，用这个方法<strong>写入</strong>和<strong>读取自己的写入的文件(Uri)<strong>是</strong>不需要权限</strong>的，测试结果也的确是这样的。</p>
-<p>这里有个问题，Q及之后是可以通过<code>RELATIVE_PATH</code>把图片保存进相册文件夹中的，但在之前是不能的，这时只能用已被废弃的硬编码 + <code>File</code>来储存了。</p>
-<p>此外有一个<code>MediaStore.Downloads</code>，只针对Q及之后，但似乎没啥用？</p>
-<p>此外有一个<code>MediaStore.Files</code>，Q之后显示应用创建的图片、音频和视频。</p>
-<p>总结一下，Q之前需要读写外部需要权限，Q及之后如果只是读写自己的内容，完全可以不要权限啦。</p>
-<h2 id="SAF"><a href="#SAF" class="headerlink" title="SAF"></a>SAF</h2><p>上述未包含的其他文件，不需要权限，读写单个文件很方便，<a href="https://developer.android.com/training/data-storage/shared/documents-files">文档里很清楚</a>。</p>
-<h2 id="常见用法"><a href="#常见用法" class="headerlink" title="常见用法"></a>常见用法</h2><p>这里列举一些我常用到的情况。</p>
-<h3 id="导出-导入一个备份文件"><a href="#导出-导入一个备份文件" class="headerlink" title="导出/导入一个备份文件"></a>导出/导入一个备份文件</h3><p>SAF。导出时还能让用户命名和选择位置。不要权限。</p>
-<h3 id="分享一个文件"><a href="#分享一个文件" class="headerlink" title="分享一个文件"></a>分享一个文件</h3><p><code>FileProvider</code> + <code>FLAG_GRANT_READ_URI_PERMISSION</code>导出为Uri，然后用<code>ShareCompat</code>分享。文件放内部储存居然也可以。</p>
-<p>但是呢，如果项目中用了一些撒币的第三方分享库，而这些垃圾玩意儿只支持分享<code>File</code>和路径，这就有点麻烦了。解决方案有：</p>
-<ol>
-<li>把文件放到应用的外部私有文件夹中，然后把<code>File</code>或路径交给那些没有实现Scoped Storage的应用。但这意味着未来某个Android版本如果强制要求Scoped Storage，又得改代码。</li>
-<li>如果文件是图片的话，可以考虑分享一张小尺寸的Bitmap。</li>
-<li>偷梁换柱。依然使用<code>FileProvider</code>生成的Uri搭配<code>ShareCompat</code>分享，但设置<code>Intent</code>的package为对应应用的包名，如果解析Activity后没有对应的可启动Activity，就清除package后再启动分享选择器。但这么做难以处理某个应用的多种分享方式，比如微信分享和朋友圈分享，要么自己去找对应的Activity名字并承担可能失效的后果，要么只能用对应应用的难用且坑多分享库了。</li>
-</ol>
-<h3 id="分享一个Bitmap"><a href="#分享一个Bitmap" class="headerlink" title="分享一个Bitmap"></a>分享一个<code>Bitmap</code></h3><p>把<code>Bitmap</code>保存到文件里，再<a href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6">分享一个文件</a>。</p>
-<h3 id="选择音乐、图片"><a href="#选择音乐、图片" class="headerlink" title="选择音乐、图片"></a>选择音乐、图片</h3><p>SAF可以选单个文件，不要权限。选多个文件或者要自定义UI的话，还是乖乖<code>MediaStore</code> + 读取权限吧。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android System UI</title>
-    <url>/2019/05/06/android-system-ui/</url>
-    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
-<p>只是一些笔记。</p>
-<span id="more"></span>
-
-<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
-<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>VISIBLE：让😲回来，重新显示</li>
-<li>LOW_PROFILE：让😲暗淡</li>
-<li>HIDE_NAVIGATION</li>
-<li>FULLSCREEN</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
-<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LIGHT_STATUS_BAR</li>
-<li>LIGHT_NAVIGATION_BAR</li>
-</ul>
-<p>让😲浅底深色。默认是深底浅色。</p>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LAYOUT_STABLE</li>
-<li>LAYOUT_HIDE_NAVIGATION</li>
-<li>LAYOUT_FULLSCREEN</li>
-</ul>
-<p>跟应用内容的显示有关系。</p>
-<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
-
-<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
-<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
-<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
-<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
-<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
-<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
-<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
-<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
-<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
-<p>可以给子View设置，选择是否让子View出现在😲后。</p>
-<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
-<ul>
-<li><code>app:statusBarBackground</code></li>
-</ul>
-<p><code>CollapsingToolbarLayout</code></p>
-<ul>
-<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
-<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
-</ul>
-<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
-<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
-<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
-<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
-<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
-<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发牢骚 - 2021年2月6日</title>
-    <url>/2021/02/06/android-thoughts-20210206/</url>
-    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
-<span id="more"></span>
-
-<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
-<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
-<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
-<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
-<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
-<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
-<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
-<p>语义化版本是不是只算加分项？</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
-<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
-<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发后悔的九件事</title>
     <url>/2022/12/20/android-things-i-wish-i-knew/</url>
     <content><![CDATA[<p>RT</p>
@@ -2082,18 +2059,23 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+    <title>Android开发牢骚 - 2021年2月6日</title>
+    <url>/2021/02/06/android-thoughts-20210206/</url>
+    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
 <span id="more"></span>
 
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
+<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
+<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
+<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
+<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
+<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
+<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
+<p>语义化版本是不是只算加分项？</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
+<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
+<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2133,6 +2115,24 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2195,27 +2195,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 14升级笔记</title>
-    <url>/2024/04/22/android14-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
-<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
-<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>换域名啦</title>
     <url>/2023/06/10/changing-domain/</url>
     <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
@@ -2262,6 +2241,27 @@
 ]]></content>
       <categories>
         <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 14升级笔记</title>
+    <url>/2024/04/22/android14-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
+<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
+<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2796,36 +2796,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Nexus 5 购入 刷机 升级 笔记</title>
-    <url>/2022/07/08/nexus5/</url>
-    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
-<span id="more"></span>
-
-<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
-<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
-<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
-<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
-<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
-<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
-
-<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2912,6 +2882,26 @@
       </categories>
   </entry>
   <entry>
+    <title>Nexus 5 购入 刷机 升级 笔记</title>
+    <url>/2022/07/08/nexus5/</url>
+    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
+<span id="more"></span>
+
+<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
+<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
+<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
+<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
+<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
+<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
+
+<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Desgin响应式布局Android实现思路</title>
     <url>/2018/06/03/reponsive-patterns/</url>
     <content><![CDATA[<p>虽然Google已经放弃了它的Android平板产品，但开发者不会（哭）。</p>
@@ -2957,6 +2947,16 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3292,35 +3292,6 @@
       </categories>
   </entry>
   <entry>
-    <title>更新，还是不更新，这是个问题</title>
-    <url>/2022/05/25/update-or-not/</url>
-    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
-<span id="more"></span>
-
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
-<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
-<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
-<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
-<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
-<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
-<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
-<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
-<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
-<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
-<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
-<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
-<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
-<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
-<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
-<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
-<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
-<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android文字转语音(TTS)引擎</title>
     <url>/2019/03/11/tts/</url>
     <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
@@ -3350,11 +3321,49 @@
       </categories>
   </entry>
   <entry>
+    <title>更新，还是不更新，这是个问题</title>
+    <url>/2022/05/25/update-or-not/</url>
+    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
+<span id="more"></span>
+
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
+<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
+<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
+<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
+<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
+<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
+<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
+<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
+<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
+<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
+<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
+<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
+<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
+<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
+<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
+<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
+<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
+<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>个人常用的视频下载及处理命令整理</title>
     <url>/2023/11/23/youtube-dl-commands/</url>
     <content><![CDATA[<p>RT</p>
 <span id="more"></span>
 
+<h2 id="下载最佳视频-音频"><a href="#下载最佳视频-音频" class="headerlink" title="下载最佳视频+音频"></a>下载最佳视频+音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp -S ext</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/yt-dlp/yt-dlp/issues/3398">https://github.com/yt-dlp/yt-dlp/issues/3398</a></p>
+<h2 id="合成视频加音频"><a href="#合成视频加音频" class="headerlink" title="合成视频加音频"></a>合成视频加音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp -F</span><br><span class="line">yt-dlp -f 641+140 </span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.reddit.com/r/youtubedl/comments/qfsuxu/ytdlp_download_and_merge_multiple_format/">https://www.reddit.com/r/youtubedl/comments/qfsuxu/ytdlp_download_and_merge_multiple_format/</a></p>
+<h2 id="裁剪音频"><a href="#裁剪音频" class="headerlink" title="裁剪音频"></a>裁剪音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -ss 1:00 -to 2:00 -i input.mp3 output.mp3</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/46508055/using-ffmpeg-to-cut-audio-from-to-position">https://stackoverflow.com/questions/46508055/using-ffmpeg-to-cut-audio-from-to-position</a></p>
 <h2 id="下载视频的音频"><a href="#下载视频的音频" class="headerlink" title="下载视频的音频"></a>下载视频的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 </span><br></pre></td></tr></table></figure>
 
 <p><a href="https://askubuntu.com/a/178991">https://askubuntu.com/a/178991</a></p>
