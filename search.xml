@@ -188,6 +188,25 @@
       </categories>
   </entry>
   <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一些可能有用的Android代码 - IO22版</title>
     <url>/2022/05/29/android-code-snippets-io22/</url>
     <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
@@ -299,25 +318,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>巧用Android CoordinatorLayout实现复杂布局 + 滚动内容</title>
     <url>/2019/10/02/android-coordinator-layout-hack/</url>
     <content><![CDATA[<p>一个使用情景是：页面上半部分是一个不算短的、复杂的Layout，后半部分是一个嵌套了RecyclerView的Fragment的横向ViewPager。使用效果是，上半部分会充当下半部分可滚动内容的Header。怎么做？</p>
@@ -406,6 +406,57 @@
 <p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
 <p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
 <p>完。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android动态主题</title>
+    <url>/2018/09/14/android-dynamic-theme/</url>
+    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
+<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
+<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
+<span id="more"></span>
+
+<p>2018年12月1日 更新Cyanea</p>
+<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
+<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
+<p>好强啊。</p>
+<p>【完】2018年12月1日 更新Cyanea</p>
+<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
+<p>优点：简单到做这种应用的开发者都用不着找资料</p>
+<p>缺点：使用体验很一般</p>
+<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
+<p>优点：</p>
+<ul>
+<li>简简单单</li>
+<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
+</ul>
+<p>缺点：除了不能让用户随便选，没有缺点</p>
+<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
+<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
+<p>优点：用户体验++<br>缺点</p>
+<ul>
+<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
+<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
+</ul>
+<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
+<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
+<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
+<p>优点：用户体验#</p>
+<p>缺点：</p>
+<ul>
+<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
+<li>实现起来很繁琐</li>
+</ul>
+<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
+<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
+<p>夜间模式也有两种实现方式：</p>
+<ol>
+<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
+<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -513,84 +564,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android动态主题</title>
-    <url>/2018/09/14/android-dynamic-theme/</url>
-    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
-<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
-<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
-<span id="more"></span>
-
-<p>2018年12月1日 更新Cyanea</p>
-<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
-<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
-<p>好强啊。</p>
-<p>【完】2018年12月1日 更新Cyanea</p>
-<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
-<p>优点：简单到做这种应用的开发者都用不着找资料</p>
-<p>缺点：使用体验很一般</p>
-<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
-<p>优点：</p>
-<ul>
-<li>简简单单</li>
-<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
-</ul>
-<p>缺点：除了不能让用户随便选，没有缺点</p>
-<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
-<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
-<p>优点：用户体验++<br>缺点</p>
-<ul>
-<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
-<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
-</ul>
-<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
-<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
-<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
-<p>优点：用户体验#</p>
-<p>缺点：</p>
-<ul>
-<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
-<li>实现起来很繁琐</li>
-</ul>
-<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
-<p>夜间模式也有两种实现方式：</p>
-<ol>
-<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
-<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
-    <url>/2018/10/26/android-expandable-recyclerview/</url>
-    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
-<span id="more"></span>
-
-<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
-<p>用实现一个Expandable RecyclerView来举例子：</p>
-<ol>
-<li><p>首先要使用不同的ViewType：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
-</li>
-<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
-</li>
-</ol>
-<p>来源：AOSP的DeskClock</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android上一个简单的Feature Flag实现</title>
     <url>/2020/04/21/android-feature-flags/</url>
     <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
@@ -638,6 +611,33 @@
 <p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
+    <url>/2018/10/26/android-expandable-recyclerview/</url>
+    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
+<span id="more"></span>
+
+<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
+<p>用实现一个Expandable RecyclerView来举例子：</p>
+<ol>
+<li><p>首先要使用不同的ViewType：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
+</li>
+<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
+</li>
+</ol>
+<p>来源：AOSP的DeskClock</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -714,6 +714,33 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android故障艺术</title>
+    <url>/2019/06/05/android-glitch/</url>
+    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
+<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+<span id="more"></span>
+
+<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
+<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
+<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
+<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
+<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
+<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
+<details>
+  <summary></summary>
+  <p>这个项目的代码是真的看得我头大。</p>
+</details>
+
+<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
+<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -828,33 +855,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android故障艺术</title>
-    <url>/2019/06/05/android-glitch/</url>
-    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
-<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
-<span id="more"></span>
-
-<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
-<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
-<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
-<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
-<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
-<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
-<details>
-  <summary></summary>
-  <p>这个项目的代码是真的看得我头大。</p>
-</details>
-
-<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
-<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Jetpack Compose Stability白话版</title>
     <url>/2024/06/24/android-jetpack-compose-stability/</url>
     <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
@@ -923,6 +923,28 @@
       </categories>
   </entry>
   <entry>
+    <title>使用json-server模拟后台</title>
+    <url>/2019/10/02/android-mock-server/</url>
+    <content><![CDATA[<p>笔记。</p>
+<span id="more"></span>
+
+<p><a href="https://github.com/typicode/json-server">json-server</a></p>
+<ol>
+<li><p><code>yarn global add json-server</code></p>
+</li>
+<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
+<p> <code>db.json</code>: 数据文件</p>
+<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
+<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android依赖笔记</title>
     <url>/2022/06/02/android-library-dependency/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
@@ -969,28 +991,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>使用json-server模拟后台</title>
-    <url>/2019/10/02/android-mock-server/</url>
-    <content><![CDATA[<p>笔记。</p>
-<span id="more"></span>
-
-<p><a href="https://github.com/typicode/json-server">json-server</a></p>
-<ol>
-<li><p><code>yarn global add json-server</code></p>
-</li>
-<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
-<p> <code>db.json</code>: 数据文件</p>
-<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
-<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1072,6 +1072,24 @@
 </ul>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <url>/2020/01/01/android-oh-my-dagger/</url>
+    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+<span id="more"></span>
+
+<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
+<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
+<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
+<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
+<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
+<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
+<p>死鱼安乐啊死鱼安乐。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1181,24 +1199,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些关于Dagger2及其未来的思考</title>
-    <url>/2020/01/01/android-oh-my-dagger/</url>
-    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
-<span id="more"></span>
-
-<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
-<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
-<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
-<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
-<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
-<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
-<p>死鱼安乐啊死鱼安乐。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android OpenGL Texture 坐标原点问题</title>
     <url>/2023/08/23/android-opengl-coordinates/</url>
     <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
@@ -1290,60 +1290,6 @@
 <p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
 <p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
 <p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Jetpack Paging3 从入门到入土</title>
-    <url>/2022/01/31/android-paging3/</url>
-    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
-<p>本文记录了个人实现分页的一些弯路与经验。</p>
-<span id="more"></span>
-
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
-<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
-<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
-<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
-</ol>
-<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
-<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
-<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
-<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
-<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
-<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
-<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
-<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
-<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
-<p><strong>可是</strong>，</p>
-<ol>
-<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
-<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
-<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
-</li>
-<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
-<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
-</li>
-<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
-<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
-<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
- <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
-<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
-<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
-<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
-<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
-</li>
-</ol>
-<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
-<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
-<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
-<ul>
-<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1500,6 +1446,60 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Jetpack Paging3 从入门到入土</title>
+    <url>/2022/01/31/android-paging3/</url>
+    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
+<p>本文记录了个人实现分页的一些弯路与经验。</p>
+<span id="more"></span>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
+<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
+<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
+</ol>
+<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
+<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
+<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
+<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
+<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
+<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
+<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
+<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
+<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
+<p><strong>可是</strong>，</p>
+<ol>
+<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
+<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
+<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
+</li>
+<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
+<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
+</li>
+<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
+<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
+<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
+ <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
+<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
+<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
+<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
+<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
+</li>
+</ol>
+<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
+<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
+<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
+<ul>
+<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1646,44 +1646,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识</title>
-    <url>/2018/12/31/android-requirements/</url>
-    <content><![CDATA[<p>一些Android开发的知识。</p>
-<span id="more"></span>
-
-<ol>
-<li><p>At a high level, what does the Android architecture look like?</p>
-<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md</a></p>
-</li>
-<li><p>At a high level, what happens when you hit the build button on Andorid Studio?</p>
-<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md</a></p>
-</li>
-<li><p>What happens when you install an application on the device?</p>
-<p> <a href="https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application">https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application</a></p>
-</li>
-<li><p>How Dalvik and ART VMs work?</p>
-<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md</a></p>
-</li>
-<li><p>How does Inter-Process-Communication work on Android？</p>
-<p> 来自Linux的跨进程通信，Android有自己的实现。用于不同Android Components之间如何通信。有多种机制：Intents、Bundles、Binders、Service、BroadcastReceivers。这些实现为通信提高了安全性。</p>
-<p> 一些情况可以需要ALDL来实现跨进程通信：<a href="https://developer.android.com/guide/components/aidl">https://developer.android.com/guide/components/aidl</a></p>
-</li>
-<li><p>How are apps sandboxed and why does it matter?</p>
-<p> <a href="https://source.android.com/security/app-sandbox">https://source.android.com/security/app-sandbox</a></p>
-<p> 借用了Linux的用户权限系统来给每个应用提供各自的权限，达到了应用分离、沙箱的效果。默认情况下，普通应用没有跟其他应用和系统应用互动的权限。</p>
-</li>
-<li><p>Processes and application lifecycle</p>
-<p> <a href="https://developer.android.com/guide/components/activities/process-lifecycle">https://developer.android.com/guide/components/activities/process-lifecycle</a></p>
-<p> 应用在需要运行时，创建进程。再不再运行且系统需要内存时回收。系统根据一个应用正在运行中的组件来给应用分等级，并在需要内存时，从低等级开始回收。</p>
-<p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Resources小研究</title>
     <url>/2020/01/12/android-resources-test/</url>
     <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
@@ -1725,6 +1687,44 @@
 <li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
  <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识</title>
+    <url>/2018/12/31/android-requirements/</url>
+    <content><![CDATA[<p>一些Android开发的知识。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>At a high level, what does the Android architecture look like?</p>
+<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md</a></p>
+</li>
+<li><p>At a high level, what happens when you hit the build button on Andorid Studio?</p>
+<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md</a></p>
+</li>
+<li><p>What happens when you install an application on the device?</p>
+<p> <a href="https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application">https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application</a></p>
+</li>
+<li><p>How Dalvik and ART VMs work?</p>
+<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md</a></p>
+</li>
+<li><p>How does Inter-Process-Communication work on Android？</p>
+<p> 来自Linux的跨进程通信，Android有自己的实现。用于不同Android Components之间如何通信。有多种机制：Intents、Bundles、Binders、Service、BroadcastReceivers。这些实现为通信提高了安全性。</p>
+<p> 一些情况可以需要ALDL来实现跨进程通信：<a href="https://developer.android.com/guide/components/aidl">https://developer.android.com/guide/components/aidl</a></p>
+</li>
+<li><p>How are apps sandboxed and why does it matter?</p>
+<p> <a href="https://source.android.com/security/app-sandbox">https://source.android.com/security/app-sandbox</a></p>
+<p> 借用了Linux的用户权限系统来给每个应用提供各自的权限，达到了应用分离、沙箱的效果。默认情况下，普通应用没有跟其他应用和系统应用互动的权限。</p>
+</li>
+<li><p>Processes and application lifecycle</p>
+<p> <a href="https://developer.android.com/guide/components/activities/process-lifecycle">https://developer.android.com/guide/components/activities/process-lifecycle</a></p>
+<p> 应用在需要运行时，创建进程。再不再运行且系统需要内存时回收。系统根据一个应用正在运行中的组件来给应用分等级，并在需要内存时，从低等级开始回收。</p>
+<p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
 ]]></content>
@@ -1857,12 +1857,12 @@
 </li>
 </ul>
 </li>
-<li><code>Keymap</code><ul>
+<li><code>Keymap</code>(Delete old keys)<ul>
 <li><code>ShowProjectStructureSettings</code>: Empty</li>
 <li><code>Type alias</code>: Empty</li>
 <li><code>Show vcs Log</code>: Alt + 3</li>
-<li><code>Logcat</code>: Alt + 4</li>
-<li><code>Build</code>: Alt + 5</li>
+<li><code>Show Logcat</code>: Alt + 4</li>
+<li><code>Build</code>(Tool Window): Alt + 5</li>
 <li><code>Show Local Changes</code>: Alt + 2</li>
 <li><code>Maximize/Restore Active Dialog</code>: Ctrl + Alt + Shift + M</li>
 <li><code>Compare with Clipboard</code>: Ctrl + Alt + Shift + C</li>
@@ -1944,8 +1944,8 @@
 </ul>
 </li>
 <li>Open a project</li>
+<li>Clean <code>Gutter Icons</code> and reorder tabs manually</li>
 <li>Reorder window layouts and <code>Store Current Layout as Default</code></li>
-<li>Clean <code>Gutter Icons</code> manually</li>
 <li><code>Editor</code><ul>
 <li><code>Live Template</code>: Disable compose related; Import from settings zip</li>
 </ul>
@@ -2220,23 +2220,6 @@
       </categories>
   </entry>
   <entry>
-    <title>换域名啦</title>
-    <url>/2023/06/10/changing-domain/</url>
-    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
-<p>本文记录换域名和重定向的历程。</p>
-<span id="more"></span>
-
-<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
-<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
-<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
-<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
-<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
-]]></content>
-      <categories>
-        <category>Website</category>
-      </categories>
-  </entry>
-  <entry>
     <title>想要自动清空浏览记录</title>
     <url>/2020/08/06/clean-browser-history/</url>
     <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
@@ -2266,6 +2249,23 @@
 ]]></content>
       <categories>
         <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>换域名啦</title>
+    <url>/2023/06/10/changing-domain/</url>
+    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
+<p>本文记录换域名和重定向的历程。</p>
+<span id="more"></span>
+
+<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
+<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
+<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
+<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
+<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
       </categories>
   </entry>
   <entry>
@@ -2906,16 +2906,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Material Desgin响应式布局Android实现思路</title>
     <url>/2018/06/03/reponsive-patterns/</url>
     <content><![CDATA[<p>虽然Google已经放弃了它的Android平板产品，但开发者不会（哭）。</p>
@@ -2961,6 +2951,61 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>sed 使用笔记</title>
+    <url>/2024/04/21/sed/</url>
+    <content><![CDATA[<p><code>sed</code></p>
+<span id="more"></span>
+
+<p><a href="https://regex-vis.com/">https://regex-vis.com/</a></p>
+<ul>
+<li><p>替换<code>oldfile</code>文件中的<strong>每行第一个</strong><code>find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
+<p><code>sed &#39;s/find/replace/&#39; &lt;oldfile &gt;newfile</code></p>
+</li>
+<li><p>替换<code>oldfile</code>文件中的<strong>每一个</strong><code>&lt;space&gt;find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
+<p><code>sed &#39;s/ find/replace/g&#39; &lt;oldfile &gt;newfile</code></p>
+</li>
+<li><p>替换<code>filename</code>文件中的每一个<code>find</code>为<code>replace</code></p>
+<p><code>sed -i &#39;s/find/replace/g&#39; filename</code></p>
+</li>
+<li><p>替换<code>filename</code>文件中的包含<code>Replace</code>文字的每一行中的<code>the</code>为<code>THE</code></p>
+<p><code>sed -i &#39;/Replace/s/the/THE/g&#39; filename</code></p>
+</li>
+<li><p>删除<code>filename</code>文件中的包含<code>Replace</code>文字的每一行</p>
+<p><code>sed -i &#39;/Replace/d&#39; filename</code></p>
+</li>
+<li><p>不使用<code>-i</code>则打印内容</p>
+</li>
+<li><p>运行多条命令</p>
+<ul>
+<li><code>sed -i &#39;...;...&#39; filename</code></li>
+<li><code>sed -i -e &#39;...&#39; -e &#39;...&#39; filename</code></li>
+</ul>
+</li>
+<li><p><code>\/</code>转义<code>/</code>或使用<code>s#find#replace#g</code>, <code>s|find|replace|g</code>, <code>.</code></p>
+</li>
+<li><p>打印出包含<code>usr</code>的每一行: <code>sed &#39;/user/p&#39;</code></p>
+</li>
+<li><p>删除<code>redacted</code>: <code>sed &quot;s/redacted//g filename</code></p>
+</li>
+<li><p>删除空行: <code>sed &quot;/^$/d&quot; filename</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -3039,48 +3084,34 @@
       </categories>
   </entry>
   <entry>
-    <title>sed 使用笔记</title>
-    <url>/2024/04/21/sed/</url>
-    <content><![CDATA[<p><code>sed</code></p>
+    <title>三个和尚没水喝</title>
+    <url>/2018/10/30/thoughts-three-monks/</url>
+    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
 <span id="more"></span>
 
-<p><a href="https://regex-vis.com/">https://regex-vis.com/</a></p>
-<ul>
-<li><p>替换<code>oldfile</code>文件中的<strong>每行第一个</strong><code>find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
-<p><code>sed &#39;s/find/replace/&#39; &lt;oldfile &gt;newfile</code></p>
+<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
+<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
+<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
+<p>我们要利用它，让它利于我们 =&gt;</p>
+<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
+<ol>
+<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
 </li>
-<li><p>替换<code>oldfile</code>文件中的<strong>每一个</strong><code>&lt;space&gt;find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
-<p><code>sed &#39;s/ find/replace/g&#39; &lt;oldfile &gt;newfile</code></p>
+<li><p>侧面回避，让问题消失</p>
+<ol>
+<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
 </li>
-<li><p>替换<code>filename</code>文件中的每一个<code>find</code>为<code>replace</code></p>
-<p><code>sed -i &#39;s/find/replace/g&#39; filename</code></p>
+<li><p>拉第四个人入伙，配对挑水。</p>
 </li>
-<li><p>替换<code>filename</code>文件中的包含<code>Replace</code>文字的每一行中的<code>the</code>为<code>THE</code></p>
-<p><code>sed -i &#39;/Replace/s/the/THE/g&#39; filename</code></p>
+</ol>
 </li>
-<li><p>删除<code>filename</code>文件中的包含<code>Replace</code>文字的每一行</p>
-<p><code>sed -i &#39;/Replace/d&#39; filename</code></p>
+<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
 </li>
-<li><p>不使用<code>-i</code>则打印内容</p>
-</li>
-<li><p>运行多条命令</p>
-<ul>
-<li><code>sed -i &#39;...;...&#39; filename</code></li>
-<li><code>sed -i -e &#39;...&#39; -e &#39;...&#39; filename</code></li>
-</ul>
-</li>
-<li><p><code>\/</code>转义<code>/</code>或使用<code>s#find#replace#g</code>, <code>s|find|replace|g</code>, <code>.</code></p>
-</li>
-<li><p>打印出包含<code>usr</code>的每一行: <code>sed &#39;/user/p&#39;</code></p>
-</li>
-<li><p>删除<code>redacted</code>: <code>sed &quot;s/redacted//g filename</code></p>
-</li>
-<li><p>删除空行: <code>sed &quot;/^$/d&quot; filename</code></p>
-</li>
-</ul>
+</ol>
+<p>=&gt; 这些把戏很常见吧，这就对了。</p>
 ]]></content>
       <categories>
-        <category>Notes</category>
+        <category>Thoughts</category>
       </categories>
   </entry>
   <entry>
@@ -3129,37 +3160,6 @@
 <p>的一半意思的出处已不可靠。内容常见于城隍庙。</p>
 <p>不过这句话却深得我心，不禁感叹文化的博大精深，民间的熟语也都充满了智慧。</p>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>中华文化真包容呀，既有“知行合一”，又有“论心不论迹”、“论迹不论心”。</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>三个和尚没水喝</title>
-    <url>/2018/10/30/thoughts-three-monks/</url>
-    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
-<span id="more"></span>
-
-<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
-<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
-<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
-<p>我们要利用它，让它利于我们 =&gt;</p>
-<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
-<ol>
-<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
-</li>
-<li><p>侧面回避，让问题消失</p>
-<ol>
-<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
-</li>
-<li><p>拉第四个人入伙，配对挑水。</p>
-</li>
-</ol>
-</li>
-<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
-</li>
-</ol>
-<p>=&gt; 这些把戏很常见吧，这就对了。</p>
 ]]></content>
       <categories>
         <category>Thoughts</category>
