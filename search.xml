@@ -412,57 +412,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android动态主题</title>
-    <url>/2018/09/14/android-dynamic-theme/</url>
-    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
-<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
-<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
-<span id="more"></span>
-
-<p>2018年12月1日 更新Cyanea</p>
-<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
-<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
-<p>好强啊。</p>
-<p>【完】2018年12月1日 更新Cyanea</p>
-<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
-<p>优点：简单到做这种应用的开发者都用不着找资料</p>
-<p>缺点：使用体验很一般</p>
-<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
-<p>优点：</p>
-<ul>
-<li>简简单单</li>
-<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
-</ul>
-<p>缺点：除了不能让用户随便选，没有缺点</p>
-<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
-<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
-<p>优点：用户体验++<br>缺点</p>
-<ul>
-<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
-<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
-</ul>
-<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
-<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
-<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
-<p>优点：用户体验#</p>
-<p>缺点：</p>
-<ul>
-<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
-<li>实现起来很繁琐</li>
-</ul>
-<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
-<p>夜间模式也有两种实现方式：</p>
-<ol>
-<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
-<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Dev Summit 2019 笔记</title>
     <url>/2019/11/13/android-dev-summit-2019/</url>
     <content><![CDATA[<p>RT</p>
@@ -564,6 +513,84 @@
       </categories>
   </entry>
   <entry>
+    <title>Android动态主题</title>
+    <url>/2018/09/14/android-dynamic-theme/</url>
+    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
+<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
+<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
+<span id="more"></span>
+
+<p>2018年12月1日 更新Cyanea</p>
+<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
+<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
+<p>好强啊。</p>
+<p>【完】2018年12月1日 更新Cyanea</p>
+<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
+<p>优点：简单到做这种应用的开发者都用不着找资料</p>
+<p>缺点：使用体验很一般</p>
+<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
+<p>优点：</p>
+<ul>
+<li>简简单单</li>
+<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
+</ul>
+<p>缺点：除了不能让用户随便选，没有缺点</p>
+<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
+<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
+<p>优点：用户体验++<br>缺点</p>
+<ul>
+<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
+<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
+</ul>
+<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
+<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
+<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
+<p>优点：用户体验#</p>
+<p>缺点：</p>
+<ul>
+<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
+<li>实现起来很繁琐</li>
+</ul>
+<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
+<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
+<p>夜间模式也有两种实现方式：</p>
+<ol>
+<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
+<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
+    <url>/2018/10/26/android-expandable-recyclerview/</url>
+    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
+<span id="more"></span>
+
+<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
+<p>用实现一个Expandable RecyclerView来举例子：</p>
+<ol>
+<li><p>首先要使用不同的ViewType：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
+</li>
+<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
+</li>
+</ol>
+<p>来源：AOSP的DeskClock</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android上一个简单的Feature Flag实现</title>
     <url>/2020/04/21/android-feature-flags/</url>
     <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
@@ -611,33 +638,6 @@
 <p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
-    <url>/2018/10/26/android-expandable-recyclerview/</url>
-    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
-<span id="more"></span>
-
-<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
-<p>用实现一个Expandable RecyclerView来举例子：</p>
-<ol>
-<li><p>首先要使用不同的ViewType：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
-</li>
-<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
-</li>
-</ol>
-<p>来源：AOSP的DeskClock</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -923,28 +923,6 @@
       </categories>
   </entry>
   <entry>
-    <title>使用json-server模拟后台</title>
-    <url>/2019/10/02/android-mock-server/</url>
-    <content><![CDATA[<p>笔记。</p>
-<span id="more"></span>
-
-<p><a href="https://github.com/typicode/json-server">json-server</a></p>
-<ol>
-<li><p><code>yarn global add json-server</code></p>
-</li>
-<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
-<p> <code>db.json</code>: 数据文件</p>
-<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
-<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android依赖笔记</title>
     <url>/2022/06/02/android-library-dependency/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
@@ -991,6 +969,28 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用json-server模拟后台</title>
+    <url>/2019/10/02/android-mock-server/</url>
+    <content><![CDATA[<p>笔记。</p>
+<span id="more"></span>
+
+<p><a href="https://github.com/typicode/json-server">json-server</a></p>
+<ol>
+<li><p><code>yarn global add json-server</code></p>
+</li>
+<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
+<p> <code>db.json</code>: 数据文件</p>
+<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
+<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1646,6 +1646,44 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识</title>
+    <url>/2018/12/31/android-requirements/</url>
+    <content><![CDATA[<p>一些Android开发的知识。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>At a high level, what does the Android architecture look like?</p>
+<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md</a></p>
+</li>
+<li><p>At a high level, what happens when you hit the build button on Andorid Studio?</p>
+<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md</a></p>
+</li>
+<li><p>What happens when you install an application on the device?</p>
+<p> <a href="https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application">https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application</a></p>
+</li>
+<li><p>How Dalvik and ART VMs work?</p>
+<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md</a></p>
+</li>
+<li><p>How does Inter-Process-Communication work on Android？</p>
+<p> 来自Linux的跨进程通信，Android有自己的实现。用于不同Android Components之间如何通信。有多种机制：Intents、Bundles、Binders、Service、BroadcastReceivers。这些实现为通信提高了安全性。</p>
+<p> 一些情况可以需要ALDL来实现跨进程通信：<a href="https://developer.android.com/guide/components/aidl">https://developer.android.com/guide/components/aidl</a></p>
+</li>
+<li><p>How are apps sandboxed and why does it matter?</p>
+<p> <a href="https://source.android.com/security/app-sandbox">https://source.android.com/security/app-sandbox</a></p>
+<p> 借用了Linux的用户权限系统来给每个应用提供各自的权限，达到了应用分离、沙箱的效果。默认情况下，普通应用没有跟其他应用和系统应用互动的权限。</p>
+</li>
+<li><p>Processes and application lifecycle</p>
+<p> <a href="https://developer.android.com/guide/components/activities/process-lifecycle">https://developer.android.com/guide/components/activities/process-lifecycle</a></p>
+<p> 应用在需要运行时，创建进程。再不再运行且系统需要内存时回收。系统根据一个应用正在运行中的组件来给应用分等级，并在需要内存时，从低等级开始回收。</p>
+<p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Resources小研究</title>
     <url>/2020/01/12/android-resources-test/</url>
     <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
@@ -1687,44 +1725,6 @@
 <li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
  <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识</title>
-    <url>/2018/12/31/android-requirements/</url>
-    <content><![CDATA[<p>一些Android开发的知识。</p>
-<span id="more"></span>
-
-<ol>
-<li><p>At a high level, what does the Android architecture look like?</p>
-<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-architecture.md</a></p>
-</li>
-<li><p>At a high level, what happens when you hit the build button on Andorid Studio?</p>
-<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-start-button.md</a></p>
-</li>
-<li><p>What happens when you install an application on the device?</p>
-<p> <a href="https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application">https://stackoverflow.com/questions/7773360/what-exactly-happens-when-i-install-an-android-application</a></p>
-</li>
-<li><p>How Dalvik and ART VMs work?</p>
-<p> <a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md">https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements-dalvik-art.md</a></p>
-</li>
-<li><p>How does Inter-Process-Communication work on Android？</p>
-<p> 来自Linux的跨进程通信，Android有自己的实现。用于不同Android Components之间如何通信。有多种机制：Intents、Bundles、Binders、Service、BroadcastReceivers。这些实现为通信提高了安全性。</p>
-<p> 一些情况可以需要ALDL来实现跨进程通信：<a href="https://developer.android.com/guide/components/aidl">https://developer.android.com/guide/components/aidl</a></p>
-</li>
-<li><p>How are apps sandboxed and why does it matter?</p>
-<p> <a href="https://source.android.com/security/app-sandbox">https://source.android.com/security/app-sandbox</a></p>
-<p> 借用了Linux的用户权限系统来给每个应用提供各自的权限，达到了应用分离、沙箱的效果。默认情况下，普通应用没有跟其他应用和系统应用互动的权限。</p>
-</li>
-<li><p>Processes and application lifecycle</p>
-<p> <a href="https://developer.android.com/guide/components/activities/process-lifecycle">https://developer.android.com/guide/components/activities/process-lifecycle</a></p>
-<p> 应用在需要运行时，创建进程。再不再运行且系统需要内存时回收。系统根据一个应用正在运行中的组件来给应用分等级，并在需要内存时，从低等级开始回收。</p>
-<p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
 ]]></content>
@@ -1955,6 +1955,7 @@
 </ul>
 </li>
 <li>Disable <code>Show Project Gradient</code> in the toolbar</li>
+<li><code>Log</code> - Show <code>Tag Names</code></li>
 </ul>
 ]]></content>
       <categories>
@@ -2220,6 +2221,23 @@
       </categories>
   </entry>
   <entry>
+    <title>换域名啦</title>
+    <url>/2023/06/10/changing-domain/</url>
+    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
+<p>本文记录换域名和重定向的历程。</p>
+<span id="more"></span>
+
+<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
+<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
+<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
+<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
+<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
     <title>想要自动清空浏览记录</title>
     <url>/2020/08/06/clean-browser-history/</url>
     <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
@@ -2249,23 +2267,6 @@
 ]]></content>
       <categories>
         <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>换域名啦</title>
-    <url>/2023/06/10/changing-domain/</url>
-    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
-<p>本文记录换域名和重定向的历程。</p>
-<span id="more"></span>
-
-<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
-<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
-<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
-<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
-<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
-]]></content>
-      <categories>
-        <category>Website</category>
       </categories>
   </entry>
   <entry>
@@ -2906,6 +2907,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Desgin响应式布局Android实现思路</title>
     <url>/2018/06/03/reponsive-patterns/</url>
     <content><![CDATA[<p>虽然Google已经放弃了它的Android平板产品，但开发者不会（哭）。</p>
@@ -2951,16 +2962,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3033,6 +3034,23 @@
       </categories>
   </entry>
   <entry>
+    <title>我们为什么不相信狼来了中的那个孩子</title>
+    <url>/2018/12/25/thoughts-cry-wolf/</url>
+    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
+<span id="more"></span>
+
+<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
+<p>所以我们的逻辑成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
+
+<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
+<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
     <title>两种安慰别人的方式</title>
     <url>/2019/07/05/thoughts-comfort/</url>
     <content><![CDATA[<p>生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。</p>
@@ -3061,54 +3079,6 @@
 </ol>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>具体要说什么话，还是要对人对事。</p>
 <h2 id="嗯…………"><a href="#嗯…………" class="headerlink" title="嗯…………"></a>嗯…………</h2><p>我总感觉还有些东西没有挖掘出来，但找不到是哪些。</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>我们为什么不相信狼来了中的那个孩子</title>
-    <url>/2018/12/25/thoughts-cry-wolf/</url>
-    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
-<span id="more"></span>
-
-<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
-<p>所以我们的逻辑成了：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
-
-<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
-<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>三个和尚没水喝</title>
-    <url>/2018/10/30/thoughts-three-monks/</url>
-    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
-<span id="more"></span>
-
-<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
-<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
-<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
-<p>我们要利用它，让它利于我们 =&gt;</p>
-<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
-<ol>
-<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
-</li>
-<li><p>侧面回避，让问题消失</p>
-<ol>
-<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
-</li>
-<li><p>拉第四个人入伙，配对挑水。</p>
-</li>
-</ol>
-</li>
-<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
-</li>
-</ol>
-<p>=&gt; 这些把戏很常见吧，这就对了。</p>
 ]]></content>
       <categories>
         <category>Thoughts</category>
@@ -3166,6 +3136,37 @@
       </categories>
   </entry>
   <entry>
+    <title>三个和尚没水喝</title>
+    <url>/2018/10/30/thoughts-three-monks/</url>
+    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
+<span id="more"></span>
+
+<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
+<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
+<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
+<p>我们要利用它，让它利于我们 =&gt;</p>
+<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
+<ol>
+<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
+</li>
+<li><p>侧面回避，让问题消失</p>
+<ol>
+<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
+</li>
+<li><p>拉第四个人入伙，配对挑水。</p>
+</li>
+</ol>
+</li>
+<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
+</li>
+</ol>
+<p>=&gt; 这些把戏很常见吧，这就对了。</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
     <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
     <url>/2020/01/19/timer-analytics-2020-1-19/</url>
     <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
@@ -3188,27 +3189,6 @@
 <p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
 <h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
 <p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
-    <url>/2020/09/07/timer-cloud-backup/</url>
-    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
-<span id="more"></span>
-
-<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
-<p>酷安版本独占：开发日志、打赏</p>
-<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
-<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
-<li>在Google Play搜索“计时机器”并安装。</li>
-<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
-<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
-<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
-</ol>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3240,6 +3220,27 @@
 <blockquote>
 <p>I’ve seen things you people wouldn’t believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die. - Blade Runner</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
+    <url>/2020/09/07/timer-cloud-backup/</url>
+    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
+<span id="more"></span>
+
+<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
+<p>酷安版本独占：开发日志、打赏</p>
+<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
+<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
+<li>在Google Play搜索“计时机器”并安装。</li>
+<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
+<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
+<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
+</ol>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
 ]]></content>
       <categories>
         <category>Android</category>
