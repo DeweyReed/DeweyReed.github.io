@@ -150,6 +150,25 @@
       </categories>
   </entry>
   <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android简繁体翻译到底该放哪儿？</title>
     <url>/2022/12/25/android-chinese-strings/</url>
     <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
@@ -182,25 +201,6 @@
 <li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
 <li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -299,6 +299,56 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Dark Theme/深色模式使用体验</title>
+    <url>/2020/05/07/android-dark-theme/</url>
+    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
+<span id="more"></span>
+
+<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
+<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
+<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
+<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
+<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
+<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
+<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
+<p>这是因为文档中有一句话：</p>
+<blockquote>
+<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
+</blockquote>
+<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
+<p>我的第二次尝试是重写<code>recreate()</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
+<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
+<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
+<p>一个Switch显示是否使用了深色主题：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
+
+<p>切换Switch时切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，在onCreate中根据需要自动切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有啥问题，有啥问题呀？</p>
+<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
+<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
+<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
+<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
+<p>完。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一些可能有用的Android代码</title>
     <url>/2019/06/15/android-code-snippets/</url>
     <content><![CDATA[<p><strong>2020年11月6日 更新<code>View.outlineProvider</code></strong></p>
@@ -362,50 +412,51 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Dark Theme/深色模式使用体验</title>
-    <url>/2020/05/07/android-dark-theme/</url>
-    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
+    <title>Android动态主题</title>
+    <url>/2018/09/14/android-dynamic-theme/</url>
+    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
+<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
+<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
 <span id="more"></span>
 
-<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
-<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
-<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
-<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
-<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
-<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
-<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
-<p>这是因为文档中有一句话：</p>
-<blockquote>
-<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
-</blockquote>
-<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
-<p>我的第二次尝试是重写<code>recreate()</code>：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
-<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
-<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
-<p>一个Switch显示是否使用了深色主题：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
-
-<p>切换Switch时切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此外，在onCreate中根据需要自动切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有啥问题，有啥问题呀？</p>
-<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
-<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
-<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
-<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
-<p>完。</p>
+<p>2018年12月1日 更新Cyanea</p>
+<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
+<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
+<p>好强啊。</p>
+<p>【完】2018年12月1日 更新Cyanea</p>
+<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
+<p>优点：简单到做这种应用的开发者都用不着找资料</p>
+<p>缺点：使用体验很一般</p>
+<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
+<p>优点：</p>
+<ul>
+<li>简简单单</li>
+<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
+</ul>
+<p>缺点：除了不能让用户随便选，没有缺点</p>
+<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
+<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
+<p>优点：用户体验++<br>缺点</p>
+<ul>
+<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
+<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
+</ul>
+<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
+<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
+<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
+<p>优点：用户体验#</p>
+<p>缺点：</p>
+<ul>
+<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
+<li>实现起来很繁琐</li>
+</ul>
+<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
+<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
+<p>夜间模式也有两种实现方式：</p>
+<ol>
+<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
+<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -513,57 +564,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android动态主题</title>
-    <url>/2018/09/14/android-dynamic-theme/</url>
-    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
-<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
-<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
-<span id="more"></span>
-
-<p>2018年12月1日 更新Cyanea</p>
-<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
-<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
-<p>好强啊。</p>
-<p>【完】2018年12月1日 更新Cyanea</p>
-<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
-<p>优点：简单到做这种应用的开发者都用不着找资料</p>
-<p>缺点：使用体验很一般</p>
-<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
-<p>优点：</p>
-<ul>
-<li>简简单单</li>
-<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
-</ul>
-<p>缺点：除了不能让用户随便选，没有缺点</p>
-<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
-<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
-<p>优点：用户体验++<br>缺点</p>
-<ul>
-<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
-<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
-</ul>
-<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
-<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
-<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
-<p>优点：用户体验#</p>
-<p>缺点：</p>
-<ul>
-<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
-<li>实现起来很繁琐</li>
-</ul>
-<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
-<p>夜间模式也有两种实现方式：</p>
-<ol>
-<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
-<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
     <url>/2018/10/26/android-expandable-recyclerview/</url>
     <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
@@ -585,59 +585,6 @@
 </li>
 </ol>
 <p>来源：AOSP的DeskClock</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android上一个简单的Feature Flag实现</title>
-    <url>/2020/04/21/android-feature-flags/</url>
-    <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
-<span id="more"></span>
-
-<p>我个人的需求没原文中那么复杂，只需要一个可以在代码里手动调整的开关，一个可以在运行时进行修改的面板，同时要让R8把未使用的所有代码剔除。</p>
-<p>首先是可以在代码里手动调整的开关，用<code>buildConfigField</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>&quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</code>确保IDE不会警告，就像<code>BuildConfig.DEBUG</code>一样。</li>
-</ul>
-<p>整个框架，抄了就走：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Feature</span>(</span><br><span class="line">    <span class="keyword">val</span> key: String,</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> description: String,</span><br><span class="line">    <span class="keyword">val</span> default: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line">) &#123;</span><br><span class="line">    Log(</span><br><span class="line">        key = <span class="string">&quot;feature_log&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;All log to console&quot;</span></span><br><span class="line">    ),</span><br><span class="line">    Network(</span><br><span class="line">        key = <span class="string">&quot;feature_network&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Network&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;Inspect network requests&quot;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> FeatureFlagManager &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> sharedPreferences: SharedPreferences</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">init</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        sharedPreferences = context.safeSharedPreference</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">     * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">     * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">manageFeatures</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">val</span> features = Feature.values()</span><br><span class="line">        MaterialAlertDialogBuilder(context)</span><br><span class="line">            .setCancelable(<span class="literal">false</span>)</span><br><span class="line">            .setTitle(<span class="string">&quot;Feature Flag Manager&quot;</span>)</span><br><span class="line">            .setAdapter(</span><br><span class="line">                <span class="keyword">object</span> : BaseAdapter() &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> = features.size</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Any = features[position]</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemId</span><span class="params">(position: <span class="type">Int</span>)</span></span>: <span class="built_in">Long</span> =</span><br><span class="line">                        features[position].ordinal.toLong()</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">                        position: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                        convertView: <span class="type">View</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">                        parent: <span class="type">ViewGroup</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    )</span></span>: View &#123;</span><br><span class="line">                        <span class="keyword">val</span> view = convertView ?: LayoutInflater.from(context)</span><br><span class="line">                            .inflate(R.layout.list_item_feature_flag, parent, <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">val</span> layout = view.findViewById&lt;ListItemWithLayout&gt;(R.id.listItemFeatureFlag)</span><br><span class="line">                        <span class="keyword">val</span> feature = features[position]</span><br><span class="line">                        layout.listItem.run &#123;</span><br><span class="line">                            setPrimaryText(feature.title)</span><br><span class="line">                            setSecondaryText(feature.description)</span><br><span class="line">                        &#125;</span><br><span class="line">                        layout.getLayoutView&lt;CompoundButton&gt;().run &#123;</span><br><span class="line">                            setOnCheckedChangeListener(<span class="literal">null</span>)</span><br><span class="line">                            isChecked = feature.enabled</span><br><span class="line">                            setOnCheckedChangeListener &#123; buttonView, isChecked -&gt;</span><br><span class="line">                                feature.enabled = isChecked</span><br><span class="line">                                buttonView.indefiniteSnackbar(</span><br><span class="line">                                    message = <span class="string">&quot;Restart the app&quot;</span>,</span><br><span class="line">                                    actionText = <span class="string">&quot;Now&quot;</span>,</span><br><span class="line">                                    action = &#123;</span><br><span class="line">                                        ProcessPhoenix.triggerRebirth(context)</span><br><span class="line">                                    &#125;</span><br><span class="line">                                )</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">return</span> view</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="literal">null</span></span><br><span class="line">            )</span><br><span class="line">            .setPositiveButton(android.R.string.ok, <span class="literal">null</span>)</span><br><span class="line">            .setNegativeButton(android.R.string.cancel, <span class="literal">null</span>)</span><br><span class="line">            .show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> Feature.enabled</span><br><span class="line">        <span class="keyword">get</span>() = sharedPreferences.getBoolean(key, default)</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            sharedPreferences.storeBoolean(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">FeatureFlagManager.<span class="keyword">init</span>(<span class="keyword">this</span>)</span><br><span class="line"><span class="keyword">if</span> (FeatureFlagManager.isFeatureEnabled &#123; Feature.Log &#125;) &#123;</span><br><span class="line">    Timber.plant(Timber.DebugTree())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运作原理：</p>
-<ul>
-<li><p><code>isFeatureEnabled</code></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">    * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">    * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>顾名思义，传Lambda而不是直接传Feature确保R8可以在这段代码没被使用时移除掉它，不然Feature会留在最终的APK里。</p>
-<p>担心性能问题？</p>
-<ul>
-<li>我没做Benchkmark，所以不考虑优化。</li>
-<li>我寻思以大部分应用的水平，这个Lambda根本不在瓶颈上。</li>
-<li>请信任智能的R8，人家比咱上心，也比咱厉害，也许人家已经搞定了。</li>
-<li>Romain Guy大佬怎么做，我就怎么做！</li>
-</ul>
-</li>
-<li><p><code>setAdapter</code></p>
-<p>之所以使用<code>AlertDialog</code>的<code>setAdapter</code>而不是自定义<code>View</code>，是因为这样可以让列表滚动时在顶端和底端有一个分割线，我挺喜欢这个设计，但缺点就是要处理<code>ListView</code>😢</p>
-</li>
-<li><p><code>ListView</code>的每个条目的命名<code>R.layout.list_item_feature_flag</code></p>
-<p>我之前用的是<code>R.layout.item_feature_flag</code>，但发现R8在把整个<code>Feature</code>移除后死活不把这个文件处理掉，查看<code>resources.txt</code>并研究后才发现，所有以<code>item</code>开头的资源，都不会被处理（当然还有其它各种开头，<a href="https://android.googlesource.com/platform/tools/base/+/master/build-system/gradle-core/src/main/groovy/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java#827">具体在这里</a>）。修改为<code>list</code>开头后就好了，虽然文件还在，但里面的内容已经没了。</p>
-<p>另一种方法是根据<a href="https://developer.android.com/studio/build/shrink-code.html#troubleshoot-resource-shrink">官方文档底部的方法</a>来确保这些文件被移除。我懒，所以没试这种方法。</p>
-</li>
-<li><p><code>getView</code>绑定</p>
-<p> <code>ListItemWithLayout</code>就是一个<code>CompoundButton</code>配一个<code>TextView</code>，不稀奇。包括其他的一些方法，都是简单包装了一下，顾名思义。</p>
-</li>
-<li><p><code>ProcessPhoenix.triggerRebirth(context)</code></p>
-<p> 我这里用<a href="https://github.com/JakeWharton/ProcessPhoenix">ProcessPhoenix</a>来强制重启，但它有点Bug，需要你在启动的<code>Activity</code>加一个category：<code>&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</code>。</p>
-<p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -717,30 +664,56 @@
       </categories>
   </entry>
   <entry>
-    <title>Android故障艺术</title>
-    <url>/2019/06/05/android-glitch/</url>
-    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
-<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+    <title>Android上一个简单的Feature Flag实现</title>
+    <url>/2020/04/21/android-feature-flags/</url>
+    <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
 <span id="more"></span>
 
-<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
-<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
-<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
-<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
-<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
-<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
-<details>
-  <summary></summary>
-  <p>这个项目的代码是真的看得我头大。</p>
-</details>
+<p>我个人的需求没原文中那么复杂，只需要一个可以在代码里手动调整的开关，一个可以在运行时进行修改的面板，同时要让R8把未使用的所有代码剔除。</p>
+<p>首先是可以在代码里手动调整的开关，用<code>buildConfigField</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
-<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+<ul>
+<li><code>&quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</code>确保IDE不会警告，就像<code>BuildConfig.DEBUG</code>一样。</li>
+</ul>
+<p>整个框架，抄了就走：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Feature</span>(</span><br><span class="line">    <span class="keyword">val</span> key: String,</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> description: String,</span><br><span class="line">    <span class="keyword">val</span> default: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line">) &#123;</span><br><span class="line">    Log(</span><br><span class="line">        key = <span class="string">&quot;feature_log&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;All log to console&quot;</span></span><br><span class="line">    ),</span><br><span class="line">    Network(</span><br><span class="line">        key = <span class="string">&quot;feature_network&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Network&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;Inspect network requests&quot;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> FeatureFlagManager &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> sharedPreferences: SharedPreferences</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">init</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        sharedPreferences = context.safeSharedPreference</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">     * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">     * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">manageFeatures</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">val</span> features = Feature.values()</span><br><span class="line">        MaterialAlertDialogBuilder(context)</span><br><span class="line">            .setCancelable(<span class="literal">false</span>)</span><br><span class="line">            .setTitle(<span class="string">&quot;Feature Flag Manager&quot;</span>)</span><br><span class="line">            .setAdapter(</span><br><span class="line">                <span class="keyword">object</span> : BaseAdapter() &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> = features.size</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Any = features[position]</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemId</span><span class="params">(position: <span class="type">Int</span>)</span></span>: <span class="built_in">Long</span> =</span><br><span class="line">                        features[position].ordinal.toLong()</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">                        position: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                        convertView: <span class="type">View</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">                        parent: <span class="type">ViewGroup</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    )</span></span>: View &#123;</span><br><span class="line">                        <span class="keyword">val</span> view = convertView ?: LayoutInflater.from(context)</span><br><span class="line">                            .inflate(R.layout.list_item_feature_flag, parent, <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">val</span> layout = view.findViewById&lt;ListItemWithLayout&gt;(R.id.listItemFeatureFlag)</span><br><span class="line">                        <span class="keyword">val</span> feature = features[position]</span><br><span class="line">                        layout.listItem.run &#123;</span><br><span class="line">                            setPrimaryText(feature.title)</span><br><span class="line">                            setSecondaryText(feature.description)</span><br><span class="line">                        &#125;</span><br><span class="line">                        layout.getLayoutView&lt;CompoundButton&gt;().run &#123;</span><br><span class="line">                            setOnCheckedChangeListener(<span class="literal">null</span>)</span><br><span class="line">                            isChecked = feature.enabled</span><br><span class="line">                            setOnCheckedChangeListener &#123; buttonView, isChecked -&gt;</span><br><span class="line">                                feature.enabled = isChecked</span><br><span class="line">                                buttonView.indefiniteSnackbar(</span><br><span class="line">                                    message = <span class="string">&quot;Restart the app&quot;</span>,</span><br><span class="line">                                    actionText = <span class="string">&quot;Now&quot;</span>,</span><br><span class="line">                                    action = &#123;</span><br><span class="line">                                        ProcessPhoenix.triggerRebirth(context)</span><br><span class="line">                                    &#125;</span><br><span class="line">                                )</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">return</span> view</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="literal">null</span></span><br><span class="line">            )</span><br><span class="line">            .setPositiveButton(android.R.string.ok, <span class="literal">null</span>)</span><br><span class="line">            .setNegativeButton(android.R.string.cancel, <span class="literal">null</span>)</span><br><span class="line">            .show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> Feature.enabled</span><br><span class="line">        <span class="keyword">get</span>() = sharedPreferences.getBoolean(key, default)</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            sharedPreferences.storeBoolean(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">FeatureFlagManager.<span class="keyword">init</span>(<span class="keyword">this</span>)</span><br><span class="line"><span class="keyword">if</span> (FeatureFlagManager.isFeatureEnabled &#123; Feature.Log &#125;) &#123;</span><br><span class="line">    Timber.plant(Timber.DebugTree())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运作原理：</p>
+<ul>
+<li><p><code>isFeatureEnabled</code></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">    * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">    * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>顾名思义，传Lambda而不是直接传Feature确保R8可以在这段代码没被使用时移除掉它，不然Feature会留在最终的APK里。</p>
+<p>担心性能问题？</p>
+<ul>
+<li>我没做Benchkmark，所以不考虑优化。</li>
+<li>我寻思以大部分应用的水平，这个Lambda根本不在瓶颈上。</li>
+<li>请信任智能的R8，人家比咱上心，也比咱厉害，也许人家已经搞定了。</li>
+<li>Romain Guy大佬怎么做，我就怎么做！</li>
+</ul>
+</li>
+<li><p><code>setAdapter</code></p>
+<p>之所以使用<code>AlertDialog</code>的<code>setAdapter</code>而不是自定义<code>View</code>，是因为这样可以让列表滚动时在顶端和底端有一个分割线，我挺喜欢这个设计，但缺点就是要处理<code>ListView</code>😢</p>
+</li>
+<li><p><code>ListView</code>的每个条目的命名<code>R.layout.list_item_feature_flag</code></p>
+<p>我之前用的是<code>R.layout.item_feature_flag</code>，但发现R8在把整个<code>Feature</code>移除后死活不把这个文件处理掉，查看<code>resources.txt</code>并研究后才发现，所有以<code>item</code>开头的资源，都不会被处理（当然还有其它各种开头，<a href="https://android.googlesource.com/platform/tools/base/+/master/build-system/gradle-core/src/main/groovy/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java#827">具体在这里</a>）。修改为<code>list</code>开头后就好了，虽然文件还在，但里面的内容已经没了。</p>
+<p>另一种方法是根据<a href="https://developer.android.com/studio/build/shrink-code.html#troubleshoot-resource-shrink">官方文档底部的方法</a>来确保这些文件被移除。我懒，所以没试这种方法。</p>
+</li>
+<li><p><code>getView</code>绑定</p>
+<p> <code>ListItemWithLayout</code>就是一个<code>CompoundButton</code>配一个<code>TextView</code>，不稀奇。包括其他的一些方法，都是简单包装了一下，顾名思义。</p>
+</li>
+<li><p><code>ProcessPhoenix.triggerRebirth(context)</code></p>
+<p> 我这里用<a href="https://github.com/JakeWharton/ProcessPhoenix">ProcessPhoenix</a>来强制重启，但它有点Bug，需要你在启动的<code>Activity</code>加一个category：<code>&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</code>。</p>
+<p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -852,6 +825,33 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android故障艺术</title>
+    <url>/2019/06/05/android-glitch/</url>
+    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
+<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+<span id="more"></span>
+
+<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
+<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
+<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
+<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
+<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
+<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
+<details>
+  <summary></summary>
+  <p>这个项目的代码是真的看得我头大。</p>
+</details>
+
+<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
+<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1199,6 +1199,45 @@
       </categories>
   </entry>
   <entry>
+    <title>Android OpenGL Texture 坐标原点问题</title>
+    <url>/2023/08/23/android-opengl-coordinates/</url>
+    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
+<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
+<span id="more"></span>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
+
+<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
+
+<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
+
+<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
+<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
+<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
+<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
+<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
+<blockquote>
+<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
+</blockquote>
+<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
+<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
+<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
+<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
+<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
+<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
+<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
+<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
+<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
+<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
+<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
     <url>/2023/06/08/android-opengl-matrix/</url>
     <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
@@ -1251,6 +1290,60 @@
 <p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
 <p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
 <p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Jetpack Paging3 从入门到入土</title>
+    <url>/2022/01/31/android-paging3/</url>
+    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
+<p>本文记录了个人实现分页的一些弯路与经验。</p>
+<span id="more"></span>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
+<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
+<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
+</ol>
+<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
+<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
+<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
+<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
+<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
+<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
+<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
+<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
+<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
+<p><strong>可是</strong>，</p>
+<ol>
+<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
+<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
+<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
+</li>
+<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
+<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
+</li>
+<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
+<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
+<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
+ <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
+<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
+<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
+<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
+<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
+</li>
+</ol>
+<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
+<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
+<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
+<ul>
+<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1407,99 +1500,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android OpenGL Texture 坐标原点问题</title>
-    <url>/2023/08/23/android-opengl-coordinates/</url>
-    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
-<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
-<span id="more"></span>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
-
-<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
-
-<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
-
-<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
-<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
-<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
-<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
-<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
-<blockquote>
-<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
-</blockquote>
-<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
-<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
-<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
-<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
-<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
-<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
-<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
-<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
-<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
-<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
-<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Jetpack Paging3 从入门到入土</title>
-    <url>/2022/01/31/android-paging3/</url>
-    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
-<p>本文记录了个人实现分页的一些弯路与经验。</p>
-<span id="more"></span>
-
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
-<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
-<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
-<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
-</ol>
-<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
-<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
-<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
-<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
-<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
-<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
-<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
-<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
-<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
-<p><strong>可是</strong>，</p>
-<ol>
-<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
-<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
-<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
-</li>
-<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
-<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
-</li>
-<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
-<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
-<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
- <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
-<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
-<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
-<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
-<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
-</li>
-</ol>
-<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
-<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
-<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
-<ul>
-<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1646,6 +1646,34 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Resources小研究</title>
+    <url>/2020/01/12/android-resources-test/</url>
+    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
+<span id="more"></span>
+
+<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
+<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
+<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
+<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
+<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
+<p>新建<code>attrs.xml</code>并塞入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1678,34 +1706,6 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Resources小研究</title>
-    <url>/2020/01/12/android-resources-test/</url>
-    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
-<span id="more"></span>
-
-<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
-<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
-<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
-<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
-<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
-<p>新建<code>attrs.xml</code>并塞入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就可以</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1837,6 +1837,76 @@
       </categories>
   </entry>
   <entry>
+    <title>Android System UI</title>
+    <url>/2019/05/06/android-system-ui/</url>
+    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
+<p>只是一些笔记。</p>
+<span id="more"></span>
+
+<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
+<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>VISIBLE：让😲回来，重新显示</li>
+<li>LOW_PROFILE：让😲暗淡</li>
+<li>HIDE_NAVIGATION</li>
+<li>FULLSCREEN</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
+<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LIGHT_STATUS_BAR</li>
+<li>LIGHT_NAVIGATION_BAR</li>
+</ul>
+<p>让😲浅底深色。默认是深底浅色。</p>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LAYOUT_STABLE</li>
+<li>LAYOUT_HIDE_NAVIGATION</li>
+<li>LAYOUT_FULLSCREEN</li>
+</ul>
+<p>跟应用内容的显示有关系。</p>
+<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
+
+<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
+<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
+<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
+<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
+<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
+<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
+<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
+<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
+<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
+<p>可以给子View设置，选择是否让子View出现在😲后。</p>
+<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
+<ul>
+<li><code>app:statusBarBackground</code></li>
+</ul>
+<p><code>CollapsingToolbarLayout</code></p>
+<ul>
+<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
+<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
+</ul>
+<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
+<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
+<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
+<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
+<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
+<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>个人使用的Android Studio配置</title>
     <url>/2024/02/12/android-studio-settings/</url>
     <content><![CDATA[<p>Android Studio的每个新版本都或多或少有点问题，因此每次都重新安装并手动配置来避免配置继承的问题。</p>
@@ -1956,76 +2026,6 @@
 </li>
 <li>Disable <code>Show Project Gradient</code> in the toolbar</li>
 <li><code>Log</code> - Show <code>Tag Names</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android System UI</title>
-    <url>/2019/05/06/android-system-ui/</url>
-    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
-<p>只是一些笔记。</p>
-<span id="more"></span>
-
-<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
-<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>VISIBLE：让😲回来，重新显示</li>
-<li>LOW_PROFILE：让😲暗淡</li>
-<li>HIDE_NAVIGATION</li>
-<li>FULLSCREEN</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
-<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LIGHT_STATUS_BAR</li>
-<li>LIGHT_NAVIGATION_BAR</li>
-</ul>
-<p>让😲浅底深色。默认是深底浅色。</p>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LAYOUT_STABLE</li>
-<li>LAYOUT_HIDE_NAVIGATION</li>
-<li>LAYOUT_FULLSCREEN</li>
-</ul>
-<p>跟应用内容的显示有关系。</p>
-<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
-
-<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
-<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
-<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
-<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
-<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
-<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
-<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
-<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
-<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
-<p>可以给子View设置，选择是否让子View出现在😲后。</p>
-<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
-<ul>
-<li><code>app:statusBarBackground</code></li>
-</ul>
-<p><code>CollapsingToolbarLayout</code></p>
-<ul>
-<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
-<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
-</ul>
-<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
-<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
-<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
-<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
-<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
-<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -2221,6 +2221,23 @@
       </categories>
   </entry>
   <entry>
+    <title>换域名啦</title>
+    <url>/2023/06/10/changing-domain/</url>
+    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
+<p>本文记录换域名和重定向的历程。</p>
+<span id="more"></span>
+
+<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
+<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
+<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
+<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
+<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
     <title>想要自动清空浏览记录</title>
     <url>/2020/08/06/clean-browser-history/</url>
     <content><![CDATA[<p>一直有个心结：在网上冲浪时，不想留下任何痕迹。倒不是因为浏览记录中有什么见不得人的内容（真见不得人就用Tor啦），而是在搜索栏输入一些内容，却看到一些自己以前搜索过的关键词，会有一种被窥探、被监视的糟糕感觉。</p>
@@ -2344,23 +2361,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>换域名啦</title>
-    <url>/2023/06/10/changing-domain/</url>
-    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
-<p>本文记录换域名和重定向的历程。</p>
-<span id="more"></span>
-
-<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
-<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
-<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
-<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
-<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
-]]></content>
-      <categories>
-        <category>Website</category>
       </categories>
   </entry>
   <entry>
@@ -2514,6 +2514,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2536,29 +2559,6 @@
 <p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
 <p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
 <p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2588,60 +2588,6 @@
 ]]></content>
       <categories>
         <category>What</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>在Android Studio中引入AAR文件</title>
-    <url>/2018/08/13/include-aar/</url>
-    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
-<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
-<p>要解决的问题在于</p>
-<ol>
-<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
-<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
-<li>Module该有好处自然有的了</li>
-<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
-<li>修改后直接复制粘贴AAR就可使用</li>
-</ol>
-<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
-<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
-<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
-<li>修改后复制粘贴AAR才能使用</li>
-<li>AAR的版本被保存在了另一个项目中</li>
-<li>AAR的依赖需要手动添加到项目的依赖中</li>
-<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
-<li>似乎并不能跨module使用</li>
-</ol>
-<p><del>缺点比优点多可还行</del></p>
-<p>个人习惯：</p>
-<ul>
-<li>把名字改为library名+git commit编号</li>
-<li>另建一个文件夹专门放各种AAR</li>
-<li>把修改的项目丢到Github或GitBucket</li>
-<li>在版本控制中删掉所有AAR</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
-<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
-<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
-<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
-<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
-<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
-<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
-<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
-<p>注意<code>name</code>中不带后缀。</p>
-<p>Ta-Da。完成！</p>
-<p>参考:</p>
-<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2711,6 +2657,60 @@
 ]]></content>
       <categories>
         <category>Gaming</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>在Android Studio中引入AAR文件</title>
+    <url>/2018/08/13/include-aar/</url>
+    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
+<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
+<p>要解决的问题在于</p>
+<ol>
+<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
+<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
+<li>Module该有好处自然有的了</li>
+<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
+<li>修改后直接复制粘贴AAR就可使用</li>
+</ol>
+<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
+<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
+<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
+<li>修改后复制粘贴AAR才能使用</li>
+<li>AAR的版本被保存在了另一个项目中</li>
+<li>AAR的依赖需要手动添加到项目的依赖中</li>
+<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
+<li>似乎并不能跨module使用</li>
+</ol>
+<p><del>缺点比优点多可还行</del></p>
+<p>个人习惯：</p>
+<ul>
+<li>把名字改为library名+git commit编号</li>
+<li>另建一个文件夹专门放各种AAR</li>
+<li>把修改的项目丢到Github或GitBucket</li>
+<li>在版本控制中删掉所有AAR</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
+<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
+<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
+<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
+<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
+<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
+<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
+<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
+<p>注意<code>name</code>中不带后缀。</p>
+<p>Ta-Da。完成！</p>
+<p>参考:</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3262,6 +3262,64 @@
       </categories>
   </entry>
   <entry>
+    <title>Android文字转语音(TTS)引擎</title>
+    <url>/2019/03/11/tts/</url>
+    <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
+<span id="more"></span>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这个设置是系统自带。这个功能不仅仅用于盲人使用设备时，将屏幕上的文字阅读出来，更广泛的用途是，语音播报内容，比如导航、天气预报等。这个功能的登场次数不算多，但我见过不少。</p>
+<p>几乎所有Android设备会自带一个<code>Pico TTS</code>。</p>
+<blockquote>
+<p>Pico TTS: AOSP自带的TTS，支持的语言只有英德西法意。</p>
+</blockquote>
+<p>它不支持中文，加上国内多数厂商对这块儿并不怎么重视，导致了TTS这个功能在国内基本是荒废的。但Android留出接口，可以安装一些第三方支持中文的引擎来让Android阅读中文。</p>
+<p><strong>有的国产系统后台管理严格，导致TTS无法启动运行，这种情况下TTS就已经凉了</strong></p>
+<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>国内一些导航应用导航时使用的方法，并不是使用这个引擎，而是另起炉灶，用的自己的方法或购买第三方的SDK。</p>
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="Google文字转语音"><a href="#Google文字转语音" class="headerlink" title="Google文字转语音"></a>Google文字转语音</h3><p>在Google自家的设备上取代了<code>Pico TTS</code>，支持地球上绝大多数语言，基本是首选。在酷安和Google Play或各大应用市场都可以找到。</p>
+<p>它默认会联网获取语音，但可能出现因网络状况而读不出来的情况，所以需要提前下载好语音包。但即使下好了语音包，有时也会读不出来 ㄟ( ▔, ▔ )ㄏ</p>
+<h2 id="讯飞语记"><a href="#讯飞语记" class="headerlink" title="讯飞语记"></a>讯飞语记</h2><p>是讯飞的一个单独应用。安装后就会添加一个引擎。可以自定义的内容不少。<del>虽然声音不如谷歌娘好听。</del></p>
+<h2 id="小爱-TTS"><a href="#小爱-TTS" class="headerlink" title="小爱 TTS"></a>小爱 TTS</h2><p>似乎只有在小米应用商店有下载：<a href="http://app.mi.com/details?id=com.xiaomi.mibrain.speech">http://app.mi.com/details?id=com.xiaomi.mibrain.speech</a></p>
+<p>没有试过，但应用信息</p>
+<blockquote>
+<p>软件大小:20.86 M 版本号：1.1.1 更新时间：2018-08-02</p>
+</blockquote>
+<p>怕是不靠谱。</p>
+<h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>更新，还是不更新，这是个问题</title>
+    <url>/2022/05/25/update-or-not/</url>
+    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
+<span id="more"></span>
+
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
+<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
+<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
+<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
+<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
+<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
+<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
+<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
+<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
+<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
+<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
+<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
+<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
+<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
+<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
+<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
+<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
+<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>计时机器的使用方法</title>
     <url>/2018/12/19/timer-machine-usage-zh/</url>
     <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
@@ -3297,35 +3355,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android文字转语音(TTS)引擎</title>
-    <url>/2019/03/11/tts/</url>
-    <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
-<span id="more"></span>
-
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这个设置是系统自带。这个功能不仅仅用于盲人使用设备时，将屏幕上的文字阅读出来，更广泛的用途是，语音播报内容，比如导航、天气预报等。这个功能的登场次数不算多，但我见过不少。</p>
-<p>几乎所有Android设备会自带一个<code>Pico TTS</code>。</p>
-<blockquote>
-<p>Pico TTS: AOSP自带的TTS，支持的语言只有英德西法意。</p>
-</blockquote>
-<p>它不支持中文，加上国内多数厂商对这块儿并不怎么重视，导致了TTS这个功能在国内基本是荒废的。但Android留出接口，可以安装一些第三方支持中文的引擎来让Android阅读中文。</p>
-<p><strong>有的国产系统后台管理严格，导致TTS无法启动运行，这种情况下TTS就已经凉了</strong></p>
-<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>国内一些导航应用导航时使用的方法，并不是使用这个引擎，而是另起炉灶，用的自己的方法或购买第三方的SDK。</p>
-<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="Google文字转语音"><a href="#Google文字转语音" class="headerlink" title="Google文字转语音"></a>Google文字转语音</h3><p>在Google自家的设备上取代了<code>Pico TTS</code>，支持地球上绝大多数语言，基本是首选。在酷安和Google Play或各大应用市场都可以找到。</p>
-<p>它默认会联网获取语音，但可能出现因网络状况而读不出来的情况，所以需要提前下载好语音包。但即使下好了语音包，有时也会读不出来 ㄟ( ▔, ▔ )ㄏ</p>
-<h2 id="讯飞语记"><a href="#讯飞语记" class="headerlink" title="讯飞语记"></a>讯飞语记</h2><p>是讯飞的一个单独应用。安装后就会添加一个引擎。可以自定义的内容不少。<del>虽然声音不如谷歌娘好听。</del></p>
-<h2 id="小爱-TTS"><a href="#小爱-TTS" class="headerlink" title="小爱 TTS"></a>小爱 TTS</h2><p>似乎只有在小米应用商店有下载：<a href="http://app.mi.com/details?id=com.xiaomi.mibrain.speech">http://app.mi.com/details?id=com.xiaomi.mibrain.speech</a></p>
-<p>没有试过，但应用信息</p>
-<blockquote>
-<p>软件大小:20.86 M 版本号：1.1.1 更新时间：2018-08-02</p>
-</blockquote>
-<p>怕是不靠谱。</p>
-<h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>个人常用的视频下载及处理命令整理</title>
     <url>/2023/11/23/youtube-dl-commands/</url>
     <content><![CDATA[<p>RT</p>
@@ -3352,35 +3381,6 @@
 ]]></content>
       <categories>
         <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>更新，还是不更新，这是个问题</title>
-    <url>/2022/05/25/update-or-not/</url>
-    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
-<span id="more"></span>
-
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
-<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
-<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
-<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
-<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
-<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
-<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
-<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
-<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
-<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
-<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
-<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
-<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
-<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
-<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
-<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
-<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
-<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
