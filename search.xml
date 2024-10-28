@@ -73,16 +73,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android自动切换深色主题</title>
     <url>/2018/10/04/android-auto-night/</url>
     <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
@@ -105,6 +95,16 @@
 
 <p>然后在MainActivity里：</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -150,6 +150,25 @@
       </categories>
   </entry>
   <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android简繁体翻译到底该放哪儿？</title>
     <url>/2022/12/25/android-chinese-strings/</url>
     <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
@@ -182,25 +201,6 @@
 <li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
 <li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1078,6 +1078,24 @@
       </categories>
   </entry>
   <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <url>/2020/01/01/android-oh-my-dagger/</url>
+    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+<span id="more"></span>
+
+<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
+<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
+<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
+<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
+<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
+<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
+<p>死鱼安乐啊死鱼安乐。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android OpenGL学习笔记</title>
     <url>/2023/01/02/android-opengl-basics/</url>
     <content><![CDATA[<p><a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a> 学习笔记。</p>
@@ -1175,24 +1193,6 @@
 </ol>
 <p>给坐标增加各种矩阵，实现3D模拟。</p>
 <h2 id="Adding-Detail-with-Textures"><a href="#Adding-Detail-with-Textures" class="headerlink" title="Adding Detail with Textures"></a>Adding Detail with Textures</h2><p>之后书中的内容就复杂起来，记笔记也变得难了起来。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些关于Dagger2及其未来的思考</title>
-    <url>/2020/01/01/android-oh-my-dagger/</url>
-    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
-<span id="more"></span>
-
-<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
-<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
-<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
-<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
-<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
-<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
-<p>死鱼安乐啊死鱼安乐。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1563,6 +1563,28 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1618,28 +1640,6 @@
 <li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
 <li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2521,29 +2521,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2566,6 +2543,29 @@
 <p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
 <p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
 <p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2808,6 +2808,26 @@
       </categories>
   </entry>
   <entry>
+    <title>Nexus 5 购入 刷机 升级 笔记</title>
+    <url>/2022/07/08/nexus5/</url>
+    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
+<span id="more"></span>
+
+<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
+<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
+<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
+<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
+<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
+<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
+
+<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2888,26 +2908,6 @@
 <li><code>CardView</code>被囊括在design library中，更名为<code>MaterialCardView</code></li>
 <li><code>?attr/textAppearanceHeadline6</code>：新的(?)<code>textAppearance</code>，符合Design中的Type Scale</li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Nexus 5 购入 刷机 升级 笔记</title>
-    <url>/2022/07/08/nexus5/</url>
-    <content><![CDATA[<p>在论坛中看到可以入手一台Nexus 5来测试应用，于是开始了折腾之旅。</p>
-<span id="more"></span>
-
-<p>从淘宝或咸鱼花一百左右收一台Nexus 5。注意它是用老版的Android数据线。</p>
-<p>到手是Android 4.4，在升级到Android 5.0.1后，一切正常。于是开始熟练地<code>adb shell pm uninstall --user 0 -k ...</code>卸载起系统应用来。但是在最后卸载Google搜索后，把机器给弄死机了。无奈只好强制恢复出厂设置。</p>
-<p>根据<a href="https://zhuanlan.zhihu.com/p/19635679">Nexus 刷机步骤</a>，<code>关机状态下长按音量下+电源就可以进入</code>。要先按音量下。</p>
-<p>顺利双清后，发现系统连不上Wifi了。一通失败的操作后，最后决定根据上文链接手动换系统。</p>
-<p>先去 <a href="https://developers.google.com/android/images">https://developers.google.com/android/images</a> 下载压缩包，然后ADB一通操作。据说直接运行flash-all脚本就可以，但是我总会遇到系统无限重启的问题。</p>
-<p>最后根据<a href="https://www.jianshu.com/p/c14f003fa844">Nexus 5刷机无限重启的解决方案</a>，只好手动输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
-
-<p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
 ]]></content>
       <categories>
         <category>Android</category>
