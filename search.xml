@@ -27,6 +27,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
+    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
+    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Animation</title>
     <url>/2018/12/11/android-animation/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=N_x7SV3I3P0">Get Animated (Android Dev Summit ‘18)</a>，解释那复杂的Android动画框架和工具。</p>
@@ -101,16 +111,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android AppCompat 1.1.0渐隐式切换夜间模式</title>
-    <url>/2019/09/07/android-appcompt110-fading-dark/</url>
-    <content><![CDATA[<p><strong>2020年5月7日更新，原方案有误，废弃，给我移步2020年5月的深色模式的新文章</strong></p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>在国内做Android开发踩过的坑</title>
     <url>/2019/08/25/android-chinese-pitfalls/</url>
     <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
@@ -150,25 +150,6 @@
       </categories>
   </entry>
   <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android简繁体翻译到底该放哪儿？</title>
     <url>/2022/12/25/android-chinese-strings/</url>
     <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
@@ -201,6 +182,25 @@
 <li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
 <li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
 </ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1238,64 +1238,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
-    <url>/2023/06/08/android-opengl-matrix/</url>
-    <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
-<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
-<span id="more"></span>
-
-<hr>
-<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
-<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
-
-<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
-<p>参考了<a href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
-<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
-<hr>
-<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
-<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
-<hr>
-<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
-<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
-<hr>
-<p>Q: Orthographic Projection是个啥？</p>
-<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
-<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
-<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
-<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
-<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
-<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
-<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
-<ol>
-<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
-<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
-</ol>
-<p>参考了<a href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
-<hr>
-<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
-<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
-<p>这里有一个没人跟我说的小秘密。</p>
-<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
-<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
-<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
-<p>Source: <a href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
-<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
-<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
-<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
-<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
-<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
-<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
-<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
-<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>个人偏爱的Android应用架构</title>
     <url>/2021/04/18/android-opinoinated-arch/</url>
     <content><![CDATA[<p>根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了<a href="https://github.com/google/iosched">iosched</a>（新的<a href="https://github.com/android/nowinandroid">nowinandroid</a>大同小异），尽可能地照顾到测试和扩展。</p>
@@ -1446,6 +1388,64 @@
       </categories>
   </entry>
   <entry>
+    <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
+    <url>/2023/06/08/android-opengl-matrix/</url>
+    <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
+<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
+<span id="more"></span>
+
+<hr>
+<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
+<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
+
+<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
+<p>参考了<a href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
+<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
+<hr>
+<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
+<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
+<hr>
+<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
+<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
+<hr>
+<p>Q: Orthographic Projection是个啥？</p>
+<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
+<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
+<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
+<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
+<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
+<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
+<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
+<ol>
+<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
+<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
+</ol>
+<p>参考了<a href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
+<hr>
+<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
+<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
+<p>这里有一个没人跟我说的小秘密。</p>
+<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
+<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
+<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
+<p>Source: <a href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
+<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
+<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
+<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
+<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
+<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
+<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
+<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
+<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Jetpack Paging3 从入门到入土</title>
     <url>/2022/01/31/android-paging3/</url>
     <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
@@ -1563,28 +1563,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1640,6 +1618,28 @@
 <li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
 <li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2147,6 +2147,27 @@
       </categories>
   </entry>
   <entry>
+    <title>Android 14升级笔记</title>
+    <url>/2024/04/22/android14-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
+<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
+<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android 13升级笔记</title>
     <url>/2023/02/22/android13-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2196,27 +2217,6 @@
 </li>
 <li><p><a href="https://developer.android.com/about/versions/13/features#large-screens">Tablet and large screen support</a></p>
 </li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 14升级笔记</title>
-    <url>/2024/04/22/android14-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
-<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
-<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -2477,6 +2477,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2543,29 +2566,6 @@
 <p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
 <p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
 <p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2828,6 +2828,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2911,16 +2921,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3017,30 +3017,6 @@
       </categories>
   </entry>
   <entry>
-    <title>使用Splinter模拟网页操作</title>
-    <url>/2018/04/01/splinter/</url>
-    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
-<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
-<p>内容大同小异，说明几个坑。</p>
-<span id="more"></span>
-
-<p>我用的是Py3.6和Chrome.</p>
-<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
-<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
-<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
-<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
-<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
-]]></content>
-      <categories>
-        <category>Automation</category>
-      </categories>
-  </entry>
-  <entry>
     <title>两种安慰别人的方式</title>
     <url>/2019/07/05/thoughts-comfort/</url>
     <content><![CDATA[<p>生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。</p>
@@ -3072,6 +3048,30 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用Splinter模拟网页操作</title>
+    <url>/2018/04/01/splinter/</url>
+    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
+<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
+<p>内容大同小异，说明几个坑。</p>
+<span id="more"></span>
+
+<p>我用的是Py3.6和Chrome.</p>
+<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
+<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
+<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
+<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
+<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
+]]></content>
+      <categories>
+        <category>Automation</category>
       </categories>
   </entry>
   <entry>
