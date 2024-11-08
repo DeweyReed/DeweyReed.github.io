@@ -83,34 +83,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android自动切换深色主题</title>
-    <url>/2018/10/04/android-auto-night/</url>
-    <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
-<p><strong>2020年6月1日我发现还有问题！</strong></p>
-<p><strong>2020年5月22日新方案又来了，希望能结束这个问题</strong></p>
-<p><strong>2020年4月21日还有Bug，正在修。反正也没人看，估计也没坑到什么人</strong></p>
-<p><strong>2020年1月27日憋出了新方案，似乎修好了</strong></p>
-<p><strong>2019年11月4日现在的实现有Bug，正在研究</strong></p>
-<p><strong>2019年10月18日更新AppCompat 1.1.0的使用说明</strong></p>
-<p><strong>2019年8月18日更新增强版</strong></p>
-<p>网上搜怎么实现自动切换深色主题都没资料的，全是实现，只能自己想办法了。</p>
-<p>最终解决的方案倒是很简单，不过走了<strong>很多、很多、很多、很多</strong>弯路。<del>脑子不是很好使了</del>我好菜啊。</p>
-<span id="more"></span>
-
-<p>已有数据：上一次的启动时间、本次的启动时间（就是现在）、自动启动深色模式的几点几分开始和几点几分结束。</p>
-<p>举个例子，设置八点自动进入深色主题，九点退出深色主题，我们需要满足：1. 上一次启动是在今天八点前。2. 本次启动在今天八点后。3.本次启动在今天九点前。4. 现在是浅色主题。退出深色主题同理。</p>
-<p>下述方案储存几点几分是把小时和分钟分开储存的，另外一种方案是只储存一个值：<code>60 * 小时 + 分钟</code>。</p>
-<p>代码：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> True if we should revert the current dark.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">calculateAutoDarkChange</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    currentIsDark: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    nowMilli: <span class="type">Long</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lastLaunchMilli: <span class="type">Long</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lastLaunch =</span><br><span class="line">        LocalDateTime.ofInstant(Instant.ofEpochMilli(lastLaunchMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> now = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> today = LocalDate.now()</span><br><span class="line">    <span class="keyword">val</span> nightRange = scheduleRange</span><br><span class="line">    <span class="keyword">val</span> nightStart =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.fromHour, nightRange.fromMinute))</span><br><span class="line">    <span class="keyword">val</span> nightEnd =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.toHour, nightRange.toMinute))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringTheSpanFirst</span><span class="params">(from: <span class="type">LocalDateTime</span>, to: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (from == to) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        require(from.isBefore(to))</span><br><span class="line">        <span class="keyword">return</span> (now.isAfter(from) || now == from) &amp;&amp;</span><br><span class="line">            now.isBefore(to) &amp;&amp;</span><br><span class="line">            lastLaunch.isBefore(from)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringNight</span><span class="params">(nightStart: <span class="type">LocalDateTime</span>, nightEnd: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightStart, to = nightEnd) &amp;&amp; !currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isExitingNight</span><span class="params">(nightEnd: <span class="type">LocalDateTime</span>, nextNightStart: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightEnd, to = nextNightStart) &amp;&amp; currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (nightStart.isBefore(nightEnd)) &#123;</span><br><span class="line">        <span class="comment">// |day start           |night start------------|night end          |day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// |day start-----------|night end              |night start--------|day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后在MainActivity里：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>在国内做Android开发踩过的坑</title>
     <url>/2019/08/25/android-chinese-pitfalls/</url>
     <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
@@ -144,6 +116,34 @@
 <h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><blockquote>
 <p>你觉得我喜欢去研究这些东西嘛？</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android自动切换深色主题</title>
+    <url>/2018/10/04/android-auto-night/</url>
+    <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
+<p><strong>2020年6月1日我发现还有问题！</strong></p>
+<p><strong>2020年5月22日新方案又来了，希望能结束这个问题</strong></p>
+<p><strong>2020年4月21日还有Bug，正在修。反正也没人看，估计也没坑到什么人</strong></p>
+<p><strong>2020年1月27日憋出了新方案，似乎修好了</strong></p>
+<p><strong>2019年11月4日现在的实现有Bug，正在研究</strong></p>
+<p><strong>2019年10月18日更新AppCompat 1.1.0的使用说明</strong></p>
+<p><strong>2019年8月18日更新增强版</strong></p>
+<p>网上搜怎么实现自动切换深色主题都没资料的，全是实现，只能自己想办法了。</p>
+<p>最终解决的方案倒是很简单，不过走了<strong>很多、很多、很多、很多</strong>弯路。<del>脑子不是很好使了</del>我好菜啊。</p>
+<span id="more"></span>
+
+<p>已有数据：上一次的启动时间、本次的启动时间（就是现在）、自动启动深色模式的几点几分开始和几点几分结束。</p>
+<p>举个例子，设置八点自动进入深色主题，九点退出深色主题，我们需要满足：1. 上一次启动是在今天八点前。2. 本次启动在今天八点后。3.本次启动在今天九点前。4. 现在是浅色主题。退出深色主题同理。</p>
+<p>下述方案储存几点几分是把小时和分钟分开储存的，另外一种方案是只储存一个值：<code>60 * 小时 + 分钟</code>。</p>
+<p>代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> True if we should revert the current dark.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">calculateAutoDarkChange</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    currentIsDark: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    nowMilli: <span class="type">Long</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lastLaunchMilli: <span class="type">Long</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lastLaunch =</span><br><span class="line">        LocalDateTime.ofInstant(Instant.ofEpochMilli(lastLaunchMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> now = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> today = LocalDate.now()</span><br><span class="line">    <span class="keyword">val</span> nightRange = scheduleRange</span><br><span class="line">    <span class="keyword">val</span> nightStart =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.fromHour, nightRange.fromMinute))</span><br><span class="line">    <span class="keyword">val</span> nightEnd =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.toHour, nightRange.toMinute))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringTheSpanFirst</span><span class="params">(from: <span class="type">LocalDateTime</span>, to: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (from == to) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        require(from.isBefore(to))</span><br><span class="line">        <span class="keyword">return</span> (now.isAfter(from) || now == from) &amp;&amp;</span><br><span class="line">            now.isBefore(to) &amp;&amp;</span><br><span class="line">            lastLaunch.isBefore(from)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringNight</span><span class="params">(nightStart: <span class="type">LocalDateTime</span>, nightEnd: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightStart, to = nightEnd) &amp;&amp; !currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isExitingNight</span><span class="params">(nightEnd: <span class="type">LocalDateTime</span>, nextNightStart: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightEnd, to = nextNightStart) &amp;&amp; currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (nightStart.isBefore(nightEnd)) &#123;</span><br><span class="line">        <span class="comment">// |day start           |night start------------|night end          |day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// |day start-----------|night end              |night start--------|day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在MainActivity里：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -513,6 +513,33 @@
       </categories>
   </entry>
   <entry>
+    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
+    <url>/2018/10/26/android-expandable-recyclerview/</url>
+    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
+<span id="more"></span>
+
+<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
+<p>用实现一个Expandable RecyclerView来举例子：</p>
+<ol>
+<li><p>首先要使用不同的ViewType：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
+</li>
+<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
+</li>
+</ol>
+<p>来源：AOSP的DeskClock</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android动态主题</title>
     <url>/2018/09/14/android-dynamic-theme/</url>
     <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
@@ -558,33 +585,6 @@
 <li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
 <li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
-    <url>/2018/10/26/android-expandable-recyclerview/</url>
-    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
-<span id="more"></span>
-
-<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
-<p>用实现一个Expandable RecyclerView来举例子：</p>
-<ol>
-<li><p>首先要使用不同的ViewType：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
-</li>
-<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
-</li>
-</ol>
-<p>来源：AOSP的DeskClock</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -812,55 +812,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android依赖笔记</title>
-    <url>/2022/06/02/android-library-dependency/</url>
-    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
-<span id="more"></span>
-
-<ul>
-<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
-</li>
-<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
-<ol>
-<li>把依赖发布到Maven</li>
-<li>FAR AAR插件</li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>限制多个依赖间的内部类</p>
-<ol>
-<li><code>package com.example.internal.database</code></li>
-<li>混淆为<code>package com.example.internal.a</code></li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
-<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
-<ol>
-<li><p>忽略依赖的Transitive Dependency</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>全局指定依赖版本</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
-</li>
-<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
-</li>
-<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
-<p>  要用：</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
-</li>
-<li><p>设置为必须声明Class Visibility</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -966,6 +917,55 @@
 <ol>
 <li><a href="https://www.youtube.com/watch?v=w7K0jio8afM">Understanding Android memory usage (Google I/O ‘18)</a></li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android依赖笔记</title>
+    <url>/2022/06/02/android-library-dependency/</url>
+    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
+<span id="more"></span>
+
+<ul>
+<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
+</li>
+<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
+<ol>
+<li>把依赖发布到Maven</li>
+<li>FAR AAR插件</li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>限制多个依赖间的内部类</p>
+<ol>
+<li><code>package com.example.internal.database</code></li>
+<li>混淆为<code>package com.example.internal.a</code></li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
+<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
+<ol>
+<li><p>忽略依赖的Transitive Dependency</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>全局指定依赖版本</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
+</li>
+<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
+</li>
+<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
+<p>  要用：</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
+</li>
+<li><p>设置为必须声明Class Visibility</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2672,6 +2672,60 @@
       </categories>
   </entry>
   <entry>
+    <title>在Android Studio中引入AAR文件</title>
+    <url>/2018/08/13/include-aar/</url>
+    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
+<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
+<p>要解决的问题在于</p>
+<ol>
+<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
+<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
+<li>Module该有好处自然有的了</li>
+<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
+<li>修改后直接复制粘贴AAR就可使用</li>
+</ol>
+<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
+<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
+<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
+<li>修改后复制粘贴AAR才能使用</li>
+<li>AAR的版本被保存在了另一个项目中</li>
+<li>AAR的依赖需要手动添加到项目的依赖中</li>
+<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
+<li>似乎并不能跨module使用</li>
+</ol>
+<p><del>缺点比优点多可还行</del></p>
+<p>个人习惯：</p>
+<ul>
+<li>把名字改为library名+git commit编号</li>
+<li>另建一个文件夹专门放各种AAR</li>
+<li>把修改的项目丢到Github或GitBucket</li>
+<li>在版本控制中删掉所有AAR</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
+<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
+<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
+<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
+<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
+<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
+<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
+<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
+<p>注意<code>name</code>中不带后缀。</p>
+<p>Ta-Da。完成！</p>
+<p>参考:</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>用于展示的Markdown徽章集合</title>
     <url>/2018/04/19/markdown-badges/</url>
     <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
@@ -2753,60 +2807,6 @@
 <p>Kotlin + Moshi（不带Kotlin插件）+ Kotshi就是最终解决方案。当然AutoValue之类的也可以，不过没深入研究。</p>
 <p>Kotshi没有采用一劳永逸的方案，而是让每个Kotlin data class类都加一个annotation，再根据它生成一个adapter，<br>在序列化和反序列化时手动处理。</p>
 <p>不算很方便的方案，但也算比<a href="https://medium.com/@MaxMello/most-elegant-way-of-using-gson-kotlin-with-default-values-and-null-safety-b6216ac5328c">通过Backing field处理</a>来的舒服。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>在Android Studio中引入AAR文件</title>
-    <url>/2018/08/13/include-aar/</url>
-    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
-<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
-<p>要解决的问题在于</p>
-<ol>
-<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
-<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
-<li>Module该有好处自然有的了</li>
-<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
-<li>修改后直接复制粘贴AAR就可使用</li>
-</ol>
-<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
-<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
-<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
-<li>修改后复制粘贴AAR才能使用</li>
-<li>AAR的版本被保存在了另一个项目中</li>
-<li>AAR的依赖需要手动添加到项目的依赖中</li>
-<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
-<li>似乎并不能跨module使用</li>
-</ol>
-<p><del>缺点比优点多可还行</del></p>
-<p>个人习惯：</p>
-<ul>
-<li>把名字改为library名+git commit编号</li>
-<li>另建一个文件夹专门放各种AAR</li>
-<li>把修改的项目丢到Github或GitBucket</li>
-<li>在版本控制中删掉所有AAR</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
-<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
-<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
-<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
-<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
-<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
-<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
-<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
-<p>注意<code>name</code>中不带后缀。</p>
-<p>Ta-Da。完成！</p>
-<p>参考:</p>
-<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2929,51 +2929,6 @@
       </categories>
   </entry>
   <entry>
-    <title>sed 使用笔记</title>
-    <url>/2024/04/21/sed/</url>
-    <content><![CDATA[<p><code>sed</code></p>
-<span id="more"></span>
-
-<p><a href="https://regex-vis.com/">https://regex-vis.com/</a></p>
-<ul>
-<li><p>替换<code>oldfile</code>文件中的<strong>每行第一个</strong><code>find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
-<p><code>sed &#39;s/find/replace/&#39; &lt;oldfile &gt;newfile</code></p>
-</li>
-<li><p>替换<code>oldfile</code>文件中的<strong>每一个</strong><code>&lt;space&gt;find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
-<p><code>sed &#39;s/ find/replace/g&#39; &lt;oldfile &gt;newfile</code></p>
-</li>
-<li><p>替换<code>filename</code>文件中的每一个<code>find</code>为<code>replace</code></p>
-<p><code>sed -i &#39;s/find/replace/g&#39; filename</code></p>
-</li>
-<li><p>替换<code>filename</code>文件中的包含<code>Replace</code>文字的每一行中的<code>the</code>为<code>THE</code></p>
-<p><code>sed -i &#39;/Replace/s/the/THE/g&#39; filename</code></p>
-</li>
-<li><p>删除<code>filename</code>文件中的包含<code>Replace</code>文字的每一行</p>
-<p><code>sed -i &#39;/Replace/d&#39; filename</code></p>
-</li>
-<li><p>不使用<code>-i</code>则打印内容</p>
-</li>
-<li><p>运行多条命令</p>
-<ul>
-<li><code>sed -i &#39;...;...&#39; filename</code></li>
-<li><code>sed -i -e &#39;...&#39; -e &#39;...&#39; filename</code></li>
-</ul>
-</li>
-<li><p><code>\/</code>转义<code>/</code>或使用<code>s#find#replace#g</code>, <code>s|find|replace|g</code>, <code>.</code></p>
-</li>
-<li><p>打印出包含<code>usr</code>的每一行: <code>sed &#39;/user/p&#39;</code></p>
-</li>
-<li><p>删除<code>redacted</code>: <code>sed &quot;s/redacted//g filename</code></p>
-</li>
-<li><p>删除空行: <code>sed &quot;/^$/d&quot; filename</code></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Material Desgin响应式布局Android实现思路</title>
     <url>/2018/06/03/reponsive-patterns/</url>
     <content><![CDATA[<p>虽然Google已经放弃了它的Android平板产品，但开发者不会（哭）。</p>
@@ -3019,6 +2974,51 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>sed 使用笔记</title>
+    <url>/2024/04/21/sed/</url>
+    <content><![CDATA[<p><code>sed</code></p>
+<span id="more"></span>
+
+<p><a href="https://regex-vis.com/">https://regex-vis.com/</a></p>
+<ul>
+<li><p>替换<code>oldfile</code>文件中的<strong>每行第一个</strong><code>find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
+<p><code>sed &#39;s/find/replace/&#39; &lt;oldfile &gt;newfile</code></p>
+</li>
+<li><p>替换<code>oldfile</code>文件中的<strong>每一个</strong><code>&lt;space&gt;find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
+<p><code>sed &#39;s/ find/replace/g&#39; &lt;oldfile &gt;newfile</code></p>
+</li>
+<li><p>替换<code>filename</code>文件中的每一个<code>find</code>为<code>replace</code></p>
+<p><code>sed -i &#39;s/find/replace/g&#39; filename</code></p>
+</li>
+<li><p>替换<code>filename</code>文件中的包含<code>Replace</code>文字的每一行中的<code>the</code>为<code>THE</code></p>
+<p><code>sed -i &#39;/Replace/s/the/THE/g&#39; filename</code></p>
+</li>
+<li><p>删除<code>filename</code>文件中的包含<code>Replace</code>文字的每一行</p>
+<p><code>sed -i &#39;/Replace/d&#39; filename</code></p>
+</li>
+<li><p>不使用<code>-i</code>则打印内容</p>
+</li>
+<li><p>运行多条命令</p>
+<ul>
+<li><code>sed -i &#39;...;...&#39; filename</code></li>
+<li><code>sed -i -e &#39;...&#39; -e &#39;...&#39; filename</code></li>
+</ul>
+</li>
+<li><p><code>\/</code>转义<code>/</code>或使用<code>s#find#replace#g</code>, <code>s|find|replace|g</code>, <code>.</code></p>
+</li>
+<li><p>打印出包含<code>usr</code>的每一行: <code>sed &#39;/user/p&#39;</code></p>
+</li>
+<li><p>删除<code>redacted</code>: <code>sed &quot;s/redacted//g filename</code></p>
+</li>
+<li><p>删除空行: <code>sed &quot;/^$/d&quot; filename</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -3091,37 +3091,6 @@
 
 <p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
 <p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>三个和尚没水喝</title>
-    <url>/2018/10/30/thoughts-three-monks/</url>
-    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
-<span id="more"></span>
-
-<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
-<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
-<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
-<p>我们要利用它，让它利于我们 =&gt;</p>
-<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
-<ol>
-<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
-</li>
-<li><p>侧面回避，让问题消失</p>
-<ol>
-<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
-</li>
-<li><p>拉第四个人入伙，配对挑水。</p>
-</li>
-</ol>
-</li>
-<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
-</li>
-</ol>
-<p>=&gt; 这些把戏很常见吧，这就对了。</p>
 ]]></content>
       <categories>
         <category>Thoughts</category>
@@ -3204,6 +3173,37 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>三个和尚没水喝</title>
+    <url>/2018/10/30/thoughts-three-monks/</url>
+    <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
+<span id="more"></span>
+
+<p>发展到二十一世纪，这个现象依然普遍存在 =&gt;</p>
+<p>可以假设这个现象将长时间存在并难以避免或逆转 (=&gt; 激进版：我认为在人类摆脱肉体存在之前做不到) + 我们不能浪费这个寓言故事 =&gt;</p>
+<p>我们要利用这个注定存在现象/事实 + 我们都是<strong>广义</strong>的利己主义者 =&gt;</p>
+<p>我们要利用它，让它利于我们 =&gt;</p>
+<p>利用需要方法 + 解决问题的方案有两种 =&gt;</p>
+<ol>
+<li><p>正面迎击，解决问题：立下规矩，轮流挑水。</p>
+</li>
+<li><p>侧面回避，让问题消失</p>
+<ol>
+<li><p>排挤第三个人，让他退出，回到两个人挑水喝的日子。</p>
+</li>
+<li><p>拉第四个人入伙，配对挑水。</p>
+</li>
+</ol>
+</li>
+<li><p>不解决：那就不喝水喽，喝自己的冰阔落。</p>
+</li>
+</ol>
+<p>=&gt; 这些把戏很常见吧，这就对了。</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
       </categories>
   </entry>
   <entry>
@@ -3309,35 +3309,6 @@
       </categories>
   </entry>
   <entry>
-    <title>更新，还是不更新，这是个问题</title>
-    <url>/2022/05/25/update-or-not/</url>
-    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
-<span id="more"></span>
-
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
-<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
-<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
-<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
-<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
-<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
-<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
-<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
-<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
-<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
-<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
-<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
-<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
-<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
-<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
-<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
-<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
-<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android文字转语音(TTS)引擎</title>
     <url>/2019/03/11/tts/</url>
     <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
@@ -3361,6 +3332,35 @@
 </blockquote>
 <p>怕是不靠谱。</p>
 <h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>更新，还是不更新，这是个问题</title>
+    <url>/2022/05/25/update-or-not/</url>
+    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
+<span id="more"></span>
+
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
+<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
+<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
+<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
+<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
+<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
+<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
+<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
+<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
+<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
+<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
+<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
+<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
+<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
+<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
+<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
+<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
+<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
 ]]></content>
       <categories>
         <category>Android</category>
