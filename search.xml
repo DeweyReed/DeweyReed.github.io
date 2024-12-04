@@ -188,6 +188,25 @@
       </categories>
   </entry>
   <entry>
+    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
+    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
+<span id="more"></span>
+
+<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
+<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
+<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
+<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一些可能有用的Android代码 - IO22版</title>
     <url>/2022/05/29/android-code-snippets-io22/</url>
     <content><![CDATA[<p>记录了一些可以直接拿来使用的内容。出处全是IO视频截图。</p>
@@ -230,25 +249,6 @@
 
 <p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
 <p>代码过于简单以至于不需要其他解释了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些可能有用的Android代码 - Android Makers 2022版</title>
-    <url>/2022/06/25/android-code-snippets-android-makers22/</url>
-    <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
-<span id="more"></span>
-
-<h2 id="buildSrc-Deprecated"><a href="#buildSrc-Deprecated" class="headerlink" title="buildSrc Deprecated"></a>buildSrc Deprecated</h2><p>对编译速度有影响，所以过气了。换用Version Catalogs。</p>
-<h2 id="Single-variant-Libraries"><a href="#Single-variant-Libraries" class="headerlink" title="Single-variant Libraries"></a>Single-variant Libraries</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">androidComponents &#123;</span><br><span class="line">    beforeVariants(selector().withBuildType(<span class="string">&quot;debug&quot;</span>)) &#123; builder -&gt;</span><br><span class="line">        builder.enable = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Disable-Android-Features"><a href="#Disable-Android-Features" class="headerlink" title="Disable Android Features"></a>Disable Android Features</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"># Build features that are disabled by <span class="keyword">default</span> <span class="keyword">in</span> all projects</span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.aidl=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.buildconfig=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.renderscript=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.resvalues=<span class="literal">false</span></span><br><span class="line">android.<span class="keyword">default</span>.buildFeatures.shaders=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="TaskUpToDateValidator-kt"><a href="#TaskUpToDateValidator-kt" class="headerlink" title="TaskUpToDateValidator.kt"></a>TaskUpToDateValidator.kt</h2><p><a href="https://github.com/androidx/androidx/blob/androidx-main/buildSrc/private/src/main/kotlin/androidx/build/uptodatedness/TaskUpToDateValidator.kt">TaskUpToDateValidator.kt</a></p>
-<h2 id="modules-graph-assert"><a href="#modules-graph-assert" class="headerlink" title="modules-graph-assert"></a>modules-graph-assert</h2><p><a href="https://github.com/jraska/modules-graph-assert">https://github.com/jraska/modules-graph-assert</a></p>
-<h2 id="文件保存"><a href="#文件保存" class="headerlink" title="文件保存"></a>文件保存</h2><img src="/2022/06/25/android-code-snippets-android-makers22/save_files.png" class="" title="[save_files.png](.&#x2F;android-code-snippets-android-makers22&#x2F;save_files.png)">
 ]]></content>
       <categories>
         <category>Android</category>
@@ -591,6 +591,59 @@
       </categories>
   </entry>
   <entry>
+    <title>Android上一个简单的Feature Flag实现</title>
+    <url>/2020/04/21/android-feature-flags/</url>
+    <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
+<span id="more"></span>
+
+<p>我个人的需求没原文中那么复杂，只需要一个可以在代码里手动调整的开关，一个可以在运行时进行修改的面板，同时要让R8把未使用的所有代码剔除。</p>
+<p>首先是可以在代码里手动调整的开关，用<code>buildConfigField</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</code>确保IDE不会警告，就像<code>BuildConfig.DEBUG</code>一样。</li>
+</ul>
+<p>整个框架，抄了就走：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Feature</span>(</span><br><span class="line">    <span class="keyword">val</span> key: String,</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> description: String,</span><br><span class="line">    <span class="keyword">val</span> default: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line">) &#123;</span><br><span class="line">    Log(</span><br><span class="line">        key = <span class="string">&quot;feature_log&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;All log to console&quot;</span></span><br><span class="line">    ),</span><br><span class="line">    Network(</span><br><span class="line">        key = <span class="string">&quot;feature_network&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Network&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;Inspect network requests&quot;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> FeatureFlagManager &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> sharedPreferences: SharedPreferences</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">init</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        sharedPreferences = context.safeSharedPreference</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">     * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">     * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">manageFeatures</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">val</span> features = Feature.values()</span><br><span class="line">        MaterialAlertDialogBuilder(context)</span><br><span class="line">            .setCancelable(<span class="literal">false</span>)</span><br><span class="line">            .setTitle(<span class="string">&quot;Feature Flag Manager&quot;</span>)</span><br><span class="line">            .setAdapter(</span><br><span class="line">                <span class="keyword">object</span> : BaseAdapter() &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> = features.size</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Any = features[position]</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemId</span><span class="params">(position: <span class="type">Int</span>)</span></span>: <span class="built_in">Long</span> =</span><br><span class="line">                        features[position].ordinal.toLong()</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">                        position: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                        convertView: <span class="type">View</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">                        parent: <span class="type">ViewGroup</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    )</span></span>: View &#123;</span><br><span class="line">                        <span class="keyword">val</span> view = convertView ?: LayoutInflater.from(context)</span><br><span class="line">                            .inflate(R.layout.list_item_feature_flag, parent, <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">val</span> layout = view.findViewById&lt;ListItemWithLayout&gt;(R.id.listItemFeatureFlag)</span><br><span class="line">                        <span class="keyword">val</span> feature = features[position]</span><br><span class="line">                        layout.listItem.run &#123;</span><br><span class="line">                            setPrimaryText(feature.title)</span><br><span class="line">                            setSecondaryText(feature.description)</span><br><span class="line">                        &#125;</span><br><span class="line">                        layout.getLayoutView&lt;CompoundButton&gt;().run &#123;</span><br><span class="line">                            setOnCheckedChangeListener(<span class="literal">null</span>)</span><br><span class="line">                            isChecked = feature.enabled</span><br><span class="line">                            setOnCheckedChangeListener &#123; buttonView, isChecked -&gt;</span><br><span class="line">                                feature.enabled = isChecked</span><br><span class="line">                                buttonView.indefiniteSnackbar(</span><br><span class="line">                                    message = <span class="string">&quot;Restart the app&quot;</span>,</span><br><span class="line">                                    actionText = <span class="string">&quot;Now&quot;</span>,</span><br><span class="line">                                    action = &#123;</span><br><span class="line">                                        ProcessPhoenix.triggerRebirth(context)</span><br><span class="line">                                    &#125;</span><br><span class="line">                                )</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">return</span> view</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="literal">null</span></span><br><span class="line">            )</span><br><span class="line">            .setPositiveButton(android.R.string.ok, <span class="literal">null</span>)</span><br><span class="line">            .setNegativeButton(android.R.string.cancel, <span class="literal">null</span>)</span><br><span class="line">            .show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> Feature.enabled</span><br><span class="line">        <span class="keyword">get</span>() = sharedPreferences.getBoolean(key, default)</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            sharedPreferences.storeBoolean(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">FeatureFlagManager.<span class="keyword">init</span>(<span class="keyword">this</span>)</span><br><span class="line"><span class="keyword">if</span> (FeatureFlagManager.isFeatureEnabled &#123; Feature.Log &#125;) &#123;</span><br><span class="line">    Timber.plant(Timber.DebugTree())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运作原理：</p>
+<ul>
+<li><p><code>isFeatureEnabled</code></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">    * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">    * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>顾名思义，传Lambda而不是直接传Feature确保R8可以在这段代码没被使用时移除掉它，不然Feature会留在最终的APK里。</p>
+<p>担心性能问题？</p>
+<ul>
+<li>我没做Benchkmark，所以不考虑优化。</li>
+<li>我寻思以大部分应用的水平，这个Lambda根本不在瓶颈上。</li>
+<li>请信任智能的R8，人家比咱上心，也比咱厉害，也许人家已经搞定了。</li>
+<li>Romain Guy大佬怎么做，我就怎么做！</li>
+</ul>
+</li>
+<li><p><code>setAdapter</code></p>
+<p>之所以使用<code>AlertDialog</code>的<code>setAdapter</code>而不是自定义<code>View</code>，是因为这样可以让列表滚动时在顶端和底端有一个分割线，我挺喜欢这个设计，但缺点就是要处理<code>ListView</code>😢</p>
+</li>
+<li><p><code>ListView</code>的每个条目的命名<code>R.layout.list_item_feature_flag</code></p>
+<p>我之前用的是<code>R.layout.item_feature_flag</code>，但发现R8在把整个<code>Feature</code>移除后死活不把这个文件处理掉，查看<code>resources.txt</code>并研究后才发现，所有以<code>item</code>开头的资源，都不会被处理（当然还有其它各种开头，<a href="https://android.googlesource.com/platform/tools/base/+/master/build-system/gradle-core/src/main/groovy/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java#827">具体在这里</a>）。修改为<code>list</code>开头后就好了，虽然文件还在，但里面的内容已经没了。</p>
+<p>另一种方法是根据<a href="https://developer.android.com/studio/build/shrink-code.html#troubleshoot-resource-shrink">官方文档底部的方法</a>来确保这些文件被移除。我懒，所以没试这种方法。</p>
+</li>
+<li><p><code>getView</code>绑定</p>
+<p> <code>ListItemWithLayout</code>就是一个<code>CompoundButton</code>配一个<code>TextView</code>，不稀奇。包括其他的一些方法，都是简单包装了一下，顾名思义。</p>
+</li>
+<li><p><code>ProcessPhoenix.triggerRebirth(context)</code></p>
+<p> 我这里用<a href="https://github.com/JakeWharton/ProcessPhoenix">ProcessPhoenix</a>来强制重启，但它有点Bug，需要你在启动的<code>Activity</code>加一个category：<code>&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</code>。</p>
+<p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一些Android开发死局</title>
     <url>/2022/06/26/android-forbidden-topics/</url>
     <content><![CDATA[<p>有些东西就是做不到，除非，加很多很多钱和时间。</p>
@@ -657,59 +710,6 @@
 <ul>
 <li><a href="https://www.v2ex.com/t/859166">深圳注册公司的坑，一些经验分享（视频和文档）</a></li>
 <li><a href="https://www.v2ex.com/t/747843">公司注册下来了，分享一下费用、流程以及遇到的坑</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android上一个简单的Feature Flag实现</title>
-    <url>/2020/04/21/android-feature-flags/</url>
-    <content><![CDATA[<p>起因是看了Jeroen Mols大佬的<a href="https://jeroenmols.com/blog/2019/08/13/featureflags/">Feature Flags</a>系列，深受启发。在看了代码后，萌生了写一个适合自己的Feature Flag框架。现在整出来了，但发现使用场景有点局限😂，所以把代码丢在这里以备不时之需。</p>
-<span id="more"></span>
-
-<p>我个人的需求没原文中那么复杂，只需要一个可以在代码里手动调整的开关，一个可以在运行时进行修改的面板，同时要让R8把未使用的所有代码剔除。</p>
-<p>首先是可以在代码里手动调整的开关，用<code>buildConfigField</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        debug &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField &quot;boolean&quot;, &quot;FEATURE_FLAG&quot;, &quot;false&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>&quot;Boolean.parseBoolean(\&quot;true\&quot;)&quot;</code>确保IDE不会警告，就像<code>BuildConfig.DEBUG</code>一样。</li>
-</ul>
-<p>整个框架，抄了就走：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Feature</span>(</span><br><span class="line">    <span class="keyword">val</span> key: String,</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> description: String,</span><br><span class="line">    <span class="keyword">val</span> default: <span class="built_in">Boolean</span> = <span class="literal">true</span></span><br><span class="line">) &#123;</span><br><span class="line">    Log(</span><br><span class="line">        key = <span class="string">&quot;feature_log&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Log&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;All log to console&quot;</span></span><br><span class="line">    ),</span><br><span class="line">    Network(</span><br><span class="line">        key = <span class="string">&quot;feature_network&quot;</span>,</span><br><span class="line">        title = <span class="string">&quot;Network&quot;</span>,</span><br><span class="line">        description = <span class="string">&quot;Inspect network requests&quot;</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">object</span> FeatureFlagManager &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> sharedPreferences: SharedPreferences</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">init</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        sharedPreferences = context.safeSharedPreference</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">     * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">     * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">manageFeatures</span><span class="params">(context: <span class="type">Context</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">val</span> features = Feature.values()</span><br><span class="line">        MaterialAlertDialogBuilder(context)</span><br><span class="line">            .setCancelable(<span class="literal">false</span>)</span><br><span class="line">            .setTitle(<span class="string">&quot;Feature Flag Manager&quot;</span>)</span><br><span class="line">            .setAdapter(</span><br><span class="line">                <span class="keyword">object</span> : BaseAdapter() &#123;</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> = features.size</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Any = features[position]</span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemId</span><span class="params">(position: <span class="type">Int</span>)</span></span>: <span class="built_in">Long</span> =</span><br><span class="line">                        features[position].ordinal.toLong()</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">                        position: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                        convertView: <span class="type">View</span>?,</span></span></span><br><span class="line"><span class="params"><span class="function">                        parent: <span class="type">ViewGroup</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    )</span></span>: View &#123;</span><br><span class="line">                        <span class="keyword">val</span> view = convertView ?: LayoutInflater.from(context)</span><br><span class="line">                            .inflate(R.layout.list_item_feature_flag, parent, <span class="literal">false</span>)</span><br><span class="line">                        <span class="keyword">val</span> layout = view.findViewById&lt;ListItemWithLayout&gt;(R.id.listItemFeatureFlag)</span><br><span class="line">                        <span class="keyword">val</span> feature = features[position]</span><br><span class="line">                        layout.listItem.run &#123;</span><br><span class="line">                            setPrimaryText(feature.title)</span><br><span class="line">                            setSecondaryText(feature.description)</span><br><span class="line">                        &#125;</span><br><span class="line">                        layout.getLayoutView&lt;CompoundButton&gt;().run &#123;</span><br><span class="line">                            setOnCheckedChangeListener(<span class="literal">null</span>)</span><br><span class="line">                            isChecked = feature.enabled</span><br><span class="line">                            setOnCheckedChangeListener &#123; buttonView, isChecked -&gt;</span><br><span class="line">                                feature.enabled = isChecked</span><br><span class="line">                                buttonView.indefiniteSnackbar(</span><br><span class="line">                                    message = <span class="string">&quot;Restart the app&quot;</span>,</span><br><span class="line">                                    actionText = <span class="string">&quot;Now&quot;</span>,</span><br><span class="line">                                    action = &#123;</span><br><span class="line">                                        ProcessPhoenix.triggerRebirth(context)</span><br><span class="line">                                    &#125;</span><br><span class="line">                                )</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">return</span> view</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="literal">null</span></span><br><span class="line">            )</span><br><span class="line">            .setPositiveButton(android.R.string.ok, <span class="literal">null</span>)</span><br><span class="line">            .setNegativeButton(android.R.string.cancel, <span class="literal">null</span>)</span><br><span class="line">            .show()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> Feature.enabled</span><br><span class="line">        <span class="keyword">get</span>() = sharedPreferences.getBoolean(key, default)</span><br><span class="line">        <span class="keyword">set</span>(value) &#123;</span><br><span class="line">            sharedPreferences.storeBoolean(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">FeatureFlagManager.<span class="keyword">init</span>(<span class="keyword">this</span>)</span><br><span class="line"><span class="keyword">if</span> (FeatureFlagManager.isFeatureEnabled &#123; Feature.Log &#125;) &#123;</span><br><span class="line">    Timber.plant(Timber.DebugTree())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运作原理：</p>
-<ul>
-<li><p><code>isFeatureEnabled</code></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * If we pass a value directly, this method won&#x27;t get removed by R8.</span></span><br><span class="line"><span class="comment">    * Passing a lambda does the job.</span></span><br><span class="line"><span class="comment">    * I learn this at https://youtu.be/MYQWtNG2so8?t=362</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">isFeatureEnabled</span><span class="params">(f: () -&gt; <span class="type">Feature</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!BuildConfig.FEATURE_FLAG) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> f.invoke().enabled</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>顾名思义，传Lambda而不是直接传Feature确保R8可以在这段代码没被使用时移除掉它，不然Feature会留在最终的APK里。</p>
-<p>担心性能问题？</p>
-<ul>
-<li>我没做Benchkmark，所以不考虑优化。</li>
-<li>我寻思以大部分应用的水平，这个Lambda根本不在瓶颈上。</li>
-<li>请信任智能的R8，人家比咱上心，也比咱厉害，也许人家已经搞定了。</li>
-<li>Romain Guy大佬怎么做，我就怎么做！</li>
-</ul>
-</li>
-<li><p><code>setAdapter</code></p>
-<p>之所以使用<code>AlertDialog</code>的<code>setAdapter</code>而不是自定义<code>View</code>，是因为这样可以让列表滚动时在顶端和底端有一个分割线，我挺喜欢这个设计，但缺点就是要处理<code>ListView</code>😢</p>
-</li>
-<li><p><code>ListView</code>的每个条目的命名<code>R.layout.list_item_feature_flag</code></p>
-<p>我之前用的是<code>R.layout.item_feature_flag</code>，但发现R8在把整个<code>Feature</code>移除后死活不把这个文件处理掉，查看<code>resources.txt</code>并研究后才发现，所有以<code>item</code>开头的资源，都不会被处理（当然还有其它各种开头，<a href="https://android.googlesource.com/platform/tools/base/+/master/build-system/gradle-core/src/main/groovy/com/android/build/gradle/tasks/ResourceUsageAnalyzer.java#827">具体在这里</a>）。修改为<code>list</code>开头后就好了，虽然文件还在，但里面的内容已经没了。</p>
-<p>另一种方法是根据<a href="https://developer.android.com/studio/build/shrink-code.html#troubleshoot-resource-shrink">官方文档底部的方法</a>来确保这些文件被移除。我懒，所以没试这种方法。</p>
-</li>
-<li><p><code>getView</code>绑定</p>
-<p> <code>ListItemWithLayout</code>就是一个<code>CompoundButton</code>配一个<code>TextView</code>，不稀奇。包括其他的一些方法，都是简单包装了一下，顾名思义。</p>
-</li>
-<li><p><code>ProcessPhoenix.triggerRebirth(context)</code></p>
-<p> 我这里用<a href="https://github.com/JakeWharton/ProcessPhoenix">ProcessPhoenix</a>来强制重启，但它有点Bug，需要你在启动的<code>Activity</code>加一个category：<code>&lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</code>。</p>
-<p> 我也找了一下<code>chromium</code>是怎么重启的，发现人家使用JNI重启进程，我寻思有没有谁来打包成一个库呀？</p>
-</li>
 </ul>
 ]]></content>
       <categories>
@@ -972,28 +972,6 @@
       </categories>
   </entry>
   <entry>
-    <title>使用json-server模拟后台</title>
-    <url>/2019/10/02/android-mock-server/</url>
-    <content><![CDATA[<p>笔记。</p>
-<span id="more"></span>
-
-<p><a href="https://github.com/typicode/json-server">json-server</a></p>
-<ol>
-<li><p><code>yarn global add json-server</code></p>
-</li>
-<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
-<p> <code>db.json</code>: 数据文件</p>
-<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
-<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android多进程开发笔记</title>
     <url>/2024/06/23/android-multiprocessing/</url>
     <content><![CDATA[<p>RT</p>
@@ -1020,6 +998,28 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用json-server模拟后台</title>
+    <url>/2019/10/02/android-mock-server/</url>
+    <content><![CDATA[<p>笔记。</p>
+<span id="more"></span>
+
+<p><a href="https://github.com/typicode/json-server">json-server</a></p>
+<ol>
+<li><p><code>yarn global add json-server</code></p>
+</li>
+<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
+<p> <code>db.json</code>: 数据文件</p>
+<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
+<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1199,45 +1199,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android OpenGL Texture 坐标原点问题</title>
-    <url>/2023/08/23/android-opengl-coordinates/</url>
-    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
-<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
-<span id="more"></span>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
-
-<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
-
-<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
-
-<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
-<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
-<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
-<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
-<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
-<blockquote>
-<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
-</blockquote>
-<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
-<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
-<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
-<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
-<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
-<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
-<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
-<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
-<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
-<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
-<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
     <url>/2023/06/08/android-opengl-matrix/</url>
     <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
@@ -1296,178 +1257,39 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Jetpack Paging3 从入门到入土</title>
-    <url>/2022/01/31/android-paging3/</url>
-    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
-<p>本文记录了个人实现分页的一些弯路与经验。</p>
+    <title>Android OpenGL Texture 坐标原点问题</title>
+    <url>/2023/08/23/android-opengl-coordinates/</url>
+    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
+<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
 <span id="more"></span>
 
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
-<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
-<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
-<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
-</ol>
-<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
-<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
-<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
-<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
-<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
-<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
-<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
-<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
-<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
-<p><strong>可是</strong>，</p>
-<ol>
-<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
-<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
-<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
-</li>
-<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
-<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
-</li>
-<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
-<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
-<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
- <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
 
-<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
-<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
-<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
-<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
-<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
-</li>
-</ol>
-<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
-<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
-<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
-<ul>
-<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Proguard Hell</title>
-    <url>/2018/12/16/android-proguard-hell/</url>
-    <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
-<span id="more"></span>
+<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
 
-<p>Proguard基本上有个任务，精简（删除），混淆，优化。</p>
-<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><ul>
-<li><p>-keep 不精简且不混淆这个类和它的成员，“别摸这个类”</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keep class android.support.annotation.Keep</span><br><span class="line">-keep class androidx.annotation.Keep</span><br><span class="line"></span><br><span class="line">-keep @android.support.annotation.Keep class * &#123;*;&#125;</span><br><span class="line">-keep @androidx.annotation.Keep class * &#123;*;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepclasseswithmemebers 效果跟上一条一致，但可以更具体地声明包含某种成员的类。</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepclassmembers -keep针对某个类，这个针对某个成员，效果一致（不精简且不混淆）。“别摸这个类的这个成员”</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final ** CREATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Preserve annotated Javascript interface methods.</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    @android.webkit.JavascriptInterface &lt;methods&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepnames 只精简不混淆</p>
-</li>
-<li><p>-keepclasseswithmembernames 效果跟上一条一致，但可以更具体地声明包含某种成员的类</p>
-</li>
-<li><p>-keepclassmembernames 只针对这个类的这个成员，只精简不混淆。不影响这个类。</p>
-</li>
-</ul>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>seeds.txt：第一步(Read Input)的产物。内容是所有匹配proguard-rules的类和成员。是Proguard没有摸过的内容。</p>
-<p>usage.txt：第二步(Shrink)的产物。在知道不能摸的内容后，这里是所有Proguard摸过的内容。</p>
-<p>mapping.txt：第三步(Obfuscate)的产物，记录了Proguard怎么摸的。是一个混淆前后的对应表。</p>
-<p>dump.txt：第四步(Dump)的产物，Progurad处理后的，未压缩或未优化的结果。体量巨大，但可以用于不反编译APK就可以看到APK的内容。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><p><a href="https://developer.android.com/studio/build/shrink-code">Shrink your code and resources</a></p>
-</li>
-<li><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74">Troubleshooting ProGuard issues on Android</a></p>
-</li>
-<li><p><a href="https://jebware.com/blog/?p=484">Reading ProGuard’s Outputs</a></p>
-</li>
-<li><p><a href="https://jebware.com/blog/?p=498">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
-</li>
-<li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
+<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
 
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：Dalvik和ART</title>
-    <url>/2019/02/15/android-requirements-dalvik-art/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
-<span id="more"></span>
-
-<p><strong>更新</strong></p>
-<p><a href="https://proandroiddev.com/android-cpu-compilers-d8-r8-a3aa2bfbc109">Android CPU, Compilers, D8 &amp; R8</a>，这篇文章中的内容更准确。</p>
-<p><strong>完</strong></p>
-<h2 id="Dalvik"><a href="#Dalvik" class="headerlink" title="Dalvik"></a>Dalvik</h2><p>运行在4.4之前设备上的虚拟机。JIT编译，每应用一个，运行着Dalvik字节码（.dex）的文件。在运行时把.dex字节码转化为硬件特有的指令。</p>
-<p>要塞到小设备（体积、内存）里所以体量很小、优化很少。内存分配和回收很慢。堆碎片化（有什么专业的对应翻译吗）严重。适合不怎么分配内存的应用，因此早期Android开发会教导大伙儿尽量少分配对象。</p>
-<p>Dalvik虽然为低内存设备优化过，但依然使用了JIT。</p>
-<h2 id="ART"><a href="#ART" class="headerlink" title="ART"></a>ART</h2><p>在4.4需手动开启、5.0之后默认开始。依然运行着.dex字节码，相比Dalvik，ART各方面都更好。随着新版本的推出，ART性能也在越来越好。整个Android平台也在和它互相适配。</p>
-<p>主要的优势有：</p>
-<h3 id="1-AOT"><a href="#1-AOT" class="headerlink" title="1. AOT"></a>1. AOT</h3><p>传统的VM是解释型的，一行一行转换巨慢。</p>
-<p>后来出现了JIT，放到虚拟机里跑字节码，但它延迟大、占用内存大，但优点是可以观察代码的具体运行，并进行直接的优化。</p>
-<p>AOT只在安装应用时把代码编译为机器对应的字节码，这样运行时更快，内存占用更小。因为第一次运行编译时时间多，所以可以在这一次里进行更细致的优化。这和移动设备要求延迟低、内存小的相性很般配。</p>
-<ul>
-<li>早期的iOS比Android跑的快，有一部分原因就是其设备架构统一，所以就可以跑编译后的代码，当然快啦。</li>
-<li>JIT也在运行啦。在一些代码瓶颈处（Hotspot）会把代码留下来以后跑JIT。</li>
-</ul>
-<h3 id="2-优化了的GC"><a href="#2-优化了的GC" class="headerlink" title="2. 优化了的GC"></a>2. 优化了的GC</h3><h4 id="Dalvik的行为"><a href="#Dalvik的行为" class="headerlink" title="Dalvik的行为"></a>Dalvik的行为</h4><p>分配：从头找一个足够的空挡放进去。</p>
-<p>回收：</p>
-<ol>
-<li>【暂停所有线程】来找根索引。</li>
-<li>所有线程恢复运行，Dalvik顺藤摸瓜，从根索引找到所有可以到达的对象，并标记它们。</li>
-<li>再次【暂停所有线程】来找所有可以到达的对象，因为程序可能在第二步又分配的对象。</li>
-<li>回收掉没有被标记的对象</li>
-</ol>
-<p>如果要分配一个大对象，内存又不够用，但内存里又有马上要被回收但还没被回收的对象，这时就会触发<code>GC_FOR_ALLOC</code>，专门为了这次分配回收一次。</p>
-<p>如果要分配一个大对象，内存又不够用，但内存里也没有可回收的对象，这时就会增大堆或者out of memory。</p>
-<p>Dalvik不会压缩/移动内存来腾空间，导致堆碎片化严重。</p>
-<h4 id="ART的行为"><a href="#ART的行为" class="headerlink" title="ART的行为"></a>ART的行为</h4><p>全方面地更快啦。</p>
-<p>分配：<code>RosAlloc</code>取代了原来的<code>dlmalloc</code>（是C和C++中使用的算法）。特点有</p>
-<ol>
-<li>可以针对某一线程进行内存分配</li>
-<li>将小对象内存分配打包</li>
-<li>将大对象内存分配按页对齐</li>
-<li>更好的上锁和解锁</li>
-</ol>
-<p>分配大对象（<strong>现在</strong>只是针对至少12KB的primitive数组或String）时，不是找空的坑位，而是直接放到空旷的某个地方。</p>
-<p>ART学会了通过压缩/移动内存来腾空间，堆碎片化解决了。ART会在应用进入后台后，不影响用户体验时，再进行内存整理，<strong>或者</strong>应用在前台，而急需内存时。</p>
-<p>回收：</p>
-<p>四个阶段中的第一个阶段不再暂停其他线程。第三个阶段也更快了。</p>
-<p>Minor GC：跟踪所有上一次GC后分配的对象，回收时先处理它们，因为它们寿命更短，处理更快。</p>
-<h3 id="牛轧糖的ART"><a href="#牛轧糖的ART" class="headerlink" title="牛轧糖的ART"></a>牛轧糖的ART</h3><p>把分配器用汇编代码重写了一遍。</p>
-<h3 id="奥利奥的ART"><a href="#奥利奥的ART" class="headerlink" title="奥利奥的ART"></a>奥利奥的ART</h3><p>新的回收器，可以在前台进行持续地内存优化/压缩。结果就是整个系统的内存占用和堆碎片化都有了大幅度优化。移动内存只需要移动指针。</p>
-<p>内存分配更快了导致synchronized的对象池的性能有一些情况下比直接分配更差。</p>
-<p>AOT跟JIT合作，情况更复杂了。安装时并不会完全编译代码，以此提升安装速度。第一次运行时依赖JIT，然后找到运行瓶颈，再在后台进行AOT和不断地优化。这一过程不断重复，结果就是应用越用越快。</p>
-<p>此外还有大量大量的优化。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a href="https://source.android.com/devices/tech/dalvik">https://source.android.com/devices/tech/dalvik</a></li>
-<li><a href="https://www.quora.com/From-what-Ive-read-online-it-seems-like-Google-is-planning-to-default-to-ART-in-a-future-release-Why-is-ART-better-than-Dalvik">https://www.quora.com/From-what-Ive-read-online-it-seems-like-Google-is-planning-to-default-to-ART-in-a-future-release-Why-is-ART-better-than-Dalvik</a></li>
-<li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
-<li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
-</ol>
+<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
+<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
+<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
+<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
+<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
+<blockquote>
+<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
+</blockquote>
+<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
+<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
+<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
+<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
+<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
+<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
+<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
+<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
+<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
+<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
+<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1618,6 +1440,184 @@
 </li>
 </ul>
 <h3 id="2023年12月19日"><a href="#2023年12月19日" class="headerlink" title="2023年12月19日"></a>2023年12月19日</h3><p>最近看了<a href="https://github.com/android/nowinandroid">nowinandroid</a>。从架构上来讲，并没有什么新增的地方。但我发现整个项目比较零碎，并没有之前iosched的浑然一体的感觉。大量的实验API和不少TODO都让这个项目变得对新人不是很友好。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Jetpack Paging3 从入门到入土</title>
+    <url>/2022/01/31/android-paging3/</url>
+    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
+<p>本文记录了个人实现分页的一些弯路与经验。</p>
+<span id="more"></span>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
+<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
+<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
+</ol>
+<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
+<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
+<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
+<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
+<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
+<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
+<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
+<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
+<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
+<p><strong>可是</strong>，</p>
+<ol>
+<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
+<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
+<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
+</li>
+<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
+<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
+</li>
+<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
+<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
+<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
+ <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
+<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
+<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
+<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
+<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
+</li>
+</ol>
+<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
+<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
+<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
+<ul>
+<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Proguard Hell</title>
+    <url>/2018/12/16/android-proguard-hell/</url>
+    <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
+<span id="more"></span>
+
+<p>Proguard基本上有个任务，精简（删除），混淆，优化。</p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><ul>
+<li><p>-keep 不精简且不混淆这个类和它的成员，“别摸这个类”</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keep class android.support.annotation.Keep</span><br><span class="line">-keep class androidx.annotation.Keep</span><br><span class="line"></span><br><span class="line">-keep @android.support.annotation.Keep class * &#123;*;&#125;</span><br><span class="line">-keep @androidx.annotation.Keep class * &#123;*;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepclasseswithmemebers 效果跟上一条一致，但可以更具体地声明包含某种成员的类。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepclassmembers -keep针对某个类，这个针对某个成员，效果一致（不精简且不混淆）。“别摸这个类的这个成员”</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final ** CREATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Preserve annotated Javascript interface methods.</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    @android.webkit.JavascriptInterface &lt;methods&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepnames 只精简不混淆</p>
+</li>
+<li><p>-keepclasseswithmembernames 效果跟上一条一致，但可以更具体地声明包含某种成员的类</p>
+</li>
+<li><p>-keepclassmembernames 只针对这个类的这个成员，只精简不混淆。不影响这个类。</p>
+</li>
+</ul>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>seeds.txt：第一步(Read Input)的产物。内容是所有匹配proguard-rules的类和成员。是Proguard没有摸过的内容。</p>
+<p>usage.txt：第二步(Shrink)的产物。在知道不能摸的内容后，这里是所有Proguard摸过的内容。</p>
+<p>mapping.txt：第三步(Obfuscate)的产物，记录了Proguard怎么摸的。是一个混淆前后的对应表。</p>
+<p>dump.txt：第四步(Dump)的产物，Progurad处理后的，未压缩或未优化的结果。体量巨大，但可以用于不反编译APK就可以看到APK的内容。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p><a href="https://developer.android.com/studio/build/shrink-code">Shrink your code and resources</a></p>
+</li>
+<li><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74">Troubleshooting ProGuard issues on Android</a></p>
+</li>
+<li><p><a href="https://jebware.com/blog/?p=484">Reading ProGuard’s Outputs</a></p>
+</li>
+<li><p><a href="https://jebware.com/blog/?p=498">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
+</li>
+<li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：Dalvik和ART</title>
+    <url>/2019/02/15/android-requirements-dalvik-art/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
+<span id="more"></span>
+
+<p><strong>更新</strong></p>
+<p><a href="https://proandroiddev.com/android-cpu-compilers-d8-r8-a3aa2bfbc109">Android CPU, Compilers, D8 &amp; R8</a>，这篇文章中的内容更准确。</p>
+<p><strong>完</strong></p>
+<h2 id="Dalvik"><a href="#Dalvik" class="headerlink" title="Dalvik"></a>Dalvik</h2><p>运行在4.4之前设备上的虚拟机。JIT编译，每应用一个，运行着Dalvik字节码（.dex）的文件。在运行时把.dex字节码转化为硬件特有的指令。</p>
+<p>要塞到小设备（体积、内存）里所以体量很小、优化很少。内存分配和回收很慢。堆碎片化（有什么专业的对应翻译吗）严重。适合不怎么分配内存的应用，因此早期Android开发会教导大伙儿尽量少分配对象。</p>
+<p>Dalvik虽然为低内存设备优化过，但依然使用了JIT。</p>
+<h2 id="ART"><a href="#ART" class="headerlink" title="ART"></a>ART</h2><p>在4.4需手动开启、5.0之后默认开始。依然运行着.dex字节码，相比Dalvik，ART各方面都更好。随着新版本的推出，ART性能也在越来越好。整个Android平台也在和它互相适配。</p>
+<p>主要的优势有：</p>
+<h3 id="1-AOT"><a href="#1-AOT" class="headerlink" title="1. AOT"></a>1. AOT</h3><p>传统的VM是解释型的，一行一行转换巨慢。</p>
+<p>后来出现了JIT，放到虚拟机里跑字节码，但它延迟大、占用内存大，但优点是可以观察代码的具体运行，并进行直接的优化。</p>
+<p>AOT只在安装应用时把代码编译为机器对应的字节码，这样运行时更快，内存占用更小。因为第一次运行编译时时间多，所以可以在这一次里进行更细致的优化。这和移动设备要求延迟低、内存小的相性很般配。</p>
+<ul>
+<li>早期的iOS比Android跑的快，有一部分原因就是其设备架构统一，所以就可以跑编译后的代码，当然快啦。</li>
+<li>JIT也在运行啦。在一些代码瓶颈处（Hotspot）会把代码留下来以后跑JIT。</li>
+</ul>
+<h3 id="2-优化了的GC"><a href="#2-优化了的GC" class="headerlink" title="2. 优化了的GC"></a>2. 优化了的GC</h3><h4 id="Dalvik的行为"><a href="#Dalvik的行为" class="headerlink" title="Dalvik的行为"></a>Dalvik的行为</h4><p>分配：从头找一个足够的空挡放进去。</p>
+<p>回收：</p>
+<ol>
+<li>【暂停所有线程】来找根索引。</li>
+<li>所有线程恢复运行，Dalvik顺藤摸瓜，从根索引找到所有可以到达的对象，并标记它们。</li>
+<li>再次【暂停所有线程】来找所有可以到达的对象，因为程序可能在第二步又分配的对象。</li>
+<li>回收掉没有被标记的对象</li>
+</ol>
+<p>如果要分配一个大对象，内存又不够用，但内存里又有马上要被回收但还没被回收的对象，这时就会触发<code>GC_FOR_ALLOC</code>，专门为了这次分配回收一次。</p>
+<p>如果要分配一个大对象，内存又不够用，但内存里也没有可回收的对象，这时就会增大堆或者out of memory。</p>
+<p>Dalvik不会压缩/移动内存来腾空间，导致堆碎片化严重。</p>
+<h4 id="ART的行为"><a href="#ART的行为" class="headerlink" title="ART的行为"></a>ART的行为</h4><p>全方面地更快啦。</p>
+<p>分配：<code>RosAlloc</code>取代了原来的<code>dlmalloc</code>（是C和C++中使用的算法）。特点有</p>
+<ol>
+<li>可以针对某一线程进行内存分配</li>
+<li>将小对象内存分配打包</li>
+<li>将大对象内存分配按页对齐</li>
+<li>更好的上锁和解锁</li>
+</ol>
+<p>分配大对象（<strong>现在</strong>只是针对至少12KB的primitive数组或String）时，不是找空的坑位，而是直接放到空旷的某个地方。</p>
+<p>ART学会了通过压缩/移动内存来腾空间，堆碎片化解决了。ART会在应用进入后台后，不影响用户体验时，再进行内存整理，<strong>或者</strong>应用在前台，而急需内存时。</p>
+<p>回收：</p>
+<p>四个阶段中的第一个阶段不再暂停其他线程。第三个阶段也更快了。</p>
+<p>Minor GC：跟踪所有上一次GC后分配的对象，回收时先处理它们，因为它们寿命更短，处理更快。</p>
+<h3 id="牛轧糖的ART"><a href="#牛轧糖的ART" class="headerlink" title="牛轧糖的ART"></a>牛轧糖的ART</h3><p>把分配器用汇编代码重写了一遍。</p>
+<h3 id="奥利奥的ART"><a href="#奥利奥的ART" class="headerlink" title="奥利奥的ART"></a>奥利奥的ART</h3><p>新的回收器，可以在前台进行持续地内存优化/压缩。结果就是整个系统的内存占用和堆碎片化都有了大幅度优化。移动内存只需要移动指针。</p>
+<p>内存分配更快了导致synchronized的对象池的性能有一些情况下比直接分配更差。</p>
+<p>AOT跟JIT合作，情况更复杂了。安装时并不会完全编译代码，以此提升安装速度。第一次运行时依赖JIT，然后找到运行瓶颈，再在后台进行AOT和不断地优化。这一过程不断重复，结果就是应用越用越快。</p>
+<p>此外还有大量大量的优化。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://source.android.com/devices/tech/dalvik">https://source.android.com/devices/tech/dalvik</a></li>
+<li><a href="https://www.quora.com/From-what-Ive-read-online-it-seems-like-Google-is-planning-to-default-to-ART-in-a-future-release-Why-is-ART-better-than-Dalvik">https://www.quora.com/From-what-Ive-read-online-it-seems-like-Google-is-planning-to-default-to-ART-in-a-future-release-Why-is-ART-better-than-Dalvik</a></li>
+<li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
+<li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
+<span id="more"></span>
+
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1878,8 +1878,13 @@
 <li>Disable <code>Render documentation comments</code> and <code>Reader Mode</code></li>
 </ul>
 </li>
+<li><code>Code Completion</code> - Disable <code>Match case</code></li>
 <li><code>Console</code> - <code>Default Encoding</code>: <code>UTF-8</code></li>
-<li><code>Smart Keys</code>: Enable <code>Use &quot;CamelHumps&quot; Words</code></li>
+<li><code>Smart Keys</code><ul>
+<li>Enable <code>Use &quot;CamelHumps&quot; Words</code></li>
+<li>Disable `Reformat again to remove custom line breaks</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>Font</code> - <code>Font</code>: <code>Consolas</code>; <code>Size</code>: <code>22.0</code></li>
@@ -2095,6 +2100,24 @@
       </categories>
   </entry>
   <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -2128,24 +2151,6 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2482,29 +2487,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2549,6 +2531,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2574,6 +2579,32 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>灰度显示</title>
+    <url>/2018/11/04/greyscale/</url>
+    <content><![CDATA[<p>搜集的一些如何在电子设备上打开灰度显示的设置。</p>
+<span id="more"></span>
+
+<ul>
+<li><p>Windows10</p>
+<ul>
+<li>设置搜索“颜色滤镜”，勾选“允许使用快捷键打开或关闭滤镜”，把滤镜设置为“灰度”。使用Windows + Ctrl + C切换灰度。</li>
+<li><a href="https://justgetflux.com/">flux</a>，最新版(4.84)有灰度设置。</li>
+</ul>
+</li>
+<li><p>Android 5.0及以后</p>
+<ul>
+<li>开发者设置，从最后开始找“模拟颜色空间”，设置为“全色盲”。</li>
+<li>应用<a href="https://github.com/fei-ke/Greyscale">灰度</a>，或在酷安搜索。</li>
+</ul>
+</li>
+</ul>
+<p>其他的，有缘再添加吧。</p>
+]]></content>
+      <categories>
+        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -2643,32 +2674,6 @@
 ]]></content>
       <categories>
         <category>Gaming</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>灰度显示</title>
-    <url>/2018/11/04/greyscale/</url>
-    <content><![CDATA[<p>搜集的一些如何在电子设备上打开灰度显示的设置。</p>
-<span id="more"></span>
-
-<ul>
-<li><p>Windows10</p>
-<ul>
-<li>设置搜索“颜色滤镜”，勾选“允许使用快捷键打开或关闭滤镜”，把滤镜设置为“灰度”。使用Windows + Ctrl + C切换灰度。</li>
-<li><a href="https://justgetflux.com/">flux</a>，最新版(4.84)有灰度设置。</li>
-</ul>
-</li>
-<li><p>Android 5.0及以后</p>
-<ul>
-<li>开发者设置，从最后开始找“模拟颜色空间”，设置为“全色盲”。</li>
-<li>应用<a href="https://github.com/fei-ke/Greyscale">灰度</a>，或在酷安搜索。</li>
-</ul>
-</li>
-</ul>
-<p>其他的，有缘再添加吧。</p>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -2929,6 +2934,51 @@
       </categories>
   </entry>
   <entry>
+    <title>sed 使用笔记</title>
+    <url>/2024/04/21/sed/</url>
+    <content><![CDATA[<p><code>sed</code></p>
+<span id="more"></span>
+
+<p><a href="https://regex-vis.com/">https://regex-vis.com/</a></p>
+<ul>
+<li><p>替换<code>oldfile</code>文件中的<strong>每行第一个</strong><code>find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
+<p><code>sed &#39;s/find/replace/&#39; &lt;oldfile &gt;newfile</code></p>
+</li>
+<li><p>替换<code>oldfile</code>文件中的<strong>每一个</strong><code>&lt;space&gt;find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
+<p><code>sed &#39;s/ find/replace/g&#39; &lt;oldfile &gt;newfile</code></p>
+</li>
+<li><p>替换<code>filename</code>文件中的每一个<code>find</code>为<code>replace</code></p>
+<p><code>sed -i &#39;s/find/replace/g&#39; filename</code></p>
+</li>
+<li><p>替换<code>filename</code>文件中的包含<code>Replace</code>文字的每一行中的<code>the</code>为<code>THE</code></p>
+<p><code>sed -i &#39;/Replace/s/the/THE/g&#39; filename</code></p>
+</li>
+<li><p>删除<code>filename</code>文件中的包含<code>Replace</code>文字的每一行</p>
+<p><code>sed -i &#39;/Replace/d&#39; filename</code></p>
+</li>
+<li><p>不使用<code>-i</code>则打印内容</p>
+</li>
+<li><p>运行多条命令</p>
+<ul>
+<li><code>sed -i &#39;...;...&#39; filename</code></li>
+<li><code>sed -i -e &#39;...&#39; -e &#39;...&#39; filename</code></li>
+</ul>
+</li>
+<li><p><code>\/</code>转义<code>/</code>或使用<code>s#find#replace#g</code>, <code>s|find|replace|g</code>, <code>.</code></p>
+</li>
+<li><p>打印出包含<code>usr</code>的每一行: <code>sed &#39;/user/p&#39;</code></p>
+</li>
+<li><p>删除<code>redacted</code>: <code>sed &quot;s/redacted//g filename</code></p>
+</li>
+<li><p>删除空行: <code>sed &quot;/^$/d&quot; filename</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Desgin响应式布局Android实现思路</title>
     <url>/2018/06/03/reponsive-patterns/</url>
     <content><![CDATA[<p>虽然Google已经放弃了它的Android平板产品，但开发者不会（哭）。</p>
@@ -2998,51 +3048,6 @@
 ]]></content>
       <categories>
         <category>Automation</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>sed 使用笔记</title>
-    <url>/2024/04/21/sed/</url>
-    <content><![CDATA[<p><code>sed</code></p>
-<span id="more"></span>
-
-<p><a href="https://regex-vis.com/">https://regex-vis.com/</a></p>
-<ul>
-<li><p>替换<code>oldfile</code>文件中的<strong>每行第一个</strong><code>find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
-<p><code>sed &#39;s/find/replace/&#39; &lt;oldfile &gt;newfile</code></p>
-</li>
-<li><p>替换<code>oldfile</code>文件中的<strong>每一个</strong><code>&lt;space&gt;find</code>为<code>replace</code>，保存内容到<code>newfile</code>中</p>
-<p><code>sed &#39;s/ find/replace/g&#39; &lt;oldfile &gt;newfile</code></p>
-</li>
-<li><p>替换<code>filename</code>文件中的每一个<code>find</code>为<code>replace</code></p>
-<p><code>sed -i &#39;s/find/replace/g&#39; filename</code></p>
-</li>
-<li><p>替换<code>filename</code>文件中的包含<code>Replace</code>文字的每一行中的<code>the</code>为<code>THE</code></p>
-<p><code>sed -i &#39;/Replace/s/the/THE/g&#39; filename</code></p>
-</li>
-<li><p>删除<code>filename</code>文件中的包含<code>Replace</code>文字的每一行</p>
-<p><code>sed -i &#39;/Replace/d&#39; filename</code></p>
-</li>
-<li><p>不使用<code>-i</code>则打印内容</p>
-</li>
-<li><p>运行多条命令</p>
-<ul>
-<li><code>sed -i &#39;...;...&#39; filename</code></li>
-<li><code>sed -i -e &#39;...&#39; -e &#39;...&#39; filename</code></li>
-</ul>
-</li>
-<li><p><code>\/</code>转义<code>/</code>或使用<code>s#find#replace#g</code>, <code>s|find|replace|g</code>, <code>.</code></p>
-</li>
-<li><p>打印出包含<code>usr</code>的每一行: <code>sed &#39;/user/p&#39;</code></p>
-</li>
-<li><p>删除<code>redacted</code>: <code>sed &quot;s/redacted//g filename</code></p>
-</li>
-<li><p>删除空行: <code>sed &quot;/^$/d&quot; filename</code></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -3207,27 +3212,6 @@
       </categories>
   </entry>
   <entry>
-    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
-    <url>/2020/09/07/timer-cloud-backup/</url>
-    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
-<span id="more"></span>
-
-<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
-<p>酷安版本独占：开发日志、打赏</p>
-<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
-<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
-<li>在Google Play搜索“计时机器”并安装。</li>
-<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
-<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
-<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
-</ol>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>计时机器公告2019-7-6</title>
     <url>/2019/07/06/timer-death/</url>
     <content><![CDATA[<h2 id="简单版本"><a href="#简单版本" class="headerlink" title="简单版本"></a>简单版本</h2><p>从计时机器3.8.0起，计时机器应用将从内购模式转为真·免费应用，所有专业版功能会在升级后为所有用户解锁。旧版本的登录、注册和激活将也会在未来几天失效。</p>
@@ -3253,6 +3237,27 @@
 <blockquote>
 <p>I’ve seen things you people wouldn’t believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhäuser Gate. All those moments will be lost in time, like tears in rain. Time to die. - Blade Runner</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
+    <url>/2020/09/07/timer-cloud-backup/</url>
+    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
+<span id="more"></span>
+
+<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
+<p>酷安版本独占：开发日志、打赏</p>
+<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
+<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
+<li>在Google Play搜索“计时机器”并安装。</li>
+<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
+<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
+<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
+</ol>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
 ]]></content>
       <categories>
         <category>Android</category>
