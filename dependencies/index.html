@@ -27,7 +27,7 @@
 <meta property="og:description" content="Gradle1gradle wrapper --gradle-version   Disable Reformat Code before committing  Note, you need to run this command twice to upgrade both Gradle and the Gradle Wrapper itself  https:&#x2F;&#x2F;gradle.org&#x2F;rele">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-04T05:46:18.974Z">
+<meta property="article:modified_time" content="2024-12-07T12:13:38.888Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -289,9 +289,9 @@
 <h2 id="Kotlin"><a href="#Kotlin" class="headerlink" title="Kotlin"></a>Kotlin</h2><ul>
 <li><p>org.jetbrains.kotlin:kotlin</p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew2020.html">2.0.20</a>: 🚧</p>
+<li><p><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew2020.html">2.0.21</a>: 🚧</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew20.html">2.0.0</a>: 🚧</p>
+<li><p><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew20.html">2.0.0</a>: ⬆</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/compiler">Compose Compiler Gradle plugin</a></li>
 <li><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects">Add the <code>.kotlin</code> directory to your project’s <code>.gitignore</code> file.</a></li>
@@ -470,6 +470,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/fragment">androidx.fragment:fragment</a></p>
 <ul>
+<li><p>1.8.5: 🚧</p>
+</li>
 <li><p>1.8.4: ✔</p>
 </li>
 <li><p>1.8.2: ✔</p>
@@ -498,9 +500,9 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/lifecycle">androidx.lifecycle:lifecycle</a></p>
 <ul>
-<li><p>2.8.6: 🚧</p>
+<li><p>2.8.7: 🚧</p>
 </li>
-<li><p>2.8.5: 🚧</p>
+<li><p>2.8.6: ⬆(Compose 1.7)</p>
 </li>
 <li><p>2.8.4: ✔</p>
 </li>
@@ -541,6 +543,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/core">androidx.core:core-ktx</a></p>
 <ul>
+<li><p>1.15.0: 🚧(Android 15(35))</p>
+</li>
 <li><p>1.13.1: ✔</p>
 </li>
 <li><p>1.12.0: ✔(Android 14(34))</p>
@@ -567,6 +571,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/collection">androidx.collection:collection-ktx</a></p>
 <ul>
+<li><p>1.4.5: 🚧</p>
+</li>
 <li><p>1.4.4: ✔</p>
 </li>
 <li><p>1.4.3: ✔</p>
@@ -588,6 +594,11 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/google/desugar_jdk_libs">com.android.tools:desugar_jdk_libs</a></p>
 <ul>
+<li><p>2.1.3: ❌(AGP 8.0)</p>
+<ul>
+<li>java.lang.IllegalArgumentException: this and base files have different roots</li>
+</ul>
+</li>
 <li><p>2.0.4: ✔</p>
 </li>
 <li><p>2.0.3: ✔(AGP 7.4)</p>
@@ -603,6 +614,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/constraintlayout">androidx.constraintlayout:constraintlayout</a></p>
 <ul>
+<li><p>2.2.0: 🚧</p>
+</li>
 <li><p>2.1.4: ✔</p>
 <ul>
 <li><blockquote>
@@ -615,6 +628,7 @@
 </li>
 <li><p>androidx.constraintlayout:constraintlayout-compose</p>
 <ul>
+<li>1.1.0: 🚧</li>
 <li>1.0.1: ✔</li>
 </ul>
 </li>
@@ -639,7 +653,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/navigation">androidx.navigation:navigation</a></p>
 <ul>
-<li><p>2.8.0: 🚧(Compose 1.7)</p>
+<li><p>2.8.4: 🚧(Compose 1.7)</p>
 <ul>
 <li>Navigation Kotlin DSL Type-Safety(used by Navigation Compose)</li>
 <li><code>navigation-fragment-compose</code>: <code>&lt;composable android:id=&quot;@+id/home_screen&quot;...</code></li>
@@ -683,6 +697,8 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/work">androidx.work:work</a></p>
 <ul>
+<li><p>2.10.0: 🚧(Android 15(35))</p>
+</li>
 <li><p>2.9.1: ✔</p>
 </li>
 <li><p>2.9.0: ✔(Android 14(34))</p>
@@ -703,6 +719,11 @@
 <ul>
 <li>1.2.0: ✔</li>
 <li>1.1.1: ✔</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/media3">androidx.media3</a></p>
+<ul>
+<li>1.4.1: ✔</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/security">androidx.security:security-crypto</a></p>
@@ -737,11 +758,21 @@
 </li>
 </ul>
 </li>
-<li><p>Jetpack Compose</p>
+<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/compose">Jetpack Compose</a></p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/compose-kotlin">Compose Compiler Plugin to Kotlin version</a></li>
-<li><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/bom/bom-mapping">BOM to library version mapping</a></li>
-<li>2023.06.01: ✔(Compose UI 1.4 + Kotlin 1.8.22 + Compose Compiler Plugin 1.4.8 + accompanist 0.30.1)</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/compose-kotlin">Compose Compiler Plugin to Kotlin version</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/bom/bom-mapping">BOM to library version mapping</a></p>
+</li>
+<li><p>2023.06.01: ✔(Compose UI 1.4 + Kotlin 1.8.22 + Compose Compiler Plugin 1.4.8 + accompanist 0.30.1)</p>
+</li>
+<li><p>2024.11.00: 🚧(Compose 1.7.5)</p>
+<ul>
+<li>Apply <code>AppCompatDelegate.setDefaultNightMode</code></li>
+<li><code>LocalRippleTheme</code> -&gt; <code>LocalRippleConfiguration</code></li>
+<li><code>windowInsets =</code> -&gt; <code>contentWindowInsets =</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/material-components/material-components-android/releases">com.google.android.material:material</a></p>
@@ -1065,6 +1096,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/qiniu/android-sdk/releases">com.qiniu:qiniu-android-sdk</a></p>
 <ul>
+<li>8.8.0: 🚧</li>
 <li>8.7.0: ✔<ul>
 <li>❗ <code>android.permission.READ_PHONE_STATE</code></li>
 </ul>
