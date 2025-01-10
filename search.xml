@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Android Animated Vector Drawable搜集</title>
+    <url>/2019/11/27/android-animated_vector_drawables/</url>
+    <content><![CDATA[<p>各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><p><a href="https://github.com/StylingAndroid/AnimatedIcons/">StylingAndroid/AnimatedIcons</a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-max-min/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/MaxMin.gif" alt="AnimatedIcons: Max / Min"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v3/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/LoadingV3.gif" alt="AnimatedIcons: Loading V3"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animated-icons-plus-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/PlusX.gif" alt="AnimatedIcons: Plus / X"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-strikethru/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Strikethru.gif" alt="AnimatedIcons: Strikethru"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v2/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Loading_V2.gif" alt="AnimatedIcons: Loading V2"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-search-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/12/search_x-1.gif" alt="AnimatedIcons: Search / X"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animated-icons-burger-menu/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2020/01/BurgerMenu.gif" alt="Animated Icons: Burger Menu"></a></p>
+</li>
+<li><p><a href="https://github.com/alexjlockwood/adp-delightful-details"><img src="https://camo.githubusercontent.com/079cd7f1079153cd0489dc58bc0fa121b3ecb767/687474703a2f2f692e696d6775722e636f6d2f306146646a4a6e2e676966" alt="A lot of icons"></a></p>
+</li>
+<li><p><a href="https://github.com/tarek360/RichPath"><img src="https://github.com/tarek360/RichPath/raw/develop/screenshots/samples.gif" alt="tarek360/RichPath"></a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Animation</title>
     <url>/2018/12/11/android-animation/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=N_x7SV3I3P0">Get Animated (Android Dev Summit ‘18)</a>，解释那复杂的Android动画框架和工具。</p>
@@ -41,32 +67,6 @@
 <li><p>MotionLayout：饼，真香。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Animated Vector Drawable搜集</title>
-    <url>/2019/11/27/android-animated_vector_drawables/</url>
-    <content><![CDATA[<p>各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><p><a href="https://github.com/StylingAndroid/AnimatedIcons/">StylingAndroid/AnimatedIcons</a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-max-min/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/MaxMin.gif" alt="AnimatedIcons: Max / Min"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v3/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/LoadingV3.gif" alt="AnimatedIcons: Loading V3"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animated-icons-plus-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/PlusX.gif" alt="AnimatedIcons: Plus / X"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-strikethru/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Strikethru.gif" alt="AnimatedIcons: Strikethru"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v2/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Loading_V2.gif" alt="AnimatedIcons: Loading V2"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-search-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/12/search_x-1.gif" alt="AnimatedIcons: Search / X"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animated-icons-burger-menu/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2020/01/BurgerMenu.gif" alt="Animated Icons: Burger Menu"></a></p>
-</li>
-<li><p><a href="https://github.com/alexjlockwood/adp-delightful-details"><img src="https://camo.githubusercontent.com/079cd7f1079153cd0489dc58bc0fa121b3ecb767/687474703a2f2f692e696d6775722e636f6d2f306146646a4a6e2e676966" alt="A lot of icons"></a></p>
-</li>
-<li><p><a href="https://github.com/tarek360/RichPath"><img src="https://github.com/tarek360/RichPath/raw/develop/screenshots/samples.gif" alt="tarek360/RichPath"></a></p>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -255,50 +255,6 @@
       </categories>
   </entry>
   <entry>
-    <title>巧用Android CoordinatorLayout实现复杂布局 + 滚动内容</title>
-    <url>/2019/10/02/android-coordinator-layout-hack/</url>
-    <content><![CDATA[<p>一个使用情景是：页面上半部分是一个不算短的、复杂的Layout，后半部分是一个嵌套了RecyclerView的Fragment的横向ViewPager。使用效果是，上半部分会充当下半部分可滚动内容的Header。怎么做？</p>
-<span id="more"></span>
-
-<h2 id="常见的解决办法"><a href="#常见的解决办法" class="headerlink" title="常见的解决办法"></a>常见的解决办法</h2><p>如果下半部分只是RecyclerView而不是ViewPager的话，可以把上半部分当作RecyclerView的Header，使用多类型Adapter实现，除了每次找头部有点麻烦外，没问题。</p>
-<p>但下面是ViewPager，这时如果用ScrollView/NestedScrollView，可能会发生一下情况：</p>
-<ol>
-<li><p>滚顿位置错误、初始位置不是最顶部</p>
-<p> 从下往上滚动到ViewPager顶部时，滚动停止，需要再次下拉才能看到头部。记忆中SO上给出一种解决方案是，修改fousable，但这样会伤害到a11y，虽然不少人不在乎这个东西，但是还是有更优雅的解决方案的。</p>
-</li>
-<li><p>ViewPager双向滚动不流畅</p>
-<p> 只要ViewPager嵌套RecyclerView都会多少出现这个问题。解决方案可以参考<a href="https://rubensousa.com/2019/08/16/nested_recyclerview_part1/">Improving scrolling behavior of nested RecyclerViews - Part 1</a></p>
-</li>
-<li><p>使用ViewPager2来解决问题</p>
-<p> 之前试了一下，似乎能解决不少问题，但遇到了横向滚动时位置错误/空白的问题，无奈只能放弃。另外，它的双向滚动不流畅问题比ViewPager还要严重。也许未来的Release会修好这些问题。</p>
-</li>
-</ol>
-<p>更严重的是，如果在SO上找答案，会根据不同Target API和不同AndroidX/Support版本，方案都不一样，有新有旧，有的有用有的没用。</p>
-<h2 id="要用CoordinatorLayout啊"><a href="#要用CoordinatorLayout啊" class="headerlink" title="要用CoordinatorLayout啊"></a>要用CoordinatorLayout啊</h2><p>前段时间找到了一个不错的解决办法，就是使用CoordinatorLayout，把上半部分塞到AppBarLayout中，下半部分放到正文中：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- Top Content --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.AppBarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>CoordinatorLayouthe和AppBarLayout不一定非要用在根部嘛，无论哪里都可以用。</p>
-<p>既然不放Toolbar，可以把AppBarLayout的颜色和elevation去掉：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>让CollapsingToolbarLayout滚起来，可以让顶部内容成为Header：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，滚动位置、初始位置、a11y什么的都没问题啦。</p>
-<h2 id="奖励：带一个可滚动的TabLayout"><a href="#奖励：带一个可滚动的TabLayout" class="headerlink" title="奖励：带一个可滚动的TabLayout"></a>奖励：带一个可滚动的TabLayout</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>TabLayout是顶部内容最后一个，会跟随滚动，离开屏幕。</p>
-<h2 id="奖励励：带一个常驻的TabLayout"><a href="#奖励励：带一个常驻的TabLayout" class="headerlink" title="奖励励：带一个常驻的TabLayout"></a>奖励励：带一个常驻的TabLayout</h2><p>把TabLayout移到下半部分：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>&quot; /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样TabLayout一开始会跟随滚动，到达顶部后，就不动了，而下半部分的ViewPager会继续滚，相当于一个Sticky Header。如果一开始使用多类型Adapter + Header实现的话，要解决这个就需要点劳动了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浓眉大眼的CoordinatorLayout和它的一帮小弟有时候还有点用。希望material 1.1.0不会出现陨石坑吧。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一些可能有用的Android代码</title>
     <url>/2019/06/15/android-code-snippets/</url>
     <content><![CDATA[<p><strong>2020年11月6日 更新<code>View.outlineProvider</code></strong></p>
@@ -356,6 +312,50 @@
 
 <h2 id="clipToPadidng"><a href="#clipToPadidng" class="headerlink" title="clipToPadidng"></a><code>clipToPadidng</code></h2><p><code>Enables our items to still be drawn within the parent&#39;s padding.</code></p>
 <h2 id="View-outlineProvider"><a href="#View-outlineProvider" class="headerlink" title="View.outlineProvider"></a><code>View.outlineProvider</code></h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">binding.imageView.run &#123;</span><br><span class="line">    clipToOutline = <span class="literal">true</span></span><br><span class="line">    outlineProvider = <span class="keyword">object</span> : ViewOutlineProvider() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getOutline</span><span class="params">(view: <span class="type">View</span>, outline: <span class="type">Outline</span>)</span></span> &#123;</span><br><span class="line">            outline.setOval(</span><br><span class="line">                view.paddingLeft,</span><br><span class="line">                view.paddingTop,</span><br><span class="line">                view.width - view.paddingRight,</span><br><span class="line">                view.height - view.paddingBottom</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>巧用Android CoordinatorLayout实现复杂布局 + 滚动内容</title>
+    <url>/2019/10/02/android-coordinator-layout-hack/</url>
+    <content><![CDATA[<p>一个使用情景是：页面上半部分是一个不算短的、复杂的Layout，后半部分是一个嵌套了RecyclerView的Fragment的横向ViewPager。使用效果是，上半部分会充当下半部分可滚动内容的Header。怎么做？</p>
+<span id="more"></span>
+
+<h2 id="常见的解决办法"><a href="#常见的解决办法" class="headerlink" title="常见的解决办法"></a>常见的解决办法</h2><p>如果下半部分只是RecyclerView而不是ViewPager的话，可以把上半部分当作RecyclerView的Header，使用多类型Adapter实现，除了每次找头部有点麻烦外，没问题。</p>
+<p>但下面是ViewPager，这时如果用ScrollView/NestedScrollView，可能会发生一下情况：</p>
+<ol>
+<li><p>滚顿位置错误、初始位置不是最顶部</p>
+<p> 从下往上滚动到ViewPager顶部时，滚动停止，需要再次下拉才能看到头部。记忆中SO上给出一种解决方案是，修改fousable，但这样会伤害到a11y，虽然不少人不在乎这个东西，但是还是有更优雅的解决方案的。</p>
+</li>
+<li><p>ViewPager双向滚动不流畅</p>
+<p> 只要ViewPager嵌套RecyclerView都会多少出现这个问题。解决方案可以参考<a href="https://rubensousa.com/2019/08/16/nested_recyclerview_part1/">Improving scrolling behavior of nested RecyclerViews - Part 1</a></p>
+</li>
+<li><p>使用ViewPager2来解决问题</p>
+<p> 之前试了一下，似乎能解决不少问题，但遇到了横向滚动时位置错误/空白的问题，无奈只能放弃。另外，它的双向滚动不流畅问题比ViewPager还要严重。也许未来的Release会修好这些问题。</p>
+</li>
+</ol>
+<p>更严重的是，如果在SO上找答案，会根据不同Target API和不同AndroidX/Support版本，方案都不一样，有新有旧，有的有用有的没用。</p>
+<h2 id="要用CoordinatorLayout啊"><a href="#要用CoordinatorLayout啊" class="headerlink" title="要用CoordinatorLayout啊"></a>要用CoordinatorLayout啊</h2><p>前段时间找到了一个不错的解决办法，就是使用CoordinatorLayout，把上半部分塞到AppBarLayout中，下半部分放到正文中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- Top Content --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.AppBarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>CoordinatorLayouthe和AppBarLayout不一定非要用在根部嘛，无论哪里都可以用。</p>
+<p>既然不放Toolbar，可以把AppBarLayout的颜色和elevation去掉：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>让CollapsingToolbarLayout滚起来，可以让顶部内容成为Header：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，滚动位置、初始位置、a11y什么的都没问题啦。</p>
+<h2 id="奖励：带一个可滚动的TabLayout"><a href="#奖励：带一个可滚动的TabLayout" class="headerlink" title="奖励：带一个可滚动的TabLayout"></a>奖励：带一个可滚动的TabLayout</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>TabLayout是顶部内容最后一个，会跟随滚动，离开屏幕。</p>
+<h2 id="奖励励：带一个常驻的TabLayout"><a href="#奖励励：带一个常驻的TabLayout" class="headerlink" title="奖励励：带一个常驻的TabLayout"></a>奖励励：带一个常驻的TabLayout</h2><p>把TabLayout移到下半部分：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>&quot; /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样TabLayout一开始会跟随滚动，到达顶部后，就不动了，而下半部分的ViewPager会继续滚，相当于一个Sticky Header。如果一开始使用多类型Adapter + Header实现的话，要解决这个就需要点劳动了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浓眉大眼的CoordinatorLayout和它的一帮小弟有时候还有点用。希望material 1.1.0不会出现陨石坑吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -744,74 +744,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Jetpack Compose Stability白话版</title>
-    <url>/2024/06/24/android-jetpack-compose-stability/</url>
-    <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
-<p>但优秀的开发者在点点滴滴中优化性能，而不是等到性能真出问题时再挠头。本文记录如何写Composable来得到最好的Stability。</p>
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
-<li>书写Composable或用于Composable参数的类时，优先考虑Primitive类型</li>
-<li>把Android SDK、第三方依赖、其他Module的类放到<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>中</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="总是优先考虑Primitive类型"><a href="#总是优先考虑Primitive类型" class="headerlink" title="总是优先考虑Primitive类型"></a>总是优先考虑Primitive类型</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Tab</span> &#123; Home, Profile &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenPrimitive</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    int: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    float: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    string: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    tab: <span class="type">Tab</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lambda: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = <span class="string">&quot;<span class="variable">$int</span> <span class="variable">$float</span> <span class="variable">$string</span> <span class="variable">$tab</span>&quot;</span>,</span><br><span class="line">        modifier = modifier.clickable(onClick = lambda),</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenPrimitive(</span><br><span class="line">  stable int: Int</span><br><span class="line">  stable float: Float</span><br><span class="line">  stable string: String</span><br><span class="line">  stable tab: Tab</span><br><span class="line">  stable lambda: Function0&lt;Unit&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>除了Primitive类型，字符串、枚举和Lambda也是没问题的，因为<strong>Jetpack Compose Compiler确定在创建它们后，内容无法变化</strong>。这一句话也是Stability的核心，并将在之后得到更多解释。</p>
-<p>如果能用一些Primitive类型书写Composable是最好的，因为不仅Stable，还提高了复用度，但有时我们需要一个类，比如参数太多、需要特定功能、要一定抽象等，那么情况就不一样了。</p>
-<h2 id="同一Module的类"><a href="#同一Module的类" class="headerlink" title="同一Module的类"></a>同一Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Screen</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">    <span class="keyword">val</span> tab: Tab,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenInternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">Screen</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span> <span class="variable">$tab</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class Screen &#123;</span><br><span class="line">  stable val title: String</span><br><span class="line">  stable val time: Long</span><br><span class="line">  stable val tab: Tab</span><br><span class="line">  &lt;runtime stability&gt; = Stable</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenInternalClass(</span><br><span class="line">  stable screen: Screen</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>如果用到的类和Composable在同一个Module，且这个类的内容符合上述的全是Primitive类型，它也是没问题的。</p>
-<p>Jetpack Compose之所以能得出这个结论，是<strong>因为<code>Screen</code>所在Module启用了Jetpack Compose Compiler</strong>。因为当前Module要用Jetpack Compose，所以Compiler早已启用了，于是从结果上来看，同一Module的只带Primitive类型的类是没问题的。这一点在下一点更为重要。</p>
-<h2 id="不同Module的类"><a href="#不同Module的类" class="headerlink" title="不同Module的类"></a>不同Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在一个新建的Module中</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">ScreenFromLibrary</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在一个另外的Module中</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenExternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">ScreenFromLibrary</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenExternalClass(</span><br><span class="line">  unstable screen: ScreenFromLibrary</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>这时有问题了。因为Jetpack Compose依赖于Jetpack Compose Compiler来推测一个类的Stability，而新建的Module没有启用Compiler，于是就<code>unstable</code>了。</p>
-<p>解决方法有几个：</p>
-<ul>
-<li>使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a></li>
-<li>在新建的Module中配置好Jetpack Compose及其依赖，让其检测各种类型。缺点是要污染新建的Module的依赖。<ul>
-<li>虽然也有第三方库来只引入少量依赖，但1. 第三方依赖越少越好。2. 大依赖小依赖都是污染。</li>
-</ul>
-</li>
-</ul>
-<h2 id="依赖中的类"><a href="#依赖中的类" class="headerlink" title="依赖中的类"></a>依赖中的类</h2><p>当参数来自于Android SDK或某个依赖时，又出问题了。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferences</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferences: <span class="type">SharedPreferences</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferences(</span><br><span class="line">  unstable sharedPreferences: SharedPreferences</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>因为Jetpack Compose Compiler无法触及<code>SharedPreferences</code>所处的位置，Android SDK，所以其无法确定Stability。解决方法有三个：</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>和上文一样的使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>。</p>
-<h3 id="二次包装"><a href="#二次包装" class="headerlink" title="二次包装"></a>二次包装</h3><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Immutable</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">SharedPreferencesWrapper</span>(</span><br><span class="line">    <span class="keyword">val</span> sharedPreferences: SharedPreferences,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferencesWrapper</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferencesWrapper: <span class="type">SharedPreferencesWrapper</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferencesWrapper.sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class SharedPreferencesWrapper &#123;</span><br><span class="line">  unstable val sharedPreferences: SharedPreferences</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferencesWrapper(</span><br><span class="line">  stable sharedPreferencesWrapper: SharedPreferencesWrapper</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p><code>@Immutable</code>告诉Compiler：凡是跟我混的，都别管，懂了没！</p>
-<h3 id="打开Strong-Skipping-Mode"><a href="#打开Strong-Skipping-Mode" class="headerlink" title="打开Strong Skipping Mode"></a>打开Strong Skipping Mode</h3><p>Jetpack Compose面对Stable类型，通过<code>==</code>来决定是否触发Recomposition，面对Unstable类型，总是触发Recomposition。打开<a href="https://developer.android.com/develop/ui/compose/performance/stability/strongskipping">Strong skipping mode</a>后，面对Unstable类型，使用<code>===</code>来决定是否触发Recomposition。因为<code>SharedPreferences</code>通常是Singleton，那么这个方法可以避免多余的Recomposition。</p>
-<p>但是1. 这并不会让开发者理解性能优化。2. 该选项会在未来默认打开。</p>
-<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenList</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    list: <span class="type">List</span>&lt;<span class="type">Int</span>&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = list.size.toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenList(</span><br><span class="line">  unstable list: List&lt;Int&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>您猜怎么着，Unstable！原因是<code>List</code>的本质上可能是个<code>MutableList</code>（<code>val list: List&lt;Int&gt; = mutableListOf()</code>），属于创建后内容可以变化的类型。</p>
-<p>解决方法有三个：</p>
-<h3 id="又是配置文件"><a href="#又是配置文件" class="headerlink" title="又是配置文件"></a>又是配置文件</h3><p>同上。</p>
-<h3 id="又是二次包装"><a href="#又是二次包装" class="headerlink" title="又是二次包装"></a>又是二次包装</h3><p>同上。</p>
-<h3 id="Immutable-collections"><a href="#Immutable-collections" class="headerlink" title="Immutable collections"></a>Immutable collections</h3><p>Jetpack Compose Compiler给 <a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#immutable-collections">Immutable collections</a> 偷偷开了绿灯。</p>
-<p>但要注意<strong>列表中的类<code>ImmutableList&lt;StableClass&gt;</code>也要Stable</strong>。</p>
-<h2 id="Stable"><a href="#Stable" class="headerlink" title="@Stable"></a>@Stable</h2><p>虽然是很重要的注释，会在类或接口中包含<code>mutableStateOf</code>时用到，但是我倾向于让Jetpack Compose只完成将数据转换为界面的任务。当不得不使用这个注释时，通常意味着UI代码职责不清晰，这才是更紧急的问题。</p>
-<p>因此出于个人偏好，会避免使用该注释，同时这里也将不再讨论。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>见开头。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -923,6 +855,74 @@
       </categories>
   </entry>
   <entry>
+    <title>Jetpack Compose Stability白话版</title>
+    <url>/2024/06/24/android-jetpack-compose-stability/</url>
+    <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
+<p>但优秀的开发者在点点滴滴中优化性能，而不是等到性能真出问题时再挠头。本文记录如何写Composable来得到最好的Stability。</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><ul>
+<li>书写Composable或用于Composable参数的类时，优先考虑Primitive类型</li>
+<li>把Android SDK、第三方依赖、其他Module的类放到<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>中</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="总是优先考虑Primitive类型"><a href="#总是优先考虑Primitive类型" class="headerlink" title="总是优先考虑Primitive类型"></a>总是优先考虑Primitive类型</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="keyword">class</span> <span class="title class_">Tab</span> &#123; Home, Profile &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenPrimitive</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    int: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    float: <span class="type">Float</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    string: <span class="type">String</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    tab: <span class="type">Tab</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lambda: () -&gt; <span class="type">Unit</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = <span class="string">&quot;<span class="variable">$int</span> <span class="variable">$float</span> <span class="variable">$string</span> <span class="variable">$tab</span>&quot;</span>,</span><br><span class="line">        modifier = modifier.clickable(onClick = lambda),</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenPrimitive(</span><br><span class="line">  stable int: Int</span><br><span class="line">  stable float: Float</span><br><span class="line">  stable string: String</span><br><span class="line">  stable tab: Tab</span><br><span class="line">  stable lambda: Function0&lt;Unit&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>除了Primitive类型，字符串、枚举和Lambda也是没问题的，因为<strong>Jetpack Compose Compiler确定在创建它们后，内容无法变化</strong>。这一句话也是Stability的核心，并将在之后得到更多解释。</p>
+<p>如果能用一些Primitive类型书写Composable是最好的，因为不仅Stable，还提高了复用度，但有时我们需要一个类，比如参数太多、需要特定功能、要一定抽象等，那么情况就不一样了。</p>
+<h2 id="同一Module的类"><a href="#同一Module的类" class="headerlink" title="同一Module的类"></a>同一Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">Screen</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">    <span class="keyword">val</span> tab: Tab,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenInternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">Screen</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span> <span class="variable">$tab</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class Screen &#123;</span><br><span class="line">  stable val title: String</span><br><span class="line">  stable val time: Long</span><br><span class="line">  stable val tab: Tab</span><br><span class="line">  &lt;runtime stability&gt; = Stable</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenInternalClass(</span><br><span class="line">  stable screen: Screen</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>如果用到的类和Composable在同一个Module，且这个类的内容符合上述的全是Primitive类型，它也是没问题的。</p>
+<p>Jetpack Compose之所以能得出这个结论，是<strong>因为<code>Screen</code>所在Module启用了Jetpack Compose Compiler</strong>。因为当前Module要用Jetpack Compose，所以Compiler早已启用了，于是从结果上来看，同一Module的只带Primitive类型的类是没问题的。这一点在下一点更为重要。</p>
+<h2 id="不同Module的类"><a href="#不同Module的类" class="headerlink" title="不同Module的类"></a>不同Module的类</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在一个新建的Module中</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">ScreenFromLibrary</span>(</span><br><span class="line">    <span class="keyword">val</span> title: String,</span><br><span class="line">    <span class="keyword">val</span> time: <span class="built_in">Long</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在一个另外的Module中</span></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenExternalClass</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    screen: <span class="type">ScreenFromLibrary</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = screen.run &#123; <span class="string">&quot;<span class="variable">$title</span> <span class="variable">$time</span>&quot;</span> &#125;,</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenExternalClass(</span><br><span class="line">  unstable screen: ScreenFromLibrary</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这时有问题了。因为Jetpack Compose依赖于Jetpack Compose Compiler来推测一个类的Stability，而新建的Module没有启用Compiler，于是就<code>unstable</code>了。</p>
+<p>解决方法有几个：</p>
+<ul>
+<li>使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a></li>
+<li>在新建的Module中配置好Jetpack Compose及其依赖，让其检测各种类型。缺点是要污染新建的Module的依赖。<ul>
+<li>虽然也有第三方库来只引入少量依赖，但1. 第三方依赖越少越好。2. 大依赖小依赖都是污染。</li>
+</ul>
+</li>
+</ul>
+<h2 id="依赖中的类"><a href="#依赖中的类" class="headerlink" title="依赖中的类"></a>依赖中的类</h2><p>当参数来自于Android SDK或某个依赖时，又出问题了。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferences</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferences: <span class="type">SharedPreferences</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferences(</span><br><span class="line">  unstable sharedPreferences: SharedPreferences</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>因为Jetpack Compose Compiler无法触及<code>SharedPreferences</code>所处的位置，Android SDK，所以其无法确定Stability。解决方法有三个：</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>和上文一样的使用<a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file">Stability configuration file</a>。</p>
+<h3 id="二次包装"><a href="#二次包装" class="headerlink" title="二次包装"></a>二次包装</h3><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Immutable</span></span><br><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">SharedPreferencesWrapper</span>(</span><br><span class="line">    <span class="keyword">val</span> sharedPreferences: SharedPreferences,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenSharedPreferencesWrapper</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    sharedPreferencesWrapper: <span class="type">SharedPreferencesWrapper</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = sharedPreferencesWrapper.sharedPreferences.getInt(<span class="string">&quot;key&quot;</span>, -<span class="number">1</span>).toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">stable class SharedPreferencesWrapper &#123;</span><br><span class="line">  unstable val sharedPreferences: SharedPreferences</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restartable skippable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenSharedPreferencesWrapper(</span><br><span class="line">  stable sharedPreferencesWrapper: SharedPreferencesWrapper</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>@Immutable</code>告诉Compiler：凡是跟我混的，都别管，懂了没！</p>
+<h3 id="打开Strong-Skipping-Mode"><a href="#打开Strong-Skipping-Mode" class="headerlink" title="打开Strong Skipping Mode"></a>打开Strong Skipping Mode</h3><p>Jetpack Compose面对Stable类型，通过<code>==</code>来决定是否触发Recomposition，面对Unstable类型，总是触发Recomposition。打开<a href="https://developer.android.com/develop/ui/compose/performance/stability/strongskipping">Strong skipping mode</a>后，面对Unstable类型，使用<code>===</code>来决定是否触发Recomposition。因为<code>SharedPreferences</code>通常是Singleton，那么这个方法可以避免多余的Recomposition。</p>
+<p>但是1. 这并不会让开发者理解性能优化。2. 该选项会在未来默认打开。</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">ScreenList</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    list: <span class="type">List</span>&lt;<span class="type">Int</span>&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span> &#123;</span><br><span class="line">    Text(</span><br><span class="line">        text = list.size.toString(),</span><br><span class="line">        modifier = modifier,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">restartable scheme(&quot;[androidx.compose.ui.UiComposable]&quot;) fun ScreenList(</span><br><span class="line">  unstable list: List&lt;Int&gt;</span><br><span class="line">  stable modifier: Modifier? = @static Companion</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>您猜怎么着，Unstable！原因是<code>List</code>的本质上可能是个<code>MutableList</code>（<code>val list: List&lt;Int&gt; = mutableListOf()</code>），属于创建后内容可以变化的类型。</p>
+<p>解决方法有三个：</p>
+<h3 id="又是配置文件"><a href="#又是配置文件" class="headerlink" title="又是配置文件"></a>又是配置文件</h3><p>同上。</p>
+<h3 id="又是二次包装"><a href="#又是二次包装" class="headerlink" title="又是二次包装"></a>又是二次包装</h3><p>同上。</p>
+<h3 id="Immutable-collections"><a href="#Immutable-collections" class="headerlink" title="Immutable collections"></a>Immutable collections</h3><p>Jetpack Compose Compiler给 <a href="https://developer.android.com/develop/ui/compose/performance/stability/fix#immutable-collections">Immutable collections</a> 偷偷开了绿灯。</p>
+<p>但要注意<strong>列表中的类<code>ImmutableList&lt;StableClass&gt;</code>也要Stable</strong>。</p>
+<h2 id="Stable"><a href="#Stable" class="headerlink" title="@Stable"></a>@Stable</h2><p>虽然是很重要的注释，会在类或接口中包含<code>mutableStateOf</code>时用到，但是我倾向于让Jetpack Compose只完成将数据转换为界面的任务。当不得不使用这个注释时，通常意味着UI代码职责不清晰，这才是更紧急的问题。</p>
+<p>因此出于个人偏好，会避免使用该注释，同时这里也将不再讨论。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>见开头。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android依赖笔记</title>
     <url>/2022/06/02/android-library-dependency/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
@@ -965,6 +965,35 @@
 </li>
 <li><p>设置为必须声明Class Visibility</p>
   <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android多进程开发笔记</title>
+    <url>/2024/06/23/android-multiprocessing/</url>
+    <content><![CDATA[<p>RT</p>
+<span id="more"></span>
+
+<ul>
+<li><p><a href="https://x.com/oasisfeng/status/1633822931523612676">把需要长期后台运行的服务放到单独的进程中来降低被杀几率</a></p>
+</li>
+<li><p>通过<a href="https://developer.android.com/guide/topics/manifest/service-element#proc"><code>android:process=&quot;:process&quot;</code></a>指定运行于新的进程</p>
+</li>
+<li><p>自定义的<code>Application</code>（<code>android:name=&quot;.App&quot;</code>）会被每个进程运行一次</p>
+<p>应在自定义的<code>Application</code>中提前考虑多进程使用：</p>
+<ol>
+<li>在<code>Application</code>判断进程名，按需初始化组件<ul>
+<li><a href="https://stackoverflow.com/a/55842542/5507158">Is there a way to get current process name in Android</a></li>
+</ul>
+</li>
+<li>将组件放到<code>androidx.startup</code>中并手动初始化</li>
+</ol>
+</li>
+<li><p><code>SharedPreference</code>无法跨进程使用，因此<a href="https://developer.android.com/topic/libraries/architecture/datastore#multiprocess">Use DataStore in multi-process code</a></p>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -1043,35 +1072,6 @@
 </ul>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android多进程开发笔记</title>
-    <url>/2024/06/23/android-multiprocessing/</url>
-    <content><![CDATA[<p>RT</p>
-<span id="more"></span>
-
-<ul>
-<li><p><a href="https://x.com/oasisfeng/status/1633822931523612676">把需要长期后台运行的服务放到单独的进程中来降低被杀几率</a></p>
-</li>
-<li><p>通过<a href="https://developer.android.com/guide/topics/manifest/service-element#proc"><code>android:process=&quot;:process&quot;</code></a>指定运行于新的进程</p>
-</li>
-<li><p>自定义的<code>Application</code>（<code>android:name=&quot;.App&quot;</code>）会被每个进程运行一次</p>
-<p>应在自定义的<code>Application</code>中提前考虑多进程使用：</p>
-<ol>
-<li>在<code>Application</code>判断进程名，按需初始化组件<ul>
-<li><a href="https://stackoverflow.com/a/55842542/5507158">Is there a way to get current process name in Android</a></li>
-</ul>
-</li>
-<li>将组件放到<code>androidx.startup</code>中并手动初始化</li>
-</ol>
-</li>
-<li><p><code>SharedPreference</code>无法跨进程使用，因此<a href="https://developer.android.com/topic/libraries/architecture/datastore#multiprocess">Use DataStore in multi-process code</a></p>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1296,6 +1296,60 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Jetpack Paging3 从入门到入土</title>
+    <url>/2022/01/31/android-paging3/</url>
+    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
+<p>本文记录了个人实现分页的一些弯路与经验。</p>
+<span id="more"></span>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
+<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
+<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
+<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
+</ol>
+<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
+<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
+<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
+<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
+<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
+<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
+<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
+<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
+<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
+<p><strong>可是</strong>，</p>
+<ol>
+<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
+<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
+<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
+</li>
+<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
+<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
+</li>
+<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
+<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
+<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
+ <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
+<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
+<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
+<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
+<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
+</li>
+</ol>
+<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
+<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
+<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
+<ul>
+<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>个人偏爱的Android应用架构</title>
     <url>/2021/04/18/android-opinoinated-arch/</url>
     <content><![CDATA[<p>根据几年来的开发经验和阅读过的代码，总结出了个人觉得还算稳定可持续的Android应用架构。它以MVVM为基础，融合了Clean Architecture，参考了<a href="https://github.com/google/iosched">iosched</a>（新的<a href="https://github.com/android/nowinandroid">nowinandroid</a>大同小异），尽可能地照顾到测试和扩展。</p>
@@ -1446,60 +1500,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Jetpack Paging3 从入门到入土</title>
-    <url>/2022/01/31/android-paging3/</url>
-    <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
-<p>本文记录了个人实现分页的一些弯路与经验。</p>
-<span id="more"></span>
-
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ol>
-<li>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</li>
-<li>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</li>
-<li>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</li>
-</ol>
-<p>人生中第一个分页方案是<a href="https://github.com/mikepenz/FastAdapter#8-infinite-endless-scrolling">FastAdapter的Endless scrolling</a>。背后的原理是<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>。它们针对需求1，通过给RecyclerView增加OnScrollListener，进行了逐字逐句的实现。</p>
-<p>由于业务不熟练，数据储存使用了MutableList，导致了很多多线程、缓存之类的问题。最后代码混乱，勉强能用。</p>
-<p>之后在Jetpack Paging发布后，自然而然地决定迁移过去，吃Google软饭。</p>
-<h2 id="缝缝补补Paging2"><a href="#缝缝补补Paging2" class="headerlink" title="缝缝补补Paging2"></a>缝缝补补Paging2</h2><p>Paging的官方Sample很复杂。可以看得出Google想要满足尽可能多的情况，但结果却是大伙儿都理解不了。</p>
-<p>Sample中为了满足需求，需要<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/androidx/paging/PagingRequestHelper.java">一个巨大的类</a>，还要给BoundaryCheck<a href="https://github.com/android/architecture-components-samples/blob/paging2/PagingWithNetworkSample/app/src/main/java/com/android/example/paging/pagingwithnetwork/reddit/util/PagingRequestHelperExt.kt">外挂LiveData来实现检测错误、实现刷新</a>。因此每一个PagedList的创建都很繁琐，为此开发者都得二次封装。加上几年前Unidirectional Data Flow的思想还未流行，从实现底层到UI层，自然处处都会见到PagedList的闪亮身影。</p>
-<p>虽说代码库更乱了，但好在能用。FastAdapter的维护者也很勤奋，增加了对Paging2的支持。</p>
-<h2 id="竹篮打水Paging3"><a href="#竹篮打水Paging3" class="headerlink" title="竹篮打水Paging3"></a>竹篮打水Paging3</h2><p>在Paging3公布时，看到了全程使用Kotlin Coroutines、一个Pager配置所有内容、支持分隔符、支持错误状态和重试……让人口水流了一地。</p>
-<p>正式版发布后，我以为大版本不兼容，需要重构很多代码，所以在很长一段时间内都没正式使用过。</p>
-<p>在某次偶然的机会，才发现Paging2到Paging3是二进制兼容的。细看之下，原来是Paging3用新API重新实现了Paging2！想到二者API差别之大，和确保行为相同所需的测试和努力，发自内心佩服维护者。</p>
-<p><strong>可是</strong>，</p>
-<ol>
-<li><p>初始加载部分数据，然后在滑过一定距离后，自动加载更多。</p>
-<p> 即使是仅创建Pager，不交给Adapter，Paging3都会触发Refresh + Append或两次Append。如果我把分页设置为一个远大于屏幕可显示内容的数值，它依然会自动加载两次。</p>
-<p> 自动加载一次可以理解为确保数据尽早到位，但为什么要加载第二次呢？为什么本地数据即使够多，也要加载更多呢？多次Debug后，发现Flow会初始化两次？</p>
-</li>
-<li><p>Offline first。先显示缓存数据，本地缓存用光后再请求新数据。</p>
-<p> 由于需求1的原因，每次新建Pager后，它总会请求新的两页，即使本地数据还有很多未浏览。</p>
-</li>
-<li><p>第一次请求和后续请求时根据是否加载与成功与否显示不同的布局。</p>
-<p> 如果只用withLoadStateFooter，RecyclerView可能会自动滚动到第一页末尾。原因可能是为了保持没有数据时，第一项也就是Footer的位置，而在第一页数据加载完毕后，Footer可能还未清空。</p>
-<p> Paging3可能需要<a href="https://developer.android.com/topic/libraries/architecture/paging/load-state#chain-operators">类似如下的肮脏代码</a>来解决问题：</p>
- <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">lifecycleScope.launchWhenCreated &#123;</span><br><span class="line">    adapter.loadStateFlow</span><br><span class="line">        <span class="comment">// Only emit when REFRESH LoadState for RemoteMediator changes.</span></span><br><span class="line">        .distinctUntilChangedBy &#123; it.refresh &#125;</span><br><span class="line">        <span class="comment">// Only react to cases where REFRESH completes, such as NotLoading.</span></span><br><span class="line">        .filter &#123; it.refresh <span class="keyword">is</span> LoadState.NotLoading &#125;</span><br><span class="line">        <span class="comment">// Scroll to top is synchronous with UI updates, even if remote load was</span></span><br><span class="line">        <span class="comment">// triggered.</span></span><br><span class="line">        .collect &#123; binding.list.scrollToPosition(<span class="number">0</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 最后是在Stackoverflow发现了可以增加一个Header来避免滚动。</p>
-<p> 既然有了Header，那把初始刷新状态也显示了吧。</p>
-<p> 那么这时RecyclerView的动画会在一瞬间同时显示Header和Footer，非常丑。为了解决这个，需要对ItemAnimator进行很复杂的Hack。</p>
-<p> 于是决定把初始刷新状态单独成为View，和LoadStateAdapter协作。然而这么做依然无法彻底解决上述问题。</p>
-<p> 同时，为了避免自动滚动，Header不能去掉。但如果把Header高度设置为0，会出现SwipeRefreshLayout失效的问题，因此最后只好把Header设置为空白的1px。</p>
-</li>
-</ol>
-<p>在花费很多天把玩Paging3，结果却依然不理想后，只能自己造轮子了。</p>
-<p><a href="https://www.reddit.com/r/androiddev/search/?q=paging3">Reddit上也有很多开发者抱怨Paging3复杂难用</a>。</p>
-<h2 id="自制小饼干"><a href="#自制小饼干" class="headerlink" title="自制小饼干"></a>自制小饼干</h2><p>为了自身情况量身定制的方法意外地简单。大体上还是参考了<a href="https://guides.codepath.com/android/endless-scrolling-with-adapterviews-and-recyclerview">Endless Scrolling with AdapterViews and RecyclerView</a>，只不过使用ListAdapter中的getItem来确定已浏览的范围，进而决定何时请求更多。配合Room生成的Flow和自定义的加载状态，确保了Single source of truth。</p>
-<ul>
-<li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1563,28 +1563,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1640,6 +1618,28 @@
 <li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
 <li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1712,27 +1712,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android创建快捷方式图标的简单快速方法</title>
-    <url>/2019/03/11/android-shortcut-icon/</url>
-    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
-<span id="more"></span>
-
-<ol>
-<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
-</li>
-<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>在Activity启动时弹出软键盘并在其之上显示内容</title>
     <url>/2023/01/11/android-soft-keyboard-oncreate/</url>
     <content><![CDATA[<p>想要在Activity一启动就显示如下状态，还要有一个不乱跳的动画，这比预想中要复杂不少。</p>
@@ -1768,6 +1747,27 @@
 <ol>
 <li>内容只会在第一次时跳跃。</li>
 <li>可以跟随软键盘高度变化，比如切换语言时。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android创建快捷方式图标的简单快速方法</title>
+    <url>/2019/03/11/android-shortcut-icon/</url>
+    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
+</li>
+<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -2213,6 +2213,23 @@
       </categories>
   </entry>
   <entry>
+    <title>换域名啦</title>
+    <url>/2023/06/10/changing-domain/</url>
+    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
+<p>本文记录换域名和重定向的历程。</p>
+<span id="more"></span>
+
+<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
+<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
+<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
+<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
+<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android 14升级笔记</title>
     <url>/2024/04/22/android14-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2231,23 +2248,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>换域名啦</title>
-    <url>/2023/06/10/changing-domain/</url>
-    <content><![CDATA[<p>由于 <del>不想继续花钱续费域名</del> 想不到心仪的域名，决定用回GitHub的默认域名。平平淡淡才是真。旧域名再续个几年就丢掉了。</p>
-<p>本文记录换域名和重定向的历程。</p>
-<span id="more"></span>
-
-<p>旧域名是在NameSilo购买的。NameSilo的界面是复古了点，但能出色完成工作。</p>
-<p>但在使用其提供的重定向试图将旧域名定向到GitHub默认域名时，发现其不支持HTTPS，导致直接访问链接失败。一番搜索后发现有人提到了用Cloudflare来移花接木。</p>
-<p>于是问了问ChatGPT具体该怎么做。走了不少弯路，ChatGPT也说了几个错误的步骤，不过到最后还是帮到了我。从结果上来说，根据Cloudflare的教程导入域名后，保持导入的DNS不变，增加一个Page Rule是最终的解决方案。</p>
-<p>接下来就是迁移项目中用过的旧域名了。怕不是要花几年哟。</p>
-<p>ChatGPT现阶段虽然错误不少，但我想到了前段时间看的一个神经学家的视频，人类的进化不也是一路犯错过来的嘛。</p>
-]]></content>
-      <categories>
-        <category>Website</category>
       </categories>
   </entry>
   <entry>
@@ -2478,6 +2478,15 @@
       </categories>
   </entry>
   <entry>
+    <title>aprildown.xyz将会在未来到期</title>
+    <url>/2023/08/12/domain-expiration/</url>
+    <content><![CDATA[<p>惊闻XYZ域名即将涨价，索性决定再续费一两年后放弃该域名。之后继续乖乖地使用无需多虑的Github域名。</p>
+]]></content>
+      <categories>
+        <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Github Stars整理</title>
     <url>/2019/11/24/github-stars/</url>
     <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
@@ -2519,43 +2528,6 @@
 ]]></content>
       <categories>
         <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>aprildown.xyz将会在未来到期</title>
-    <url>/2023/08/12/domain-expiration/</url>
-    <content><![CDATA[<p>惊闻XYZ域名即将涨价，索性决定再续费一两年后放弃该域名。之后继续乖乖地使用无需多虑的Github域名。</p>
-]]></content>
-      <categories>
-        <category>Website</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Gradle缓存笔记</title>
-    <url>/2022/03/06/gradle-cache/</url>
-    <content><![CDATA[<p>来自于：</p>
-<ul>
-<li><a href="https://jasonatwood.io/archives/1966">Understanding Different Gradle Caches for Android Projects, part 1.</a></li>
-<li><a href="https://jasonatwood.io/archives/1995">Understanding Different Gradle Caches for Android Projects, part 2</a></li>
-<li><a href="https://jasonatwood.io/archives/2127">Understanding Different Gradle Caches for Android Projects, part 3</a></li>
-</ul>
-<span id="more"></span>
-
-<p>[Build]-[Clean Project]和<code>gradlew clean</code>都是仅删除根目录和Module目录下的<code>build</code>文件夹。<code>build</code>文件夹是Gradle自带的、默认的缓存策略。</p>
-<p>Build Cache（现在默认关闭，通过<code>--build-cache</code>或<code>org.gradle.caching=true</code>打开），使用了默认单项目缓存一样的机制，会把部分缓存保存到<code>~/.gradle/caches/build-cache-*</code>，机器上所有项目可共享。这也就是为什么Dagger偶尔失效时，需要删除系统Gradle缓存的原因。</p>
-<ul>
-<li>文中提到<code>R.java</code>，但记得在某个AGP版本中，文件已经变成<code>jar</code>，轻易找不到了。</li>
-<li><code>kapt</code>的<code>useBuildCache</code><a href="https://docs.gradle.org/current/userguide/caching_android_projects.html#annotation_processors_and_kotlin">在某个版本中默认开启了</a>。<a href="https://kotlinlang.org/docs/kapt.html#gradle-build-cache-support">关闭文档</a>。</li>
-</ul>
-<p>Gradle Deamon默认开启。</p>
-<p>依赖储存在<code>~/.gradle/caches/*</code>中。其中<code>transform-*</code>保存了本地修改后的依赖，非下载内容。</p>
-<p>Invalidate Caches / Restart只清理IDE缓存，不清理上述缓存。</p>
-<p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
-<p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
-<p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2605,6 +2577,34 @@
 ]]></content>
       <categories>
         <category>What</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Gradle缓存笔记</title>
+    <url>/2022/03/06/gradle-cache/</url>
+    <content><![CDATA[<p>来自于：</p>
+<ul>
+<li><a href="https://jasonatwood.io/archives/1966">Understanding Different Gradle Caches for Android Projects, part 1.</a></li>
+<li><a href="https://jasonatwood.io/archives/1995">Understanding Different Gradle Caches for Android Projects, part 2</a></li>
+<li><a href="https://jasonatwood.io/archives/2127">Understanding Different Gradle Caches for Android Projects, part 3</a></li>
+</ul>
+<span id="more"></span>
+
+<p>[Build]-[Clean Project]和<code>gradlew clean</code>都是仅删除根目录和Module目录下的<code>build</code>文件夹。<code>build</code>文件夹是Gradle自带的、默认的缓存策略。</p>
+<p>Build Cache（现在默认关闭，通过<code>--build-cache</code>或<code>org.gradle.caching=true</code>打开），使用了默认单项目缓存一样的机制，会把部分缓存保存到<code>~/.gradle/caches/build-cache-*</code>，机器上所有项目可共享。这也就是为什么Dagger偶尔失效时，需要删除系统Gradle缓存的原因。</p>
+<ul>
+<li>文中提到<code>R.java</code>，但记得在某个AGP版本中，文件已经变成<code>jar</code>，轻易找不到了。</li>
+<li><code>kapt</code>的<code>useBuildCache</code><a href="https://docs.gradle.org/current/userguide/caching_android_projects.html#annotation_processors_and_kotlin">在某个版本中默认开启了</a>。<a href="https://kotlinlang.org/docs/kapt.html#gradle-build-cache-support">关闭文档</a>。</li>
+</ul>
+<p>Gradle Deamon默认开启。</p>
+<p>依赖储存在<code>~/.gradle/caches/*</code>中。其中<code>transform-*</code>保存了本地修改后的依赖，非下载内容。</p>
+<p>Invalidate Caches / Restart只清理IDE缓存，不清理上述缓存。</p>
+<p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
+<p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
+<p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2982,6 +2982,64 @@
       </categories>
   </entry>
   <entry>
+    <title>使用Splinter模拟网页操作</title>
+    <url>/2018/04/01/splinter/</url>
+    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
+<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
+<p>内容大同小异，说明几个坑。</p>
+<span id="more"></span>
+
+<p>我用的是Py3.6和Chrome.</p>
+<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
+<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
+<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
+<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
+<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
+]]></content>
+      <categories>
+        <category>Automation</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>两种安慰别人的方式</title>
+    <url>/2019/07/05/thoughts-comfort/</url>
+    <content><![CDATA[<p>生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。</p>
+<span id="more"></span>
+
+<p>有两种安慰人的方式，对不同的人有不同的效果。快来对号入座儿。</p>
+<h2 id="1-“你过得一点都不惨”"><a href="#1-“你过得一点都不惨”" class="headerlink" title="1. “你过得一点都不惨”"></a>1. “你过得一点都不惨”</h2><p>“比你过得惨的人多的去了，${列举各种惨状}的人还不过了嘛？”之类的安慰语。</p>
+<p>诉苦主体可以对此两种反应:</p>
+<ol>
+<li><p>“原来我也不算最糟糕的嘛，比我惨多的去了，平衡了平衡了。”</p>
+<p> 起到了正面效果。诉苦主题认清了自己的位置，重拾了生活的希望。</p>
+</li>
+<li><p>“你是在说我矫揉造作，是个懦夫吗？”</p>
+<p> 起到了负面效果。诉苦主体此时感觉更糟糕了，因为不仅没人能跟他感同身受，而且还被嘲讽、鄙视了。</p>
+</li>
+</ol>
+<h2 id="2-“你过得好惨啊”"><a href="#2-“你过得好惨啊”" class="headerlink" title="2. “你过得好惨啊”"></a>2. “你过得好惨啊”</h2><p>“这也太惨了吧”之类的安慰语，有的人甚至还会笑出来。</p>
+<p>诉苦主体可以对此两种反应:</p>
+<ol>
+<li><p>“我真的是惨，失败的人生！”</p>
+<p> 起到了负面效果。击碎了诉苦主体最后的波纹。</p>
+</li>
+<li><p>“哈哈，对吧。这就是生活啊！”</p>
+<p> 起到了正面效果。诉苦主题接受了现实，被迫面对生活。跟前一个相比，效果也算比较正面。</p>
+</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>具体要说什么话，还是要对人对事。</p>
+<h2 id="嗯…………"><a href="#嗯…………" class="headerlink" title="嗯…………"></a>嗯…………</h2><p>我总感觉还有些东西没有挖掘出来，但找不到是哪些。</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
     <title>sed 使用笔记</title>
     <url>/2024/04/21/sed/</url>
     <content><![CDATA[<p><code>sed</code></p>
@@ -3027,40 +3085,6 @@
       </categories>
   </entry>
   <entry>
-    <title>两种安慰别人的方式</title>
-    <url>/2019/07/05/thoughts-comfort/</url>
-    <content><![CDATA[<p>生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。</p>
-<span id="more"></span>
-
-<p>有两种安慰人的方式，对不同的人有不同的效果。快来对号入座儿。</p>
-<h2 id="1-“你过得一点都不惨”"><a href="#1-“你过得一点都不惨”" class="headerlink" title="1. “你过得一点都不惨”"></a>1. “你过得一点都不惨”</h2><p>“比你过得惨的人多的去了，${列举各种惨状}的人还不过了嘛？”之类的安慰语。</p>
-<p>诉苦主体可以对此两种反应:</p>
-<ol>
-<li><p>“原来我也不算最糟糕的嘛，比我惨多的去了，平衡了平衡了。”</p>
-<p> 起到了正面效果。诉苦主题认清了自己的位置，重拾了生活的希望。</p>
-</li>
-<li><p>“你是在说我矫揉造作，是个懦夫吗？”</p>
-<p> 起到了负面效果。诉苦主体此时感觉更糟糕了，因为不仅没人能跟他感同身受，而且还被嘲讽、鄙视了。</p>
-</li>
-</ol>
-<h2 id="2-“你过得好惨啊”"><a href="#2-“你过得好惨啊”" class="headerlink" title="2. “你过得好惨啊”"></a>2. “你过得好惨啊”</h2><p>“这也太惨了吧”之类的安慰语，有的人甚至还会笑出来。</p>
-<p>诉苦主体可以对此两种反应:</p>
-<ol>
-<li><p>“我真的是惨，失败的人生！”</p>
-<p> 起到了负面效果。击碎了诉苦主体最后的波纹。</p>
-</li>
-<li><p>“哈哈，对吧。这就是生活啊！”</p>
-<p> 起到了正面效果。诉苦主题接受了现实，被迫面对生活。跟前一个相比，效果也算比较正面。</p>
-</li>
-</ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>具体要说什么话，还是要对人对事。</p>
-<h2 id="嗯…………"><a href="#嗯…………" class="headerlink" title="嗯…………"></a>嗯…………</h2><p>我总感觉还有些东西没有挖掘出来，但找不到是哪些。</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
     <title>我们为什么不相信狼来了中的那个孩子</title>
     <url>/2018/12/25/thoughts-cry-wolf/</url>
     <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
@@ -3075,30 +3099,6 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>使用Splinter模拟网页操作</title>
-    <url>/2018/04/01/splinter/</url>
-    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
-<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
-<p>内容大同小异，说明几个坑。</p>
-<span id="more"></span>
-
-<p>我用的是Py3.6和Chrome.</p>
-<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
-<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
-<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
-<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
-<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
-]]></content>
-      <categories>
-        <category>Automation</category>
       </categories>
   </entry>
   <entry>
@@ -3153,6 +3153,34 @@
       </categories>
   </entry>
   <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -3181,34 +3209,6 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3279,35 +3279,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android文字转语音(TTS)引擎</title>
-    <url>/2019/03/11/tts/</url>
-    <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
-<span id="more"></span>
-
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这个设置是系统自带。这个功能不仅仅用于盲人使用设备时，将屏幕上的文字阅读出来，更广泛的用途是，语音播报内容，比如导航、天气预报等。这个功能的登场次数不算多，但我见过不少。</p>
-<p>几乎所有Android设备会自带一个<code>Pico TTS</code>。</p>
-<blockquote>
-<p>Pico TTS: AOSP自带的TTS，支持的语言只有英德西法意。</p>
-</blockquote>
-<p>它不支持中文，加上国内多数厂商对这块儿并不怎么重视，导致了TTS这个功能在国内基本是荒废的。但Android留出接口，可以安装一些第三方支持中文的引擎来让Android阅读中文。</p>
-<p><strong>有的国产系统后台管理严格，导致TTS无法启动运行，这种情况下TTS就已经凉了</strong></p>
-<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>国内一些导航应用导航时使用的方法，并不是使用这个引擎，而是另起炉灶，用的自己的方法或购买第三方的SDK。</p>
-<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="Google文字转语音"><a href="#Google文字转语音" class="headerlink" title="Google文字转语音"></a>Google文字转语音</h3><p>在Google自家的设备上取代了<code>Pico TTS</code>，支持地球上绝大多数语言，基本是首选。在酷安和Google Play或各大应用市场都可以找到。</p>
-<p>它默认会联网获取语音，但可能出现因网络状况而读不出来的情况，所以需要提前下载好语音包。但即使下好了语音包，有时也会读不出来 ㄟ( ▔, ▔ )ㄏ</p>
-<h2 id="讯飞语记"><a href="#讯飞语记" class="headerlink" title="讯飞语记"></a>讯飞语记</h2><p>是讯飞的一个单独应用。安装后就会添加一个引擎。可以自定义的内容不少。<del>虽然声音不如谷歌娘好听。</del></p>
-<h2 id="小爱-TTS"><a href="#小爱-TTS" class="headerlink" title="小爱 TTS"></a>小爱 TTS</h2><p>似乎只有在小米应用商店有下载：<a href="http://app.mi.com/details?id=com.xiaomi.mibrain.speech">http://app.mi.com/details?id=com.xiaomi.mibrain.speech</a></p>
-<p>没有试过，但应用信息</p>
-<blockquote>
-<p>软件大小:20.86 M 版本号：1.1.1 更新时间：2018-08-02</p>
-</blockquote>
-<p>怕是不靠谱。</p>
-<h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>计时机器的使用方法</title>
     <url>/2018/12/19/timer-machine-usage-zh/</url>
     <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
@@ -3343,32 +3314,32 @@
       </categories>
   </entry>
   <entry>
-    <title>个人常用的视频下载及处理命令整理</title>
-    <url>/2023/11/23/youtube-dl-commands/</url>
-    <content><![CDATA[<p>RT</p>
+    <title>Android文字转语音(TTS)引擎</title>
+    <url>/2019/03/11/tts/</url>
+    <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
 <span id="more"></span>
 
-<h2 id="下载最佳视频-音频"><a href="#下载最佳视频-音频" class="headerlink" title="下载最佳视频+音频"></a>下载最佳视频+音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp -S ext</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://github.com/yt-dlp/yt-dlp/issues/3398">https://github.com/yt-dlp/yt-dlp/issues/3398</a></p>
-<h2 id="合成视频加音频"><a href="#合成视频加音频" class="headerlink" title="合成视频加音频"></a>合成视频加音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp -F</span><br><span class="line">yt-dlp -f 641+140 </span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.reddit.com/r/youtubedl/comments/qfsuxu/ytdlp_download_and_merge_multiple_format/">https://www.reddit.com/r/youtubedl/comments/qfsuxu/ytdlp_download_and_merge_multiple_format/</a></p>
-<h2 id="裁剪音频"><a href="#裁剪音频" class="headerlink" title="裁剪音频"></a>裁剪音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -ss 1:00 -to 2:00 -i input.mp3 output.mp3</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/questions/46508055/using-ffmpeg-to-cut-audio-from-to-position">https://stackoverflow.com/questions/46508055/using-ffmpeg-to-cut-audio-from-to-position</a></p>
-<h2 id="下载视频的音频"><a href="#下载视频的音频" class="headerlink" title="下载视频的音频"></a>下载视频的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 </span><br></pre></td></tr></table></figure>
-
-<p><a href="https://askubuntu.com/a/178991">https://askubuntu.com/a/178991</a></p>
-<h2 id="下载视频列表的音频"><a href="#下载视频列表的音频" class="headerlink" title="下载视频列表的音频"></a>下载视频列表的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 -o <span class="string">&quot;%(title)s.%(ext)s&quot;</span> </span><br></pre></td></tr></table></figure>
-
-<p><a href="https://askubuntu.com/a/564571">https://askubuntu.com/a/564571</a></p>
-<h2 id="转换视频文件夹为音频文件夹"><a href="#转换视频文件夹为音频文件夹" class="headerlink" title="转换视频文件夹为音频文件夹"></a>转换视频文件夹为音频文件夹</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> %i <span class="keyword">in</span> (*.mp4) <span class="keyword">do</span> ffmpeg -i &quot;%i&quot; &quot;%~ni.mp3&quot;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://stackoverflow.com/a/56244203/5507158">https://stackoverflow.com/a/56244203/5507158</a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这个设置是系统自带。这个功能不仅仅用于盲人使用设备时，将屏幕上的文字阅读出来，更广泛的用途是，语音播报内容，比如导航、天气预报等。这个功能的登场次数不算多，但我见过不少。</p>
+<p>几乎所有Android设备会自带一个<code>Pico TTS</code>。</p>
+<blockquote>
+<p>Pico TTS: AOSP自带的TTS，支持的语言只有英德西法意。</p>
+</blockquote>
+<p>它不支持中文，加上国内多数厂商对这块儿并不怎么重视，导致了TTS这个功能在国内基本是荒废的。但Android留出接口，可以安装一些第三方支持中文的引擎来让Android阅读中文。</p>
+<p><strong>有的国产系统后台管理严格，导致TTS无法启动运行，这种情况下TTS就已经凉了</strong></p>
+<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>国内一些导航应用导航时使用的方法，并不是使用这个引擎，而是另起炉灶，用的自己的方法或购买第三方的SDK。</p>
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="Google文字转语音"><a href="#Google文字转语音" class="headerlink" title="Google文字转语音"></a>Google文字转语音</h3><p>在Google自家的设备上取代了<code>Pico TTS</code>，支持地球上绝大多数语言，基本是首选。在酷安和Google Play或各大应用市场都可以找到。</p>
+<p>它默认会联网获取语音，但可能出现因网络状况而读不出来的情况，所以需要提前下载好语音包。但即使下好了语音包，有时也会读不出来 ㄟ( ▔, ▔ )ㄏ</p>
+<h2 id="讯飞语记"><a href="#讯飞语记" class="headerlink" title="讯飞语记"></a>讯飞语记</h2><p>是讯飞的一个单独应用。安装后就会添加一个引擎。可以自定义的内容不少。<del>虽然声音不如谷歌娘好听。</del></p>
+<h2 id="小爱-TTS"><a href="#小爱-TTS" class="headerlink" title="小爱 TTS"></a>小爱 TTS</h2><p>似乎只有在小米应用商店有下载：<a href="http://app.mi.com/details?id=com.xiaomi.mibrain.speech">http://app.mi.com/details?id=com.xiaomi.mibrain.speech</a></p>
+<p>没有试过，但应用信息</p>
+<blockquote>
+<p>软件大小:20.86 M 版本号：1.1.1 更新时间：2018-08-02</p>
+</blockquote>
+<p>怕是不靠谱。</p>
+<h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
 ]]></content>
       <categories>
-        <category>Notes</category>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3398,6 +3369,35 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>个人常用的视频下载及处理命令整理</title>
+    <url>/2023/11/23/youtube-dl-commands/</url>
+    <content><![CDATA[<p>RT</p>
+<span id="more"></span>
+
+<h2 id="下载最佳视频-音频"><a href="#下载最佳视频-音频" class="headerlink" title="下载最佳视频+音频"></a>下载最佳视频+音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp -S ext</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/yt-dlp/yt-dlp/issues/3398">https://github.com/yt-dlp/yt-dlp/issues/3398</a></p>
+<h2 id="合成视频加音频"><a href="#合成视频加音频" class="headerlink" title="合成视频加音频"></a>合成视频加音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp -F</span><br><span class="line">yt-dlp -f 641+140 </span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.reddit.com/r/youtubedl/comments/qfsuxu/ytdlp_download_and_merge_multiple_format/">https://www.reddit.com/r/youtubedl/comments/qfsuxu/ytdlp_download_and_merge_multiple_format/</a></p>
+<h2 id="裁剪音频"><a href="#裁剪音频" class="headerlink" title="裁剪音频"></a>裁剪音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -ss 1:00 -to 2:00 -i input.mp3 output.mp3</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/46508055/using-ffmpeg-to-cut-audio-from-to-position">https://stackoverflow.com/questions/46508055/using-ffmpeg-to-cut-audio-from-to-position</a></p>
+<h2 id="下载视频的音频"><a href="#下载视频的音频" class="headerlink" title="下载视频的音频"></a>下载视频的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 </span><br></pre></td></tr></table></figure>
+
+<p><a href="https://askubuntu.com/a/178991">https://askubuntu.com/a/178991</a></p>
+<h2 id="下载视频列表的音频"><a href="#下载视频列表的音频" class="headerlink" title="下载视频列表的音频"></a>下载视频列表的音频</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yt-dlp --extract-audio --audio-format mp3 -o <span class="string">&quot;%(title)s.%(ext)s&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<p><a href="https://askubuntu.com/a/564571">https://askubuntu.com/a/564571</a></p>
+<h2 id="转换视频文件夹为音频文件夹"><a href="#转换视频文件夹为音频文件夹" class="headerlink" title="转换视频文件夹为音频文件夹"></a>转换视频文件夹为音频文件夹</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> %i <span class="keyword">in</span> (*.mp4) <span class="keyword">do</span> ffmpeg -i &quot;%i&quot; &quot;%~ni.mp3&quot;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/a/56244203/5507158">https://stackoverflow.com/a/56244203/5507158</a></p>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
