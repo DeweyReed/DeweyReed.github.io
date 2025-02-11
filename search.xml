@@ -362,6 +362,56 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Dark Theme/深色模式使用体验</title>
+    <url>/2020/05/07/android-dark-theme/</url>
+    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
+<span id="more"></span>
+
+<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
+<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
+<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
+<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
+<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
+<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
+<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
+<p>这是因为文档中有一句话：</p>
+<blockquote>
+<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
+</blockquote>
+<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
+<p>我的第二次尝试是重写<code>recreate()</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
+<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
+<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
+<p>一个Switch显示是否使用了深色主题：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
+
+<p>切换Switch时切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，在onCreate中根据需要自动切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有啥问题，有啥问题呀？</p>
+<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
+<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
+<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
+<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
+<p>完。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Dev Summit 2019 笔记</title>
     <url>/2019/11/13/android-dev-summit-2019/</url>
     <content><![CDATA[<p>RT</p>
@@ -460,56 +510,6 @@
       <categories>
         <category>Android</category>
         <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Dark Theme/深色模式使用体验</title>
-    <url>/2020/05/07/android-dark-theme/</url>
-    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
-<span id="more"></span>
-
-<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
-<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
-<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
-<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
-<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
-<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
-<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
-<p>这是因为文档中有一句话：</p>
-<blockquote>
-<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
-</blockquote>
-<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
-<p>我的第二次尝试是重写<code>recreate()</code>：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
-<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
-<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
-<p>一个Switch显示是否使用了深色主题：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
-
-<p>切换Switch时切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此外，在onCreate中根据需要自动切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有啥问题，有啥问题呀？</p>
-<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
-<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
-<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
-<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
-<p>完。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -1542,6 +1542,27 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
+<span id="more"></span>
+
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1597,27 +1618,6 @@
 <li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
 <li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
-
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1684,6 +1684,27 @@
       </categories>
   </entry>
   <entry>
+    <title>Android创建快捷方式图标的简单快速方法</title>
+    <url>/2019/03/11/android-shortcut-icon/</url>
+    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
+</li>
+<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Resources小研究</title>
     <url>/2020/01/12/android-resources-test/</url>
     <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
@@ -1706,27 +1727,6 @@
 
 <p>然后就可以</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android创建快捷方式图标的简单快速方法</title>
-    <url>/2019/03/11/android-shortcut-icon/</url>
-    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
-<span id="more"></span>
-
-<ol>
-<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
-</li>
-<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1976,76 +1976,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android System UI</title>
-    <url>/2019/05/06/android-system-ui/</url>
-    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
-<p>只是一些笔记。</p>
-<span id="more"></span>
-
-<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
-<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>VISIBLE：让😲回来，重新显示</li>
-<li>LOW_PROFILE：让😲暗淡</li>
-<li>HIDE_NAVIGATION</li>
-<li>FULLSCREEN</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
-<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LIGHT_STATUS_BAR</li>
-<li>LIGHT_NAVIGATION_BAR</li>
-</ul>
-<p>让😲浅底深色。默认是深底浅色。</p>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LAYOUT_STABLE</li>
-<li>LAYOUT_HIDE_NAVIGATION</li>
-<li>LAYOUT_FULLSCREEN</li>
-</ul>
-<p>跟应用内容的显示有关系。</p>
-<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
-
-<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
-<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
-<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
-<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
-<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
-<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
-<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
-<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
-<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
-<p>可以给子View设置，选择是否让子View出现在😲后。</p>
-<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
-<ul>
-<li><code>app:statusBarBackground</code></li>
-</ul>
-<p><code>CollapsingToolbarLayout</code></p>
-<ul>
-<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
-<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
-</ul>
-<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
-<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
-<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
-<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
-<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
-<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发后悔的九件事</title>
     <url>/2022/12/20/android-things-i-wish-i-knew/</url>
     <content><![CDATA[<p>RT</p>
@@ -2139,6 +2069,76 @@
       </categories>
   </entry>
   <entry>
+    <title>Android System UI</title>
+    <url>/2019/05/06/android-system-ui/</url>
+    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
+<p>只是一些笔记。</p>
+<span id="more"></span>
+
+<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
+<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>VISIBLE：让😲回来，重新显示</li>
+<li>LOW_PROFILE：让😲暗淡</li>
+<li>HIDE_NAVIGATION</li>
+<li>FULLSCREEN</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
+<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LIGHT_STATUS_BAR</li>
+<li>LIGHT_NAVIGATION_BAR</li>
+</ul>
+<p>让😲浅底深色。默认是深底浅色。</p>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LAYOUT_STABLE</li>
+<li>LAYOUT_HIDE_NAVIGATION</li>
+<li>LAYOUT_FULLSCREEN</li>
+</ul>
+<p>跟应用内容的显示有关系。</p>
+<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
+
+<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
+<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
+<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
+<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
+<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
+<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
+<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
+<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
+<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
+<p>可以给子View设置，选择是否让子View出现在😲后。</p>
+<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
+<ul>
+<li><code>app:statusBarBackground</code></li>
+</ul>
+<p><code>CollapsingToolbarLayout</code></p>
+<ul>
+<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
+<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
+</ul>
+<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
+<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
+<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
+<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
+<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
+<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android 12升级笔记</title>
     <url>/2022/06/25/android12-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2213,27 +2213,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 14升级笔记</title>
-    <url>/2024/04/22/android14-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
-<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
-<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android 15升级笔记</title>
     <url>/2025/01/10/android15-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2267,6 +2246,27 @@
 ]]></content>
       <categories>
         <category>Website</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 14升级笔记</title>
+    <url>/2024/04/22/android14-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
+<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
+<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2573,32 +2573,6 @@
       </categories>
   </entry>
   <entry>
-    <title>灰度显示</title>
-    <url>/2018/11/04/greyscale/</url>
-    <content><![CDATA[<p>搜集的一些如何在电子设备上打开灰度显示的设置。</p>
-<span id="more"></span>
-
-<ul>
-<li><p>Windows10</p>
-<ul>
-<li>设置搜索“颜色滤镜”，勾选“允许使用快捷键打开或关闭滤镜”，把滤镜设置为“灰度”。使用Windows + Ctrl + C切换灰度。</li>
-<li><a href="https://justgetflux.com/">flux</a>，最新版(4.84)有灰度设置。</li>
-</ul>
-</li>
-<li><p>Android 5.0及以后</p>
-<ul>
-<li>开发者设置，从最后开始找“模拟颜色空间”，设置为“全色盲”。</li>
-<li>应用<a href="https://github.com/fei-ke/Greyscale">灰度</a>，或在酷安搜索。</li>
-</ul>
-</li>
-</ul>
-<p>其他的，有缘再添加吧。</p>
-]]></content>
-      <categories>
-        <category>What</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2624,6 +2598,32 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>灰度显示</title>
+    <url>/2018/11/04/greyscale/</url>
+    <content><![CDATA[<p>搜集的一些如何在电子设备上打开灰度显示的设置。</p>
+<span id="more"></span>
+
+<ul>
+<li><p>Windows10</p>
+<ul>
+<li>设置搜索“颜色滤镜”，勾选“允许使用快捷键打开或关闭滤镜”，把滤镜设置为“灰度”。使用Windows + Ctrl + C切换灰度。</li>
+<li><a href="https://justgetflux.com/">flux</a>，最新版(4.84)有灰度设置。</li>
+</ul>
+</li>
+<li><p>Android 5.0及以后</p>
+<ul>
+<li>开发者设置，从最后开始找“模拟颜色空间”，设置为“全色盲”。</li>
+<li>应用<a href="https://github.com/fei-ke/Greyscale">灰度</a>，或在酷安搜索。</li>
+</ul>
+</li>
+</ul>
+<p>其他的，有缘再添加吧。</p>
+]]></content>
+      <categories>
+        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3104,6 +3104,23 @@
       </categories>
   </entry>
   <entry>
+    <title>我们为什么不相信狼来了中的那个孩子</title>
+    <url>/2018/12/25/thoughts-cry-wolf/</url>
+    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
+<span id="more"></span>
+
+<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
+<p>所以我们的逻辑成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
+
+<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
+<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
+]]></content>
+      <categories>
+        <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
     <title>万恶淫为首，论迹不论心，论心世上无完人</title>
     <url>/2022/04/21/thoughts-junzi/</url>
     <content><![CDATA[<p>今日网上冲浪，遇到了一句“君子论迹不论心，论心世上少完人”，于是有了本文。</p>
@@ -3155,23 +3172,6 @@
       </categories>
   </entry>
   <entry>
-    <title>我们为什么不相信狼来了中的那个孩子</title>
-    <url>/2018/12/25/thoughts-cry-wolf/</url>
-    <content><![CDATA[<p>废话，因为他说的话不靠谱。但是狼真的来的时候，他也没说错呀。</p>
-<span id="more"></span>
-
-<p>这是一个信任成本的问题。如果一个人的信任成本很高，大伙儿就偏向于不相信他。注意是信任成本<strong>高</strong>，而不是无穷大或者说这个人不能被信任，毕竟不存在一直在撒谎的人。</p>
-<p>所以我们的逻辑成了：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if 这个人的信任成本高：</span><br><span class="line">  不相信他</span><br><span class="line">else：</span><br><span class="line">  另加讨论</span><br></pre></td></tr></table></figure>
-
-<p>我们不相信他<strong>不是因为他有错</strong>，而是因为从他口中得到的信息假多真少。我们为了让自己信任一个人的成本维持在一个正常水平，才选择不相信他说的所有内容。</p>
-<p>那我们在微信群中常见的谣言、微博上一些信口开河的大/小V，他们的信任成本高吗？那相信他们的人多吗？那他们知道狼来了的故事吗？那他们明白那个故事吗？</p>
-]]></content>
-      <categories>
-        <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -3203,27 +3203,6 @@
       </categories>
   </entry>
   <entry>
-    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
-    <url>/2020/09/07/timer-cloud-backup/</url>
-    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
-<span id="more"></span>
-
-<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
-<p>酷安版本独占：开发日志、打赏</p>
-<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
-<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
-<li>在Google Play搜索“计时机器”并安装。</li>
-<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
-<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
-<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
-</ol>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
     <url>/2020/01/19/timer-analytics-2020-1-19/</url>
     <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
@@ -3246,6 +3225,27 @@
 <p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
 <h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
 <p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>关于计时机器在Google Play渠道引入订阅制云备份的决定</title>
+    <url>/2020/09/07/timer-cloud-backup/</url>
+    <content><![CDATA[<p>计时机器在4.6.0开始，在Google Play下载的应用将包含需要订阅后可使用的云备份功能。在酷安下载的应用将不包含此功能。在此进行一些记录和说明。</p>
+<span id="more"></span>
+
+<h2 id="Google-Play版本和酷安版本区别"><a href="#Google-Play版本和酷安版本区别" class="headerlink" title="Google Play版本和酷安版本区别"></a>Google Play版本和酷安版本区别</h2><p>Google Play版本独占：云备份、未来可能加入到订阅计划中所有服务</p>
+<p>酷安版本独占：开发日志、打赏</p>
+<h2 id="从酷安版本迁移到Google-Play版本"><a href="#从酷安版本迁移到Google-Play版本" class="headerlink" title="从酷安版本迁移到Google Play版本"></a>从酷安版本迁移到Google Play版本</h2><ol>
+<li>打开应用，打开侧边栏，选择“备份与还原”，选择“导出应用数据”，根据步骤将应用数据导出为一个文件。</li>
+<li>在Google Play搜索“计时机器”并安装。</li>
+<li>打开Google Play下载的应用，打开侧边栏，选择“备份与还原”，选择“导入应用数据”，将第一步导出的文件导入。</li>
+<li>把新应用的系统白名单设置一下，以免应用锁屏后被系统强制关闭。</li>
+<li>如果要使用云备份，且手机不是一直处于魔法上网的环境，请在订阅后将自动打开的自动云备份关闭，然后在需要时手动备份。</li>
+</ol>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>订阅使用了Google Play的In-app Billing，云备份使用了Firebase，而上述两个服务在中国大陆由于众所周知的原因无法使用。虽然这个问题有一个常见的解决方案：在大陆使用支付宝或微信支付，和Firebase的同类替代（像之前用过的LeanCloud），但由于<strong>国内个人支付资格难以获得、域名备案困难繁琐、应用曝光渠道狭窄、应用市场分散混乱等</strong>原因，故暂时放弃在中国大陆提供该服务的想法。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3292,41 +3292,6 @@
 <img src="/2017/12/10/timer-huawei-solution/huawei-solution.jpg" class="" title="[huawei-solution.jpg](.&#x2F;timer-huawei-solution&#x2F;huawei-solution.jpg)">
 
 <p>其他用户：最近发现了一个链接<a href="https://bitbucket.org/copluk/acr/issues/607">ACR is automatically closed on some phones</a>，是个国外应用处理一些应用在国产设备上后台被杀时如何白名单的文章。虽然是英文，但下面有各个设备的链接，里面有一些示范图片，各位可以参考一下。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>计时机器的使用方法</title>
-    <url>/2018/12/19/timer-machine-usage-zh/</url>
-    <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
-<span id="more"></span>
-
-<ol>
-<li><p>步骤</p>
-<p> 一个步骤代表要在一定时间内完成一件事。一个默认的步骤（新建普通步骤后不进行任何操作）只会安静地计时，然后安静地进入下一步骤或结束。</p>
-<p> 如果想要知道一个步骤结束了，那么就需要在这个步骤添加一个专门提醒的步骤，并给它添加音乐、振动等等提醒效果（行为）。</p>
-<p> 所有步骤的时间、行为、名字等都是可以修改的。</p>
-<ul>
-<li><p>特殊的步骤</p>
-<ul>
-<li><p>提醒步骤：它有一个不同的颜色（默认蓝色）；它会保存上一次编辑后的内容，并在下一添加提醒步骤时显示相同的内容；在这种步骤微调时间时，会退回到上一步并把时间设置为1分钟（设置里可以关闭）。</p>
-</li>
-<li><p>起始和结束步骤：一个计时器可以有多次循环，那这两个步骤可以用作整个计时器开始和结束的标志，它们只会在整个计时器的开始和结束时各执行一次。另外，使用计划任务来终结一个计时器时，到指定时间，计时器会自动跳到结束步骤。</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>与循环计时器的不同</p>
-<p> 最大的不同就是在计时机器中，需要手动添加提醒步骤，不然是不会得到任何反馈的。</p>
-<p> 另外，循环计时器的提醒时长在应用设置里配置，并且是全局的。但在计时机器中，提醒步骤也是计时器的一部分（一个步骤），它的时长、音乐等等都需要手动设置。</p>
-</li>
-<li><p>未来的<del>饼</del>计划</p>
-<p> 预计在2.0.0中加入“组”的概念，可以把现有的步骤放到组里，组有各自的名字和循环。到那个时候，我就得画图来解释了。</p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3405,6 +3370,41 @@
 <h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
 <h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
 <p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>计时机器的使用方法</title>
+    <url>/2018/12/19/timer-machine-usage-zh/</url>
+    <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
+<span id="more"></span>
+
+<ol>
+<li><p>步骤</p>
+<p> 一个步骤代表要在一定时间内完成一件事。一个默认的步骤（新建普通步骤后不进行任何操作）只会安静地计时，然后安静地进入下一步骤或结束。</p>
+<p> 如果想要知道一个步骤结束了，那么就需要在这个步骤添加一个专门提醒的步骤，并给它添加音乐、振动等等提醒效果（行为）。</p>
+<p> 所有步骤的时间、行为、名字等都是可以修改的。</p>
+<ul>
+<li><p>特殊的步骤</p>
+<ul>
+<li><p>提醒步骤：它有一个不同的颜色（默认蓝色）；它会保存上一次编辑后的内容，并在下一添加提醒步骤时显示相同的内容；在这种步骤微调时间时，会退回到上一步并把时间设置为1分钟（设置里可以关闭）。</p>
+</li>
+<li><p>起始和结束步骤：一个计时器可以有多次循环，那这两个步骤可以用作整个计时器开始和结束的标志，它们只会在整个计时器的开始和结束时各执行一次。另外，使用计划任务来终结一个计时器时，到指定时间，计时器会自动跳到结束步骤。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>与循环计时器的不同</p>
+<p> 最大的不同就是在计时机器中，需要手动添加提醒步骤，不然是不会得到任何反馈的。</p>
+<p> 另外，循环计时器的提醒时长在应用设置里配置，并且是全局的。但在计时机器中，提醒步骤也是计时器的一部分（一个步骤），它的时长、音乐等等都需要手动设置。</p>
+</li>
+<li><p>未来的<del>饼</del>计划</p>
+<p> 预计在2.0.0中加入“组”的概念，可以把现有的步骤放到组里，组有各自的名字和循环。到那个时候，我就得画图来解释了。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
