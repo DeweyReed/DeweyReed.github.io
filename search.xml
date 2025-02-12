@@ -83,34 +83,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android自动切换深色主题</title>
-    <url>/2018/10/04/android-auto-night/</url>
-    <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
-<p><strong>2020年6月1日我发现还有问题！</strong></p>
-<p><strong>2020年5月22日新方案又来了，希望能结束这个问题</strong></p>
-<p><strong>2020年4月21日还有Bug，正在修。反正也没人看，估计也没坑到什么人</strong></p>
-<p><strong>2020年1月27日憋出了新方案，似乎修好了</strong></p>
-<p><strong>2019年11月4日现在的实现有Bug，正在研究</strong></p>
-<p><strong>2019年10月18日更新AppCompat 1.1.0的使用说明</strong></p>
-<p><strong>2019年8月18日更新增强版</strong></p>
-<p>网上搜怎么实现自动切换深色主题都没资料的，全是实现，只能自己想办法了。</p>
-<p>最终解决的方案倒是很简单，不过走了<strong>很多、很多、很多、很多</strong>弯路。<del>脑子不是很好使了</del>我好菜啊。</p>
-<span id="more"></span>
-
-<p>已有数据：上一次的启动时间、本次的启动时间（就是现在）、自动启动深色模式的几点几分开始和几点几分结束。</p>
-<p>举个例子，设置八点自动进入深色主题，九点退出深色主题，我们需要满足：1. 上一次启动是在今天八点前。2. 本次启动在今天八点后。3.本次启动在今天九点前。4. 现在是浅色主题。退出深色主题同理。</p>
-<p>下述方案储存几点几分是把小时和分钟分开储存的，另外一种方案是只储存一个值：<code>60 * 小时 + 分钟</code>。</p>
-<p>代码：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> True if we should revert the current dark.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">calculateAutoDarkChange</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    currentIsDark: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    nowMilli: <span class="type">Long</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lastLaunchMilli: <span class="type">Long</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lastLaunch =</span><br><span class="line">        LocalDateTime.ofInstant(Instant.ofEpochMilli(lastLaunchMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> now = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> today = LocalDate.now()</span><br><span class="line">    <span class="keyword">val</span> nightRange = scheduleRange</span><br><span class="line">    <span class="keyword">val</span> nightStart =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.fromHour, nightRange.fromMinute))</span><br><span class="line">    <span class="keyword">val</span> nightEnd =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.toHour, nightRange.toMinute))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringTheSpanFirst</span><span class="params">(from: <span class="type">LocalDateTime</span>, to: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (from == to) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        require(from.isBefore(to))</span><br><span class="line">        <span class="keyword">return</span> (now.isAfter(from) || now == from) &amp;&amp;</span><br><span class="line">            now.isBefore(to) &amp;&amp;</span><br><span class="line">            lastLaunch.isBefore(from)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringNight</span><span class="params">(nightStart: <span class="type">LocalDateTime</span>, nightEnd: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightStart, to = nightEnd) &amp;&amp; !currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isExitingNight</span><span class="params">(nightEnd: <span class="type">LocalDateTime</span>, nextNightStart: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightEnd, to = nextNightStart) &amp;&amp; currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (nightStart.isBefore(nightEnd)) &#123;</span><br><span class="line">        <span class="comment">// |day start           |night start------------|night end          |day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// |day start-----------|night end              |night start--------|day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后在MainActivity里：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>在国内做Android开发踩过的坑</title>
     <url>/2019/08/25/android-chinese-pitfalls/</url>
     <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
@@ -144,6 +116,34 @@
 <h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><blockquote>
 <p>你觉得我喜欢去研究这些东西嘛？</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android自动切换深色主题</title>
+    <url>/2018/10/04/android-auto-night/</url>
+    <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
+<p><strong>2020年6月1日我发现还有问题！</strong></p>
+<p><strong>2020年5月22日新方案又来了，希望能结束这个问题</strong></p>
+<p><strong>2020年4月21日还有Bug，正在修。反正也没人看，估计也没坑到什么人</strong></p>
+<p><strong>2020年1月27日憋出了新方案，似乎修好了</strong></p>
+<p><strong>2019年11月4日现在的实现有Bug，正在研究</strong></p>
+<p><strong>2019年10月18日更新AppCompat 1.1.0的使用说明</strong></p>
+<p><strong>2019年8月18日更新增强版</strong></p>
+<p>网上搜怎么实现自动切换深色主题都没资料的，全是实现，只能自己想办法了。</p>
+<p>最终解决的方案倒是很简单，不过走了<strong>很多、很多、很多、很多</strong>弯路。<del>脑子不是很好使了</del>我好菜啊。</p>
+<span id="more"></span>
+
+<p>已有数据：上一次的启动时间、本次的启动时间（就是现在）、自动启动深色模式的几点几分开始和几点几分结束。</p>
+<p>举个例子，设置八点自动进入深色主题，九点退出深色主题，我们需要满足：1. 上一次启动是在今天八点前。2. 本次启动在今天八点后。3.本次启动在今天九点前。4. 现在是浅色主题。退出深色主题同理。</p>
+<p>下述方案储存几点几分是把小时和分钟分开储存的，另外一种方案是只储存一个值：<code>60 * 小时 + 分钟</code>。</p>
+<p>代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> True if we should revert the current dark.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">calculateAutoDarkChange</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    currentIsDark: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    nowMilli: <span class="type">Long</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lastLaunchMilli: <span class="type">Long</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lastLaunch =</span><br><span class="line">        LocalDateTime.ofInstant(Instant.ofEpochMilli(lastLaunchMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> now = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> today = LocalDate.now()</span><br><span class="line">    <span class="keyword">val</span> nightRange = scheduleRange</span><br><span class="line">    <span class="keyword">val</span> nightStart =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.fromHour, nightRange.fromMinute))</span><br><span class="line">    <span class="keyword">val</span> nightEnd =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.toHour, nightRange.toMinute))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringTheSpanFirst</span><span class="params">(from: <span class="type">LocalDateTime</span>, to: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (from == to) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        require(from.isBefore(to))</span><br><span class="line">        <span class="keyword">return</span> (now.isAfter(from) || now == from) &amp;&amp;</span><br><span class="line">            now.isBefore(to) &amp;&amp;</span><br><span class="line">            lastLaunch.isBefore(from)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringNight</span><span class="params">(nightStart: <span class="type">LocalDateTime</span>, nightEnd: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightStart, to = nightEnd) &amp;&amp; !currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isExitingNight</span><span class="params">(nightEnd: <span class="type">LocalDateTime</span>, nextNightStart: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightEnd, to = nextNightStart) &amp;&amp; currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (nightStart.isBefore(nightEnd)) &#123;</span><br><span class="line">        <span class="comment">// |day start           |night start------------|night end          |day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// |day start-----------|night end              |night start--------|day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在MainActivity里：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1023,6 +1023,24 @@
       </categories>
   </entry>
   <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <url>/2020/01/01/android-oh-my-dagger/</url>
+    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+<span id="more"></span>
+
+<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
+<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
+<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
+<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
+<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
+<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
+<p>死鱼安乐啊死鱼安乐。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>简单的Android软键盘动画</title>
     <url>/2021/05/28/android-naive-keyboard-animation/</url>
     <content><![CDATA[<p>随着<code>androidx.core</code>1.5.0的发布，我终于搞明白全屏、WindowInsets这些问题了。</p>
@@ -1072,24 +1090,6 @@
 </ul>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一些关于Dagger2及其未来的思考</title>
-    <url>/2020/01/01/android-oh-my-dagger/</url>
-    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
-<span id="more"></span>
-
-<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
-<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
-<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
-<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
-<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
-<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
-<p>死鱼安乐啊死鱼安乐。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1446,48 +1446,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android Proguard Hell</title>
-    <url>/2018/12/16/android-proguard-hell/</url>
-    <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
-<span id="more"></span>
-
-<p>Proguard基本上有个任务，精简（删除），混淆，优化。</p>
-<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><ul>
-<li><p>-keep 不精简且不混淆这个类和它的成员，“别摸这个类”</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keep class android.support.annotation.Keep</span><br><span class="line">-keep class androidx.annotation.Keep</span><br><span class="line"></span><br><span class="line">-keep @android.support.annotation.Keep class * &#123;*;&#125;</span><br><span class="line">-keep @androidx.annotation.Keep class * &#123;*;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepclasseswithmemebers 效果跟上一条一致，但可以更具体地声明包含某种成员的类。</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepclassmembers -keep针对某个类，这个针对某个成员，效果一致（不精简且不混淆）。“别摸这个类的这个成员”</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final ** CREATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Preserve annotated Javascript interface methods.</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    @android.webkit.JavascriptInterface &lt;methods&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>-keepnames 只精简不混淆</p>
-</li>
-<li><p>-keepclasseswithmembernames 效果跟上一条一致，但可以更具体地声明包含某种成员的类</p>
-</li>
-<li><p>-keepclassmembernames 只针对这个类的这个成员，只精简不混淆。不影响这个类。</p>
-</li>
-</ul>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>seeds.txt：第一步(Read Input)的产物。内容是所有匹配proguard-rules的类和成员。是Proguard没有摸过的内容。</p>
-<p>usage.txt：第二步(Shrink)的产物。在知道不能摸的内容后，这里是所有Proguard摸过的内容。</p>
-<p>mapping.txt：第三步(Obfuscate)的产物，记录了Proguard怎么摸的。是一个混淆前后的对应表。</p>
-<p>dump.txt：第四步(Dump)的产物，Progurad处理后的，未压缩或未优化的结果。体量巨大，但可以用于不反编译APK就可以看到APK的内容。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><p><a href="https://developer.android.com/studio/build/shrink-code">Shrink your code and resources</a></p>
-</li>
-<li><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74">Troubleshooting ProGuard issues on Android</a></p>
-</li>
-<li><p><a href="https://jebware.com/blog/?p=484">Reading ProGuard’s Outputs</a></p>
-</li>
-<li><p><a href="https://jebware.com/blog/?p=498">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
-</li>
-<li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Jetpack Paging3 从入门到入土</title>
     <url>/2022/01/31/android-paging3/</url>
     <content><![CDATA[<p>一言以蔽之：<a href="https://en.wikipedia.org/wiki/Jack_of_all_trades,_master_of_none">Jack of all trades, master of none</a>。</p>
@@ -1536,6 +1494,48 @@
 <li>2022年3月6日更新：为了避免更新不到的情况，选择了在ListAdapter的getItem中判断position时，只要剩余数目少于预设值，就进行请求。然后在具体请求的请求方法中，进行上锁、是否请求还是忽略请求的判断。</li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>看起来像个多面手的Paging3到都来只是浪费了不少时间。虽然可以说一句简单的“凡事还得自己来”，<del>但这件事，我还要再下一篇文章中继续反思。</del>想了许久，还是一句话：“不坏不修”。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Proguard Hell</title>
+    <url>/2018/12/16/android-proguard-hell/</url>
+    <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
+<span id="more"></span>
+
+<p>Proguard基本上有个任务，精简（删除），混淆，优化。</p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><ul>
+<li><p>-keep 不精简且不混淆这个类和它的成员，“别摸这个类”</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keep class android.support.annotation.Keep</span><br><span class="line">-keep class androidx.annotation.Keep</span><br><span class="line"></span><br><span class="line">-keep @android.support.annotation.Keep class * &#123;*;&#125;</span><br><span class="line">-keep @androidx.annotation.Keep class * &#123;*;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepclasseswithmemebers 效果跟上一条一致，但可以更具体地声明包含某种成员的类。</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @android.support.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclasseswithmembers class * &#123;</span><br><span class="line">    @androidx.annotation.Keep &lt;init&gt;(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepclassmembers -keep针对某个类，这个针对某个成员，效果一致（不精简且不混淆）。“别摸这个类的这个成员”</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-keepclassmembers enum * &#123;</span><br><span class="line">    public static **[] values();</span><br><span class="line">    public static ** valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class * implements android.os.Parcelable &#123;</span><br><span class="line">    public static final ** CREATOR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-keepclassmembers class **.R$* &#123;</span><br><span class="line">    public static &lt;fields&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Preserve annotated Javascript interface methods.</span><br><span class="line">-keepclassmembers class * &#123;</span><br><span class="line">    @android.webkit.JavascriptInterface &lt;methods&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>-keepnames 只精简不混淆</p>
+</li>
+<li><p>-keepclasseswithmembernames 效果跟上一条一致，但可以更具体地声明包含某种成员的类</p>
+</li>
+<li><p>-keepclassmembernames 只针对这个类的这个成员，只精简不混淆。不影响这个类。</p>
+</li>
+</ul>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>seeds.txt：第一步(Read Input)的产物。内容是所有匹配proguard-rules的类和成员。是Proguard没有摸过的内容。</p>
+<p>usage.txt：第二步(Shrink)的产物。在知道不能摸的内容后，这里是所有Proguard摸过的内容。</p>
+<p>mapping.txt：第三步(Obfuscate)的产物，记录了Proguard怎么摸的。是一个混淆前后的对应表。</p>
+<p>dump.txt：第四步(Dump)的产物，Progurad处理后的，未压缩或未优化的结果。体量巨大，但可以用于不反编译APK就可以看到APK的内容。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><p><a href="https://developer.android.com/studio/build/shrink-code">Shrink your code and resources</a></p>
+</li>
+<li><p><a href="https://medium.com/google-developers/troubleshooting-proguard-issues-on-android-bce9de4f8a74">Troubleshooting ProGuard issues on Android</a></p>
+</li>
+<li><p><a href="https://jebware.com/blog/?p=484">Reading ProGuard’s Outputs</a></p>
+</li>
+<li><p><a href="https://jebware.com/blog/?p=498">Feeding ProGuard’s inputs: where are all of these rules coming from?</a></p>
+</li>
+<li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1684,27 +1684,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android创建快捷方式图标的简单快速方法</title>
-    <url>/2019/03/11/android-shortcut-icon/</url>
-    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
-<span id="more"></span>
-
-<ol>
-<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
-</li>
-<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
- <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Resources小研究</title>
     <url>/2020/01/12/android-resources-test/</url>
     <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
@@ -1727,6 +1706,27 @@
 
 <p>然后就可以</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android创建快捷方式图标的简单快速方法</title>
+    <url>/2019/03/11/android-shortcut-icon/</url>
+    <content><![CDATA[<p>从Google Material Icons或其他地方拉一个<strong>24dp</strong>的vector，1分钟内创建其对应的快捷方式图标。</p>
+<span id="more"></span>
+
+<ol>
+<li><p>修改<code>viewportWidth</code>和<code>viewportHeight</code>为<code>48.0</code>。</p>
+</li>
+<li><p>把现有的所有<code>&lt;path&gt;...&lt;/path&gt;</code>放到一个<code>&lt;group&gt;</code>中，并添加<code>translate</code>：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">vector</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateX</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:translateY</span>=<span class="string">&quot;12&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 原来的path，记得改颜色--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">path</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">vector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>&lt;group&gt;</code>前添加这一段（就是画了个圆）:</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:fillColor</span>=<span class="string">&quot;#F5F5F5&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:pathData</span>=<span class="string">&quot;M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>完成！我记得这样的结果是符合MaterialDesign的。</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1976,6 +1976,76 @@
       </categories>
   </entry>
   <entry>
+    <title>Android System UI</title>
+    <url>/2019/05/06/android-system-ui/</url>
+    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
+<p>只是一些笔记。</p>
+<span id="more"></span>
+
+<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
+<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>VISIBLE：让😲回来，重新显示</li>
+<li>LOW_PROFILE：让😲暗淡</li>
+<li>HIDE_NAVIGATION</li>
+<li>FULLSCREEN</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
+<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
+</ul>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LIGHT_STATUS_BAR</li>
+<li>LIGHT_NAVIGATION_BAR</li>
+</ul>
+<p>让😲浅底深色。默认是深底浅色。</p>
+<p>SYSTEM_UI_FLAG_</p>
+<ul>
+<li>LAYOUT_STABLE</li>
+<li>LAYOUT_HIDE_NAVIGATION</li>
+<li>LAYOUT_FULLSCREEN</li>
+</ul>
+<p>跟应用内容的显示有关系。</p>
+<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
+
+<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
+<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
+<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
+<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
+<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
+<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
+<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
+<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
+<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
+<p>可以给子View设置，选择是否让子View出现在😲后。</p>
+<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
+<ul>
+<li><code>app:statusBarBackground</code></li>
+</ul>
+<p><code>CollapsingToolbarLayout</code></p>
+<ul>
+<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
+<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
+</ul>
+<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
+<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
+<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
+<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
+<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
+<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发后悔的九件事</title>
     <url>/2022/12/20/android-things-i-wish-i-knew/</url>
     <content><![CDATA[<p>RT</p>
@@ -2069,94 +2139,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android System UI</title>
-    <url>/2019/05/06/android-system-ui/</url>
-    <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
-<p>只是一些笔记。</p>
-<span id="more"></span>
-
-<p>本文用“😲”代表“状态栏与导航栏”这七个字。</p>
-<h2 id="setSystemUiVisibility"><a href="#setSystemUiVisibility" class="headerlink" title="setSystemUiVisibility"></a><a href="https://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int)">setSystemUiVisibility</a></h2><p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>VISIBLE：让😲回来，重新显示</li>
-<li>LOW_PROFILE：让😲暗淡</li>
-<li>HIDE_NAVIGATION</li>
-<li>FULLSCREEN</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>IMMERSIVE：让😲消失，但一有操作就会回来。</li>
-<li>IMMERSIVE_STICKY：和上面一个一起用，但有操作时，让😲悬浮出现，稍等后再消失。</li>
-</ul>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LIGHT_STATUS_BAR</li>
-<li>LIGHT_NAVIGATION_BAR</li>
-</ul>
-<p>让😲浅底深色。默认是深底浅色。</p>
-<p>SYSTEM_UI_FLAG_</p>
-<ul>
-<li>LAYOUT_STABLE</li>
-<li>LAYOUT_HIDE_NAVIGATION</li>
-<li>LAYOUT_FULLSCREEN</li>
-</ul>
-<p>跟应用内容的显示有关系。</p>
-<p>让应用内容在😲后面显示：LAYOUT_STABLE or LAYOUT_FULLSCREEN or LAYOUT_HIDE_NAVIGATION，后文用WTFs代替。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.systemUiVisibility =</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out</span></span><br><span class="line">    <span class="comment">// as if the navigation bar was hidden</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or</span><br><span class="line">    <span class="comment">// Optional, if we want you be laid out fullscreen,</span></span><br><span class="line">    <span class="comment">// behind the status bar</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or</span><br><span class="line">    <span class="comment">// Tells the system that you wish to be laid out at</span></span><br><span class="line">    <span class="comment">// the most extreme scenario of any other flags</span></span><br><span class="line">    View.SYSTEM_UI_FLAG_LAYOUT_STABLE</span><br></pre></td></tr></table></figure>
-
-<p>From <code>Dark Theme &amp; Gesture Navigation (Google I/O&#39;19)</code></p>
-<h2 id="android-windowTranslucentStatus和android-windowTranslucentNavigation"><a href="#android-windowTranslucentStatus和android-windowTranslucentNavigation" class="headerlink" title="android:windowTranslucentStatus和android:windowTranslucentNavigation"></a><code>android:windowTranslucentStatus</code>和<code>android:windowTranslucentNavigation</code></h2><p>从KitKat引入。让😲把透明、渐隐。应用内容在它们后面显示。它们会自动应用WTFs。渐隐不能改变颜色。</p>
-<h2 id="android-windowDrawsSystemBarBackgrounds"><a href="#android-windowDrawsSystemBarBackgrounds" class="headerlink" title="android:windowDrawsSystemBarBackgrounds"></a><code>android:windowDrawsSystemBarBackgrounds</code></h2><p>从Lollipop引入。默认已开启。</p>
-<p>把😲放到了应用内容的Window中，好让我们可以<code>activity.window.setStatusColor</code>。</p>
-<p>和<code>android:windowTranslucent</code>有冲突。后者会覆盖前者设置的😲的颜色，且会关闭<code>android:windowDrawsSystemBarBackgrounds</code>，这会导致😲不再是应用内容的一部分，从而可能导致涉及到😲SharedElement动画失效。</p>
-<p>因此为了得到半透明的😲颜色，可以用一个半透明的<code>android:statusBarColor</code>或<code>android:navigationBarColor</code>，而避免使用<code>android:windowTranslucent</code>。</p>
-<h2 id="android-fitSystemWindows-quot-true-quot"><a href="#android-fitSystemWindows-quot-true-quot" class="headerlink" title="android:fitSystemWindows=&quot;true&quot;"></a><code>android:fitSystemWindows=&quot;true&quot;</code></h2><p>让这个View自己使用Padding填充周围，让它的内容不和会😲重叠。几乎只有MaterialCompoents（CoordinatorLayout、DrawerLayout、CollapsingToolbarLayout等）才对这个属性有反应。</p>
-<p>在和WTFs共同使用后，应用内容就可以既在😲后显示，也不和😲重叠。</p>
-<p><code>DrawerLayout</code>设置<code>android:fitSystemWindows=&quot;true&quot;</code>后，会自动设置WTFs。</p>
-<p>可以给子View设置，选择是否让子View出现在😲后。</p>
-<h2 id="WindowInsets"><a href="#WindowInsets" class="headerlink" title="WindowInsets"></a><code>WindowInsets</code></h2><p>正确的使用😲大小的方式。不许使用resources或hard-coded尺寸，得用这个。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">view.setOnApplyWindowInsetsListener &#123; _, insets -&gt;</span><br><span class="line">    <span class="keyword">return</span> insets.comsumeSystemWindowInsets</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h2><p><code>CoordinatorLayout</code></p>
-<ul>
-<li><code>app:statusBarBackground</code></li>
-</ul>
-<p><code>CollapsingToolbarLayout</code></p>
-<ul>
-<li>statusBar: <code>app:statusBarScrim</code>。默认colorPrimaryDrak。</li>
-<li>contentScrim: <code>app:contentScrim</code>。默认@null。</li>
-</ul>
-<h2 id="参考与资源"><a href="#参考与资源" class="headerlink" title="参考与资源"></a>参考与资源</h2><ul>
-<li><a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a></li>
-<li><a href="https://medium.com/androiddevelopers/windowinsets-listeners-to-layouts-8f9ccc8fa4d1">WindowInsets — Listeners to layouts</a></li>
-<li><a href="https://gist.github.com/chrisbanes/73de18faffca571f7292">SystemUiHelper.java</a></li>
-<li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
-<li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android 13升级笔记</title>
     <url>/2023/02/22/android13-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2213,6 +2195,45 @@
       </categories>
   </entry>
   <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 14升级笔记</title>
+    <url>/2024/04/22/android14-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
+<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
+<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
+<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android 15升级笔记</title>
     <url>/2025/01/10/android15-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2246,27 +2267,6 @@
 ]]></content>
       <categories>
         <category>Website</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 14升级笔记</title>
-    <url>/2024/04/22/android14-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-all">Schedule exact alarms are denied by default</a>, <a href="https://developer.android.com/about/versions/14/changes/schedule-exact-alarms">https://developer.android.com/about/versions/14/changes/schedule-exact-alarms</a></li>
-<li><a href="https://developer.android.com/about/versions/14/changes/partial-photo-video-access#app-gallery-picker">Grant partial access to photos and videos</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#secure-fsi">Secure full-screen Intent notifications</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#fgs-types">Foreground service types are required</a>, <a href="https://developer.android.com/about/versions/14/changes/fgs-types-required">https://developer.android.com/about/versions/14/changes/fgs-types-required</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#safer-intents">Restrictions to implicit and pending intents</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
-<li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
-<li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2627,6 +2627,60 @@
       </categories>
   </entry>
   <entry>
+    <title>在Android Studio中引入AAR文件</title>
+    <url>/2018/08/13/include-aar/</url>
+    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
+<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
+<p>要解决的问题在于</p>
+<ol>
+<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
+<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
+<li>Module该有好处自然有的了</li>
+<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
+<li>修改后直接复制粘贴AAR就可使用</li>
+</ol>
+<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
+<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
+<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
+<li>修改后复制粘贴AAR才能使用</li>
+<li>AAR的版本被保存在了另一个项目中</li>
+<li>AAR的依赖需要手动添加到项目的依赖中</li>
+<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
+<li>似乎并不能跨module使用</li>
+</ol>
+<p><del>缺点比优点多可还行</del></p>
+<p>个人习惯：</p>
+<ul>
+<li>把名字改为library名+git commit编号</li>
+<li>另建一个文件夹专门放各种AAR</li>
+<li>把修改的项目丢到Github或GitBucket</li>
+<li>在版本控制中删掉所有AAR</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
+<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
+<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
+<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
+<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
+<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
+<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
+<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
+<p>注意<code>name</code>中不带后缀。</p>
+<p>Ta-Da。完成！</p>
+<p>参考:</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>论如何避免垃圾游戏</title>
     <url>/2023/07/06/how-to-avoid-trash-games/</url>
     <content><![CDATA[<p>终于打完了Fire Emblem Engage。过程极度痛苦，在此深刻检讨并反省。<strong>有剧透</strong>。</p>
@@ -2693,60 +2747,6 @@
 ]]></content>
       <categories>
         <category>Gaming</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>在Android Studio中引入AAR文件</title>
-    <url>/2018/08/13/include-aar/</url>
-    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
-<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
-<p>要解决的问题在于</p>
-<ol>
-<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
-<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
-<li>Module该有好处自然有的了</li>
-<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
-<li>修改后直接复制粘贴AAR就可使用</li>
-</ol>
-<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
-<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
-<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
-<li>修改后复制粘贴AAR才能使用</li>
-<li>AAR的版本被保存在了另一个项目中</li>
-<li>AAR的依赖需要手动添加到项目的依赖中</li>
-<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
-<li>似乎并不能跨module使用</li>
-</ol>
-<p><del>缺点比优点多可还行</del></p>
-<p>个人习惯：</p>
-<ul>
-<li>把名字改为library名+git commit编号</li>
-<li>另建一个文件夹专门放各种AAR</li>
-<li>把修改的项目丢到Github或GitBucket</li>
-<li>在版本控制中删掉所有AAR</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
-<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
-<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
-<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
-<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
-<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
-<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
-<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
-<p>注意<code>name</code>中不带后缀。</p>
-<p>Ta-Da。完成！</p>
-<p>参考:</p>
-<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3298,6 +3298,41 @@
       </categories>
   </entry>
   <entry>
+    <title>计时机器的使用方法</title>
+    <url>/2018/12/19/timer-machine-usage-zh/</url>
+    <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
+<span id="more"></span>
+
+<ol>
+<li><p>步骤</p>
+<p> 一个步骤代表要在一定时间内完成一件事。一个默认的步骤（新建普通步骤后不进行任何操作）只会安静地计时，然后安静地进入下一步骤或结束。</p>
+<p> 如果想要知道一个步骤结束了，那么就需要在这个步骤添加一个专门提醒的步骤，并给它添加音乐、振动等等提醒效果（行为）。</p>
+<p> 所有步骤的时间、行为、名字等都是可以修改的。</p>
+<ul>
+<li><p>特殊的步骤</p>
+<ul>
+<li><p>提醒步骤：它有一个不同的颜色（默认蓝色）；它会保存上一次编辑后的内容，并在下一添加提醒步骤时显示相同的内容；在这种步骤微调时间时，会退回到上一步并把时间设置为1分钟（设置里可以关闭）。</p>
+</li>
+<li><p>起始和结束步骤：一个计时器可以有多次循环，那这两个步骤可以用作整个计时器开始和结束的标志，它们只会在整个计时器的开始和结束时各执行一次。另外，使用计划任务来终结一个计时器时，到指定时间，计时器会自动跳到结束步骤。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>与循环计时器的不同</p>
+<p> 最大的不同就是在计时机器中，需要手动添加提醒步骤，不然是不会得到任何反馈的。</p>
+<p> 另外，循环计时器的提醒时长在应用设置里配置，并且是全局的。但在计时机器中，提醒步骤也是计时器的一部分（一个步骤），它的时长、音乐等等都需要手动设置。</p>
+</li>
+<li><p>未来的<del>饼</del>计划</p>
+<p> 预计在2.0.0中加入“组”的概念，可以把现有的步骤放到组里，组有各自的名字和循环。到那个时候，我就得画图来解释了。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android文字转语音(TTS)引擎</title>
     <url>/2019/03/11/tts/</url>
     <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
@@ -3321,26 +3356,6 @@
 </blockquote>
 <p>怕是不靠谱。</p>
 <h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>个人使用的VSCode配置</title>
-    <url>/2025/02/01/vscode-settings/</url>
-    <content><![CDATA[<p>手动同步VSCode设置。</p>
-<span id="more"></span>
-
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Monokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;security.workspace.trust.untrustedFiles&quot;</span><span class="punctuation">:</span> <span class="string">&quot;open&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.cursorBlinking&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="attr">&quot;editor.lineNumbers&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;window.commandCenter&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;git.openRepositoryInParentFolders&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.nonBasicASCII&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.stickyScroll.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.startupEditor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.ambiguousCharacters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.editor.enablePreview&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>扩展：</p>
-<ul>
-<li>APKLab</li>
-<li>IntelliJ IDEA Keybindings</li>
-<li>markdownlint</li>
-<li>Subword Navigation</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3376,35 +3391,20 @@
       </categories>
   </entry>
   <entry>
-    <title>计时机器的使用方法</title>
-    <url>/2018/12/19/timer-machine-usage-zh/</url>
-    <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
+    <title>个人使用的VSCode配置</title>
+    <url>/2025/02/01/vscode-settings/</url>
+    <content><![CDATA[<p>手动同步VSCode设置。</p>
 <span id="more"></span>
 
-<ol>
-<li><p>步骤</p>
-<p> 一个步骤代表要在一定时间内完成一件事。一个默认的步骤（新建普通步骤后不进行任何操作）只会安静地计时，然后安静地进入下一步骤或结束。</p>
-<p> 如果想要知道一个步骤结束了，那么就需要在这个步骤添加一个专门提醒的步骤，并给它添加音乐、振动等等提醒效果（行为）。</p>
-<p> 所有步骤的时间、行为、名字等都是可以修改的。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Monokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;security.workspace.trust.untrustedFiles&quot;</span><span class="punctuation">:</span> <span class="string">&quot;open&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.cursorBlinking&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="attr">&quot;editor.lineNumbers&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;window.commandCenter&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;git.openRepositoryInParentFolders&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.nonBasicASCII&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.stickyScroll.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.startupEditor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.ambiguousCharacters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.editor.enablePreview&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
 <ul>
-<li><p>特殊的步骤</p>
-<ul>
-<li><p>提醒步骤：它有一个不同的颜色（默认蓝色）；它会保存上一次编辑后的内容，并在下一添加提醒步骤时显示相同的内容；在这种步骤微调时间时，会退回到上一步并把时间设置为1分钟（设置里可以关闭）。</p>
-</li>
-<li><p>起始和结束步骤：一个计时器可以有多次循环，那这两个步骤可以用作整个计时器开始和结束的标志，它们只会在整个计时器的开始和结束时各执行一次。另外，使用计划任务来终结一个计时器时，到指定时间，计时器会自动跳到结束步骤。</p>
-</li>
+<li>APKLab</li>
+<li>IntelliJ IDEA Keybindings</li>
+<li>markdownlint</li>
+<li>Subword Navigation</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>与循环计时器的不同</p>
-<p> 最大的不同就是在计时机器中，需要手动添加提醒步骤，不然是不会得到任何反馈的。</p>
-<p> 另外，循环计时器的提醒时长在应用设置里配置，并且是全局的。但在计时机器中，提醒步骤也是计时器的一部分（一个步骤），它的时长、音乐等等都需要手动设置。</p>
-</li>
-<li><p>未来的<del>饼</del>计划</p>
-<p> 预计在2.0.0中加入“组”的概念，可以把现有的步骤放到组里，组有各自的名字和循环。到那个时候，我就得画图来解释了。</p>
-</li>
-</ol>
 ]]></content>
       <categories>
         <category>Android</category>
