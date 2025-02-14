@@ -83,6 +83,34 @@
       </categories>
   </entry>
   <entry>
+    <title>Android自动切换深色主题</title>
+    <url>/2018/10/04/android-auto-night/</url>
+    <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
+<p><strong>2020年6月1日我发现还有问题！</strong></p>
+<p><strong>2020年5月22日新方案又来了，希望能结束这个问题</strong></p>
+<p><strong>2020年4月21日还有Bug，正在修。反正也没人看，估计也没坑到什么人</strong></p>
+<p><strong>2020年1月27日憋出了新方案，似乎修好了</strong></p>
+<p><strong>2019年11月4日现在的实现有Bug，正在研究</strong></p>
+<p><strong>2019年10月18日更新AppCompat 1.1.0的使用说明</strong></p>
+<p><strong>2019年8月18日更新增强版</strong></p>
+<p>网上搜怎么实现自动切换深色主题都没资料的，全是实现，只能自己想办法了。</p>
+<p>最终解决的方案倒是很简单，不过走了<strong>很多、很多、很多、很多</strong>弯路。<del>脑子不是很好使了</del>我好菜啊。</p>
+<span id="more"></span>
+
+<p>已有数据：上一次的启动时间、本次的启动时间（就是现在）、自动启动深色模式的几点几分开始和几点几分结束。</p>
+<p>举个例子，设置八点自动进入深色主题，九点退出深色主题，我们需要满足：1. 上一次启动是在今天八点前。2. 本次启动在今天八点后。3.本次启动在今天九点前。4. 现在是浅色主题。退出深色主题同理。</p>
+<p>下述方案储存几点几分是把小时和分钟分开储存的，另外一种方案是只储存一个值：<code>60 * 小时 + 分钟</code>。</p>
+<p>代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> True if we should revert the current dark.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">calculateAutoDarkChange</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    currentIsDark: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    nowMilli: <span class="type">Long</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lastLaunchMilli: <span class="type">Long</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lastLaunch =</span><br><span class="line">        LocalDateTime.ofInstant(Instant.ofEpochMilli(lastLaunchMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> now = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> today = LocalDate.now()</span><br><span class="line">    <span class="keyword">val</span> nightRange = scheduleRange</span><br><span class="line">    <span class="keyword">val</span> nightStart =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.fromHour, nightRange.fromMinute))</span><br><span class="line">    <span class="keyword">val</span> nightEnd =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.toHour, nightRange.toMinute))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringTheSpanFirst</span><span class="params">(from: <span class="type">LocalDateTime</span>, to: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (from == to) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        require(from.isBefore(to))</span><br><span class="line">        <span class="keyword">return</span> (now.isAfter(from) || now == from) &amp;&amp;</span><br><span class="line">            now.isBefore(to) &amp;&amp;</span><br><span class="line">            lastLaunch.isBefore(from)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringNight</span><span class="params">(nightStart: <span class="type">LocalDateTime</span>, nightEnd: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightStart, to = nightEnd) &amp;&amp; !currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isExitingNight</span><span class="params">(nightEnd: <span class="type">LocalDateTime</span>, nextNightStart: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightEnd, to = nextNightStart) &amp;&amp; currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (nightStart.isBefore(nightEnd)) &#123;</span><br><span class="line">        <span class="comment">// |day start           |night start------------|night end          |day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// |day start-----------|night end              |night start--------|day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在MainActivity里：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>在国内做Android开发踩过的坑</title>
     <url>/2019/08/25/android-chinese-pitfalls/</url>
     <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
@@ -116,34 +144,6 @@
 <h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><blockquote>
 <p>你觉得我喜欢去研究这些东西嘛？</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android自动切换深色主题</title>
-    <url>/2018/10/04/android-auto-night/</url>
-    <content><![CDATA[<p><strong>2020年8月26日新方案，乖乖穷举</strong></p>
-<p><strong>2020年6月1日我发现还有问题！</strong></p>
-<p><strong>2020年5月22日新方案又来了，希望能结束这个问题</strong></p>
-<p><strong>2020年4月21日还有Bug，正在修。反正也没人看，估计也没坑到什么人</strong></p>
-<p><strong>2020年1月27日憋出了新方案，似乎修好了</strong></p>
-<p><strong>2019年11月4日现在的实现有Bug，正在研究</strong></p>
-<p><strong>2019年10月18日更新AppCompat 1.1.0的使用说明</strong></p>
-<p><strong>2019年8月18日更新增强版</strong></p>
-<p>网上搜怎么实现自动切换深色主题都没资料的，全是实现，只能自己想办法了。</p>
-<p>最终解决的方案倒是很简单，不过走了<strong>很多、很多、很多、很多</strong>弯路。<del>脑子不是很好使了</del>我好菜啊。</p>
-<span id="more"></span>
-
-<p>已有数据：上一次的启动时间、本次的启动时间（就是现在）、自动启动深色模式的几点几分开始和几点几分结束。</p>
-<p>举个例子，设置八点自动进入深色主题，九点退出深色主题，我们需要满足：1. 上一次启动是在今天八点前。2. 本次启动在今天八点后。3.本次启动在今天九点前。4. 现在是浅色主题。退出深色主题同理。</p>
-<p>下述方案储存几点几分是把小时和分钟分开储存的，另外一种方案是只储存一个值：<code>60 * 小时 + 分钟</code>。</p>
-<p>代码：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> True if we should revert the current dark.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">calculateAutoDarkChange</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    currentIsDark: <span class="type">Boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    nowMilli: <span class="type">Long</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    lastLaunchMilli: <span class="type">Long</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> lastLaunch =</span><br><span class="line">        LocalDateTime.ofInstant(Instant.ofEpochMilli(lastLaunchMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> now = LocalDateTime.ofInstant(Instant.ofEpochMilli(nowMilli), ZoneId.systemDefault())</span><br><span class="line">    <span class="keyword">val</span> today = LocalDate.now()</span><br><span class="line">    <span class="keyword">val</span> nightRange = scheduleRange</span><br><span class="line">    <span class="keyword">val</span> nightStart =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.fromHour, nightRange.fromMinute))</span><br><span class="line">    <span class="keyword">val</span> nightEnd =</span><br><span class="line">        LocalDateTime.of(today, LocalTime.of(nightRange.toHour, nightRange.toMinute))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringTheSpanFirst</span><span class="params">(from: <span class="type">LocalDateTime</span>, to: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (from == to) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        require(from.isBefore(to))</span><br><span class="line">        <span class="keyword">return</span> (now.isAfter(from) || now == from) &amp;&amp;</span><br><span class="line">            now.isBefore(to) &amp;&amp;</span><br><span class="line">            lastLaunch.isBefore(from)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isEnteringNight</span><span class="params">(nightStart: <span class="type">LocalDateTime</span>, nightEnd: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightStart, to = nightEnd) &amp;&amp; !currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">isExitingNight</span><span class="params">(nightEnd: <span class="type">LocalDateTime</span>, nextNightStart: <span class="type">LocalDateTime</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEnteringTheSpanFirst(from = nightEnd, to = nextNightStart) &amp;&amp; currentIsDark</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (nightStart.isBefore(nightEnd)) &#123;</span><br><span class="line">        <span class="comment">// |day start           |night start------------|night end          |day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// |day start-----------|night end              |night start--------|day end</span></span><br><span class="line">        <span class="keyword">when</span> &#123;</span><br><span class="line">            now.isBefore(nightEnd) -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart.minusDays(<span class="number">1</span>),</span><br><span class="line">                    nightEnd = nightEnd</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            now.isBefore(nightStart) -&gt; &#123;</span><br><span class="line">                isExitingNight(</span><br><span class="line">                    nightEnd = nightEnd,</span><br><span class="line">                    nextNightStart = nightStart</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> -&gt; &#123;</span><br><span class="line">                isEnteringNight(</span><br><span class="line">                    nightStart = nightStart,</span><br><span class="line">                    nightEnd = nightEnd.plusDays(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后在MainActivity里：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">val</span> now = Instant.now().toEpochMilli()</span><br><span class="line"><span class="keyword">val</span> lastStartTime = prefs.getLong(<span class="string">&quot;last_start_time&quot;</span>, now)</span><br><span class="line">prefs.edit().putLong(<span class="string">&quot;last_start_time&quot;</span>, now).apply()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> currentIsDark = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (darkTheme.calculateAutoDarkChange(</span><br><span class="line">        currentIsDark = currentIsDark,</span><br><span class="line">        nowMilli = now,</span><br><span class="line">        lastLaunchMilli = lastStartTime</span><br><span class="line">    )</span><br><span class="line">) &#123;</span><br><span class="line">    updateDark(isDark = !currentIsDark)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -255,6 +255,50 @@
       </categories>
   </entry>
   <entry>
+    <title>巧用Android CoordinatorLayout实现复杂布局 + 滚动内容</title>
+    <url>/2019/10/02/android-coordinator-layout-hack/</url>
+    <content><![CDATA[<p>一个使用情景是：页面上半部分是一个不算短的、复杂的Layout，后半部分是一个嵌套了RecyclerView的Fragment的横向ViewPager。使用效果是，上半部分会充当下半部分可滚动内容的Header。怎么做？</p>
+<span id="more"></span>
+
+<h2 id="常见的解决办法"><a href="#常见的解决办法" class="headerlink" title="常见的解决办法"></a>常见的解决办法</h2><p>如果下半部分只是RecyclerView而不是ViewPager的话，可以把上半部分当作RecyclerView的Header，使用多类型Adapter实现，除了每次找头部有点麻烦外，没问题。</p>
+<p>但下面是ViewPager，这时如果用ScrollView/NestedScrollView，可能会发生一下情况：</p>
+<ol>
+<li><p>滚顿位置错误、初始位置不是最顶部</p>
+<p> 从下往上滚动到ViewPager顶部时，滚动停止，需要再次下拉才能看到头部。记忆中SO上给出一种解决方案是，修改fousable，但这样会伤害到a11y，虽然不少人不在乎这个东西，但是还是有更优雅的解决方案的。</p>
+</li>
+<li><p>ViewPager双向滚动不流畅</p>
+<p> 只要ViewPager嵌套RecyclerView都会多少出现这个问题。解决方案可以参考<a href="https://rubensousa.com/2019/08/16/nested_recyclerview_part1/">Improving scrolling behavior of nested RecyclerViews - Part 1</a></p>
+</li>
+<li><p>使用ViewPager2来解决问题</p>
+<p> 之前试了一下，似乎能解决不少问题，但遇到了横向滚动时位置错误/空白的问题，无奈只能放弃。另外，它的双向滚动不流畅问题比ViewPager还要严重。也许未来的Release会修好这些问题。</p>
+</li>
+</ol>
+<p>更严重的是，如果在SO上找答案，会根据不同Target API和不同AndroidX/Support版本，方案都不一样，有新有旧，有的有用有的没用。</p>
+<h2 id="要用CoordinatorLayout啊"><a href="#要用CoordinatorLayout啊" class="headerlink" title="要用CoordinatorLayout啊"></a>要用CoordinatorLayout啊</h2><p>前段时间找到了一个不错的解决办法，就是使用CoordinatorLayout，把上半部分塞到AppBarLayout中，下半部分放到正文中：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- Top Content --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.AppBarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>CoordinatorLayouthe和AppBarLayout不一定非要用在根部嘛，无论哪里都可以用。</p>
+<p>既然不放Toolbar，可以把AppBarLayout的颜色和elevation去掉：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>让CollapsingToolbarLayout滚起来，可以让顶部内容成为Header：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，滚动位置、初始位置、a11y什么的都没问题啦。</p>
+<h2 id="奖励：带一个可滚动的TabLayout"><a href="#奖励：带一个可滚动的TabLayout" class="headerlink" title="奖励：带一个可滚动的TabLayout"></a>奖励：带一个可滚动的TabLayout</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>TabLayout是顶部内容最后一个，会跟随滚动，离开屏幕。</p>
+<h2 id="奖励励：带一个常驻的TabLayout"><a href="#奖励励：带一个常驻的TabLayout" class="headerlink" title="奖励励：带一个常驻的TabLayout"></a>奖励励：带一个常驻的TabLayout</h2><p>把TabLayout移到下半部分：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>&quot; /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样TabLayout一开始会跟随滚动，到达顶部后，就不动了，而下半部分的ViewPager会继续滚，相当于一个Sticky Header。如果一开始使用多类型Adapter + Header实现的话，要解决这个就需要点劳动了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浓眉大眼的CoordinatorLayout和它的一帮小弟有时候还有点用。希望material 1.1.0不会出现陨石坑吧。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一些可能有用的Android代码</title>
     <url>/2019/06/15/android-code-snippets/</url>
     <content><![CDATA[<p><strong>2020年11月6日 更新<code>View.outlineProvider</code></strong></p>
@@ -312,50 +356,6 @@
 
 <h2 id="clipToPadidng"><a href="#clipToPadidng" class="headerlink" title="clipToPadidng"></a><code>clipToPadidng</code></h2><p><code>Enables our items to still be drawn within the parent&#39;s padding.</code></p>
 <h2 id="View-outlineProvider"><a href="#View-outlineProvider" class="headerlink" title="View.outlineProvider"></a><code>View.outlineProvider</code></h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">binding.imageView.run &#123;</span><br><span class="line">    clipToOutline = <span class="literal">true</span></span><br><span class="line">    outlineProvider = <span class="keyword">object</span> : ViewOutlineProvider() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getOutline</span><span class="params">(view: <span class="type">View</span>, outline: <span class="type">Outline</span>)</span></span> &#123;</span><br><span class="line">            outline.setOval(</span><br><span class="line">                view.paddingLeft,</span><br><span class="line">                view.paddingTop,</span><br><span class="line">                view.width - view.paddingRight,</span><br><span class="line">                view.height - view.paddingBottom</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>巧用Android CoordinatorLayout实现复杂布局 + 滚动内容</title>
-    <url>/2019/10/02/android-coordinator-layout-hack/</url>
-    <content><![CDATA[<p>一个使用情景是：页面上半部分是一个不算短的、复杂的Layout，后半部分是一个嵌套了RecyclerView的Fragment的横向ViewPager。使用效果是，上半部分会充当下半部分可滚动内容的Header。怎么做？</p>
-<span id="more"></span>
-
-<h2 id="常见的解决办法"><a href="#常见的解决办法" class="headerlink" title="常见的解决办法"></a>常见的解决办法</h2><p>如果下半部分只是RecyclerView而不是ViewPager的话，可以把上半部分当作RecyclerView的Header，使用多类型Adapter实现，除了每次找头部有点麻烦外，没问题。</p>
-<p>但下面是ViewPager，这时如果用ScrollView/NestedScrollView，可能会发生一下情况：</p>
-<ol>
-<li><p>滚顿位置错误、初始位置不是最顶部</p>
-<p> 从下往上滚动到ViewPager顶部时，滚动停止，需要再次下拉才能看到头部。记忆中SO上给出一种解决方案是，修改fousable，但这样会伤害到a11y，虽然不少人不在乎这个东西，但是还是有更优雅的解决方案的。</p>
-</li>
-<li><p>ViewPager双向滚动不流畅</p>
-<p> 只要ViewPager嵌套RecyclerView都会多少出现这个问题。解决方案可以参考<a href="https://rubensousa.com/2019/08/16/nested_recyclerview_part1/">Improving scrolling behavior of nested RecyclerViews - Part 1</a></p>
-</li>
-<li><p>使用ViewPager2来解决问题</p>
-<p> 之前试了一下，似乎能解决不少问题，但遇到了横向滚动时位置错误/空白的问题，无奈只能放弃。另外，它的双向滚动不流畅问题比ViewPager还要严重。也许未来的Release会修好这些问题。</p>
-</li>
-</ol>
-<p>更严重的是，如果在SO上找答案，会根据不同Target API和不同AndroidX/Support版本，方案都不一样，有新有旧，有的有用有的没用。</p>
-<h2 id="要用CoordinatorLayout啊"><a href="#要用CoordinatorLayout啊" class="headerlink" title="要用CoordinatorLayout啊"></a>要用CoordinatorLayout啊</h2><p>前段时间找到了一个不错的解决办法，就是使用CoordinatorLayout，把上半部分塞到AppBarLayout中，下半部分放到正文中：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">&lt;!-- Top Content --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">com.google.android.material.appbar.AppBarLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>CoordinatorLayouthe和AppBarLayout不一定非要用在根部嘛，无论哪里都可以用。</p>
-<p>既然不放Toolbar，可以把AppBarLayout的颜色和elevation去掉：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.AppBarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@null&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:elevation</span>=<span class="string">&quot;0dp&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>让CollapsingToolbarLayout滚起来，可以让顶部内容成为Header：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，滚动位置、初始位置、a11y什么的都没问题啦。</p>
-<h2 id="奖励：带一个可滚动的TabLayout"><a href="#奖励：带一个可滚动的TabLayout" class="headerlink" title="奖励：带一个可滚动的TabLayout"></a>奖励：带一个可滚动的TabLayout</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_scrollFlags</span>=<span class="string">&quot;scroll&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">com.google.android.material.appbar.CollapsingToolbarLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>TabLayout是顶部内容最后一个，会跟随滚动，离开屏幕。</p>
-<h2 id="奖励励：带一个常驻的TabLayout"><a href="#奖励励：带一个常驻的TabLayout" class="headerlink" title="奖励励：带一个常驻的TabLayout"></a>奖励励：带一个常驻的TabLayout</h2><p>把TabLayout移到下半部分：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/appbar_scrolling_view_behavior&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.tabs.TabLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tabLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>&quot; /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.viewpager.widget.ViewPager</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/viewPager&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样TabLayout一开始会跟随滚动，到达顶部后，就不动了，而下半部分的ViewPager会继续滚，相当于一个Sticky Header。如果一开始使用多类型Adapter + Header实现的话，要解决这个就需要点劳动了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>浓眉大眼的CoordinatorLayout和它的一帮小弟有时候还有点用。希望material 1.1.0不会出现陨石坑吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -717,33 +717,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android故障艺术</title>
-    <url>/2019/06/05/android-glitch/</url>
-    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
-<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
-<span id="more"></span>
-
-<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
-<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
-<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
-<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
-<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
-<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
-<details>
-  <summary></summary>
-  <p>这个项目的代码是真的看得我头大。</p>
-</details>
-
-<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
-<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -855,6 +828,33 @@
       </categories>
   </entry>
   <entry>
+    <title>Android故障艺术</title>
+    <url>/2019/06/05/android-glitch/</url>
+    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
+<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+<span id="more"></span>
+
+<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
+<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
+<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
+<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
+<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
+<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
+<details>
+  <summary></summary>
+  <p>这个项目的代码是真的看得我头大。</p>
+</details>
+
+<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
+<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Jetpack Compose Stability白话版</title>
     <url>/2024/06/24/android-jetpack-compose-stability/</url>
     <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
@@ -923,55 +923,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android依赖笔记</title>
-    <url>/2022/06/02/android-library-dependency/</url>
-    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
-<span id="more"></span>
-
-<ul>
-<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
-</li>
-<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
-<ol>
-<li>把依赖发布到Maven</li>
-<li>FAR AAR插件</li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>限制多个依赖间的内部类</p>
-<ol>
-<li><code>package com.example.internal.database</code></li>
-<li>混淆为<code>package com.example.internal.a</code></li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
-<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
-<ol>
-<li><p>忽略依赖的Transitive Dependency</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>全局指定依赖版本</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
-</li>
-<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
-</li>
-<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
-<p>  要用：</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
-</li>
-<li><p>设置为必须声明Class Visibility</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>使用json-server模拟后台</title>
     <url>/2019/10/02/android-mock-server/</url>
     <content><![CDATA[<p>笔记。</p>
@@ -1023,18 +974,49 @@
       </categories>
   </entry>
   <entry>
-    <title>一些关于Dagger2及其未来的思考</title>
-    <url>/2020/01/01/android-oh-my-dagger/</url>
-    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+    <title>Android依赖笔记</title>
+    <url>/2022/06/02/android-library-dependency/</url>
+    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
 <span id="more"></span>
 
-<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
-<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
-<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
-<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
-<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
-<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
-<p>死鱼安乐啊死鱼安乐。</p>
+<ul>
+<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
+</li>
+<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
+<ol>
+<li>把依赖发布到Maven</li>
+<li>FAR AAR插件</li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>限制多个依赖间的内部类</p>
+<ol>
+<li><code>package com.example.internal.database</code></li>
+<li>混淆为<code>package com.example.internal.a</code></li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
+<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
+<ol>
+<li><p>忽略依赖的Transitive Dependency</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>全局指定依赖版本</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
+</li>
+<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
+</li>
+<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
+<p>  要用：</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
+</li>
+<li><p>设置为必须声明Class Visibility</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1090,6 +1072,24 @@
 </ul>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一些关于Dagger2及其未来的思考</title>
+    <url>/2020/01/01/android-oh-my-dagger/</url>
+    <content><![CDATA[<p>一切都始于<a href="https://www.youtube.com/watch?v=o-ins1nvbDg">An Opinionated Guide to Dependency Injection on Android (Android Dev Summit ‘19)</a>。好消息是Google终于提供了官方的DI教程，而且质量颇高。坏消息是dagger-android要亡了。</p>
+<span id="more"></span>
+
+<p>首先是<a href="https://developer.android.com/training/dependency-injection">官方教程</a>，是我见过最通俗易懂、深入浅出的教程了，没啥问题。但它配套的<a href="https://codelabs.developers.google.com/codelabs/android-dagger/">Codelab</a>手动管理了一个Scope和Component，以此来在多个Activity中注入相同的对象。这种做法一开始理解起来有点复杂，但用Dagger解决此类问题的方法也都与此大同小异吧。</p>
+<p>我个人没遇到过此类问题。因为像是用户状态这类东西，一直都是放到一个Singleton里，也不需要担心是不是多个Activity。其他地方能用Navigation就用，配合ViewModel自带的Lifecycle管理，通常不需要专门用Scope来管理对象。</p>
+<p>这个问题其实还有一个解决方法，就是用自定义ViewModel：<a href="https://github.com/FarshadTahmasbi/Vita">Vita</a>。它的代码可能要改一改才能适合自己用，但原理就是根据Activity的Lifecycle Events来生成ViewModel。</p>
+<p>但这暴露了一个问题，<del>我用Dagger经验不丰富，</del> Dagger依然学起来难，用起来繁琐，这也跟视频后半部分提到的一样。为此Dagger团队正在发明新的API来简化Android上依赖注入，他们画的那些饼看起来也挺香的。<strong>但是</strong>，一想到现有的dagger代码和近期新项目不得不用dagger写，而这些代码在未来都要重构，我就头大。<del>其实完全可以不动它们</del></p>
+<p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
+<p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
+<p>死鱼安乐啊死鱼安乐。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1624,28 +1624,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1678,6 +1656,28 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2139,6 +2139,24 @@
       </categories>
   </entry>
   <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android 13升级笔记</title>
     <url>/2023/02/22/android13-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2189,24 +2207,6 @@
 <li><p><a href="https://developer.android.com/about/versions/13/features#large-screens">Tablet and large screen support</a></p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2627,60 +2627,6 @@
       </categories>
   </entry>
   <entry>
-    <title>在Android Studio中引入AAR文件</title>
-    <url>/2018/08/13/include-aar/</url>
-    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
-<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
-<p>要解决的问题在于</p>
-<ol>
-<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
-<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
-<li>Module该有好处自然有的了</li>
-<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
-<li>修改后直接复制粘贴AAR就可使用</li>
-</ol>
-<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
-<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
-<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
-<li>修改后复制粘贴AAR才能使用</li>
-<li>AAR的版本被保存在了另一个项目中</li>
-<li>AAR的依赖需要手动添加到项目的依赖中</li>
-<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
-<li>似乎并不能跨module使用</li>
-</ol>
-<p><del>缺点比优点多可还行</del></p>
-<p>个人习惯：</p>
-<ul>
-<li>把名字改为library名+git commit编号</li>
-<li>另建一个文件夹专门放各种AAR</li>
-<li>把修改的项目丢到Github或GitBucket</li>
-<li>在版本控制中删掉所有AAR</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
-<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
-<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
-<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
-<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
-<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
-<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
-<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
-<p>注意<code>name</code>中不带后缀。</p>
-<p>Ta-Da。完成！</p>
-<p>参考:</p>
-<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>论如何避免垃圾游戏</title>
     <url>/2023/07/06/how-to-avoid-trash-games/</url>
     <content><![CDATA[<p>终于打完了Fire Emblem Engage。过程极度痛苦，在此深刻检讨并反省。<strong>有剧透</strong>。</p>
@@ -2747,6 +2693,60 @@
 ]]></content>
       <categories>
         <category>Gaming</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>在Android Studio中引入AAR文件</title>
+    <url>/2018/08/13/include-aar/</url>
+    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
+<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
+<p>要解决的问题在于</p>
+<ol>
+<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
+<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
+<li>Module该有好处自然有的了</li>
+<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
+<li>修改后直接复制粘贴AAR就可使用</li>
+</ol>
+<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
+<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
+<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
+<li>修改后复制粘贴AAR才能使用</li>
+<li>AAR的版本被保存在了另一个项目中</li>
+<li>AAR的依赖需要手动添加到项目的依赖中</li>
+<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
+<li>似乎并不能跨module使用</li>
+</ol>
+<p><del>缺点比优点多可还行</del></p>
+<p>个人习惯：</p>
+<ul>
+<li>把名字改为library名+git commit编号</li>
+<li>另建一个文件夹专门放各种AAR</li>
+<li>把修改的项目丢到Github或GitBucket</li>
+<li>在版本控制中删掉所有AAR</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
+<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
+<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
+<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
+<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
+<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
+<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
+<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
+<p>注意<code>name</code>中不带后缀。</p>
+<p>Ta-Da。完成！</p>
+<p>参考:</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
