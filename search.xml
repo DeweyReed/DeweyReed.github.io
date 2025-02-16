@@ -111,6 +111,44 @@
       </categories>
   </entry>
   <entry>
+    <title>Android简繁体翻译到底该放哪儿？</title>
+    <url>/2022/12/25/android-chinese-strings/</url>
+    <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
+<span id="more"></span>
+
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>如果minSdk大于等于24(Android 7, Nougat)，根据<a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">官方文档</a>，简体中文放<code>values-b+zh+Hans</code>，繁体中文放<code>values-b+zh+Hant</code>。</p>
+<p>但没人会这么做吧！</p>
+<p>如果minSdk小于等于23(Android 6, Marshmallow)，经过个人测试，简体中文放<code>values-rCN</code>，繁体中文放<code>values-rTW</code>。如果要针对香港特殊翻译，再用<code>values-rHK</code>，澳门、新加坡同理。</p>
+<h2 id="官方文档有坑"><a href="#官方文档有坑" class="headerlink" title="官方文档有坑"></a>官方文档有坑</h2><p><a href="https://developer.android.com/training/basics/supporting-devices/languages">讲解如何增加翻译的官方文档</a>和前段时间的Android Dev Summit的一个视频中中，都推荐BCP 47格式（比如<code>values-b+zh+Hans</code>），但<strong>都不提示这是Android 7及之后才支持的格式</strong>。</p>
+<p>在之前的版本使用该格式时，应用并不会崩溃。但在缺少对应的翻译时，系统会发现新格式包含<code>zh</code>，进而先显示新格式的简体翻译，没有时显示新格式的繁体翻译。</p>
+<h2 id="英文翻译"><a href="#英文翻译" class="headerlink" title="英文翻译"></a>英文翻译</h2><p>以情况简单的英文为例，Android系统并没有单独的“英语”的语言选择，而有的是诸如“英语（美国）”、“英语（英国）”和“英语（印度）”等选择。这种情况下<code>Locale.getDefault().toLanguageTag()</code>将会是<code>en-US</code>、<code>en-GB</code>和<code>en-IN</code>等。</p>
+<p>这里可以把英文翻译统一放到<code>values-en</code>，但通常英语是直接放到<code>values</code>中作为默认语言。</p>
+<h2 id="中文翻译"><a href="#中文翻译" class="headerlink" title="中文翻译"></a>中文翻译</h2><p>但简繁体中文并不能统一放到一个文件夹中。Android系统团队显然意识到了类似问题，但Android 7才支持为时已晚<del>（要是AGP向前兼容就好了）</del>。</p>
+<p>以情况复杂的繁体中文为例，虽然翻译放到了台湾（<code>values-rTW</code>），但是：</p>
+<p>在Android 5和6中，只有“简体中文”和“繁体中文”两个语言选项。前者对应<code>values-rCN</code>，后者对应<code>values-rTW</code>。这里并没有之后系统中，可以选择地区的选项。</p>
+<p>从Android 7开始，在选择语言的同时，也必须选择语言的地区。这时就出现了港澳台三地的繁体中文版本。</p>
+<p>在个人测试中，以香港繁体中文为例，系统选择<code>values-b+zh+Hant</code>和<code>values-rTW</code>或<code>values-rHK</code>的优先级在不同手机上是不同的。但肯定是繁体中文。</p>
+<p>系统也足够智能，如果没有<code>values-rHK</code>，它会选择<code>values-rTW</code>，即使这里的地区是台湾而不是用户设置的香港。</p>
+<p>系统会选择和用户设置地区不同的文件夹，这里是最反直觉的地方。这是因为找不到地区对应的翻译时，系统会选择同语言的其他地区翻译，来确保至少是语言是正确的。</p>
+<h2 id="奖励1"><a href="#奖励1" class="headerlink" title="奖励1"></a>奖励1</h2><p><code>build.gradle</code>中的指定语言的<code>resConfigs</code>是要和对应文件夹一致的。比如<code>resConfigs &#39;en&#39;, &#39;zh-rCN&#39;, &#39;zh-rTW&#39;</code></p>
+<h2 id="奖励2"><a href="#奖励2" class="headerlink" title="奖励2"></a>奖励2</h2><p>在<a href="https://developer.android.com/guide/topics/resources/app-languages">Per-app language preferences</a>，Android依然沿用了<a href="https://developer.android.com/guide/topics/resources/app-languages#sample-config">反直觉的缩写</a>。这里似乎和<code>Locale.toLanguageTag()</code>是一致的。</p>
+<h2 id="更新1"><a href="#更新1" class="headerlink" title="更新1"></a>更新1</h2><p>不要假设简体中文只有<code>values-rCN</code>、<code>values-rSG</code>等几个地区标签。有的手机允许用户分别任意选择语言和地区，这样会有很多很多的组合。不过文件夹的检测顺序是通用的。</p>
+<h2 id="更新2"><a href="#更新2" class="headerlink" title="更新2"></a>更新2</h2><p>如何检测应用当前是否是简体中文？</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> languageTag = Locale.getDefault().toLanguageTag()</span><br><span class="line"><span class="keyword">if</span> (languageTag == <span class="string">&quot;zh-CN&quot;</span> || languageTag.startsWith(<span class="string">&quot;zh-Hans&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>暂时并没有找到更靠谱的办法。</p>
+<p>往对应<code>values</code>文件夹中放对应语言的标识<code>string</code>似乎可以，但这让翻译协作变得困难。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.android.com/guide/topics/resources/localization">https://developer.android.com/guide/topics/resources/localization</a></li>
+<li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
+<li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>在国内做Android开发踩过的坑</title>
     <url>/2019/08/25/android-chinese-pitfalls/</url>
     <content><![CDATA[<p>曾经怀疑过很多次是不是自己的代码有问题，到头来全是各厂商的魔改惹的祸。</p>
@@ -144,44 +182,6 @@
 <h2 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h2><blockquote>
 <p>你觉得我喜欢去研究这些东西嘛？</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android简繁体翻译到底该放哪儿？</title>
-    <url>/2022/12/25/android-chinese-strings/</url>
-    <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
-<span id="more"></span>
-
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>如果minSdk大于等于24(Android 7, Nougat)，根据<a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">官方文档</a>，简体中文放<code>values-b+zh+Hans</code>，繁体中文放<code>values-b+zh+Hant</code>。</p>
-<p>但没人会这么做吧！</p>
-<p>如果minSdk小于等于23(Android 6, Marshmallow)，经过个人测试，简体中文放<code>values-rCN</code>，繁体中文放<code>values-rTW</code>。如果要针对香港特殊翻译，再用<code>values-rHK</code>，澳门、新加坡同理。</p>
-<h2 id="官方文档有坑"><a href="#官方文档有坑" class="headerlink" title="官方文档有坑"></a>官方文档有坑</h2><p><a href="https://developer.android.com/training/basics/supporting-devices/languages">讲解如何增加翻译的官方文档</a>和前段时间的Android Dev Summit的一个视频中中，都推荐BCP 47格式（比如<code>values-b+zh+Hans</code>），但<strong>都不提示这是Android 7及之后才支持的格式</strong>。</p>
-<p>在之前的版本使用该格式时，应用并不会崩溃。但在缺少对应的翻译时，系统会发现新格式包含<code>zh</code>，进而先显示新格式的简体翻译，没有时显示新格式的繁体翻译。</p>
-<h2 id="英文翻译"><a href="#英文翻译" class="headerlink" title="英文翻译"></a>英文翻译</h2><p>以情况简单的英文为例，Android系统并没有单独的“英语”的语言选择，而有的是诸如“英语（美国）”、“英语（英国）”和“英语（印度）”等选择。这种情况下<code>Locale.getDefault().toLanguageTag()</code>将会是<code>en-US</code>、<code>en-GB</code>和<code>en-IN</code>等。</p>
-<p>这里可以把英文翻译统一放到<code>values-en</code>，但通常英语是直接放到<code>values</code>中作为默认语言。</p>
-<h2 id="中文翻译"><a href="#中文翻译" class="headerlink" title="中文翻译"></a>中文翻译</h2><p>但简繁体中文并不能统一放到一个文件夹中。Android系统团队显然意识到了类似问题，但Android 7才支持为时已晚<del>（要是AGP向前兼容就好了）</del>。</p>
-<p>以情况复杂的繁体中文为例，虽然翻译放到了台湾（<code>values-rTW</code>），但是：</p>
-<p>在Android 5和6中，只有“简体中文”和“繁体中文”两个语言选项。前者对应<code>values-rCN</code>，后者对应<code>values-rTW</code>。这里并没有之后系统中，可以选择地区的选项。</p>
-<p>从Android 7开始，在选择语言的同时，也必须选择语言的地区。这时就出现了港澳台三地的繁体中文版本。</p>
-<p>在个人测试中，以香港繁体中文为例，系统选择<code>values-b+zh+Hant</code>和<code>values-rTW</code>或<code>values-rHK</code>的优先级在不同手机上是不同的。但肯定是繁体中文。</p>
-<p>系统也足够智能，如果没有<code>values-rHK</code>，它会选择<code>values-rTW</code>，即使这里的地区是台湾而不是用户设置的香港。</p>
-<p>系统会选择和用户设置地区不同的文件夹，这里是最反直觉的地方。这是因为找不到地区对应的翻译时，系统会选择同语言的其他地区翻译，来确保至少是语言是正确的。</p>
-<h2 id="奖励1"><a href="#奖励1" class="headerlink" title="奖励1"></a>奖励1</h2><p><code>build.gradle</code>中的指定语言的<code>resConfigs</code>是要和对应文件夹一致的。比如<code>resConfigs &#39;en&#39;, &#39;zh-rCN&#39;, &#39;zh-rTW&#39;</code></p>
-<h2 id="奖励2"><a href="#奖励2" class="headerlink" title="奖励2"></a>奖励2</h2><p>在<a href="https://developer.android.com/guide/topics/resources/app-languages">Per-app language preferences</a>，Android依然沿用了<a href="https://developer.android.com/guide/topics/resources/app-languages#sample-config">反直觉的缩写</a>。这里似乎和<code>Locale.toLanguageTag()</code>是一致的。</p>
-<h2 id="更新1"><a href="#更新1" class="headerlink" title="更新1"></a>更新1</h2><p>不要假设简体中文只有<code>values-rCN</code>、<code>values-rSG</code>等几个地区标签。有的手机允许用户分别任意选择语言和地区，这样会有很多很多的组合。不过文件夹的检测顺序是通用的。</p>
-<h2 id="更新2"><a href="#更新2" class="headerlink" title="更新2"></a>更新2</h2><p>如何检测应用当前是否是简体中文？</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> languageTag = Locale.getDefault().toLanguageTag()</span><br><span class="line"><span class="keyword">if</span> (languageTag == <span class="string">&quot;zh-CN&quot;</span> || languageTag.startsWith(<span class="string">&quot;zh-Hans&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>暂时并没有找到更靠谱的办法。</p>
-<p>往对应<code>values</code>文件夹中放对应语言的标识<code>string</code>似乎可以，但这让翻译协作变得困难。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://developer.android.com/guide/topics/resources/localization">https://developer.android.com/guide/topics/resources/localization</a></li>
-<li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
-<li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -299,6 +299,107 @@
       </categories>
   </entry>
   <entry>
+    <title>Android Dark Theme/深色模式使用体验</title>
+    <url>/2020/05/07/android-dark-theme/</url>
+    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
+<span id="more"></span>
+
+<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
+<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
+<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
+<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
+<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
+<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
+<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
+<p>这是因为文档中有一句话：</p>
+<blockquote>
+<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
+</blockquote>
+<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
+<p>我的第二次尝试是重写<code>recreate()</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
+<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
+<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
+<p>一个Switch显示是否使用了深色主题：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
+
+<p>切换Switch时切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，在onCreate中根据需要自动切换深色模式：</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有啥问题，有啥问题呀？</p>
+<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
+<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
+<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
+<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
+<p>完。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android动态主题</title>
+    <url>/2018/09/14/android-dynamic-theme/</url>
+    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
+<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
+<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
+<span id="more"></span>
+
+<p>2018年12月1日 更新Cyanea</p>
+<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
+<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
+<p>好强啊。</p>
+<p>【完】2018年12月1日 更新Cyanea</p>
+<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
+<p>优点：简单到做这种应用的开发者都用不着找资料</p>
+<p>缺点：使用体验很一般</p>
+<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
+<p>优点：</p>
+<ul>
+<li>简简单单</li>
+<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
+</ul>
+<p>缺点：除了不能让用户随便选，没有缺点</p>
+<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
+<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
+<p>优点：用户体验++<br>缺点</p>
+<ul>
+<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
+<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
+</ul>
+<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
+<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
+<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
+<p>优点：用户体验#</p>
+<p>缺点：</p>
+<ul>
+<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
+<li>实现起来很繁琐</li>
+</ul>
+<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
+<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
+<p>夜间模式也有两种实现方式：</p>
+<ol>
+<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
+<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>一些可能有用的Android代码</title>
     <url>/2019/06/15/android-code-snippets/</url>
     <content><![CDATA[<p><strong>2020年11月6日 更新<code>View.outlineProvider</code></strong></p>
@@ -356,56 +457,6 @@
 
 <h2 id="clipToPadidng"><a href="#clipToPadidng" class="headerlink" title="clipToPadidng"></a><code>clipToPadidng</code></h2><p><code>Enables our items to still be drawn within the parent&#39;s padding.</code></p>
 <h2 id="View-outlineProvider"><a href="#View-outlineProvider" class="headerlink" title="View.outlineProvider"></a><code>View.outlineProvider</code></h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">binding.imageView.run &#123;</span><br><span class="line">    clipToOutline = <span class="literal">true</span></span><br><span class="line">    outlineProvider = <span class="keyword">object</span> : ViewOutlineProvider() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getOutline</span><span class="params">(view: <span class="type">View</span>, outline: <span class="type">Outline</span>)</span></span> &#123;</span><br><span class="line">            outline.setOval(</span><br><span class="line">                view.paddingLeft,</span><br><span class="line">                view.paddingTop,</span><br><span class="line">                view.width - view.paddingRight,</span><br><span class="line">                view.height - view.paddingBottom</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Dark Theme/深色模式使用体验</title>
-    <url>/2020/05/07/android-dark-theme/</url>
-    <content><![CDATA[<p>虽说一行代码<code>AppCompatDelegate.setDefaultNightMode</code>就能搞定的问题，但实际上坑不少哩。</p>
-<span id="more"></span>
-
-<h2 id="命名问题"><a href="#命名问题" class="headerlink" title="命名问题"></a>命名问题</h2><p>之前Google自己在文档中和API中混用Night Theme/Dark Theme，后来才统一用Dark Theme，毕竟不一定非得晚上才可以用这个模式嘛。同样的，在Dark Theme的中文文档里，将其翻译为深色/浅色主题，个人觉得比之前大伙儿用的夜间模式、黑色模式、黑夜模式、暗夜模式、暗黑模式等好听不少。</p>
-<h2 id="自带的坑"><a href="#自带的坑" class="headerlink" title="自带的坑"></a>自带的坑</h2><p>AppCompat 1.1.0给我们带来了深色模式，也带来了不少问题。像是<a href="https://issuetracker.google.com/issues/141351441">因为从rc到正式版时只改了一行关于深色模式的代码，导致棒棒糖的WebView全线崩溃的问题</a>。</p>
-<p><code>setDefaultNightMode</code>在1.1.0中会自动重启所有Activity，这导致不少应用的深色主题的逻辑被打乱不说，这个实现也很难自定义。当然，你别动它，自然什么毛病没有。</p>
-<h2 id="自挖的坑"><a href="#自挖的坑" class="headerlink" title="自挖的坑"></a>自挖的坑</h2><p><code>setDefaultNightMode</code>会调用<a href="https://developer.android.com/reference/kotlin/androidx/core/app/ActivityCompat#recreate(android.app.Activity)"><code>ActivityCompat.recreate()</code></a>。</p>
-<p>这个方法没有任何动画不说，而且在某些设备上会黑屏闪一下。在之前<code>setDefaultNightMode</code>不会自动重启的日子里，我的办法是：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Activity.<span class="title">restartWithFading</span><span class="params">()</span></span> &#123;</span><br><span class="line">    startActivity(intent)</span><br><span class="line">    finish()</span><br><span class="line">    overridePendingTransition(R.anim.fade_in_short, R.anim.fade_out_short)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但现在不行了。那么如何拦截<code>recreate()</code>呢？</p>
-<p>我的第一次尝试是根据文档中<a href="https://developer.android.com/guide/topics/ui/look-and-feel/darktheme#configuration_changes">对<code>onConfigurationChanged()</code>进行拦截</a>，在拦截后手动重启Activity。</p>
-<p>这么做用了没问题，但如果我从一个没有拦截<code>onConfigurationChanged()</code>的Activity中切换深色主题（比如通过省电模式），那这时会切换失效。</p>
-<p>这是因为文档中有一句话：</p>
-<blockquote>
-<p>An app can handle the implementation of Dark theme itself by declaring that <strong>each</strong> Activity can handle the uiMode configuration change:</p>
-</blockquote>
-<p>我们需要对每个Activity都进行拦截。但这时如果我用了第三方的Activity（像CustomTabs），这依然会失效。至此我只能另寻他路。</p>
-<p>我的第二次尝试是重写<code>recreate()</code>：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">recreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) &#123;</span><br><span class="line">        <span class="comment">// 不在前台时执行此处会导致Activity成为栈顶。</span></span><br><span class="line">        restartWithFading()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.recreate()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用后皆大欢喜，但当我在另一台机器上测试时，发现失效了。原因是：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">recreate</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> &#123;</span><br><span class="line">    <span class="comment">// On Android P and later we can safely rely on the platform recreate()</span></span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">28</span>) &#123;</span><br><span class="line">        activity.recreate();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!ActivityRecreator.recreate(activity)) &#123;</span><br><span class="line">            <span class="comment">// If ActivityRecreator did not start a recreation, we&#x27;ll just invoke the platform</span></span><br><span class="line">            activity.recreate();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ActivityCompat.recreate</code>在派之后才会调用<code>recreate</code>，而在之前只是<strong>可能</strong>调用，比如我在27的设备上没调用，但在21的模拟器上调用了。</p>
-<p>至此我没办法了，只能委屈部分老用户闪一下了。╮(╯▽╰)╭</p>
-<h2 id="我都不知道我不知道的坑"><a href="#我都不知道我不知道的坑" class="headerlink" title="我都不知道我不知道的坑"></a>我都不知道我不知道的坑</h2><p>我的一个应用里有一个指定时间段内自动打开/关闭深色主题的功能。具体如下，</p>
-<p>一个Switch显示是否使用了深色主题：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.isChecked = resources.isDarkTheme</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> Resources.isDarkTheme: <span class="built_in">Boolean</span></span><br><span class="line">    <span class="keyword">get</span>() = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES</span><br></pre></td></tr></table></figure>
-
-<p>切换Switch时切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">switchDark.setOnCheckedChangeListener &#123; _, isChecked -&gt;</span><br><span class="line">    toggleDark(toDark = isChecked)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">toggleDark</span><span class="params">(toDark: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">    AppCompatDelegate.setDefaultNightMode(</span><br><span class="line">        <span class="keyword">if</span> (toDark) &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_YES</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            AppCompatDelegate.MODE_NIGHT_NO</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此外，在onCreate中根据需要自动切换深色模式：</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (shouldToggleAutoDark) &#123;</span><br><span class="line">    toggleDark(toDark = !resources.isDarkTheme)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有啥问题，有啥问题呀？</p>
-<p>如果使用之前在<code>recreate</code>中重启应用的方法，那么在派及之后的设备上没有任何问题。否则，在所有设备上 + 使用之前在<code>recreate</code>中重启应用的方法且在派之前的设备上，都会出现自动切换失效的问题。</p>
-<p>比如现在是浅色主题，Switch为关，在启动时触发自动深色主题，<code>setDefaultNightMode</code>呼叫<code>recreate()</code>，应用重启，Switch为开，但这时Switch会经历一次<code>onSaveInstanceState</code>，将它的状态设置为之前的关，同时触发<code>OnCheckedChangeListener</code>，把应用设置为浅色模式，然后我们回到了原点。╮(╯▽╰)╭</p>
-<p>最后我把Switch在切换前把所有可能调用<code>onSaveInstanceState</code>的地方（<code>toggleDark</code>和<code>recreate</code>中）删掉View后，修好了。</p>
-<p>也可以在那些地方清空掉Listener，再把isChecked设为新的值。</p>
-<p>完。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -510,57 +561,6 @@
       <categories>
         <category>Android</category>
         <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android动态主题</title>
-    <url>/2018/09/14/android-dynamic-theme/</url>
-    <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
-<p>不是给用户几个主题选择的多主题，而是可以让用户选择任意颜色，这让难度上了一档次，尤其是想用一种不那么侵入的方法实现的话。</p>
-<p>从主题的实现来分，主要分依赖Android和自己动手。但这里按实现难度排序。</p>
-<span id="more"></span>
-
-<p>2018年12月1日 更新Cyanea</p>
-<p>发现了<a href="https://github.com/jaredrummler/Cyanea">Cyanea</a>，也是可以动态颜色，黑科技，效果极佳，除了不仅需要代码还需要很多styles。</p>
-<p>初步看了一下代码，它不像Aesthetic一样拦截View创建过程，而是拦截Resources的getColor和getColorStateLlist返回自定义颜色，并使用自定义的LayoutInflater，在View创建之后，使用反射给View的ColorStateList修改颜色。这样，一些直接着色很困难的View（说的就是TimePicker）也可以一并被着色。</p>
-<p>好强啊。</p>
-<p>【完】2018年12月1日 更新Cyanea</p>
-<h2 id="幼儿园难度-着色次数少的动态主题"><a href="#幼儿园难度-着色次数少的动态主题" class="headerlink" title="幼儿园难度 - 着色次数少的动态主题"></a>幼儿园难度 - 着色次数少的动态主题</h2><p>像<code>网易云音乐</code>这种，除了标题栏有主题色外，用到主题色的地方基本没有。只需要判断一下颜色亮暗，修改一下标题栏图标色和背景色就可以啦。</p>
-<p>优点：简单到做这种应用的开发者都用不着找资料</p>
-<p>缺点：使用体验很一般</p>
-<h2 id="简单难度-预设的多主题"><a href="#简单难度-预设的多主题" class="headerlink" title="简单难度 - 预设的多主题"></a>简单难度 - 预设的多主题</h2><p>这个也很容易，只需要把预设的主题放到<code>styles.xml</code>中，然后在<code>onCreate</code>的<code>super</code>前调用<code>setTheme</code>，让Android框架自己处理各种主题颜色即可。<a href="https://github.com/garretyoder/Colorful"><code>Colorful</code></a>就是这么做的，它的<code>styles.xml</code>中存放了很多很多预设颜色和它们的组合。</p>
-<p>优点：</p>
-<ul>
-<li>简简单单</li>
-<li>所有用到的地方都能着色（跟下一方案相比尤其重要）</li>
-</ul>
-<p>缺点：除了不能让用户随便选，没有缺点</p>
-<h2 id="正常难度-手动着色的动态主题"><a href="#正常难度-手动着色的动态主题" class="headerlink" title="正常难度 - 手动着色的动态主题"></a>正常难度 - 手动着色的动态主题</h2><p>像<code>酷安</code>这种，对每个用到主题色的地方进行着色。</p>
-<p>这里可以对需要用的主题色的<code>View</code>新建一个子类，创建时着色。<a href="https://github.com/afollestad/aesthetic"><code>Aesthetic</code></a>就是这么做的，而且它机智地使用了<code>LayoutInflaterCompat.setFactory2</code>来偷梁换柱，把每个<code>View</code>都换成可着色的子类。</p>
-<p>优点：用户体验++<br>缺点</p>
-<ul>
-<li>实现复杂，现有的Library(<code>Aesthetic</code>)都有点问题。</li>
-<li>有的<code>View</code>不能被正常着色，比如<code>CoordinatorLayout</code>跟它的子子孙孙们，有不少坑，有的还得反射才行。</li>
-</ul>
-<h2 id="老手难度-动态主题-主题包"><a href="#老手难度-动态主题-主题包" class="headerlink" title="老手难度 - 动态主题 + 主题包"></a>老手难度 - 动态主题 + 主题包</h2><p><code>Telegram</code>啦。它是自己动手，丰衣足食。</p>
-<p>这种方案不仅可以自定义颜色，还可以使用别人的主题包。</p>
-<p>有个现成的框架<code>Android-skin-support</code>，也是用<code>setFactory</code>实现的，不过没有用过，使用体验不知如何。</p>
-<p>优点：用户体验#</p>
-<p>缺点：</p>
-<ul>
-<li>主题包主要是给社交软件用的，而且不是必备功能，因此使用面较窄</li>
-<li>实现起来很繁琐</li>
-</ul>
-<h2 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h2><p>要么应用很简单，要么只提供预设主题，否则想要实现动态主题，此时此刻并不轻松。没有现成的壮硕的Library能用，意味着自己的造轮子。比如<code>Aesthetic</code>现在还有一大堆Bug。</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>我倾向于将夜间模式和主题分开，两者互不影响。</p>
-<p>夜间模式也有两种实现方式：</p>
-<ol>
-<li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
-<li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -717,6 +717,33 @@
       </categories>
   </entry>
   <entry>
+    <title>Android故障艺术</title>
+    <url>/2019/06/05/android-glitch/</url>
+    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
+<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+<span id="more"></span>
+
+<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
+<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
+<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
+<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
+<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
+<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
+<details>
+  <summary></summary>
+  <p>这个项目的代码是真的看得我头大。</p>
+</details>
+
+<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
+<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -828,33 +855,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android故障艺术</title>
-    <url>/2019/06/05/android-glitch/</url>
-    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
-<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
-<span id="more"></span>
-
-<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
-<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
-<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
-<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
-<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
-<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
-<details>
-  <summary></summary>
-  <p>这个项目的代码是真的看得我头大。</p>
-</details>
-
-<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
-<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Jetpack Compose Stability白话版</title>
     <url>/2024/06/24/android-jetpack-compose-stability/</url>
     <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
@@ -923,6 +923,55 @@
       </categories>
   </entry>
   <entry>
+    <title>Android依赖笔记</title>
+    <url>/2022/06/02/android-library-dependency/</url>
+    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
+<span id="more"></span>
+
+<ul>
+<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
+</li>
+<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
+<ol>
+<li>把依赖发布到Maven</li>
+<li>FAR AAR插件</li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>限制多个依赖间的内部类</p>
+<ol>
+<li><code>package com.example.internal.database</code></li>
+<li>混淆为<code>package com.example.internal.a</code></li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
+<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
+<ol>
+<li><p>忽略依赖的Transitive Dependency</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>全局指定依赖版本</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
+</li>
+<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
+</li>
+<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
+<p>  要用：</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
+</li>
+<li><p>设置为必须声明Class Visibility</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>使用json-server模拟后台</title>
     <url>/2019/10/02/android-mock-server/</url>
     <content><![CDATA[<p>笔记。</p>
@@ -967,55 +1016,6 @@
 </li>
 <li><p><code>SharedPreference</code>无法跨进程使用，因此<a href="https://developer.android.com/topic/libraries/architecture/datastore#multiprocess">Use DataStore in multi-process code</a></p>
 </li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android依赖笔记</title>
-    <url>/2022/06/02/android-library-dependency/</url>
-    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
-<span id="more"></span>
-
-<ul>
-<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
-</li>
-<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
-<ol>
-<li>把依赖发布到Maven</li>
-<li>FAR AAR插件</li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>限制多个依赖间的内部类</p>
-<ol>
-<li><code>package com.example.internal.database</code></li>
-<li>混淆为<code>package com.example.internal.a</code></li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
-<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
-<ol>
-<li><p>忽略依赖的Transitive Dependency</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>全局指定依赖版本</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
-</li>
-<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
-</li>
-<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
-<p>  要用：</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
-</li>
-<li><p>设置为必须声明Class Visibility</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
@@ -1090,6 +1090,45 @@
 <p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
 <p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
 <p>死鱼安乐啊死鱼安乐。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android OpenGL Texture 坐标原点问题</title>
+    <url>/2023/08/23/android-opengl-coordinates/</url>
+    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
+<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
+<span id="more"></span>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
+
+<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
+
+<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
+
+<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
+<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
+<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
+<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
+<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
+<blockquote>
+<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
+</blockquote>
+<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
+<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
+<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
+<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
+<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
+<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
+<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
+<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
+<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
+<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
+<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1193,45 +1232,6 @@
 </ol>
 <p>给坐标增加各种矩阵，实现3D模拟。</p>
 <h2 id="Adding-Detail-with-Textures"><a href="#Adding-Detail-with-Textures" class="headerlink" title="Adding Detail with Textures"></a>Adding Detail with Textures</h2><p>之后书中的内容就复杂起来，记笔记也变得难了起来。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android OpenGL Texture 坐标原点问题</title>
-    <url>/2023/08/23/android-opengl-coordinates/</url>
-    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
-<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
-<span id="more"></span>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
-
-<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
-
-<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
-
-<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
-<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
-<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
-<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
-<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
-<blockquote>
-<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
-</blockquote>
-<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
-<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
-<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
-<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
-<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
-<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
-<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
-<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
-<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
-<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
-<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1624,6 +1624,28 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1656,28 +1678,6 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1733,42 +1733,26 @@
       </categories>
   </entry>
   <entry>
-    <title>在Activity启动时弹出软键盘并在其之上显示内容</title>
-    <url>/2023/01/11/android-soft-keyboard-oncreate/</url>
-    <content><![CDATA[<p>想要在Activity一启动就显示如下状态，还要有一个不乱跳的动画，这比预想中要复杂不少。</p>
-<table>
-<thead>
-<tr>
-<th align="center">屏幕</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">状态栏<br>空白<br>内容<br>紧贴着<br>软键盘<br>导航栏</td>
-</tr>
-</tbody></table>
+    <title>天天坏，天天修的Android Studio</title>
+    <url>/2020/09/20/android-studio-is-broken/</url>
+    <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
 <span id="more"></span>
 
-<p>第一次尝试了<code>WindowCompat.setDecorFitsSystemWindows(window, false)</code> + <code>ViewCompat.setWindowInsetsAnimationCallback</code>，但问题在于：</p>
-<ol>
-<li><p>有的手机上，在动画结束后，软键盘的高度有时会少十几二十个dp。</p>
-<p> 在onCreate中唤起动画时，一定几率出现。原因不明。</p>
-<p> 如果是用户点击某个按钮后再唤起动画，是没问题的。</p>
-</li>
-<li><p>软键盘从底部升起时，内容会先显示在底部，然后跟随动画升起。</p>
-<p> 这样的效果还行，但很突兀。除非让内容跟随升起时，有一个从小变大动画。</p>
-</li>
-</ol>
-<p>无奈之下，不再使用Edge-to-edge。而使用Activity的<code>android:windowSoftInputMode=&quot;adjustResize&quot;</code>。效果立竿见影，不会再出现高度缺少的问题了。</p>
-<p>但第二个问题依然有。一直以为无能为力了，但直到前几天发现Todoist的一个快捷方式做到了。</p>
-<p>在一顿反编译后，发现它们也用了<code>adjustResize</code>。虽然没能找到具体实现，但我有了新的想法。</p>
-<p><code>adjustResize</code>的实现是Activity自动给Root view增加Padding。那么如果我们记忆之前的Padding，并在之后的onCreate中重复使用，那么就不会跳跃了。</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里用了JetpackCompose，所以override这个。</span></span><br><span class="line"><span class="comment">// 如果用XML，就override只有一个参数的setContentView。</span></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setContentView</span><span class="params">(view: <span class="type">View</span>?, params: <span class="type">ViewGroup</span>.<span class="type">LayoutParams</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.setContentView(view, params)</span><br><span class="line">    <span class="keyword">if</span> (view == <span class="literal">null</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用之前储存的底部Padding</span></span><br><span class="line">    view.updatePadding(bottom = viewModel.bottomHeight)</span><br><span class="line"></span><br><span class="line">    ViewCompat.setOnApplyWindowInsetsListener(view) &#123; _, insets -&gt;</span><br><span class="line">        <span class="keyword">val</span> bottom = insets.getInsets(</span><br><span class="line">            WindowInsetsCompat.Type.ime() or WindowInsetsCompat.Type.navigationBars()</span><br><span class="line">        ).bottom</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (bottom &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            view.updatePadding(bottom = bottom)</span><br><span class="line">            <span class="comment">// 储存好底部Padding，供下次启动使用</span></span><br><span class="line">            viewModel.setBottomPadding(bottom)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        insets</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个方案的优点是：</p>
-<ol>
-<li>内容只会在第一次时跳跃。</li>
-<li>可以跟随软键盘高度变化，比如切换语言时。</li>
-</ol>
+<p>“坏掉”指的是所有不是自己代码问题的问题。</p>
+<h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
+<p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
+<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
+<p>2021新发现的方法！给类改名字。</p>
+<h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
+<h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
+<p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
+<h2 id="删除Gradle缓存"><a href="#删除Gradle缓存" class="headerlink" title="删除Gradle缓存"></a>删除Gradle缓存</h2><p>最近遇到一个问题，Kotlin Extension Functions不被识别，上述方案都试过了没用。最后只好打起了Gradle的主意。</p>
+<p>除了<code>.gradle/gradle.properties</code>，把<code>.gradle</code>和<code>.m2</code>都删掉。因为小文件很多，删除时间很长，所以要一次性永久删除，如果先丢到回收站，等待时间要翻倍。</p>
+<h2 id="删除Android-Studio缓存"><a href="#删除Android-Studio缓存" class="headerlink" title="删除Android Studio缓存"></a>删除Android Studio缓存</h2><p>最近升级到4.2后，遇到问题仅删除Gradle缓存已经不够了。导出AS设置，然后把所有AS缓存都删光，然后重启。相当于重装了。</p>
+<h2 id="deep-clean"><a href="#deep-clean" class="headerlink" title="deep-clean"></a><code>deep-clean</code></h2><p>使用Github的<a href="https://github.com/rock3r/deep-clean">deep-clean</a>。</p>
+<p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
+<p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
+<h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1811,26 +1795,42 @@
       </categories>
   </entry>
   <entry>
-    <title>天天坏，天天修的Android Studio</title>
-    <url>/2020/09/20/android-studio-is-broken/</url>
-    <content><![CDATA[<p>记录了个人在确定不是代码问题后，如何修理坏掉的Android Studio的一些经验。</p>
+    <title>在Activity启动时弹出软键盘并在其之上显示内容</title>
+    <url>/2023/01/11/android-soft-keyboard-oncreate/</url>
+    <content><![CDATA[<p>想要在Activity一启动就显示如下状态，还要有一个不乱跳的动画，这比预想中要复杂不少。</p>
+<table>
+<thead>
+<tr>
+<th align="center">屏幕</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">状态栏<br>空白<br>内容<br>紧贴着<br>软键盘<br>导航栏</td>
+</tr>
+</tbody></table>
 <span id="more"></span>
 
-<p>“坏掉”指的是所有不是自己代码问题的问题。</p>
-<h2 id="Dagger"><a href="#Dagger" class="headerlink" title="Dagger"></a>Dagger</h2><p><a href="https://stackoverflow.com/a/52499659/5507158">曾经的某些AS版本和Dagger的某些版本不兼容</a>，而Dagger出了问题，多数人会先怀疑自己（而且多数情况也的确是自己的问题）。现在有了Hilt，问题会好很多。所以针对Dagger的问题，先学好Dagger，再去Issues里逛一逛。</p>
-<p>确认代码没问题后，可以尝试将项目或全局的<code>gradle.properties</code>中的各种配置注释掉重新Build一次。各种为了加速Gradle的配置有时会帮倒忙。</p>
-<p>最近发现当<code>DaggerAppComponent</code>中有类型不匹配、缺少Injector的问题时，手动修改生成的<code>DaggerAppComponent</code>，然后重新Build，有时能解决办法，当然这是在确信自己的Dagger代码无误，且各种Clean、清缓存都不起作用的前提下。</p>
-<p>2021新发现的方法！给类改名字。</p>
-<h2 id="git-clean-fdx"><a href="#git-clean-fdx" class="headerlink" title="git clean -fdx"></a><code>git clean -fdx</code></h2><p>删除所有没被Git管理的文件夹和文件。Android Studio中的Clean Project有时不够用。</p>
-<h2 id="修改settings-gradle中的rootProject-name"><a href="#修改settings-gradle中的rootProject-name" class="headerlink" title="修改settings.gradle中的rootProject.name"></a>修改<code>settings.gradle</code>中的<code>rootProject.name</code></h2><p>如果没有<code>rootProject.name</code>，新建一个Android项目，参考里面的示例代码。</p>
-<p>把<code>rootProject.name = &quot;ProjectName&quot;</code>中的<code>ProjectName</code>修改为任意名字，保险起见重启一下AS，再修改回原名字，再重启一下AS。这个方法可以解决一些Gradle文件不在IDE中的Android标签下显示的问题。</p>
-<h2 id="删除Gradle缓存"><a href="#删除Gradle缓存" class="headerlink" title="删除Gradle缓存"></a>删除Gradle缓存</h2><p>最近遇到一个问题，Kotlin Extension Functions不被识别，上述方案都试过了没用。最后只好打起了Gradle的主意。</p>
-<p>除了<code>.gradle/gradle.properties</code>，把<code>.gradle</code>和<code>.m2</code>都删掉。因为小文件很多，删除时间很长，所以要一次性永久删除，如果先丢到回收站，等待时间要翻倍。</p>
-<h2 id="删除Android-Studio缓存"><a href="#删除Android-Studio缓存" class="headerlink" title="删除Android Studio缓存"></a>删除Android Studio缓存</h2><p>最近升级到4.2后，遇到问题仅删除Gradle缓存已经不够了。导出AS设置，然后把所有AS缓存都删光，然后重启。相当于重装了。</p>
-<h2 id="deep-clean"><a href="#deep-clean" class="headerlink" title="deep-clean"></a><code>deep-clean</code></h2><p>使用Github的<a href="https://github.com/rock3r/deep-clean">deep-clean</a>。</p>
-<p>因为破坏力太大，所以个人还没使用过，不过可以参考其中删除了哪些文件和文件夹。</p>
-<p>通常是不需要删除IDE配置文件的，而且个人还从没走到那个地步。希望未来也不需要吧。</p>
-<h2 id="改变项目文件路径"><a href="#改变项目文件路径" class="headerlink" title="改变项目文件路径"></a>改变项目文件路径</h2><p>最近遇到了ID解析不出来。发现可以先把项目放到一个新文件夹中，然后再用AS打开项目。之后再把项目从文件夹中移出来。</p>
+<p>第一次尝试了<code>WindowCompat.setDecorFitsSystemWindows(window, false)</code> + <code>ViewCompat.setWindowInsetsAnimationCallback</code>，但问题在于：</p>
+<ol>
+<li><p>有的手机上，在动画结束后，软键盘的高度有时会少十几二十个dp。</p>
+<p> 在onCreate中唤起动画时，一定几率出现。原因不明。</p>
+<p> 如果是用户点击某个按钮后再唤起动画，是没问题的。</p>
+</li>
+<li><p>软键盘从底部升起时，内容会先显示在底部，然后跟随动画升起。</p>
+<p> 这样的效果还行，但很突兀。除非让内容跟随升起时，有一个从小变大动画。</p>
+</li>
+</ol>
+<p>无奈之下，不再使用Edge-to-edge。而使用Activity的<code>android:windowSoftInputMode=&quot;adjustResize&quot;</code>。效果立竿见影，不会再出现高度缺少的问题了。</p>
+<p>但第二个问题依然有。一直以为无能为力了，但直到前几天发现Todoist的一个快捷方式做到了。</p>
+<p>在一顿反编译后，发现它们也用了<code>adjustResize</code>。虽然没能找到具体实现，但我有了新的想法。</p>
+<p><code>adjustResize</code>的实现是Activity自动给Root view增加Padding。那么如果我们记忆之前的Padding，并在之后的onCreate中重复使用，那么就不会跳跃了。</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里用了JetpackCompose，所以override这个。</span></span><br><span class="line"><span class="comment">// 如果用XML，就override只有一个参数的setContentView。</span></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setContentView</span><span class="params">(view: <span class="type">View</span>?, params: <span class="type">ViewGroup</span>.<span class="type">LayoutParams</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.setContentView(view, params)</span><br><span class="line">    <span class="keyword">if</span> (view == <span class="literal">null</span>) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 应用之前储存的底部Padding</span></span><br><span class="line">    view.updatePadding(bottom = viewModel.bottomHeight)</span><br><span class="line"></span><br><span class="line">    ViewCompat.setOnApplyWindowInsetsListener(view) &#123; _, insets -&gt;</span><br><span class="line">        <span class="keyword">val</span> bottom = insets.getInsets(</span><br><span class="line">            WindowInsetsCompat.Type.ime() or WindowInsetsCompat.Type.navigationBars()</span><br><span class="line">        ).bottom</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (bottom &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            view.updatePadding(bottom = bottom)</span><br><span class="line">            <span class="comment">// 储存好底部Padding，供下次启动使用</span></span><br><span class="line">            viewModel.setBottomPadding(bottom)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        insets</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方案的优点是：</p>
+<ol>
+<li>内容只会在第一次时跳跃。</li>
+<li>可以跟随软键盘高度变化，比如切换语言时。</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2550,29 +2550,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2595,6 +2572,29 @@
 <p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
 <p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
 <p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3172,6 +3172,34 @@
       </categories>
   </entry>
   <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -3200,34 +3228,6 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
