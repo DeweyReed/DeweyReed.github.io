@@ -513,33 +513,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
-    <url>/2018/10/26/android-expandable-recyclerview/</url>
-    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
-<span id="more"></span>
-
-<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
-<p>用实现一个Expandable RecyclerView来举例子：</p>
-<ol>
-<li><p>首先要使用不同的ViewType：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
-</li>
-<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
-</li>
-</ol>
-<p>来源：AOSP的DeskClock</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android动态主题</title>
     <url>/2018/09/14/android-dynamic-theme/</url>
     <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
@@ -585,6 +558,33 @@
 <li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
 <li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
+    <url>/2018/10/26/android-expandable-recyclerview/</url>
+    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
+<span id="more"></span>
+
+<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
+<p>用实现一个Expandable RecyclerView来举例子：</p>
+<ol>
+<li><p>首先要使用不同的ViewType：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
+</li>
+<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
+</li>
+</ol>
+<p>来源：AOSP的DeskClock</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -855,6 +855,55 @@
       </categories>
   </entry>
   <entry>
+    <title>Android依赖笔记</title>
+    <url>/2022/06/02/android-library-dependency/</url>
+    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
+<span id="more"></span>
+
+<ul>
+<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
+</li>
+<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
+<ol>
+<li>把依赖发布到Maven</li>
+<li>FAR AAR插件</li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>限制多个依赖间的内部类</p>
+<ol>
+<li><code>package com.example.internal.database</code></li>
+<li>混淆为<code>package com.example.internal.a</code></li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
+<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
+<ol>
+<li><p>忽略依赖的Transitive Dependency</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>全局指定依赖版本</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
+</li>
+<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
+</li>
+<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
+<p>  要用：</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
+</li>
+<li><p>设置为必须声明Class Visibility</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Jetpack Compose Stability白话版</title>
     <url>/2024/06/24/android-jetpack-compose-stability/</url>
     <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
@@ -923,52 +972,25 @@
       </categories>
   </entry>
   <entry>
-    <title>Android依赖笔记</title>
-    <url>/2022/06/02/android-library-dependency/</url>
-    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
+    <title>使用json-server模拟后台</title>
+    <url>/2019/10/02/android-mock-server/</url>
+    <content><![CDATA[<p>笔记。</p>
 <span id="more"></span>
 
-<ul>
-<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
-</li>
-<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
+<p><a href="https://github.com/typicode/json-server">json-server</a></p>
 <ol>
-<li>把依赖发布到Maven</li>
-<li>FAR AAR插件</li>
-<li>把依赖内容复制到Library中</li>
+<li><p><code>yarn global add json-server</code></p>
+</li>
+<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
+<p> <code>db.json</code>: 数据文件</p>
+<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
+<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
+</li>
 </ol>
-</li>
-<li><p>限制多个依赖间的内部类</p>
-<ol>
-<li><code>package com.example.internal.database</code></li>
-<li>混淆为<code>package com.example.internal.a</code></li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
-<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
-<ol>
-<li><p>忽略依赖的Transitive Dependency</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>全局指定依赖版本</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
-</li>
-<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
-</li>
-<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
-<p>  要用：</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
-</li>
-<li><p>设置为必须声明Class Visibility</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -998,28 +1020,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>使用json-server模拟后台</title>
-    <url>/2019/10/02/android-mock-server/</url>
-    <content><![CDATA[<p>笔记。</p>
-<span id="more"></span>
-
-<p><a href="https://github.com/typicode/json-server">json-server</a></p>
-<ol>
-<li><p><code>yarn global add json-server</code></p>
-</li>
-<li><p><code>json-server --watch db.json --port 80 --host $ip --routes routes.json</code></p>
-<p> <code>db.json</code>: 数据文件</p>
-<p> <code>$ip</code>: 本地IP，好让手机连接。一般是机器的IP。</p>
-<p> <code>routes.json</code>: 似乎默认只能单路径，使用这个支持子路径</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1090,6 +1090,45 @@
 <p><a href="https://youtu.be/o-ins1nvbDg?t=537">这里给dagger-android判了死刑</a>: <code>We are stopping its development. We are not adding any more features to do that.</code>。不过继续用也没啥问题，现在的又没有deprected。但dagger-android的局限也的确比较大，而它现在也只做到了能让大伙儿少写些类似于Subcomponent的胶水代码。</p>
 <p>前几天在V2EX上看大伙儿讨论为啥程序员容易被淘汰，其中一个原因就是自己会的技术很快就过时了。想想也是，要是新的dagger-android一出，也没人关心你曾用dagger用得多么厉害吧。这让我想起了我曾经不知道Dagger需要Build Project来生成代码，结果死活找不到DaggerAppComponent，而现在的官方文档里把Make Project专门用框框标出来，新手一眼就明白了。</p>
 <p>死鱼安乐啊死鱼安乐。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android OpenGL Texture 坐标原点问题</title>
+    <url>/2023/08/23/android-opengl-coordinates/</url>
+    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
+<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
+<span id="more"></span>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
+
+<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
+
+<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
+
+<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
+<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
+<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
+<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
+<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
+<blockquote>
+<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
+</blockquote>
+<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
+<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
+<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
+<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
+<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
+<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
+<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
+<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
+<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
+<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
+<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1199,39 +1238,58 @@
       </categories>
   </entry>
   <entry>
-    <title>Android OpenGL Texture 坐标原点问题</title>
-    <url>/2023/08/23/android-opengl-coordinates/</url>
-    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
-<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
+    <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
+    <url>/2023/06/08/android-opengl-matrix/</url>
+    <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
+<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
 <span id="more"></span>
 
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
+<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
 
-<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
-
-<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
-
-<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
-<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
-<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
-<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
-<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
-<blockquote>
-<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
-</blockquote>
-<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
-<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
-<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
-<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
-<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
-<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
-<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
-<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
-<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
-<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
-<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
+<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
+<p>参考了<a href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
+<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
+<hr>
+<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
+<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
+<hr>
+<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
+<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
+<hr>
+<p>Q: Orthographic Projection是个啥？</p>
+<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
+<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
+<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
+<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
+<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
+<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
+<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
+<ol>
+<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
+<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
+</ol>
+<p>参考了<a href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
+<hr>
+<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
+<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
+<p>这里有一个没人跟我说的小秘密。</p>
+<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
+<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
+<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
+<p>Source: <a href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
+<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
+<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
+<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
+<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
+<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
+<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
+<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
+<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1442,85 +1500,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android OpenGL ES 2.0 的矩阵和坐标到底是怎么一回事儿？</title>
-    <url>/2023/06/08/android-opengl-matrix/</url>
-    <content><![CDATA[<p>最近依然在研读<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>。在此记录有关Orthographic Matrix、Perspective Matrix、Perspective Divide、Homogeneous Coordinates等各种问答。</p>
-<p>理解粗浅，若有错误，还望指正。不过估计没人看这个网站吧。</p>
-<span id="more"></span>
-
-<hr>
-<p>Q: 为什么OpenGL中的坐标在x、y、z之外还有一个w？</p>
-<p>A: 一个原因是3x3矩阵无法完成矩阵三维坐标的位移（同理，2x2矩阵无法完成二维坐标位移），所以给矩阵增加一维，右下角设置为1，其余增加的位置设置为0。这样完成位移后，再把增加的维度去掉，位移完成。在这里w总是1。即使不是1，也会用除法把它变为1，好让最后去掉它（这一步除法叫做Perspective Divide）。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[x 0 0 0]</span><br><span class="line">[0 y 0 0]</span><br><span class="line">[0 0 z 0]</span><br><span class="line">[0 0 0 w]</span><br></pre></td></tr></table></figure>
-
-<p>增加维度的这种方法就是Homogeneous Coordinates。</p>
-<p>参考了<a href="https://youtu.be/vQ60rFwh2ig">The True Power of the Matrix (Transformations in Graphics) - Computerphile</a>。</p>
-<p>另外一个原因涉及了三维空间在二维的投影，w会出现不为1的情况。之后讨论。</p>
-<hr>
-<p>Q: 为什么<code>android.graphics.Matrix</code>用9个<code>Float</code>，而不是和OpenGL一样用16个？</p>
-<p>A: <code>android.graphics.Matrix</code>主要处理2D图像，所以增加了新维度后，矩阵成为了3x3=9个<code>Float</code>。</p>
-<hr>
-<p>Q: 为什么<code>andnroid.graphics.Camera</code>可以用<code>android.graphics.Matrix</code>模拟3D效果？</p>
-<p>A: Skia的C++看到头疼。注意到其实现中使用了4x4矩阵，所以我猜测<code>andnroid.graphics.Camera</code>替开发者进行了2D-&gt;3D-&gt;2D的转换。</p>
-<hr>
-<p>Q: Orthographic Projection是个啥？</p>
-<p>A: 是一个坐标变换矩阵，一次位移 + 一次缩放。</p>
-<p>OpenGL需要每个顶点的坐标都在[-1, 1]中，也就是3D空间中位于原点的，边长为2的正方体。</p>
-<p>但在设计3D场景（或使用3D设计2D场景）时，如果事先就用正方体中的小数坐标，会很繁琐。而直接用最直观的坐标，比如整数坐标就很方便（也可以是其他范围的坐标，比如正数总比负数好处理吧），但代价是要把这些坐标变换到正方体中。</p>
-<p>Orthographic Projection就是这个变换。通过指定我们方便使用的坐标的范围，生成这个矩阵。之后我们把方便使用的坐标和该矩阵相乘，计算机会得出该坐标在正方体中的小数坐标。</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Axonometric_projection.svg/225px-Axonometric_projection.svg.png" alt="别看字母，看线"></p>
-<p>Source: <a href="https://en.wikipedia.org/wiki/Orthographic_projection">https://en.wikipedia.org/wiki/Orthographic_projection</a></p>
-<p>简单地说，矩阵帮我们把设计中的坐标移动到了正方体中，可以让OpenGL显示。</p>
-<p>OpenGL ES 2.0 for Android是在解决屏幕长宽的过程中引入了这个概念，有些混乱。这里再解释一下。</p>
-<p>用书中的例子，我们要在各种比例的屏幕中放一个圆。如果把横竖位置都设置为[-1, 1]，就会挤满整个屏幕，成为了椭圆。这里其实有两个解决方案：</p>
-<ol>
-<li>根据屏幕修改坐标。这是最直观的想法。在例子中1:1.78的屏幕上，把顶部和底部坐标减小。横屏同理。</li>
-<li>根据屏幕修改范围。这是书中的思路。坐标依然是[-1, 1]，但坐标范围变为了[-1.78, 1.78]。横屏同理。这里我们就可以用Orthographic Projection来把[-1.78, 1.78]范围内的坐标换到正方体中的[-1, 1]中。</li>
-</ol>
-<p>参考了<a href="https://youtu.be/U0_ONQQ5ZNM">The Math behind (most) 3D games - Perspective Projection</a>。之后的内容也会参考这个视频。</p>
-<hr>
-<p>Q: Perspective Matrix和Homogeneous Coordinates是个啥？</p>
-<p>A: 突出一个抽象。上文的提到的视频很有用。</p>
-<p>这里有一个没人跟我说的小秘密。</p>
-<p>人眼看到的图像总是二维的，而人眼观察3D世界的视角是砍去一部分顶部的金字塔形状（Frustum，平截头体，截头锥体）。</p>
-<p>我站在三维坐标的原点向一个轴看，看到的并不是轴的一个截面，而是把那个金字塔形状戴在头上😳，看到的那个截面。这样才符合现实规则。</p>
-<p><img src="https://learnopengl.com/img/guest/2021/Frustum_culling/VisualCameraFrustum.png" alt="人眼是这么看东西的"></p>
-<p>Source: <a href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling</a></p>
-<p>人眼看到的是near plane大小的图像，其内容是3D空间中把far plane到near plane所有物体从远到近挤到near plane（二维化）的效果。</p>
-<p>相关教程中总提距离越远物体越小。实际上物体大小没变，只是在二维化后，距离越远，物体<strong>看起来</strong>越小，或者说物体是在near plane中越小。</p>
-<p>这些浅显的道理放在代码和数学中就会很不直观。</p>
-<p>Perspective Matrix的作用是把3D中排好的物体，变化为near plane上的2D坐标。</p>
-<p>虽然2D坐标没有z坐标（或者说都相等），但我们需要保留z坐标的相对关系，来确定2D图像中，谁挡住谁。</p>
-<p>而在Perspective Matrix的计算中，会出现w不为1的情况。</p>
-<p>到这一步，从实用角度来说，我们完全可以忽略工具数儿w了。</p>
-<p>编不下去了，到现在我也无法直观地想象出w在3D空间中的样子。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
-
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Proguard Hell</title>
     <url>/2018/12/16/android-proguard-hell/</url>
     <content><![CDATA[<p>源自于无法忍受LeanCloud的Keep所有类的Proguard规则，想要精简一下APK而摸了Proguard的底。</p>
@@ -1557,6 +1536,49 @@
 <li><p><a href="https://www.youtube.com/watch?v=F9ymcWoDEtc">How Proguard Works</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
+<span id="more"></span>
+
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1618,28 +1640,6 @@
 <li><a href="https://www.youtube.com/watch?v=Zc4JP8kNGmQ">Trash Talk (Android Dev Summit ‘18)</a></li>
 <li><a href="https://www.youtube.com/watch?v=vU7Rhcl9x5o">Deep Dive into the ART Runtime (Android Dev Summit ‘18)</a></li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2077,29 +2077,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发牢骚 - 2021年2月6日</title>
-    <url>/2021/02/06/android-thoughts-20210206/</url>
-    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
-<span id="more"></span>
-
-<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
-<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
-<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
-<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
-<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
-<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
-<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
-<p>语义化版本是不是只算加分项？</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
-<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
-<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -2133,6 +2110,47 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发牢骚 - 2021年2月6日</title>
+    <url>/2021/02/06/android-thoughts-20210206/</url>
+    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
+<span id="more"></span>
+
+<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
+<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
+<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
+<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
+<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
+<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
+<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
+<p>语义化版本是不是只算加分项？</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
+<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
+<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 12升级笔记</title>
+    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
+<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
+<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
+<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
+<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
+<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
+<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2195,18 +2213,19 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 12升级笔记</title>
-    <url>/2022/06/25/android12-upgrade-notes/</url>
+    <title>Android 15升级笔记</title>
+    <url>/2025/01/10/android15-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
 <span id="more"></span>
 
-<h2 id="Android-App-Links-verification-changes"><a href="#Android-App-Links-verification-changes" class="headerlink" title="Android App Links verification changes"></a>Android App Links verification changes</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution">https://developer.android.com/about/versions/12/behavior-changes-all#web-intent-resolution</a></p>
-<p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes">https://developer.android.com/about/versions/12/behavior-changes-12#android-app-links-verification-changes</a></p>
-<h2 id="Foreground-service-launch-restrictions"><a href="#Foreground-service-launch-restrictions" class="headerlink" title="Foreground service launch restrictions"></a>Foreground service launch restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions">https://developer.android.com/about/versions/12/behavior-changes-12#foreground-service-launch-restrictions</a></p>
-<h2 id="Exact-alarm-permission"><a href="#Exact-alarm-permission" class="headerlink" title="Exact alarm permission"></a>Exact alarm permission</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission">https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission</a></p>
-<h2 id="Notification-trampoline-restrictions"><a href="#Notification-trampoline-restrictions" class="headerlink" title="Notification trampoline restrictions"></a>Notification trampoline restrictions</h2><p><a href="https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines">https://developer.android.com/about/versions/12/behavior-changes-12#notification-trampolines</a></p>
-<h2 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h2><p><a href="https://developer.android.com/about/versions/12/features/widgets">https://developer.android.com/about/versions/12/features/widgets</a></p>
-<p><a href="https://github.com/android/user-interface-samples/tree/main/AppWidget">https://github.com/android/user-interface-samples/tree/main/AppWidget</a></p>
+<ul>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-all#16-kb">Support for 16 KB page sizes</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#openjdk-api-changes">Collision with <code>MutableList.removeFirst()</code> and <code>MutableList.removeLast()</code> extension functions in kotlin-stdlib</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#safer-intents">Safer intents</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#edge-to-edge">Edge-to-edge enforcement</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#audio-focus">Restrictions on requesting audio focus</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#other_changes">Secured background activity launches</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2227,25 +2246,6 @@
 <li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
 <li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
 <li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android 15升级笔记</title>
-    <url>/2025/01/10/android15-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-all#16-kb">Support for 16 KB page sizes</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#openjdk-api-changes">Collision with <code>MutableList.removeFirst()</code> and <code>MutableList.removeLast()</code> extension functions in kotlin-stdlib</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#safer-intents">Safer intents</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#edge-to-edge">Edge-to-edge enforcement</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#audio-focus">Restrictions on requesting audio focus</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#other_changes">Secured background activity launches</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -2550,23 +2550,28 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+    <title>Gradle缓存笔记</title>
+    <url>/2022/03/06/gradle-cache/</url>
+    <content><![CDATA[<p>来自于：</p>
+<ul>
+<li><a href="https://jasonatwood.io/archives/1966">Understanding Different Gradle Caches for Android Projects, part 1.</a></li>
+<li><a href="https://jasonatwood.io/archives/1995">Understanding Different Gradle Caches for Android Projects, part 2</a></li>
+<li><a href="https://jasonatwood.io/archives/2127">Understanding Different Gradle Caches for Android Projects, part 3</a></li>
+</ul>
 <span id="more"></span>
 
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+<p>[Build]-[Clean Project]和<code>gradlew clean</code>都是仅删除根目录和Module目录下的<code>build</code>文件夹。<code>build</code>文件夹是Gradle自带的、默认的缓存策略。</p>
+<p>Build Cache（现在默认关闭，通过<code>--build-cache</code>或<code>org.gradle.caching=true</code>打开），使用了默认单项目缓存一样的机制，会把部分缓存保存到<code>~/.gradle/caches/build-cache-*</code>，机器上所有项目可共享。这也就是为什么Dagger偶尔失效时，需要删除系统Gradle缓存的原因。</p>
+<ul>
+<li>文中提到<code>R.java</code>，但记得在某个AGP版本中，文件已经变成<code>jar</code>，轻易找不到了。</li>
+<li><code>kapt</code>的<code>useBuildCache</code><a href="https://docs.gradle.org/current/userguide/caching_android_projects.html#annotation_processors_and_kotlin">在某个版本中默认开启了</a>。<a href="https://kotlinlang.org/docs/kapt.html#gradle-build-cache-support">关闭文档</a>。</li>
 </ul>
+<p>Gradle Deamon默认开启。</p>
+<p>依赖储存在<code>~/.gradle/caches/*</code>中。其中<code>transform-*</code>保存了本地修改后的依赖，非下载内容。</p>
+<p>Invalidate Caches / Restart只清理IDE缓存，不清理上述缓存。</p>
+<p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
+<p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
+<p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2596,88 +2601,6 @@
 ]]></content>
       <categories>
         <category>What</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Gradle缓存笔记</title>
-    <url>/2022/03/06/gradle-cache/</url>
-    <content><![CDATA[<p>来自于：</p>
-<ul>
-<li><a href="https://jasonatwood.io/archives/1966">Understanding Different Gradle Caches for Android Projects, part 1.</a></li>
-<li><a href="https://jasonatwood.io/archives/1995">Understanding Different Gradle Caches for Android Projects, part 2</a></li>
-<li><a href="https://jasonatwood.io/archives/2127">Understanding Different Gradle Caches for Android Projects, part 3</a></li>
-</ul>
-<span id="more"></span>
-
-<p>[Build]-[Clean Project]和<code>gradlew clean</code>都是仅删除根目录和Module目录下的<code>build</code>文件夹。<code>build</code>文件夹是Gradle自带的、默认的缓存策略。</p>
-<p>Build Cache（现在默认关闭，通过<code>--build-cache</code>或<code>org.gradle.caching=true</code>打开），使用了默认单项目缓存一样的机制，会把部分缓存保存到<code>~/.gradle/caches/build-cache-*</code>，机器上所有项目可共享。这也就是为什么Dagger偶尔失效时，需要删除系统Gradle缓存的原因。</p>
-<ul>
-<li>文中提到<code>R.java</code>，但记得在某个AGP版本中，文件已经变成<code>jar</code>，轻易找不到了。</li>
-<li><code>kapt</code>的<code>useBuildCache</code><a href="https://docs.gradle.org/current/userguide/caching_android_projects.html#annotation_processors_and_kotlin">在某个版本中默认开启了</a>。<a href="https://kotlinlang.org/docs/kapt.html#gradle-build-cache-support">关闭文档</a>。</li>
-</ul>
-<p>Gradle Deamon默认开启。</p>
-<p>依赖储存在<code>~/.gradle/caches/*</code>中。其中<code>transform-*</code>保存了本地修改后的依赖，非下载内容。</p>
-<p>Invalidate Caches / Restart只清理IDE缓存，不清理上述缓存。</p>
-<p><code>android.enableBuildCache</code>在AGP 7中被弃用。</p>
-<p><code>org.gradle.unsafe.configuration-cache=true</code>实验中的Configuration Cache，期待正式版。缓存储存在<code>[PROJECT_ROOT]/.gradle/configuration-cache</code>中。</p>
-<p>还有一些<a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">各种属性的默认值</a>。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>在Android Studio中引入AAR文件</title>
-    <url>/2018/08/13/include-aar/</url>
-    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
-<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
-<p>要解决的问题在于</p>
-<ol>
-<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
-<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
-<li>Module该有好处自然有的了</li>
-<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
-<li>修改后直接复制粘贴AAR就可使用</li>
-</ol>
-<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
-<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
-<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
-<li>修改后复制粘贴AAR才能使用</li>
-<li>AAR的版本被保存在了另一个项目中</li>
-<li>AAR的依赖需要手动添加到项目的依赖中</li>
-<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
-<li>似乎并不能跨module使用</li>
-</ol>
-<p><del>缺点比优点多可还行</del></p>
-<p>个人习惯：</p>
-<ul>
-<li>把名字改为library名+git commit编号</li>
-<li>另建一个文件夹专门放各种AAR</li>
-<li>把修改的项目丢到Github或GitBucket</li>
-<li>在版本控制中删掉所有AAR</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
-<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
-<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
-<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
-<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
-<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
-<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
-<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
-<p>注意<code>name</code>中不带后缀。</p>
-<p>Ta-Da。完成！</p>
-<p>参考:</p>
-<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2750,6 +2673,83 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>在Android Studio中引入AAR文件</title>
+    <url>/2018/08/13/include-aar/</url>
+    <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
+<p>任务很简单，最小程度影响当前项目的前提下，导入一个AAR第三方库。</p>
+<p>要解决的问题在于</p>
+<ol>
+<li>按导入<code>.jar</code>的方法导入<code>.aar</code>会失败</li>
+<li>使用Android Studio自带的<code>Improt Module</code>中的导入AAR会创建一个新的Module，而我们只想声明一个依赖</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="这么做的优点"><a href="#这么做的优点" class="headerlink" title="这么做的优点"></a>这么做的优点</h2><ol>
+<li>Module该有好处自然有的了</li>
+<li>不需要复杂漫长地发布到JCenter等地方，才能使用依赖</li>
+<li>修改后直接复制粘贴AAR就可使用</li>
+</ol>
+<h2 id="缺点也是明显的"><a href="#缺点也是明显的" class="headerlink" title="缺点也是明显的"></a>缺点也是明显的</h2><ol>
+<li>不要求发布，就不适用多人协作的大项目，电脑GG后源代码也会丢失</li>
+<li>不带注释，需要手动选择代码目录，有时候选择还会失效</li>
+<li>修改后复制粘贴AAR才能使用</li>
+<li>AAR的版本被保存在了另一个项目中</li>
+<li>AAR的依赖需要手动添加到项目的依赖中</li>
+<li>AAR定义的Annotation，比如IntDef，需要手动在Proguard <code>-dontwarn</code></li>
+<li>似乎并不能跨module使用</li>
+</ol>
+<p><del>缺点比优点多可还行</del></p>
+<p>个人习惯：</p>
+<ul>
+<li>把名字改为library名+git commit编号</li>
+<li>另建一个文件夹专门放各种AAR</li>
+<li>把修改的项目丢到Github或GitBucket</li>
+<li>在版本控制中删掉所有AAR</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="1-一个有正常的Library-Module的Android项目"><a href="#1-一个有正常的Library-Module的Android项目" class="headerlink" title="1. 一个有正常的Library Module的Android项目"></a>1. 一个有正常的Library Module的Android项目</h3><p>新建一个项目，带上需要的Library，或最简单的就是直接clone一个现有的依赖。</p>
+<h3 id="2-生成AAR文件"><a href="#2-生成AAR文件" class="headerlink" title="2. 生成AAR文件"></a>2. 生成AAR文件</h3><p>使用<code>./gradlew assemble</code>或者Android Studio中, 点击Gradle面板/你的library/Tasks/build/assemble</p>
+<p>我在使用中，单纯地运行应用并不一定能生成AAR。</p>
+<h3 id="3-定位AAR文件"><a href="#3-定位AAR文件" class="headerlink" title="3. 定位AAR文件"></a>3. 定位AAR文件</h3><p>在项目/library/build/outputs/aar/中找到生成的AAR文件，给<code>library-release.aar</code>（谁能解释一下它和<code>library-debug.aar</code>除了名字不一样有什么区别？字节数都一样）改个名字，拉出来。</p>
+<p>最好在文件名后加一个tag或版本号，确保以后更新时Sync Gradle可以成功更新代码库。</p>
+<h3 id="4-把AAR复制到所需项目"><a href="#4-把AAR复制到所需项目" class="headerlink" title="4. 把AAR复制到所需项目"></a>4. 把AAR复制到所需项目</h3><p>复制到项目/app/src/main/libs/下，可能需要新建一个<code>libs</code>文件夹（文件名可以随便起）。</p>
+<h3 id="5-在Gradle中添加目录"><a href="#5-在Gradle中添加目录" class="headerlink" title="5. 在Gradle中添加目录"></a>5. 在Gradle中添加目录</h3><p>首先修改项目根目录主<code>build.gradle</code>，在<code>allprojects/repositories</code>(不写classpath的那个区域里)下添加</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">flatDir &#123;</span><br><span class="line">     dirs <span class="string">&#x27;src/main/libs&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意把<code>libs</code>替换为你那奇思妙想的新名字。</p>
+<h3 id="在Dependencies中引用AAR"><a href="#在Dependencies中引用AAR" class="headerlink" title="在Dependencies中引用AAR"></a>在Dependencies中引用AAR</h3><p>添加<code>implementation(name:&#39;library-name&#39;, ext:&#39;aar&#39;)</code></p>
+<p>注意<code>name</code>中不带后缀。</p>
+<p>Ta-Da。完成！</p>
+<p>参考:</p>
+<p><a href="https://medium.com/@notestomyself/how-to-include-external-aar-file-using-gradle-6604b378e808">How to Include an External .aar File Using Gradle?</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Kotlin + JSON 默认参数适配问题</title>
     <url>/2018/05/18/kotlin-json/</url>
     <content><![CDATA[<p>2018年5月18日更新：Moshi 1.6增加了Codegen的选项，可以取代Kotshi。原方案依旧可行。</p>
@@ -2766,74 +2766,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>用于展示的Markdown徽章集合</title>
-    <url>/2018/04/19/markdown-badges/</url>
-    <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
-
-<ol>
-<li><p><a href="http://shields.io/">Shields.io</a></p>
-<p> 满足绝大部分需求，可以自定义内容和样式。没时间看剩下的内容的话，学会这么一个就够了。</p>
-<p> 在搜索栏中输入“github”可以找到一些常用的勋章。</p>
-</li>
-<li><p><a href="https://badge.fury.io/">https://badge.fury.io/</a></p>
-<p> 输入项目名（需要项目有版本号（Tag）），生成各种格式的版本勋章。</p>
-</li>
-<li><p><a href="https://github.com/ellerbrock/open-source-badges">open-source-badges</a></p>
-<p> 提供带有爱心的开源勋章，还有Linceses勋章</p>
-</li>
-<li><p><a href="https://github.com/jitpack/jitpack.io#badges">Jitpack</a></p>
-<p> 如果使用Jitpack发布，可以使用这个链接直接嵌入Jitpack为你设计好的版本勋章。</p>
- <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Release</span>](<span class="link">https://jitpack.io/v/User/Repo.svg</span>)](<span class="link">https://jitpack.io/#User/Repo</span>)</span><br></pre></td></tr></table></figure></li>
-<li><p><a href="https://github.com/KotlinBy/awesome-kotlin#spread-awesome-kotlin">Awesome Kotlin Badge</a></p>
-<p> 如果是awesome kotlin，就又有一个很酷的勋章</br></p>
- <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Awesome Kotlin Badge</span>](<span class="link">https://kotlin.link/awesome-kotlin.svg</span>)](<span class="link">https://github.com/KotlinBy/awesome-kotlin</span>)</span><br></pre></td></tr></table></figure>
-
-<p> <a href="https://github.com/KotlinBy/awesome-kotlin"><img src="https://kotlin.link/awesome-kotlin.svg" alt="Awesome Kotlin Badge"></a></p>
-</li>
-<li><p><a href="https://github.com/jirutka/maven-badges#usags">Maven central</a></p>
-<p> 一个第三方的针对maven central的版本勋章</p>
-</li>
-<li><p>Android Arsenal</p>
-<p> 在项目信息中间一栏的下方，有“Badge”选项，点击右边”Generate”就可以生成一个链接。</p>
-</li>
-<li><p>Emoji</p>
-<p> 虽然算不上勋章，但可以起到勋章的作用。</p>
-<p> 常见的就是使用:cn::us:表示支持的语言、国家。<br> 可以直接使用<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">Emoji Cheat Sheet</a>中的内容表示。</p>
-</li>
-<li><p><a href="https://github.com/larsenwork/web.svg.min">Web.svg.min</a></p>
-<p> 一些常用图标的Vector格式。</p>
-<p> <img src="http://upload-images.jianshu.io/upload_images/5450520-b5058065eb46307d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="preview"></p>
-</li>
-<li><p><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">各种Licenses</a></p>
-</li>
-<li><p><a href="https://circleci.com/docs/1.0/status-badges/">Circleci</a></p>
-</li>
-<li><p><a href="https://docs.travis-ci.com/user/status-images/">Travis CI</a></p>
-</li>
-<li><p><a href="https://support.codacy.com/hc/en-us/articles/212799365-Badges">Codacy</a></p>
-</li>
-<li><p><a href="https://play.google.com/intl/en_us/badges/">Google Play链接</a></p>
-</li>
-<li><p><a href="https://ko-fi.com/">Bug me a coffee</a></p>
-</li>
-<li><p>其他勋章集合</p>
-<p> <a href="https://github.com/boennemann/badges">Badges</a></p>
-<p> <a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></p>
-<p> <a href="https://github.com/dwyl/repo-badges">repo-badges</a></p>
-</li>
-</ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>使用各种服务时，服务商提供了Badge -&gt; 使用它; 没有 -&gt; 2</p>
-</li>
-<li><p>使用Shields.io自己做一个</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -2920,6 +2852,74 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>用于展示的Markdown徽章集合</title>
+    <url>/2018/04/19/markdown-badges/</url>
+    <content><![CDATA[<h1 id="大部分勋章使用markdown，SVG的格式。"><a href="#大部分勋章使用markdown，SVG的格式。" class="headerlink" title="大部分勋章使用markdown，SVG的格式。"></a>大部分勋章使用markdown，SVG的格式。</h1><span id="more"></span>
+
+<ol>
+<li><p><a href="http://shields.io/">Shields.io</a></p>
+<p> 满足绝大部分需求，可以自定义内容和样式。没时间看剩下的内容的话，学会这么一个就够了。</p>
+<p> 在搜索栏中输入“github”可以找到一些常用的勋章。</p>
+</li>
+<li><p><a href="https://badge.fury.io/">https://badge.fury.io/</a></p>
+<p> 输入项目名（需要项目有版本号（Tag）），生成各种格式的版本勋章。</p>
+</li>
+<li><p><a href="https://github.com/ellerbrock/open-source-badges">open-source-badges</a></p>
+<p> 提供带有爱心的开源勋章，还有Linceses勋章</p>
+</li>
+<li><p><a href="https://github.com/jitpack/jitpack.io#badges">Jitpack</a></p>
+<p> 如果使用Jitpack发布，可以使用这个链接直接嵌入Jitpack为你设计好的版本勋章。</p>
+ <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Release</span>](<span class="link">https://jitpack.io/v/User/Repo.svg</span>)](<span class="link">https://jitpack.io/#User/Repo</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p><a href="https://github.com/KotlinBy/awesome-kotlin#spread-awesome-kotlin">Awesome Kotlin Badge</a></p>
+<p> 如果是awesome kotlin，就又有一个很酷的勋章</br></p>
+ <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">[<span class="string">![Awesome Kotlin Badge</span>](<span class="link">https://kotlin.link/awesome-kotlin.svg</span>)](<span class="link">https://github.com/KotlinBy/awesome-kotlin</span>)</span><br></pre></td></tr></table></figure>
+
+<p> <a href="https://github.com/KotlinBy/awesome-kotlin"><img src="https://kotlin.link/awesome-kotlin.svg" alt="Awesome Kotlin Badge"></a></p>
+</li>
+<li><p><a href="https://github.com/jirutka/maven-badges#usags">Maven central</a></p>
+<p> 一个第三方的针对maven central的版本勋章</p>
+</li>
+<li><p>Android Arsenal</p>
+<p> 在项目信息中间一栏的下方，有“Badge”选项，点击右边”Generate”就可以生成一个链接。</p>
+</li>
+<li><p>Emoji</p>
+<p> 虽然算不上勋章，但可以起到勋章的作用。</p>
+<p> 常见的就是使用:cn::us:表示支持的语言、国家。<br> 可以直接使用<a href="https://www.webpagefx.com/tools/emoji-cheat-sheet/">Emoji Cheat Sheet</a>中的内容表示。</p>
+</li>
+<li><p><a href="https://github.com/larsenwork/web.svg.min">Web.svg.min</a></p>
+<p> 一些常用图标的Vector格式。</p>
+<p> <img src="http://upload-images.jianshu.io/upload_images/5450520-b5058065eb46307d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="preview"></p>
+</li>
+<li><p><a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">各种Licenses</a></p>
+</li>
+<li><p><a href="https://circleci.com/docs/1.0/status-badges/">Circleci</a></p>
+</li>
+<li><p><a href="https://docs.travis-ci.com/user/status-images/">Travis CI</a></p>
+</li>
+<li><p><a href="https://support.codacy.com/hc/en-us/articles/212799365-Badges">Codacy</a></p>
+</li>
+<li><p><a href="https://play.google.com/intl/en_us/badges/">Google Play链接</a></p>
+</li>
+<li><p><a href="https://ko-fi.com/">Bug me a coffee</a></p>
+</li>
+<li><p>其他勋章集合</p>
+<p> <a href="https://github.com/boennemann/badges">Badges</a></p>
+<p> <a href="https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba">Markdown License badges</a></p>
+<p> <a href="https://github.com/dwyl/repo-badges">repo-badges</a></p>
+</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>使用各种服务时，服务商提供了Badge -&gt; 使用它; 没有 -&gt; 2</p>
+</li>
+<li><p>使用Shields.io自己做一个</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3172,6 +3172,34 @@
       </categories>
   </entry>
   <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -3200,34 +3228,6 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3362,6 +3362,26 @@
       </categories>
   </entry>
   <entry>
+    <title>个人使用的VSCode配置</title>
+    <url>/2025/02/01/vscode-settings/</url>
+    <content><![CDATA[<p>手动同步VSCode设置。</p>
+<span id="more"></span>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Monokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;security.workspace.trust.untrustedFiles&quot;</span><span class="punctuation">:</span> <span class="string">&quot;open&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.cursorBlinking&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="attr">&quot;editor.lineNumbers&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;window.commandCenter&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;git.openRepositoryInParentFolders&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.nonBasicASCII&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.stickyScroll.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.startupEditor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.ambiguousCharacters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.editor.enablePreview&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
+<ul>
+<li>APKLab</li>
+<li>IntelliJ IDEA Keybindings</li>
+<li>markdownlint</li>
+<li>Subword Navigation</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>更新，还是不更新，这是个问题</title>
     <url>/2022/05/25/update-or-not/</url>
     <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
@@ -3385,26 +3405,6 @@
 <h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
 <h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
 <p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>个人使用的VSCode配置</title>
-    <url>/2025/02/01/vscode-settings/</url>
-    <content><![CDATA[<p>手动同步VSCode设置。</p>
-<span id="more"></span>
-
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Monokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;security.workspace.trust.untrustedFiles&quot;</span><span class="punctuation">:</span> <span class="string">&quot;open&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.cursorBlinking&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="attr">&quot;editor.lineNumbers&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;window.commandCenter&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;git.openRepositoryInParentFolders&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.nonBasicASCII&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.stickyScroll.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.startupEditor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.ambiguousCharacters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.editor.enablePreview&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>扩展：</p>
-<ul>
-<li>APKLab</li>
-<li>IntelliJ IDEA Keybindings</li>
-<li>markdownlint</li>
-<li>Subword Navigation</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
