@@ -150,44 +150,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android简繁体翻译到底该放哪儿？</title>
-    <url>/2022/12/25/android-chinese-strings/</url>
-    <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
-<span id="more"></span>
-
-<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>如果minSdk大于等于24(Android 7, Nougat)，根据<a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">官方文档</a>，简体中文放<code>values-b+zh+Hans</code>，繁体中文放<code>values-b+zh+Hant</code>。</p>
-<p>但没人会这么做吧！</p>
-<p>如果minSdk小于等于23(Android 6, Marshmallow)，经过个人测试，简体中文放<code>values-rCN</code>，繁体中文放<code>values-rTW</code>。如果要针对香港特殊翻译，再用<code>values-rHK</code>，澳门、新加坡同理。</p>
-<h2 id="官方文档有坑"><a href="#官方文档有坑" class="headerlink" title="官方文档有坑"></a>官方文档有坑</h2><p><a href="https://developer.android.com/training/basics/supporting-devices/languages">讲解如何增加翻译的官方文档</a>和前段时间的Android Dev Summit的一个视频中中，都推荐BCP 47格式（比如<code>values-b+zh+Hans</code>），但<strong>都不提示这是Android 7及之后才支持的格式</strong>。</p>
-<p>在之前的版本使用该格式时，应用并不会崩溃。但在缺少对应的翻译时，系统会发现新格式包含<code>zh</code>，进而先显示新格式的简体翻译，没有时显示新格式的繁体翻译。</p>
-<h2 id="英文翻译"><a href="#英文翻译" class="headerlink" title="英文翻译"></a>英文翻译</h2><p>以情况简单的英文为例，Android系统并没有单独的“英语”的语言选择，而有的是诸如“英语（美国）”、“英语（英国）”和“英语（印度）”等选择。这种情况下<code>Locale.getDefault().toLanguageTag()</code>将会是<code>en-US</code>、<code>en-GB</code>和<code>en-IN</code>等。</p>
-<p>这里可以把英文翻译统一放到<code>values-en</code>，但通常英语是直接放到<code>values</code>中作为默认语言。</p>
-<h2 id="中文翻译"><a href="#中文翻译" class="headerlink" title="中文翻译"></a>中文翻译</h2><p>但简繁体中文并不能统一放到一个文件夹中。Android系统团队显然意识到了类似问题，但Android 7才支持为时已晚<del>（要是AGP向前兼容就好了）</del>。</p>
-<p>以情况复杂的繁体中文为例，虽然翻译放到了台湾（<code>values-rTW</code>），但是：</p>
-<p>在Android 5和6中，只有“简体中文”和“繁体中文”两个语言选项。前者对应<code>values-rCN</code>，后者对应<code>values-rTW</code>。这里并没有之后系统中，可以选择地区的选项。</p>
-<p>从Android 7开始，在选择语言的同时，也必须选择语言的地区。这时就出现了港澳台三地的繁体中文版本。</p>
-<p>在个人测试中，以香港繁体中文为例，系统选择<code>values-b+zh+Hant</code>和<code>values-rTW</code>或<code>values-rHK</code>的优先级在不同手机上是不同的。但肯定是繁体中文。</p>
-<p>系统也足够智能，如果没有<code>values-rHK</code>，它会选择<code>values-rTW</code>，即使这里的地区是台湾而不是用户设置的香港。</p>
-<p>系统会选择和用户设置地区不同的文件夹，这里是最反直觉的地方。这是因为找不到地区对应的翻译时，系统会选择同语言的其他地区翻译，来确保至少是语言是正确的。</p>
-<h2 id="奖励1"><a href="#奖励1" class="headerlink" title="奖励1"></a>奖励1</h2><p><code>build.gradle</code>中的指定语言的<code>resConfigs</code>是要和对应文件夹一致的。比如<code>resConfigs &#39;en&#39;, &#39;zh-rCN&#39;, &#39;zh-rTW&#39;</code></p>
-<h2 id="奖励2"><a href="#奖励2" class="headerlink" title="奖励2"></a>奖励2</h2><p>在<a href="https://developer.android.com/guide/topics/resources/app-languages">Per-app language preferences</a>，Android依然沿用了<a href="https://developer.android.com/guide/topics/resources/app-languages#sample-config">反直觉的缩写</a>。这里似乎和<code>Locale.toLanguageTag()</code>是一致的。</p>
-<h2 id="更新1"><a href="#更新1" class="headerlink" title="更新1"></a>更新1</h2><p>不要假设简体中文只有<code>values-rCN</code>、<code>values-rSG</code>等几个地区标签。有的手机允许用户分别任意选择语言和地区，这样会有很多很多的组合。不过文件夹的检测顺序是通用的。</p>
-<h2 id="更新2"><a href="#更新2" class="headerlink" title="更新2"></a>更新2</h2><p>如何检测应用当前是否是简体中文？</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> languageTag = Locale.getDefault().toLanguageTag()</span><br><span class="line"><span class="keyword">if</span> (languageTag == <span class="string">&quot;zh-CN&quot;</span> || languageTag.startsWith(<span class="string">&quot;zh-Hans&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>暂时并没有找到更靠谱的办法。</p>
-<p>往对应<code>values</code>文件夹中放对应语言的标识<code>string</code>似乎可以，但这让翻译协作变得困难。</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://developer.android.com/guide/topics/resources/localization">https://developer.android.com/guide/topics/resources/localization</a></li>
-<li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
-<li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一些可能有用的Android代码 - Android Makers 2022版</title>
     <url>/2022/06/25/android-code-snippets-android-makers22/</url>
     <content><![CDATA[<p><a href="https://www.youtube.com/playlist?list=PLn7H9CUCuXAuLnmPD-wsljzYxHt3UD5zn">Android Makers 2022</a></p>
@@ -249,6 +211,44 @@
 
 <p><code>if</code>判断前内容就是默认的<code>verticalArrangement</code>（<code>Arrangement.Top</code>）的实现。</p>
 <p>代码过于简单以至于不需要其他解释了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android简繁体翻译到底该放哪儿？</title>
+    <url>/2022/12/25/android-chinese-strings/</url>
+    <content><![CDATA[<p>Android开发有着和<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO 639-1</a>与<a href="https://www.rfc-editor.org/info/bcp47">BCP 47</a>相似但不同的语言管理方案。</p>
+<span id="more"></span>
+
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>如果minSdk大于等于24(Android 7, Nougat)，根据<a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">官方文档</a>，简体中文放<code>values-b+zh+Hans</code>，繁体中文放<code>values-b+zh+Hant</code>。</p>
+<p>但没人会这么做吧！</p>
+<p>如果minSdk小于等于23(Android 6, Marshmallow)，经过个人测试，简体中文放<code>values-rCN</code>，繁体中文放<code>values-rTW</code>。如果要针对香港特殊翻译，再用<code>values-rHK</code>，澳门、新加坡同理。</p>
+<h2 id="官方文档有坑"><a href="#官方文档有坑" class="headerlink" title="官方文档有坑"></a>官方文档有坑</h2><p><a href="https://developer.android.com/training/basics/supporting-devices/languages">讲解如何增加翻译的官方文档</a>和前段时间的Android Dev Summit的一个视频中中，都推荐BCP 47格式（比如<code>values-b+zh+Hans</code>），但<strong>都不提示这是Android 7及之后才支持的格式</strong>。</p>
+<p>在之前的版本使用该格式时，应用并不会崩溃。但在缺少对应的翻译时，系统会发现新格式包含<code>zh</code>，进而先显示新格式的简体翻译，没有时显示新格式的繁体翻译。</p>
+<h2 id="英文翻译"><a href="#英文翻译" class="headerlink" title="英文翻译"></a>英文翻译</h2><p>以情况简单的英文为例，Android系统并没有单独的“英语”的语言选择，而有的是诸如“英语（美国）”、“英语（英国）”和“英语（印度）”等选择。这种情况下<code>Locale.getDefault().toLanguageTag()</code>将会是<code>en-US</code>、<code>en-GB</code>和<code>en-IN</code>等。</p>
+<p>这里可以把英文翻译统一放到<code>values-en</code>，但通常英语是直接放到<code>values</code>中作为默认语言。</p>
+<h2 id="中文翻译"><a href="#中文翻译" class="headerlink" title="中文翻译"></a>中文翻译</h2><p>但简繁体中文并不能统一放到一个文件夹中。Android系统团队显然意识到了类似问题，但Android 7才支持为时已晚<del>（要是AGP向前兼容就好了）</del>。</p>
+<p>以情况复杂的繁体中文为例，虽然翻译放到了台湾（<code>values-rTW</code>），但是：</p>
+<p>在Android 5和6中，只有“简体中文”和“繁体中文”两个语言选项。前者对应<code>values-rCN</code>，后者对应<code>values-rTW</code>。这里并没有之后系统中，可以选择地区的选项。</p>
+<p>从Android 7开始，在选择语言的同时，也必须选择语言的地区。这时就出现了港澳台三地的繁体中文版本。</p>
+<p>在个人测试中，以香港繁体中文为例，系统选择<code>values-b+zh+Hant</code>和<code>values-rTW</code>或<code>values-rHK</code>的优先级在不同手机上是不同的。但肯定是繁体中文。</p>
+<p>系统也足够智能，如果没有<code>values-rHK</code>，它会选择<code>values-rTW</code>，即使这里的地区是台湾而不是用户设置的香港。</p>
+<p>系统会选择和用户设置地区不同的文件夹，这里是最反直觉的地方。这是因为找不到地区对应的翻译时，系统会选择同语言的其他地区翻译，来确保至少是语言是正确的。</p>
+<h2 id="奖励1"><a href="#奖励1" class="headerlink" title="奖励1"></a>奖励1</h2><p><code>build.gradle</code>中的指定语言的<code>resConfigs</code>是要和对应文件夹一致的。比如<code>resConfigs &#39;en&#39;, &#39;zh-rCN&#39;, &#39;zh-rTW&#39;</code></p>
+<h2 id="奖励2"><a href="#奖励2" class="headerlink" title="奖励2"></a>奖励2</h2><p>在<a href="https://developer.android.com/guide/topics/resources/app-languages">Per-app language preferences</a>，Android依然沿用了<a href="https://developer.android.com/guide/topics/resources/app-languages#sample-config">反直觉的缩写</a>。这里似乎和<code>Locale.toLanguageTag()</code>是一致的。</p>
+<h2 id="更新1"><a href="#更新1" class="headerlink" title="更新1"></a>更新1</h2><p>不要假设简体中文只有<code>values-rCN</code>、<code>values-rSG</code>等几个地区标签。有的手机允许用户分别任意选择语言和地区，这样会有很多很多的组合。不过文件夹的检测顺序是通用的。</p>
+<h2 id="更新2"><a href="#更新2" class="headerlink" title="更新2"></a>更新2</h2><p>如何检测应用当前是否是简体中文？</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> languageTag = Locale.getDefault().toLanguageTag()</span><br><span class="line"><span class="keyword">if</span> (languageTag == <span class="string">&quot;zh-CN&quot;</span> || languageTag.startsWith(<span class="string">&quot;zh-Hans&quot;</span>)) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>暂时并没有找到更靠谱的办法。</p>
+<p>往对应<code>values</code>文件夹中放对应语言的标识<code>string</code>似乎可以，但这让翻译协作变得困难。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://developer.android.com/guide/topics/resources/localization">https://developer.android.com/guide/topics/resources/localization</a></li>
+<li><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources">https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources</a></li>
+<li><a href="https://developer.android.com/training/basics/supporting-devices/languages">https://developer.android.com/training/basics/supporting-devices/languages</a></li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -513,6 +513,33 @@
       </categories>
   </entry>
   <entry>
+    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
+    <url>/2018/10/26/android-expandable-recyclerview/</url>
+    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
+<span id="more"></span>
+
+<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
+<p>用实现一个Expandable RecyclerView来举例子：</p>
+<ol>
+<li><p>首先要使用不同的ViewType：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
+</li>
+<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
+</li>
+</ol>
+<p>来源：AOSP的DeskClock</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android动态主题</title>
     <url>/2018/09/14/android-dynamic-theme/</url>
     <content><![CDATA[<p>2018年12月1日 更新Cyanea</p>
@@ -558,33 +585,6 @@
 <li>同样使用<code>setTheme</code>，把什么<code>windowBackground</code>都手动设置。</li>
 <li>推荐的是技能<code>DayNight</code>style，并使用<code>AppCompatDelegate.setDefaultNightMode</code>调用<code>res-night</code>下的资源，基本上属于support library白给的夜间主题。</li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android切换RecyclerView的Item布局(Expandable RecyclerView?)</title>
-    <url>/2018/10/26/android-expandable-recyclerview/</url>
-    <content><![CDATA[<p>让一个RecyclerView中的一个Item有两种不同的布局，可以用来给Item赋予多个状态，当然也可以实现类似Expandable RecyclerView的效果。</p>
-<span id="more"></span>
-
-<p>诀窍在于<code>notifyItemChanged</code>的时候，如果<code>getItemViewType</code>返回了不同的值，<code>onCreateViewHolder</code>就会被再次调用，这时新建一个新的ViewHolder就可以啦。</p>
-<p>用实现一个Expandable RecyclerView来举例子：</p>
-<ol>
-<li><p>首先要使用不同的ViewType：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getItemViewType</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isExpanded() ? ExpandedAlarmViewHolder.VIEW_TYPE : CollapsedAlarmViewHolder.VIEW_TYPE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>要让第一种ViewHolder变成第二种，要在点击了第一种ViewHolder中的一个Button或其他，触发展开事件：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">expand</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isExpanded()) &#123;</span><br><span class="line">        mExpanded = <span class="literal">true</span>;</span><br><span class="line">        notifyItemChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在<code>onCreateViewHolder</code>中根据不同的ViewType创建不同的ViewHolder</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> ItemViewHolder <span class="title function_">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="type">int</span> viewType)</span> &#123;</span><br><span class="line">    <span class="keyword">final</span> ItemViewHolder.<span class="type">Factory</span> <span class="variable">factory</span> <span class="operator">=</span> mFactoriesByViewType.get(viewType);</span><br><span class="line">    <span class="keyword">if</span> (factory != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> factory.createViewHolder(parent, viewType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Unsupported view type: &quot;</span> + viewType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里也可以不用factory，直接判断<code>viewType</code>。</p>
-</li>
-<li><p>TaDa，完成。其实这篇文章最重要的就是第二句话。</p>
-</li>
-</ol>
-<p>来源：AOSP的DeskClock</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -855,55 +855,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android依赖笔记</title>
-    <url>/2022/06/02/android-library-dependency/</url>
-    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
-<span id="more"></span>
-
-<ul>
-<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
-</li>
-<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
-<ol>
-<li>把依赖发布到Maven</li>
-<li>FAR AAR插件</li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>限制多个依赖间的内部类</p>
-<ol>
-<li><code>package com.example.internal.database</code></li>
-<li>混淆为<code>package com.example.internal.a</code></li>
-<li>把依赖内容复制到Library中</li>
-</ol>
-</li>
-<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
-<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
-<ol>
-<li><p>忽略依赖的Transitive Dependency</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>全局指定依赖版本</p>
- <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
-</li>
-<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
-</li>
-<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
-<p>  要用：</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
-</li>
-<li><p>设置为必须声明Class Visibility</p>
-  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Jetpack Compose Stability白话版</title>
     <url>/2024/06/24/android-jetpack-compose-stability/</url>
     <content><![CDATA[<p>官方文档一边说不要过度优化，一边花了长长长的篇幅讲性能优化。</p>
@@ -966,6 +917,55 @@
 <h2 id="Stable"><a href="#Stable" class="headerlink" title="@Stable"></a>@Stable</h2><p>虽然是很重要的注释，会在类或接口中包含<code>mutableStateOf</code>时用到，但是我倾向于让Jetpack Compose只完成将数据转换为界面的任务。当不得不使用这个注释时，通常意味着UI代码职责不清晰，这才是更紧急的问题。</p>
 <p>因此出于个人偏好，会避免使用该注释，同时这里也将不再讨论。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>见开头。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android依赖笔记</title>
+    <url>/2022/06/02/android-library-dependency/</url>
+    <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=lq3PL8bHIn4">The definitive guide to Android library development by Jeroen Mols, Plaid EN</a></p>
+<span id="more"></span>
+
+<ul>
+<li><p>相比JAR（代码压缩包？），AAR还有Resources和Manifest，但二者都没有签名且不包括依赖。它们各自所需的依赖定义于pom文件中。</p>
+</li>
+<li><p>如果所需的依赖是本地文件，则需要方法来绕过限制：</p>
+<ol>
+<li>把依赖发布到Maven</li>
+<li>FAR AAR插件</li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>限制多个依赖间的内部类</p>
+<ol>
+<li><code>package com.example.internal.database</code></li>
+<li>混淆为<code>package com.example.internal.a</code></li>
+<li>把依赖内容复制到Library中</li>
+</ol>
+</li>
+<li><p>Transitive Dependency及在pom文件中定义的依赖</p>
+<p>  Grdle会默认选择所有版本最高的依赖。调整方法有</p>
+<ol>
+<li><p>忽略依赖的Transitive Dependency</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">implementation (<span class="string">&#x27;com.example:library:1.0.0&#x27;</span>) &#123;</span><br><span class="line">    exclude <span class="attr">group:</span> <span class="string">&#x27;com.squareup.okhttp3&#x27;</span>, <span class="attr">module:</span> <span class="string">&#x27;okhttp&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>全局指定依赖版本</p>
+ <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">configurations.all &#123;</span><br><span class="line">    resolutionStrategy &#123;</span><br><span class="line">        force <span class="string">&#x27;com.squareup.okhttp3:okhttp:3.12.0&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>  这些方法可能会造成编译或运行时失败，尽量避免它们。</p>
+</li>
+<li><p>开发Library时，使用稳定版本（几个月到一两年）的依赖，最好不要更新。</p>
+</li>
+<li><p>在<code>res/values/public.xml</code>声明后，只是Android Studio不再自动补全了。</p>
+<p>  要用：</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    resourcePrefix <span class="string">&#x27;mylib_&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  来限定名称空间。不过只是让Android Studio警告一下。</p>
+</li>
+<li><p>设置为必须声明Class Visibility</p>
+  <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    kotlinOptions &#123;</span><br><span class="line">        freeCompilerArgs += <span class="string">&#x27;-Xexplicit-api=strict&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1096,45 +1096,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android OpenGL Texture 坐标原点问题</title>
-    <url>/2023/08/23/android-opengl-coordinates/</url>
-    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
-<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
-<span id="more"></span>
-
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
-
-<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
-
-<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
-
-<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
-<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
-<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
-<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
-<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
-<blockquote>
-<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
-</blockquote>
-<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
-<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
-<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
-<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
-<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
-<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
-<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
-<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
-<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
-<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
-<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android OpenGL学习笔记</title>
     <url>/2023/01/02/android-opengl-basics/</url>
     <content><![CDATA[<p><a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a> 学习笔记。</p>
@@ -1232,6 +1193,45 @@
 </ol>
 <p>给坐标增加各种矩阵，实现3D模拟。</p>
 <h2 id="Adding-Detail-with-Textures"><a href="#Adding-Detail-with-Textures" class="headerlink" title="Adding Detail with Textures"></a>Adding Detail with Textures</h2><p>之后书中的内容就复杂起来，记笔记也变得难了起来。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android OpenGL Texture 坐标原点问题</title>
+    <url>/2023/08/23/android-opengl-coordinates/</url>
+    <content><![CDATA[<p>在学习<a href="https://www.amazon.com/OpenGL-Android-Quick-Start-Pragmatic-Programmers/dp/1937785343">OpenGL ES 2.0 for Android</a>时，其提到了OpenGL使用了传统的数学坐标系来定位位置，而在Texture的坐标时则含糊不清。而出来混，终于得还了。</p>
+<p>TL;DR: <code>GLUtils.texImage2D</code>会把传入的<code>Bitmap</code>上下翻转，让可以开发者可以使用左上角为原点的坐标。但实际上，OpenGL总是以左下角为原点的。</p>
+<span id="more"></span>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1----2</span><br><span class="line">-    -</span><br><span class="line">-    -</span><br><span class="line">3----4</span><br></pre></td></tr></table></figure>
+
+<p>当上图为屏幕时，那么画满全屏Vertex的位置将为</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: (-1,  1)</span><br><span class="line">2: ( 1,  1)</span><br><span class="line">3: (-1, -1)</span><br><span class="line">4: ( 1, -1)</span><br></pre></td></tr></table></figure>
+
+<p>但当上图为Texture时，坐标该是如何呢？根据书中所言，原点为左上角，也就是</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1: ( 0,  0)</span><br><span class="line">2: ( 1,  0)</span><br><span class="line">3: ( 0,  1)</span><br><span class="line">4: ( 1,  1)</span><br></pre></td></tr></table></figure>
+
+<p>和Android的绘制方向是一致的。在实际运行中，结果也是正确的。所以一直以来，我也以为Texture的坐标是从左上角开始的。</p>
+<p>在学习OpenGL后，我开始尝试<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>，但发现在使用<code>GPUImageFilterGroup</code>时，会随机出现上下颠倒的问题。为了找到该问题的原因，我是上下求索。翻遍了Issue区、认真阅读代码、问了很多遍ChatGPT、在搜索引擎中搜了很多关键字、根据滤镜数量找规律……都没能找到问题根源。</p>
+<p>在Issue区中找到一个Pull Request：<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>，虽然在之后起到了大作用，但此时的我不仅看不明白其中的逻辑，也没能解决问题。</p>
+<p>最后，我终于想起了走投无路之计策：用中文搜索问题！因为中文互联网几乎已等于只能吃老本的内容农场，所以我很少考虑这个方法。虽然在过去的确帮到我几次，但由于在其中找资料非常困难，这个方法几乎被遗忘了。</p>
+<p>但是这次！我发现了<a href="https://www.jianshu.com/p/6c4c7426eef3">Android OpenGL 纹理坐标原点位置</a>！虽然实话实话说这篇文章还是有点难懂，但我找到了最关键的一句：</p>
+<blockquote>
+<p>在Android平台中，Bitmap绑定的2D纹理，是上下颠倒的， 可以按照在左上角处理</p>
+</blockquote>
+<p>经过几天或在清醒时或在睡梦中的思考后，我终于想明白了这个问题。</p>
+<p><code>android-gpuimage</code>使用的是左上角坐标，这依赖于<code>GLUtils.texImage2D</code>的默认翻转。OpenGL总是使用左下角为原点，所以在默认翻转后，在FragmentShader中，Texture已经是上下颠倒的，这时再使用从左下角翻转到左上角的坐标绘制，又翻转了一次。一共了翻转了两次，等于没翻转，因此单个滤镜不会出错。</p>
+<p>但是这个逻辑依赖于Texture是翻转的这一假设。</p>
+<p>但<code>GPUImageFilterGroup</code>使用FrameBuffer实现，上一层的结果会作为下一层的Texture绘制到屏幕上，但是上一层的结果并不是翻转的，这与上述假设相矛盾，于是就在复杂处理中出现上下颠倒的奇怪问题。</p>
+<p>相比于不停地使用坐标来解决上下颠倒问题，不如取消<code>GLUtils.texImage2D</code>的默认翻转（把Bitmap传给它前翻转一下），总是使用左下角为原点的坐标来得实在。于是在使用之前的Pull Request<a href="https://github.com/cats-oss/android-gpuimage/pull/231/">Re-fix: Grouped filters with filterCount%2==0 are flipped</a>及其评论区的修改后，翻转解决了。</p>
+<p>但是<code>GPUImageLookupFilter</code>出错了。不过这个好解决，因为这个滤镜的原理是根据图片中某个像素点的颜色，一通计算后得到一个新的坐标，然后到LUT图中找颜色。这其中的那通计算是以左上角为原点的，也就是假设了LUT图是颠倒的。那么我们不取消LUT图Texture的<code>GLUtils.texImage2D</code>的默认翻转就可以了。</p>
+<h2 id="关于中文搜索的沉思"><a href="#关于中文搜索的沉思" class="headerlink" title="关于中文搜索的沉思"></a>关于中文搜索的沉思</h2><p>在这次的问题中，我没能用英文搜索找到任何<code>GLUtils.texImage2D</code>默认翻转的资料。反而是再一次被中文内容拯救了，这说明之后还是应该给中文搜索多一些机会。</p>
+<p>但中文搜索结果的处境依然不容乐观。对我来说，其更像是上午十点的古玩市场：剩下都大多是垃圾，而真正的宝贝需要高度的鉴别力。</p>
+<p>就拿那篇文章来说，在开发文章聚集地转型为地摊文学编辑部的简书上，只有可怜的四个赞。从文章底部划过数十篇编乎一般的小说后，有几条评论。第一条是一位读者以很不客气的语气指责文章有错。第二条是作者耐心地重复解释了文章的内容。第三条则是另一位读者同样很不客气地在没有给出任何原因的情况下批评文章造成了误解。</p>
+<p>虽说这篇文章的确有些难懂，但其中的道理是无误的。</p>
+<p>我也由此想到了我之所以几乎从不在中文社区解答问题，很大一部分也是因为不仅得不到正反馈，很多情况下还会得到负反馈吧。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1563,28 +1563,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1646,6 +1624,28 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1678,34 +1678,6 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android Resources小研究</title>
-    <url>/2020/01/12/android-resources-test/</url>
-    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
-<span id="more"></span>
-
-<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
-<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
-<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
-<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
-<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
-<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
-<p>新建<code>attrs.xml</code>并塞入：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后就可以</p>
-<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1769,6 +1741,34 @@
 <li>内容只会在第一次时跳跃。</li>
 <li>可以跟随软键盘高度变化，比如切换语言时。</li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Resources小研究</title>
+    <url>/2020/01/12/android-resources-test/</url>
+    <content><![CDATA[<p>研究了一下如何获取各种资源，这里用颜色举例，其他类型没有尝试，但应该大同小异。</p>
+<span id="more"></span>
+
+<p>我们在<code>styles.xml</code>设置<code>&lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</code>。</p>
+<h2 id="R-color-colorPrimary-gt-Color-Int"><a href="#R-color-colorPrimary-gt-Color-Int" class="headerlink" title="R.color.colorPrimary -&gt; Color Int"></a><code>R.color.colorPrimary</code> -&gt; Color Int</h2><p><code>ContextCompat.getColor(context, R.color.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-Color-Int"><a href="#R-attr-colorPrimary-gt-Color-Int" class="headerlink" title="R.attr.colorPrimary -&gt; Color Int"></a><code>R.attr.colorPrimary</code> -&gt; Color Int</h2><p><strong>这里的Context需要带Theme的Context，比如是一个<code>ContextThemeWrapper</code>或是Activity/View的Context，不然什么也拿不到。下个例子同理。</strong></p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorInt</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeColor</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getColor(<span class="number">0</span>, Color.RED)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeColor(R.attr.colorPrimary)</code> -&gt; Color Int</p>
+<h2 id="R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res"><a href="#R-attr-colorPrimary-gt-R-color-colorPrimary-Color-Res" class="headerlink" title="R.attr.colorPrimary -&gt; R.color.colorPrimary(Color Res)"></a><code>R.attr.colorPrimary</code> -&gt; <code>R.color.colorPrimary</code>(Color Res)</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ColorRes</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">themeRes</span><span class="params">(<span class="meta">@AttrRes</span> attrRes: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> a = obtainStyledAttributes(<span class="literal">null</span>, intArrayOf(attrRes))</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getResourceId(<span class="number">0</span>, -<span class="number">1</span>)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        a.recycle()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>context.themeRes(R.attr.colorPrimary)</code> -&gt; <code>R.color.colorPrimary</code></p>
+<p>一个更有用的例子是<code>context.themeRes(R.attr.colorControlActivated)</code> -&gt; <code>R.color.colorAccent</code>(通常情况下是这个值)</p>
+<h2 id="拦截View"><a href="#拦截View" class="headerlink" title="拦截View"></a>拦截<code>View</code></h2><p>比如拦截<code>Button</code>的<code>android:textColor</code>和<code>app:backgroundTint</code>。</p>
+<p>首先继承<code>AppCompatButton</code>或<code>MaterialButton</code>。</p>
+<p>新建<code>attrs.xml</code>并塞入：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span>=<span class="string">&quot;Theme_Button&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;android:textColor&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">&quot;backgroundTint&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就可以</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">context.withStyledAttributes(<span class="keyword">set</span>, attrs, defStyleAttr, defStyleRes) &#123;</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_android_textColor)</span><br><span class="line">    getColorStateList(R.styleable.Theme_Button_backgroundTint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2077,6 +2077,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发牢骚 - 2021年2月6日</title>
+    <url>/2021/02/06/android-thoughts-20210206/</url>
+    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
+<span id="more"></span>
+
+<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
+<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
+<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
+<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
+<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
+<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
+<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
+<p>语义化版本是不是只算加分项？</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
+<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
+<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android应用白名单指南</title>
     <url>/2019/01/11/android-whitelist-guideline/</url>
     <content><![CDATA[<p>更新日期：2022年9月2日</p>
@@ -2110,29 +2133,6 @@
 <li><p>华为设备的一张单独的链接：<a href="https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md">https://github.com/DeweyReed/site/blob/master/source/_posts/timer-huawei-solution.md</a></p>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发牢骚 - 2021年2月6日</title>
-    <url>/2021/02/06/android-thoughts-20210206/</url>
-    <content><![CDATA[<p>好几个月没写东西了，主要是因为开发界无新鲜事，没啥可写。今天勉为其难地发发牢骚。</p>
-<span id="more"></span>
-
-<h2 id="StateFlow和SharedFlow"><a href="#StateFlow和SharedFlow" class="headerlink" title="StateFlow和SharedFlow"></a><code>StateFlow</code>和<code>SharedFlow</code></h2><p>Kotlin Coroutines的新玩意儿，看样子要在Kotlin项目中替代LiveData，最近的MAD Skills的问答视频中也表达了类似的观点。</p>
-<p>但我在UI层使用Coroutines的体验实在难言理想，比如<code>Fragment.viewLifecyclerOwner</code>在<code>Fragment.onViewCreated</code>丢NPE呀，<code>lifecycleScope.launchWhen</code>不正常运行呀、自定义<code>CoroutineScope</code>里的代码不执行呀等，还有<a href="https://developer.android.com/kotlin/flow/stateflow-and-sharedflow">文档中那劝退的两段说明</a>。和UI层通信还是乖乖用<code>LiveData</code>吧。</p>
-<p><code>callbackFlow</code>和<code>TestCoroutineDispatcher</code>作为实验API已经快两年了吧，JetBrains是不是把它们都忘了呀。</p>
-<p>最近浏览了Flutter的异步实现，很是羡慕。突然觉得手里的Coroutines不香了。</p>
-<h2 id="Hilt"><a href="#Hilt" class="headerlink" title="Hilt"></a><code>Hilt</code></h2><p>Dagger是个好东西，虽然学起来有几丢丢难，但依赖注入让新增功能和测试变得很容易。</p>
-<p>Hilt更是好东西，学起来无脑，用起来也简单。</p>
-<p>唯一想吐槽的就是这玩意儿虽说还是Alpha，但官方已经到处推荐人使用了。官方说法是，Hilt很稳定啦，我们Google内部的应用也都在用，跑在很多很多设备上都没问题啊，只不过想在正式版前再加点东西、改点东西。可惜我被坑怕了，非正式版的不敢用，正式版了也要等几个修复版才敢用，就这个样子还遇到不少坑哩。</p>
-<p>语义化版本是不是只算加分项？</p>
-<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a><code>Android Studio</code></h2><p>IDE开发都是这个样子吗，搬了西瓜丢芝麻，这里修好那里漏？</p>
-<p>AS 4.x版本可以说体验极差。Google内部是不是人手三台MBP，每台机器跑10个Android模拟器不带卡。</p>
-<p>每天都需要多次重启和Invalidate Cache and Restart。ViewBinding不显示了、资源ID不识别了、Kapt莫名报错了、Dagger生成代码不正常了……</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>也许开发一直都是这个样子吧，还记得AS 2.3的Instant Run坏掉时，到处找解决方案，还参与Stackoverflow讨论的情景。时至今日，嘛也不剩了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2213,25 +2213,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android 15升级笔记</title>
-    <url>/2025/01/10/android15-upgrade-notes/</url>
-    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-all#16-kb">Support for 16 KB page sizes</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#openjdk-api-changes">Collision with <code>MutableList.removeFirst()</code> and <code>MutableList.removeLast()</code> extension functions in kotlin-stdlib</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#safer-intents">Safer intents</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#edge-to-edge">Edge-to-edge enforcement</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#audio-focus">Restrictions on requesting audio focus</a></li>
-<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#other_changes">Secured background activity launches</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android 14升级笔记</title>
     <url>/2024/04/22/android14-upgrade-notes/</url>
     <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
@@ -2246,6 +2227,25 @@
 <li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#runtime-receivers-exported">Runtime-registered broadcasts receivers must specify export behavior</a></li>
 <li><a href="https://developer.android.com/about/versions/14/behavior-changes-14#background-activity-restrictions">Additional restrictions on starting activities from the background</a></li>
 <li><a href="https://developer.android.com/about/versions/14/features#convert-pixels">Convert scaled pixel (sp) units</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android 15升级笔记</title>
+    <url>/2025/01/10/android15-upgrade-notes/</url>
+    <content><![CDATA[<p>一些笔记没地方放了就决定丢这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-all#16-kb">Support for 16 KB page sizes</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#openjdk-api-changes">Collision with <code>MutableList.removeFirst()</code> and <code>MutableList.removeLast()</code> extension functions in kotlin-stdlib</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#safer-intents">Safer intents</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#edge-to-edge">Edge-to-edge enforcement</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#audio-focus">Restrictions on requesting audio focus</a></li>
+<li><a href="https://developer.android.com/about/versions/15/behavior-changes-15#other_changes">Secured background activity launches</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -2550,6 +2550,29 @@
       </categories>
   </entry>
   <entry>
+    <title>Google I/O 2018 笔记</title>
+    <url>/2018/05/12/google-io-2018-notes/</url>
+    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
+<span id="more"></span>
+
+<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
+<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
+<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
+<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
+<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
+<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
+<li>使用夜间主题来省电</li>
+<li>Slice是不是要取代Widget呀，还要观望一下。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Gradle缓存笔记</title>
     <url>/2022/03/06/gradle-cache/</url>
     <content><![CDATA[<p>来自于：</p>
@@ -2673,29 +2696,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Google I/O 2018 笔记</title>
-    <url>/2018/05/12/google-io-2018-notes/</url>
-    <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
-<span id="more"></span>
-
-<h2 id="Jetpack"><a href="#Jetpack" class="headerlink" title="Jetpack"></a>Jetpack</h2><p>感觉像是给Development换了个更酷的名字。四块中Architecture中才是最重要的各种Libraries。</p>
-<p>最有亮点的应该是Navigator。在将Activity和Fragment的逻辑分离出来后，单Activity加多Fragment成为了官方推荐的做法，这样让动画也更方便了。</p>
-<p>WorkManager算是造了一个大轮子，使用起来似乎比现有的更方便。把后台运算、服务、Job Scheduler、GCM、FCM等都可以替代了。</p>
-<p>Paging，ListAdapter和Recycler Selection覆盖了更多的列表显示。</p>
-<h2 id="ContraintLayout"><a href="#ContraintLayout" class="headerlink" title="ContraintLayout"></a>ContraintLayout</h2><p>RelativeLayout都不推荐，要被取代了。而且还引入了关键帧动画，可以说野心很大了。</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>当初看Android Permormance Pattern的内容还历历在目，现在就说枚举可以用了，内存使用也放开一些手脚，也有了推荐的框架。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>Material Theming和Component给开发和设计带来了更好的指导。</li>
-<li>长文字的显示可以用RecyclerView或者premeasure来处理</li>
-<li>使用夜间主题来省电</li>
-<li>Slice是不是要取代Widget呀，还要观望一下。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>在Android Studio中引入AAR文件</title>
     <url>/2018/08/13/include-aar/</url>
     <content><![CDATA[<h2 id="2019年2月10日-更新"><a href="#2019年2月10日-更新" class="headerlink" title="2019年2月10日 更新"></a>2019年2月10日 更新</h2><p>发现一个更好的方案：不管是自己的项目还是Fork来的项目，直接到Jitpack里找到对应的commit，拉下来直接用。这样就省去了很多体力劳动。而且这个过程并不需要配置Gradle，源码都自带。【完】</p>
@@ -2763,92 +2763,6 @@
 <p>Kotlin + Moshi（不带Kotlin插件）+ Kotshi就是最终解决方案。当然AutoValue之类的也可以，不过没深入研究。</p>
 <p>Kotshi没有采用一劳永逸的方案，而是让每个Kotlin data class类都加一个annotation，再根据它生成一个adapter，<br>在序列化和反序列化时手动处理。</p>
 <p>不算很方便的方案，但也算比<a href="https://medium.com/@MaxMello/most-elegant-way-of-using-gson-kotlin-with-default-values-and-null-safety-b6216ac5328c">通过Backing field处理</a>来的舒服。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Material Design 笔记</title>
-    <url>/2018/05/27/md-notes/</url>
-    <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
-<p>2018年5月27日更新：更新了一些无用的笔记<br>2018年5月23日更新：增加了Material Desgin 2字体的可能的可选值</p>
-<p><a href="https://material.io/">Material Desgin</a></p>
-<span id="more"></span>
-
-<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><h4 id="Surfaces"><a href="#Surfaces" class="headerlink" title="Surfaces"></a>Surfaces</h4><p>各个元素的厚度都是相同的，1dp，白色，自带一个阴影。但可以通过不同elevation和shadows表示高度。</p>
-<ul>
-<li>Elevation和Shadows: Elevation指的是元素的高度；后者指的是阴影大小。原则是，高度越大，阴影越大。</li>
-</ul>
-<p>元素的分辨率应为无限 =&gt; 使用矢量图</p>
-<p>在Surfaces上显示的内容只要不超出边界，厚度为0，随意使用。</p>
-<p>同一时间这能操作一个Surface。多个Surfaces重叠时，使用不同的elevation分别。</p>
-<p>Surface继承于一张纸: </p>
-<ul>
-<li>不是气体或液体，不能穿透。可以规则变形（通过折纸）、可以旋转或移动（动画要协调、用于容纳内容或其他目的）</li>
-<li>可以改变透明度、长宽可变、可以分割或合并</li>
-<li>不可以卷角</li>
-<li>可以凭空出现或消失（魔法）</li>
-<li>点击时，向上升起(elevation++, shadows++)迎接点击。</li>
-</ul>
-<h4 id="Elevation-amp-amp-Depth"><a href="#Elevation-amp-amp-Depth" class="headerlink" title="Elevation &amp;&amp; Depth"></a>Elevation &amp;&amp; Depth</h4><p>所有元素都有elevation，值越大，内容越重要。常见的有：Dialog 24dp, Drawer 16dp, App Bar 4dp, FAB 6dp</p>
-<p>不同情况和布局，元素的elevation可变。比如点击Button 2dp =&gt; 8dp，Fab 6dp =&gt; 12dp。</p>
-<p>为了解决elevation变化时，不同元素的重叠问题，被重叠的元素可以暂时消失（实现起来复杂了，这类行为尽可能减少）。</p>
-<p>Elevation也被用作不同Surfaces的分割，也可以使用颜色或不透明度。</p>
-<p><a href="https://material.io/design/environment/elevation.html#default-elevations">各元素默认elevation</a></p>
-<h4 id="Shadows"><a href="#Shadows" class="headerlink" title="Shadows"></a>Shadows</h4><p>分为点光源（Key Light）和平行光源（Ambient Light），结合起来使用。</p>
-<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>元素按8dp排列，小元素按4dp。sp默认大小与dp一样，设置中的字体大小会给sp一个倍数。</p>
-<p>Columns, Gutters, Margins：Margins就是左右边边界（手机16dp，平板24dp），Columns是一个个竖块儿（宽度可变)，Gutters是Columns之间的空隙（宽度可变）。</p>
-<p>Columns和Gutters应为一个宽，一个窄。</p>
-<p>常用的Breakpoints就只剩600dp了吧。</p>
-<p>可触摸元素至少是48dp，边界8dp。不可触摸元素至少是24dp，边界8dp。</p>
-<p>行高通常为48dp。</p>
-<p><a href="https://material.io/design/layout/component-behavior.html#responsive-patterns">响应式</a>个人实现思路：</p>
-<ul>
-<li>Reveal Drawer：知道MaterialDrawer似乎可以直接拿来用，Support Library中的还真不知道</li>
-<li>Reveal Options：Custom View吧</li>
-<li>Reveal Card：TextView中的叫ell什么的属性</li>
-<li>Transform Drawer to Tab：两套UI和代码？</li>
-<li>Transform List to Grid：换一下LayoutManager</li>
-<li>Transform Overflow Menu：ifRoom的属性</li>
-<li>Devide Drawer：同Reveal Drawer</li>
-<li>Devide Tab to Cards：两套UI和代码？</li>
-<li>Reflow List：FlexboxLayout</li>
-<li>Reflow Tab to List：两套UI和代码？</li>
-<li>Reflow Picker：两套UI和代码？</li>
-<li>Expand Cards：设置最大宽度和Increment</li>
-<li>Expand Dialog：有区别吗？</li>
-<li>Position Sheet to Overflow Menu：两套UI和代码？</li>
-<li>Position FAB：两套代码？</li>
-</ul>
-<h3 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h3><p><a href="https://material.io/design/navigation/navigation-transitions.html">实现？</a></p>
-<h3 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h3><p>Primary Color：出现次数最多的颜色。没有Accent时取代Accent。</p>
-<p><a href="https://material.io/design/color/text-legibility.html">各种文字颜色和透明度的推荐值</a></p>
-<h3 id="Typography"><a href="#Typography" class="headerlink" title="Typography"></a>Typography</h3><ul>
-<li>Typeface和Font：前者可以看成一种风格，后者是一种具体字体。</li>
-<li>Sans Serif和Serif：是两种typeface。Serif译作衬线，比如<code>I</code>，有衬线就是上下有横杠。<code>sans</code>是无的意思，非衬线体，<code>I</code>就一竖杠。</li>
-<li>Monospace：typeface，宽度都一样。表示数字时很有用。</li>
-<li>Handwriting：typeface，手写体，用于Headlines H1 - H6</li>
-</ul>
-<p>分为了12个Type Scale。Headline H1 - H6, Subtitle 1 - 2, Body 1 - 2, Button, Caption和Overline</p>
-<ul>
-<li>Headlines：标题。除六个外还可以使用自定义的字体。Serif或sans serif也可以，它们适合小标题。</li>
-<li>Subtitles：副标题。Serif或sans serif也可以。但自定义字体可能会让问题看不清。</li>
-<li>Body：内容体。Serif或sans serif也可以。不用自定义字体。</li>
-<li>Caption &amp;&amp; Overline(文字上方一横线)：极小字体，用于解释图片或标注。Serif或sans serif也可以。不用自定义字体。</li>
-<li>Button：通常都是sans serif + 全大写。也可以serif。和非互动文字混淆时，用户可能意识不到可以点击。不用自定义字体。</li>
-</ul>
-<p>每行字数通常为短为20 - 40，中为40 - 60，最多120。</p>
-<p>开发过程中，可以参考<a href="https://stackoverflow.com/a/19692168/5507158">Valid values for android:fontFamily and what they map to?</a>中的字体，图省事得用<code>android:textAppearance=&quot;@style/TextAppearance.AppCompat.**&quot;</code></p>
-<p>更新：在新版本的Material Desgin 2中，似乎可以通过类似<code>?attr/textAppearanceHeadline6</code>或<code>TextAppearance.MaterialComponents.Subtitle2</code>获取相应的字体。</p>
-<h3 id="Iconography"><a href="#Iconography" class="headerlink" title="Iconography"></a>Iconography</h3><p>图标48dp。编辑时放大四倍，按192dp编辑，4dp边缘。方形边长152dp，圆形直径176dp。</p>
-<h3 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h3><h3 id="Interaction"><a href="#Interaction" class="headerlink" title="Interaction"></a>Interaction</h3><h3 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h3><h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><h3 id="Development-Tuturials-Kotlin-Codelabs"><a href="#Development-Tuturials-Kotlin-Codelabs" class="headerlink" title="Development Tuturials(Kotlin Codelabs)"></a>Development Tuturials(Kotlin Codelabs)</h3><p>新玩意：</p>
-<ul>
-<li><code>MaterialButton</code>取代默认<code>Button</code>。使用<code>style=&quot;@style/Widget.MaterialComponents.Button.TextButton&quot;</code>可以移除背景。</li>
-<li>很多元素用<code>MaterialComponents</code>取代<code>AppCompat</code></li>
-<li><code>CardView</code>被囊括在design library中，更名为<code>MaterialCardView</code></li>
-<li><code>?attr/textAppearanceHeadline6</code>：新的(?)<code>textAppearance</code>，符合Design中的Type Scale</li>
-</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2937,6 +2851,92 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase userdata</span><br><span class="line">fastboot erase boot</span><br><span class="line">fastboot erase cache</span><br><span class="line">fastboot erase recovery</span><br><span class="line">fastboot erase system</span><br><span class="line"></span><br><span class="line">fastboot flash bootloader bootloader-hammerhead-hhz20h.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash radio radio-hammerhead-m8974a-2.0.50.2.30.img</span><br><span class="line">fastboot reboot-bootloader</span><br><span class="line"></span><br><span class="line">fastboot flash recovery recovery.img</span><br><span class="line">fastboot flash boot boot.img</span><br><span class="line">fastboot flash system system.img</span><br><span class="line">fastboot flash cache cache.img</span><br><span class="line">fastboot flash userdata userdata.img</span><br></pre></td></tr></table></figure>
 
 <p>另外发现为了解决无法连接Wifi的问题，必须刷到Andorid 4.4，再到手机中手动升级到Andorid 5。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Material Design 笔记</title>
+    <url>/2018/05/27/md-notes/</url>
+    <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
+<p>2018年5月27日更新：更新了一些无用的笔记<br>2018年5月23日更新：增加了Material Desgin 2字体的可能的可选值</p>
+<p><a href="https://material.io/">Material Desgin</a></p>
+<span id="more"></span>
+
+<h2 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h2><h3 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h3><h4 id="Surfaces"><a href="#Surfaces" class="headerlink" title="Surfaces"></a>Surfaces</h4><p>各个元素的厚度都是相同的，1dp，白色，自带一个阴影。但可以通过不同elevation和shadows表示高度。</p>
+<ul>
+<li>Elevation和Shadows: Elevation指的是元素的高度；后者指的是阴影大小。原则是，高度越大，阴影越大。</li>
+</ul>
+<p>元素的分辨率应为无限 =&gt; 使用矢量图</p>
+<p>在Surfaces上显示的内容只要不超出边界，厚度为0，随意使用。</p>
+<p>同一时间这能操作一个Surface。多个Surfaces重叠时，使用不同的elevation分别。</p>
+<p>Surface继承于一张纸: </p>
+<ul>
+<li>不是气体或液体，不能穿透。可以规则变形（通过折纸）、可以旋转或移动（动画要协调、用于容纳内容或其他目的）</li>
+<li>可以改变透明度、长宽可变、可以分割或合并</li>
+<li>不可以卷角</li>
+<li>可以凭空出现或消失（魔法）</li>
+<li>点击时，向上升起(elevation++, shadows++)迎接点击。</li>
+</ul>
+<h4 id="Elevation-amp-amp-Depth"><a href="#Elevation-amp-amp-Depth" class="headerlink" title="Elevation &amp;&amp; Depth"></a>Elevation &amp;&amp; Depth</h4><p>所有元素都有elevation，值越大，内容越重要。常见的有：Dialog 24dp, Drawer 16dp, App Bar 4dp, FAB 6dp</p>
+<p>不同情况和布局，元素的elevation可变。比如点击Button 2dp =&gt; 8dp，Fab 6dp =&gt; 12dp。</p>
+<p>为了解决elevation变化时，不同元素的重叠问题，被重叠的元素可以暂时消失（实现起来复杂了，这类行为尽可能减少）。</p>
+<p>Elevation也被用作不同Surfaces的分割，也可以使用颜色或不透明度。</p>
+<p><a href="https://material.io/design/environment/elevation.html#default-elevations">各元素默认elevation</a></p>
+<h4 id="Shadows"><a href="#Shadows" class="headerlink" title="Shadows"></a>Shadows</h4><p>分为点光源（Key Light）和平行光源（Ambient Light），结合起来使用。</p>
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>元素按8dp排列，小元素按4dp。sp默认大小与dp一样，设置中的字体大小会给sp一个倍数。</p>
+<p>Columns, Gutters, Margins：Margins就是左右边边界（手机16dp，平板24dp），Columns是一个个竖块儿（宽度可变)，Gutters是Columns之间的空隙（宽度可变）。</p>
+<p>Columns和Gutters应为一个宽，一个窄。</p>
+<p>常用的Breakpoints就只剩600dp了吧。</p>
+<p>可触摸元素至少是48dp，边界8dp。不可触摸元素至少是24dp，边界8dp。</p>
+<p>行高通常为48dp。</p>
+<p><a href="https://material.io/design/layout/component-behavior.html#responsive-patterns">响应式</a>个人实现思路：</p>
+<ul>
+<li>Reveal Drawer：知道MaterialDrawer似乎可以直接拿来用，Support Library中的还真不知道</li>
+<li>Reveal Options：Custom View吧</li>
+<li>Reveal Card：TextView中的叫ell什么的属性</li>
+<li>Transform Drawer to Tab：两套UI和代码？</li>
+<li>Transform List to Grid：换一下LayoutManager</li>
+<li>Transform Overflow Menu：ifRoom的属性</li>
+<li>Devide Drawer：同Reveal Drawer</li>
+<li>Devide Tab to Cards：两套UI和代码？</li>
+<li>Reflow List：FlexboxLayout</li>
+<li>Reflow Tab to List：两套UI和代码？</li>
+<li>Reflow Picker：两套UI和代码？</li>
+<li>Expand Cards：设置最大宽度和Increment</li>
+<li>Expand Dialog：有区别吗？</li>
+<li>Position Sheet to Overflow Menu：两套UI和代码？</li>
+<li>Position FAB：两套代码？</li>
+</ul>
+<h3 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h3><p><a href="https://material.io/design/navigation/navigation-transitions.html">实现？</a></p>
+<h3 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h3><p>Primary Color：出现次数最多的颜色。没有Accent时取代Accent。</p>
+<p><a href="https://material.io/design/color/text-legibility.html">各种文字颜色和透明度的推荐值</a></p>
+<h3 id="Typography"><a href="#Typography" class="headerlink" title="Typography"></a>Typography</h3><ul>
+<li>Typeface和Font：前者可以看成一种风格，后者是一种具体字体。</li>
+<li>Sans Serif和Serif：是两种typeface。Serif译作衬线，比如<code>I</code>，有衬线就是上下有横杠。<code>sans</code>是无的意思，非衬线体，<code>I</code>就一竖杠。</li>
+<li>Monospace：typeface，宽度都一样。表示数字时很有用。</li>
+<li>Handwriting：typeface，手写体，用于Headlines H1 - H6</li>
+</ul>
+<p>分为了12个Type Scale。Headline H1 - H6, Subtitle 1 - 2, Body 1 - 2, Button, Caption和Overline</p>
+<ul>
+<li>Headlines：标题。除六个外还可以使用自定义的字体。Serif或sans serif也可以，它们适合小标题。</li>
+<li>Subtitles：副标题。Serif或sans serif也可以。但自定义字体可能会让问题看不清。</li>
+<li>Body：内容体。Serif或sans serif也可以。不用自定义字体。</li>
+<li>Caption &amp;&amp; Overline(文字上方一横线)：极小字体，用于解释图片或标注。Serif或sans serif也可以。不用自定义字体。</li>
+<li>Button：通常都是sans serif + 全大写。也可以serif。和非互动文字混淆时，用户可能意识不到可以点击。不用自定义字体。</li>
+</ul>
+<p>每行字数通常为短为20 - 40，中为40 - 60，最多120。</p>
+<p>开发过程中，可以参考<a href="https://stackoverflow.com/a/19692168/5507158">Valid values for android:fontFamily and what they map to?</a>中的字体，图省事得用<code>android:textAppearance=&quot;@style/TextAppearance.AppCompat.**&quot;</code></p>
+<p>更新：在新版本的Material Desgin 2中，似乎可以通过类似<code>?attr/textAppearanceHeadline6</code>或<code>TextAppearance.MaterialComponents.Subtitle2</code>获取相应的字体。</p>
+<h3 id="Iconography"><a href="#Iconography" class="headerlink" title="Iconography"></a>Iconography</h3><p>图标48dp。编辑时放大四倍，按192dp编辑，4dp边缘。方形边长152dp，圆形直径176dp。</p>
+<h3 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h3><h3 id="Interaction"><a href="#Interaction" class="headerlink" title="Interaction"></a>Interaction</h3><h3 id="Communication"><a href="#Communication" class="headerlink" title="Communication"></a>Communication</h3><h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><h3 id="Development-Tuturials-Kotlin-Codelabs"><a href="#Development-Tuturials-Kotlin-Codelabs" class="headerlink" title="Development Tuturials(Kotlin Codelabs)"></a>Development Tuturials(Kotlin Codelabs)</h3><p>新玩意：</p>
+<ul>
+<li><code>MaterialButton</code>取代默认<code>Button</code>。使用<code>style=&quot;@style/Widget.MaterialComponents.Button.TextButton&quot;</code>可以移除背景。</li>
+<li>很多元素用<code>MaterialComponents</code>取代<code>AppCompat</code></li>
+<li><code>CardView</code>被囊括在design library中，更名为<code>MaterialCardView</code></li>
+<li><code>?attr/textAppearanceHeadline6</code>：新的(?)<code>textAppearance</code>，符合Design中的Type Scale</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3046,30 +3046,6 @@
       </categories>
   </entry>
   <entry>
-    <title>使用Splinter模拟网页操作</title>
-    <url>/2018/04/01/splinter/</url>
-    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
-<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
-<p>内容大同小异，说明几个坑。</p>
-<span id="more"></span>
-
-<p>我用的是Py3.6和Chrome.</p>
-<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
-<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
-<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
-<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
-<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
-]]></content>
-      <categories>
-        <category>Automation</category>
-      </categories>
-  </entry>
-  <entry>
     <title>两种安慰别人的方式</title>
     <url>/2019/07/05/thoughts-comfort/</url>
     <content><![CDATA[<p>生活压力大，找人诉苦。别人听完了你的诉苦水，总得说点什么吧。有意思的地方来了。</p>
@@ -3101,6 +3077,30 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>使用Splinter模拟网页操作</title>
+    <url>/2018/04/01/splinter/</url>
+    <content><![CDATA[<p>之前需要用代码来代替一些繁琐重复的网页操作，自然想到用Python自动化这些工作。</p>
+<p>然后找到了<a href="https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88">这篇文章</a>。它用了Splinter，一个Selenium的包装。尝试之后发现意外地简单。</p>
+<p>内容大同小异，说明几个坑。</p>
+<span id="more"></span>
+
+<p>我用的是Py3.6和Chrome.</p>
+<h2 id="Chrome驱动"><a href="#Chrome驱动" class="headerlink" title="Chrome驱动"></a>Chrome驱动</h2><p>需要提前在<a href="https://sites.google.com/a/chromium.org/chromedriver/">这里</a>下载Chrome的驱动，再把下载到的<code>chromedriver.exe</code>放到Python代码的目录下。就可以使用了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">executable_path = &#123;<span class="string">&#x27;executable_path&#x27;</span>: <span class="string">&#x27;chromedriver.exe&#x27;</span>&#125;</span><br><span class="line">browser = Browser(<span class="string">&quot;chrome&quot;</span>, **executable_path)</span><br><span class="line">browser.driver.set_window_size(<span class="number">1200</span>, <span class="number">800</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><ul>
+<li><code>browser.driver.execute_script(&quot;window.open(&#39;&#39;);&quot;)</code> 新建Tab</li>
+<li><code>browser.windows.current = browser.windows[0]</code> 切换Tab</li>
+<li><code>Pandas</code>读数据：  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_dict</span>(<span class="params">name</span>):</span><br><span class="line">    my_df = pd.read_csv(name)</span><br><span class="line">    titles = my_df[<span class="string">&#x27;Title&#x27;</span>].tolist()</span><br><span class="line">    links = my_df[<span class="string">&#x27;Link&#x27;</span>].tolist()</span><br><span class="line">    <span class="keyword">return</span> &#123;titles[i]: links[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(titles))&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>用Splinter和Selenium完成一些简单的签到、爬数据还算方便，不需要理会用爬虫时Cookie、异步、认证等问题。</p>
+<p>开头提到的文章中讲的太详细以致于我已无法可说了。</p>
+]]></content>
+      <categories>
+        <category>Automation</category>
       </categories>
   </entry>
   <entry>
@@ -3172,34 +3172,6 @@
       </categories>
   </entry>
   <entry>
-    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
-    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
-    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
-<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
-<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
-<p>Google Play Store的更新真及时呀。</p>
-<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
-<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
-<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
-<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
-<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
-<p>行为一致，时长不同。</p>
-<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
-<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
-<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
-<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
-<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>三个和尚没水喝</title>
     <url>/2018/10/30/thoughts-three-monks/</url>
     <content><![CDATA[<p>没时间解释了，直接切入正题。</p>
@@ -3228,6 +3200,34 @@
 ]]></content>
       <categories>
         <category>Thoughts</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>截至到2020年1月19日三个月内计时机器的统计数据</title>
+    <url>/2020/01/19/timer-analytics-2020-1-19/</url>
+    <content><![CDATA[<p>这里做个大概的总结，文中出现的所有排列<strong>都分先后</strong>，只选取了数据最多的前几名进行展示和说明。</p>
+<p>因为我发现这些数据没啥用，从4.1.0开始将不再统计了。</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>国内：七成4.0.0，一七成3.8.0，第三用户量最多的是1.1.1(2.67%)（应该是第一个引入专业版的版本，但我不知道为何有人停留在此版本）和2.1.0(2.08%)（这个也不清楚）。</p>
+<p>谷歌：九七成的4.0.0，0.2%的3.8.0。</p>
+<p>Google Play Store的更新真及时呀。</p>
+<h2 id="运行界面下方按钮"><a href="#运行界面下方按钮" class="headerlink" title="运行界面下方按钮"></a>运行界面下方按钮</h2><p>国内：默认的五个（开始/暂停，下一步，停止，编辑，上一步）霸占前五，剩下的就是更多里的选项，都是百分之一或二。</p>
+<p>谷歌：默认的五个（下一步，开始/暂停，编辑，停止，上一步）霸占前五，其余同上。</p>
+<h2 id="计时器选项（打开此选项并保存的用户中）"><a href="#计时器选项（打开此选项并保存的用户中）" class="headerlink" title="计时器选项（打开此选项并保存的用户中）"></a>计时器选项（打开此选项并保存的用户中）</h2><p>国内：7%的人选择关闭计时器通知中的读秒，8%的人选择关闭计时器通知。21.5%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<p>谷歌：3%的人选择关闭计时器通知中的读秒，4%的人选择关闭计时器通知。22.3%的人选择了在计时器结束后继续运行一个其他计时器。</p>
+<h2 id="起始步骤"><a href="#起始步骤" class="headerlink" title="起始步骤"></a>起始步骤</h2><p>国内：大伙儿喜欢用嘟嘟、朗读、倒数来运行一个5秒左右的步骤来作为计时器的开始。</p>
+<p>谷歌：老外们喜欢用嘟嘟、朗读、倒数来运行一个少则5到10秒，多则2到5分钟的步骤来作为计时器的开始。</p>
+<p>行为一致，时长不同。</p>
+<h2 id="普通步骤"><a href="#普通步骤" class="headerlink" title="普通步骤"></a>普通步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、倒数来运行一个少则1分钟以内，多则2到10分钟的计时器。1到2分钟的步骤是最少的（百分之四）。</p>
+<p>谷歌：老外们喜欢用朗读、嘟嘟、振动、倒数来运行10秒到5分钟的普通步骤。1到2分钟的步骤是同样最少的。</p>
+<h2 id="通知步骤"><a href="#通知步骤" class="headerlink" title="通知步骤"></a>通知步骤</h2><p>国内：大伙儿喜欢用振动、音乐、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<p>谷歌：老外们喜欢用音乐、振动、屏幕来运行一个5秒左右的步骤来作为步骤间的提醒。</p>
+<h2 id="结束步骤"><a href="#结束步骤" class="headerlink" title="结束步骤"></a>结束步骤</h2><p>国内：大伙儿喜欢用朗读、音乐、振动来运行一个5秒左右的步骤来作为计时器的结束。</p>
+<p>谷歌：老外们喜欢用朗读、音乐、振动来运行一个少则5秒左右，多则2到5分钟的步骤来作为计时器的结束。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -3333,29 +3333,29 @@
       </categories>
   </entry>
   <entry>
-    <title>Android文字转语音(TTS)引擎</title>
-    <url>/2019/03/11/tts/</url>
-    <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
+    <title>更新，还是不更新，这是个问题</title>
+    <url>/2022/05/25/update-or-not/</url>
+    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
 <span id="more"></span>
 
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这个设置是系统自带。这个功能不仅仅用于盲人使用设备时，将屏幕上的文字阅读出来，更广泛的用途是，语音播报内容，比如导航、天气预报等。这个功能的登场次数不算多，但我见过不少。</p>
-<p>几乎所有Android设备会自带一个<code>Pico TTS</code>。</p>
-<blockquote>
-<p>Pico TTS: AOSP自带的TTS，支持的语言只有英德西法意。</p>
-</blockquote>
-<p>它不支持中文，加上国内多数厂商对这块儿并不怎么重视，导致了TTS这个功能在国内基本是荒废的。但Android留出接口，可以安装一些第三方支持中文的引擎来让Android阅读中文。</p>
-<p><strong>有的国产系统后台管理严格，导致TTS无法启动运行，这种情况下TTS就已经凉了</strong></p>
-<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>国内一些导航应用导航时使用的方法，并不是使用这个引擎，而是另起炉灶，用的自己的方法或购买第三方的SDK。</p>
-<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="Google文字转语音"><a href="#Google文字转语音" class="headerlink" title="Google文字转语音"></a>Google文字转语音</h3><p>在Google自家的设备上取代了<code>Pico TTS</code>，支持地球上绝大多数语言，基本是首选。在酷安和Google Play或各大应用市场都可以找到。</p>
-<p>它默认会联网获取语音，但可能出现因网络状况而读不出来的情况，所以需要提前下载好语音包。但即使下好了语音包，有时也会读不出来 ㄟ( ▔, ▔ )ㄏ</p>
-<h2 id="讯飞语记"><a href="#讯飞语记" class="headerlink" title="讯飞语记"></a>讯飞语记</h2><p>是讯飞的一个单独应用。安装后就会添加一个引擎。可以自定义的内容不少。<del>虽然声音不如谷歌娘好听。</del></p>
-<h2 id="小爱-TTS"><a href="#小爱-TTS" class="headerlink" title="小爱 TTS"></a>小爱 TTS</h2><p>似乎只有在小米应用商店有下载：<a href="http://app.mi.com/details?id=com.xiaomi.mibrain.speech">http://app.mi.com/details?id=com.xiaomi.mibrain.speech</a></p>
-<p>没有试过，但应用信息</p>
-<blockquote>
-<p>软件大小:20.86 M 版本号：1.1.1 更新时间：2018-08-02</p>
-</blockquote>
-<p>怕是不靠谱。</p>
-<h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
+<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
+<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
+<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
+<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
+<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
+<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
+<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
+<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
+<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
+<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
+<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
+<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
+<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
+<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
+<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
+<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
+<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3382,29 +3382,29 @@
       </categories>
   </entry>
   <entry>
-    <title>更新，还是不更新，这是个问题</title>
-    <url>/2022/05/25/update-or-not/</url>
-    <content><![CDATA[<p>项目依赖想升不敢升，升了怕有坑，到底怎么整？</p>
+    <title>Android文字转语音(TTS)引擎</title>
+    <url>/2019/03/11/tts/</url>
+    <content><![CDATA[<p>位于【设置】-【无障碍】-【文字转语音(TTS)输出】。在这里可以配置引擎。一些应用会使用这个引擎进行文字阅读。但因为国内设备的特殊情况，想要让这个玩意儿阅读中文，还是需要一些设置的。</p>
 <span id="more"></span>
 
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>依赖 == 第三方库 == Library ≈≈ 某个Github项目</p>
-<h2 id="如果东西没坏，就别修理它"><a href="#如果东西没坏，就别修理它" class="headerlink" title="如果东西没坏，就别修理它"></a>如果东西没坏，就别修理它</h2><p>升级依赖最糟糕的体验就是，本来没问题，升级升出了问题。</p>
-<p>所以如果没有“想升级”之外更充分的理由，尽量别升级依赖。要升级<strong>等最少几个月再升级</strong>。</p>
-<h2 id="依赖的源头"><a href="#依赖的源头" class="headerlink" title="依赖的源头"></a>依赖的源头</h2><p><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS, Keep it simple, stupid</a></p>
-<p>从源头上来讲，要<strong>尽量减少使用的依赖</strong>。</p>
-<p>一些对应用架构影响很大的依赖，比如一些MVI框架、复杂的UI嵌套实现等，一定要<strong>慎重考虑依赖的必要性</strong>，不然未来积重难返。</p>
-<p>还有一些专用的、不怎么更新的依赖，要么一个版本用到老，要么拷贝到项目中。</p>
-<h2 id="依赖的选择"><a href="#依赖的选择" class="headerlink" title="依赖的选择"></a>依赖的选择</h2><p>即使是一些作者积极维护、社区反馈热烈、代码质量很高的依赖，也会偶尔出现有坑的版本。更别提那些无人问津、一两个版本就杳无音信的依赖了。在选择前一定要评估<strong>评估依赖的维护状态</strong>。</p>
-<p>针对一些闭源依赖，有新版本时一定要等几个月再尝试。</p>
-<h2 id="依赖的管理"><a href="#依赖的管理" class="headerlink" title="依赖的管理"></a>依赖的管理</h2><p>个人用<a href="https://github.com/ben-manes/gradle-versions-plugin">ben-manes/gradle-versions-plugin</a>来检测需要升级的依赖，和<a href="https://github.com/dropbox/dependency-guard">dropbox/dependency-guard</a>来保证升级后的依赖版本（排查出依赖的依赖的升级）。</p>
-<h2 id="依赖的更新"><a href="#依赖的更新" class="headerlink" title="依赖的更新"></a>依赖的更新</h2><p>有新版本时一定要等一两个月再尝试，无论大小。</p>
-<h3 id="小更新"><a href="#小更新" class="headerlink" title="小更新"></a>小更新</h3><p>大部分依赖更新只需修改版本号，这样在发现问题回退版本时很容易。</p>
-<h3 id="大更新"><a href="#大更新" class="headerlink" title="大更新"></a>大更新</h3><p>对于有着Breaking Changes或需要大幅修改项目库的依赖更新，要特别小心。<strong>在升级前一定要规划好来避免意外</strong>，比如专门开一个Git Branch、进行专门的测试等，以免升级时发现太复杂而放弃，或升级后发现旧版本更适合自己。</p>
-<p>虽然一些依赖的大版本更新有着兼容，但也要小心。比如Paging3虽然兼容旧版API，但行为却有些许变化。</p>
-<h3 id="新项目"><a href="#新项目" class="headerlink" title="新项目"></a>新项目</h3><p>因为会进行详尽的测试，这里当然要使用<strong>最新稳定版</strong>的依赖。</p>
-<h3 id="老项目"><a href="#老项目" class="headerlink" title="老项目"></a>老项目</h3><p>为了项目稳定，尽量不升级依赖，或者只升级那些确定很稳定的依赖。</p>
-<h2 id="其他的更新"><a href="#其他的更新" class="headerlink" title="其他的更新"></a>其他的更新</h2><p>印象最深刻的要属某次升级了某个开源应用，结果在我的设备上有Bug。作者修了一个月，但这期间等不及只好删掉应用装旧版本，数据全没啦！</p>
-<p>教训就是，如果某次更新是无法回退的，且更新失败的代价是难以接受的，那么<strong>如果它没坏，就别修理它</strong>！</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这个设置是系统自带。这个功能不仅仅用于盲人使用设备时，将屏幕上的文字阅读出来，更广泛的用途是，语音播报内容，比如导航、天气预报等。这个功能的登场次数不算多，但我见过不少。</p>
+<p>几乎所有Android设备会自带一个<code>Pico TTS</code>。</p>
+<blockquote>
+<p>Pico TTS: AOSP自带的TTS，支持的语言只有英德西法意。</p>
+</blockquote>
+<p>它不支持中文，加上国内多数厂商对这块儿并不怎么重视，导致了TTS这个功能在国内基本是荒废的。但Android留出接口，可以安装一些第三方支持中文的引擎来让Android阅读中文。</p>
+<p><strong>有的国产系统后台管理严格，导致TTS无法启动运行，这种情况下TTS就已经凉了</strong></p>
+<h3 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h3><p>国内一些导航应用导航时使用的方法，并不是使用这个引擎，而是另起炉灶，用的自己的方法或购买第三方的SDK。</p>
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="Google文字转语音"><a href="#Google文字转语音" class="headerlink" title="Google文字转语音"></a>Google文字转语音</h3><p>在Google自家的设备上取代了<code>Pico TTS</code>，支持地球上绝大多数语言，基本是首选。在酷安和Google Play或各大应用市场都可以找到。</p>
+<p>它默认会联网获取语音，但可能出现因网络状况而读不出来的情况，所以需要提前下载好语音包。但即使下好了语音包，有时也会读不出来 ㄟ( ▔, ▔ )ㄏ</p>
+<h2 id="讯飞语记"><a href="#讯飞语记" class="headerlink" title="讯飞语记"></a>讯飞语记</h2><p>是讯飞的一个单独应用。安装后就会添加一个引擎。可以自定义的内容不少。<del>虽然声音不如谷歌娘好听。</del></p>
+<h2 id="小爱-TTS"><a href="#小爱-TTS" class="headerlink" title="小爱 TTS"></a>小爱 TTS</h2><p>似乎只有在小米应用商店有下载：<a href="http://app.mi.com/details?id=com.xiaomi.mibrain.speech">http://app.mi.com/details?id=com.xiaomi.mibrain.speech</a></p>
+<p>没有试过，但应用信息</p>
+<blockquote>
+<p>软件大小:20.86 M 版本号：1.1.1 更新时间：2018-08-02</p>
+</blockquote>
+<p>怕是不靠谱。</p>
+<h2 id="还有呢？"><a href="#还有呢？" class="headerlink" title="还有呢？"></a>还有呢？</h2><p>信息太少了，一个能打的都找不到了。</p>
 ]]></content>
       <categories>
         <category>Android</category>
