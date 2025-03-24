@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Android Animated Vector Drawable搜集</title>
-    <url>/2019/11/27/android-animated_vector_drawables/</url>
-    <content><![CDATA[<p>各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。</p>
-<span id="more"></span>
-
-<ul>
-<li><p><a href="https://github.com/StylingAndroid/AnimatedIcons/">StylingAndroid/AnimatedIcons</a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-max-min/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/MaxMin.gif" alt="AnimatedIcons: Max / Min"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v3/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/LoadingV3.gif" alt="AnimatedIcons: Loading V3"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animated-icons-plus-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/PlusX.gif" alt="AnimatedIcons: Plus / X"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-strikethru/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Strikethru.gif" alt="AnimatedIcons: Strikethru"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v2/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Loading_V2.gif" alt="AnimatedIcons: Loading V2"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animatedicons-search-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/12/search_x-1.gif" alt="AnimatedIcons: Search / X"></a></p>
-<p>  <a href="https://blog.stylingandroid.com/animated-icons-burger-menu/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2020/01/BurgerMenu.gif" alt="Animated Icons: Burger Menu"></a></p>
-</li>
-<li><p><a href="https://github.com/alexjlockwood/adp-delightful-details"><img src="https://camo.githubusercontent.com/079cd7f1079153cd0489dc58bc0fa121b3ecb767/687474703a2f2f692e696d6775722e636f6d2f306146646a4a6e2e676966" alt="A lot of icons"></a></p>
-</li>
-<li><p><a href="https://github.com/tarek360/RichPath"><img src="https://github.com/tarek360/RichPath/raw/develop/screenshots/samples.gif" alt="tarek360/RichPath"></a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Animation</title>
     <url>/2018/12/11/android-animation/</url>
     <content><![CDATA[<p>整理自<a href="https://www.youtube.com/watch?v=N_x7SV3I3P0">Get Animated (Android Dev Summit ‘18)</a>，解释那复杂的Android动画框架和工具。</p>
@@ -67,6 +41,32 @@
 <li><p>MotionLayout：饼，真香。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android Animated Vector Drawable搜集</title>
+    <url>/2019/11/27/android-animated_vector_drawables/</url>
+    <content><![CDATA[<p>各种会动的图标，性能好，免费用。随缘更新，找到了就丢在这里。</p>
+<span id="more"></span>
+
+<ul>
+<li><p><a href="https://github.com/StylingAndroid/AnimatedIcons/">StylingAndroid/AnimatedIcons</a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-max-min/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/MaxMin.gif" alt="AnimatedIcons: Max / Min"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v3/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/LoadingV3.gif" alt="AnimatedIcons: Loading V3"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animated-icons-plus-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/10/PlusX.gif" alt="AnimatedIcons: Plus / X"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-strikethru/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Strikethru.gif" alt="AnimatedIcons: Strikethru"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-loading-v2/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/08/Loading_V2.gif" alt="AnimatedIcons: Loading V2"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animatedicons-search-x/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2019/12/search_x-1.gif" alt="AnimatedIcons: Search / X"></a></p>
+<p>  <a href="https://blog.stylingandroid.com/animated-icons-burger-menu/"><img src="https://blog.stylingandroid.com/wp-content/uploads/2020/01/BurgerMenu.gif" alt="Animated Icons: Burger Menu"></a></p>
+</li>
+<li><p><a href="https://github.com/alexjlockwood/adp-delightful-details"><img src="https://camo.githubusercontent.com/079cd7f1079153cd0489dc58bc0fa121b3ecb767/687474703a2f2f692e696d6775722e636f6d2f306146646a4a6e2e676966" alt="A lot of icons"></a></p>
+</li>
+<li><p><a href="https://github.com/tarek360/RichPath"><img src="https://github.com/tarek360/RichPath/raw/develop/screenshots/samples.gif" alt="tarek360/RichPath"></a></p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -717,33 +717,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android故障艺术</title>
-    <url>/2019/06/05/android-glitch/</url>
-    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
-<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
-<span id="more"></span>
-
-<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
-<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
-<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
-<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
-<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
-<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
-<details>
-  <summary></summary>
-  <p>这个项目的代码是真的看得我头大。</p>
-</details>
-
-<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
-<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android Internal 笔记</title>
     <url>/2018/05/12/android-internal/</url>
     <content><![CDATA[<p>之前不知在哪里看到Android开发者都应该了解一下Android Internal，就截了图记了下来。现在有时间了，就找了一些Android Internal的内容，记了些笔记。相应的资料也列在了各个章节末尾。</p>
@@ -852,6 +825,33 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android故障艺术</title>
+    <url>/2019/06/05/android-glitch/</url>
+    <content><![CDATA[<p><strong>2020年10月16日更新：增加了更多资料</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Glitch_art">Glitch art (故障艺术)</a>，第一见的时候被吓到了，但之后越看越上瘾。</p>
+<p>这篇笔记记录怎么在Andorid上用代码实现这玩意儿。</p>
+<span id="more"></span>
+
+<h2 id="不停抖动View"><a href="#不停抖动View" class="headerlink" title="不停抖动View"></a>不停抖动View</h2><p>最简单的方案，通过叠加很多View，然后让它们各自向各个方向一直移动，就可以创建出类似于某音Logo的效果。</p>
+<p>现成的：<a href="https://github.com/irshuLx/Android-Glitch-Text-Effect">Android-Glitch-Text-Effect</a>。</p>
+<h2 id="随机修改JPEG"><a href="#随机修改JPEG" class="headerlink" title="随机修改JPEG"></a>随机修改JPEG</h2><p>这个也简单。<a href="https://github.com/BoD/aLibGlitch">aLibGlitch</a>就是这么做的。因为JPEG的压缩算法，只需要简单地替换一些bit，就可以让图片崩坏地很厉害。</p>
+<p><a href="https://github.com/shubhamvernekar/SlideToGlitch">SlideToGlitch</a>是另外一个有类似算法的项目。受到了<a href="https://github.com/snorpey/jpg-glitch">jpg-glitch</a>这个web项目的启发。</p>
+<p>这个可以作为应用内的一个转场动画，如果不担心被吓到的用户打差评的话。</p>
+<h2 id="对画布进行各种变换"><a href="#对画布进行各种变换" class="headerlink" title="对画布进行各种变换"></a>对画布进行各种变换</h2><p>在 <a href="https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt">https://github.com/chemickypes/Glitchy/blob/master/glitch/src/main/java/me/bemind/glitch/Glitcher.kt</a> 考古到了几个变换Canvas的方法。没什么特殊的地方，就是发挥奇思妙想对Canvas进行各种修改。</p>
+<details>
+  <summary></summary>
+  <p>这个项目的代码是真的看得我头大。</p>
+</details>
+
+<h2 id="对像素点进行各种变化"><a href="#对像素点进行各种变化" class="headerlink" title="对像素点进行各种变化"></a>对像素点进行各种变化</h2><p>在 <a href="https://github.com/g-whiz/pxSort">https://github.com/g-whiz/pxSort</a> 考古到了一些操作像素点的方法。应该是有数学公式之类在背后支撑的，但无奈它产出的效果不合我意，就懒得找了。注意各个效果的参数是在assets里的数据库里的。</p>
+<h2 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h2><p>最近发现了<a href="https://zhuanlan.zhihu.com/p/148256756">高品质后处理：十种故障艺术(Glitch Art)算法的总结与实现</a>，是针对Unity的各种故障效果，是通过OpenGL实现的。Android也支持OpenGL，懂OpenGL的可以手动把代码复制修改后使用。拿最简单的RGB Split Glitch来说，在搭配<a href="https://github.com/cats-oss/android-gpuimage">android-gpuimage</a>后，只需要改几个名称就可以放到应用里了。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -1542,49 +1542,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Android开发的一些知识：Android框架</title>
-    <url>/2019/02/03/android-requirements-architecture/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
-<span id="more"></span>
-
-<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
-<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
-<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
-<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
-<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
-<p>还有一些常有的Java Libraries。</p>
-<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
-<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
-<p>System Apps：系统应用。当然还有各种第三方应用。</p>
-<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
-    <url>/2019/02/03/android-requirements-start-button/</url>
-    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
-<span id="more"></span>
-
-<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
-<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
-<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
-<p>新建一个Empty Activity的Kotlin项目。</p>
-<p>点击Run，发现运行了</p>
-<p><code>Executing tasks: [:app:assembleDebug]</code></p>
-<p>这里摘一些有用的Tasks:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
-
-<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
-<p>最后运行adb打开app的launcher Activity。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Android开发的一些知识：Dalvik和ART</title>
     <url>/2019/02/15/android-requirements-dalvik-art/</url>
     <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - How Dalvik and ART VMs work?</a></p>
@@ -1646,6 +1603,27 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发的一些知识：Android框架</title>
+    <url>/2019/02/03/android-requirements-architecture/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what does the Android architecture look like?</a></p>
+<span id="more"></span>
+
+<p>参考<a href="https://developer.android.com/guide/platform/">Platform Architecture</a></p>
+<p><img src="https://developer.android.com/guide/platform/images/android-stack_2x.png" alt="Android Architecture"></p>
+<p>我们久经考验的Linux内核可以提供可靠安全的运行环境：权限、进程分离、IPC、应用沙箱。包括了各种硬件的驱动。</p>
+<p>Hardware Abstraction Layer (HAL)，硬件抽象层。抽象具体硬件实现的。</p>
+<p>HAL上有Android Runtime。运行程序的。每个应用都有自己的进程和ART实例。负责AOT和JIT、有专门设计的GC等。具体参见系列另一篇Dalvik和ART。</p>
+<p>还有一些常有的Java Libraries。</p>
+<p>Native C/C++ Libraries：大部分系统服务（ART和HAL）都使用了native libraries written in C and C++。通过Java JNI放出一些接口。</p>
+<p>Java API Framework：写应用时接触到Java API。像是View、Resources、Notification、Activity、Content Providers…</p>
+<p>System Apps：系统应用。当然还有各种第三方应用。</p>
+<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-internal.md">之前的笔记：Android Internal 笔记</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android开发的一些知识</title>
     <url>/2018/12/31/android-requirements/</url>
     <content><![CDATA[<p>一些Android开发的知识。</p>
@@ -1678,6 +1656,28 @@
 <p> BroadcastReceiver在返回之后，系统就会认为它没用了。需要回收时就会清理掉它和它产生的线程。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Android开发的一些知识：在Android Studio点击Run之后</title>
+    <url>/2019/02/03/android-requirements-start-button/</url>
+    <content><![CDATA[<p><a href="https://github.com/DeweyReed/site/blob/master/source/_posts/android-requirements.md">Android开发的一些知识 - At a high level, what happens when you hit the build button on Andorid Studio?</a></p>
+<span id="more"></span>
+
+<p><a href="https://cn.udacity.com/course/gradle-for-android-and-java--ud867">课程: Gradle for Android and Java</a></p>
+<p>Gradle已经提供了很多Automation相关的工作，Google就选它作为Android的build system。</p>
+<p>Android Studio把所有任务都交给了Gradle来完成，自己只是一个wrapper。但Gradle并不了解Android，所以Google提供了android-gradle-plugin，简称AGP。</p>
+<p>新建一个Empty Activity的Kotlin项目。</p>
+<p>点击Run，发现运行了</p>
+<p><code>Executing tasks: [:app:assembleDebug]</code></p>
+<p>这里摘一些有用的Tasks:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; Transform ... // 首先是Jetifier和AAR transform</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugAidl // 处理AIDL，用于IPC https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:compileDebugRenderscript // 处理RenderScript https://developer.android.com/guide/components/aidl</span><br><span class="line">&gt; Task :app:checkDebugManifest // 检查Manifest</span><br><span class="line">&gt; Task :app:generateDebugBuildConfig // 生成BuildConfig</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:generateDebugResValues // 首先处理并生成资源Resources</span><br><span class="line">&gt; Task :app:generateDebugResources</span><br><span class="line">&gt; Task :app:createDebugCompatibleScreenManifests</span><br><span class="line">&gt; Task :app:mergeDebugResources</span><br><span class="line">&gt; Task :app:processDebugManifest // 处理Manifest</span><br><span class="line">&gt; Task :app:processDebugResources</span><br><span class="line">&gt; Task :app:compileDebugKotlin // 编译Kotlin</span><br><span class="line">&gt; Task :app:prepareLintJar</span><br><span class="line">&gt; Task :app:generateDebugSources</span><br><span class="line">&gt; Task :app:javaPreCompileDebug // 预编译Java</span><br><span class="line">&gt; Task :app:compileDebugJavaWithJavac // 编译Java</span><br><span class="line">&gt; Task :app:instantRunMainApkResourcesDebug</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:mergeDebugShaders // 继续处理资源，Shaders和Assets</span><br><span class="line">&gt; Task :app:compileDebugShaders</span><br><span class="line">&gt; Task :app:generateDebugAssets</span><br><span class="line">&gt; Task :app:mergeDebugAssets</span><br><span class="line">&gt; Task :app:validateSigningDebug // 签名</span><br><span class="line">&gt; Task :app:signingConfigWriterDebug</span><br><span class="line">&gt; Task :app:processInstantRunDebugResourcesApk</span><br><span class="line">...</span><br><span class="line">&gt; Task :app:compileDebugNdk // NDK</span><br><span class="line">&gt; Task :app:mergeDebugJniLibFolders // JNI</span><br><span class="line">&gt; Task :app:transformNativeLibsWithMergeJniLibsForDebug</span><br><span class="line">&gt; Task :app:processDebugJavaRes // 处理Java Resources</span><br><span class="line">&gt; Task :app:transformResourcesWithMergeJavaResForDebug</span><br><span class="line">&gt; Task :app:transformNativeLibsAndResourcesWithJavaResourcesVerifierForDebug</span><br><span class="line">&gt; Task :app:transformClassesWithInstantRunForDebug</span><br><span class="line">&gt; Task :app:transformClassesAndClassesEnhancedWithInstantReloadDexForDebug</span><br><span class="line">&gt; Task :app:incrementalDebugTasks</span><br><span class="line">&gt; Task :app:preColdswapDebug</span><br><span class="line">&gt; Task :app:fastDeployDebugExtractor</span><br><span class="line">&gt; Task :app:generateDebugInstantRunAppInfo</span><br><span class="line">&gt; Task :app:transformClassesWithDexBuilderForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithExternalLibsDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexArchiveWithDexMergerForDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunDependenciesApkForDebug</span><br><span class="line">&gt; Task :app:instantRunSplitApkResourcesDebug</span><br><span class="line">&gt; Task :app:transformDexWithInstantRunSlicesApkForDebug</span><br><span class="line">&gt; Task :app:packageDebug // 打包</span><br><span class="line">&gt; Task :app:buildInfoGeneratorDebug</span><br><span class="line">&gt; Task :app:compileDebugSources</span><br><span class="line">&gt; Task :app:assembleDebug</span><br></pre></td></tr></table></figure>
+
+<p>接下来会运行<code>installDebug</code>。就是简单地把apk push到设备上安装。</p>
+<p>最后运行adb打开app的launcher Activity。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -1976,6 +1976,37 @@
       </categories>
   </entry>
   <entry>
+    <title>Android开发后悔的九件事</title>
+    <url>/2022/12/20/android-things-i-wish-i-knew/</url>
+    <content><![CDATA[<p>RT</p>
+<span id="more"></span>
+
+<h2 id="本应适度使用Material-Components"><a href="#本应适度使用Material-Components" class="headerlink" title="本应适度使用Material Components"></a>本应适度使用Material Components</h2><p>虽说部分组件，诸如<code>MaterialButton</code>、<code>MaterialCardView</code>和<code>CoordinatorLayout</code>，自定义程度很高，用起来也很顺手。但另外一些，诸如<code>TabLayout</code>、<code>BottomAppBar</code>和<code>TopAppBar</code>等，需要诸多奇技淫巧才能符合UI。到头来，其实不如用<code>TextView</code>和<code>ImageView</code>从头攒一个，来得容易实现和维护。</p>
+<p>更别提从Material 3开始，想要把背景颜色设置为一个特定值都变得困难起来。</p>
+<h2 id="本应谨慎使用Post"><a href="#本应谨慎使用Post" class="headerlink" title="本应谨慎使用Post"></a>本应谨慎使用Post</h2><p>在<code>onCreate</code>或<code>onCreateView</code>中，所有View还未被定位和绘制。这时获取其宽度或高度会为0。一个常见的方法是将获取尺寸的代码放到一个<code>post &#123;&#125;</code>中（我最早从AdMob的早期文档中看到类似的用法）。大多数情况下，问题会得到解决。</p>
+<p>但这会打开一个潘多拉魔盒。这个方案意味着每次修改<code>View</code>的属性后，想要得到修改后的状态，就得Post一次。逻辑复杂之后，代码库很快就会充斥着Post嵌套Post多次的糟糕实现。</p>
+<p>根据<a href="https://cheesecakelabs.com/blog/understanding-android-views-dimensions-set/">Understanding when and how Android Views have dimensions set</a>，<code>View.doOnLayout()</code>是比<code>Post</code>更好的方案。但这依然解决不了嵌套太多的问题。而最终解决方案则和下一条有关。</p>
+<h2 id="本应在View层少放业务逻辑"><a href="#本应在View层少放业务逻辑" class="headerlink" title="本应在View层少放业务逻辑"></a>本应在View层少放业务逻辑</h2><p>想法和MVI或Jetpack Compose类似，View收到的永远是UI的状态数据，而业务逻辑全都在ViewModel中。虽然只是把一个文件分为两个文件，但UI实现的复杂度会得到惊人的下降。配合<code>SavedStateHandle</code>，还可以存活过Configuration changes。</p>
+<p>常见的Configuration changes不仅是旋转屏幕，还包括深色模式切换、时区变化、一些破手机切换个应用就会被杀等情况。这里还是要早做打算。</p>
+<p>这样也可以缓解不少上一条Post嵌套太多的问题。</p>
+<h2 id="本应适度使用Single-Activity"><a href="#本应适度使用Single-Activity" class="headerlink" title="本应适度使用Single Activity"></a>本应适度使用Single Activity</h2><p>没人会告诉你，在面对一些核心操作时，Single Activity就力不从心了。</p>
+<p>比如在Fragment中放相机预览，每次切换页面后返回时，相机都得重新启动一遍，使用体验很糟糕。</p>
+<p>在一些应用核心操作时，最好单独使用一个Activity。这并不意味不需要控制好UI状态，只是不让这些核心状态太容易地被丢失。</p>
+<h2 id="本应细心规划Navigation"><a href="#本应细心规划Navigation" class="headerlink" title="本应细心规划Navigation"></a>本应细心规划Navigation</h2><p>如果要在不同屏幕间做约定，最好在顶层设计一些通用抽象的功能。不然未来就看不懂代码了。</p>
+<h2 id="本应记录更多日志"><a href="#本应记录更多日志" class="headerlink" title="本应记录更多日志"></a>本应记录更多日志</h2><p>面对一些棘手的Bug，在尝试各种方案的同时，要确保多留一些日志。</p>
+<h2 id="本应谨慎使用null"><a href="#本应谨慎使用null" class="headerlink" title="本应谨慎使用null"></a>本应谨慎使用null</h2><p>null代表的是不存在，而不是默认值。使用null就意味需要在之后不断地判断是否为null。</p>
+<p>比如用户的主题设置怎么会不存在，最多也就是默认主题。对吧！</p>
+<p>能不用null就不用。使用enum、sealed interface或者继承都会优雅的多。</p>
+<h2 id="本应注释废弃的功能"><a href="#本应注释废弃的功能" class="headerlink" title="本应注释废弃的功能"></a>本应注释废弃的功能</h2><p>把废弃功能入口关掉就好，谁不知道未来会不会有用。</p>
+<h2 id="本应适度使用Singleton"><a href="#本应适度使用Singleton" class="headerlink" title="本应适度使用Singleton"></a>本应适度使用Singleton</h2><p>这里不是用多了，而是用少了。</p>
+<p>都怪Android一开始鼓吹不用Singleton，导致我尽可能用依赖注入的<code>@Resuable</code>来控制内存。但是这会让一些简单的操作都复杂起来。</p>
+<p>既然一个对象从应用开始之初就会被分配并一直使用，就乖乖用Singleton。性能问题几乎永远不会在于几个Singleton。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Android System UI</title>
     <url>/2019/05/06/android-system-ui/</url>
     <content><![CDATA[<p>整理自<a href="https://chris.banes.dev/talks/2017/becoming-a-master-window-fitter-lon/">Becoming a master window fitter 🔧)</a>，解释那复杂的Android状态栏与导航栏和应用界面的关系。</p>
@@ -2040,37 +2071,6 @@
 <li><a href="https://github.com/DreaminginCodeZH/SystemUiHelper">SystemUiHelper</a></li>
 <li><a href="https://github.com/mikepenz/Materialize">Materialize</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Android开发后悔的九件事</title>
-    <url>/2022/12/20/android-things-i-wish-i-knew/</url>
-    <content><![CDATA[<p>RT</p>
-<span id="more"></span>
-
-<h2 id="本应适度使用Material-Components"><a href="#本应适度使用Material-Components" class="headerlink" title="本应适度使用Material Components"></a>本应适度使用Material Components</h2><p>虽说部分组件，诸如<code>MaterialButton</code>、<code>MaterialCardView</code>和<code>CoordinatorLayout</code>，自定义程度很高，用起来也很顺手。但另外一些，诸如<code>TabLayout</code>、<code>BottomAppBar</code>和<code>TopAppBar</code>等，需要诸多奇技淫巧才能符合UI。到头来，其实不如用<code>TextView</code>和<code>ImageView</code>从头攒一个，来得容易实现和维护。</p>
-<p>更别提从Material 3开始，想要把背景颜色设置为一个特定值都变得困难起来。</p>
-<h2 id="本应谨慎使用Post"><a href="#本应谨慎使用Post" class="headerlink" title="本应谨慎使用Post"></a>本应谨慎使用Post</h2><p>在<code>onCreate</code>或<code>onCreateView</code>中，所有View还未被定位和绘制。这时获取其宽度或高度会为0。一个常见的方法是将获取尺寸的代码放到一个<code>post &#123;&#125;</code>中（我最早从AdMob的早期文档中看到类似的用法）。大多数情况下，问题会得到解决。</p>
-<p>但这会打开一个潘多拉魔盒。这个方案意味着每次修改<code>View</code>的属性后，想要得到修改后的状态，就得Post一次。逻辑复杂之后，代码库很快就会充斥着Post嵌套Post多次的糟糕实现。</p>
-<p>根据<a href="https://cheesecakelabs.com/blog/understanding-android-views-dimensions-set/">Understanding when and how Android Views have dimensions set</a>，<code>View.doOnLayout()</code>是比<code>Post</code>更好的方案。但这依然解决不了嵌套太多的问题。而最终解决方案则和下一条有关。</p>
-<h2 id="本应在View层少放业务逻辑"><a href="#本应在View层少放业务逻辑" class="headerlink" title="本应在View层少放业务逻辑"></a>本应在View层少放业务逻辑</h2><p>想法和MVI或Jetpack Compose类似，View收到的永远是UI的状态数据，而业务逻辑全都在ViewModel中。虽然只是把一个文件分为两个文件，但UI实现的复杂度会得到惊人的下降。配合<code>SavedStateHandle</code>，还可以存活过Configuration changes。</p>
-<p>常见的Configuration changes不仅是旋转屏幕，还包括深色模式切换、时区变化、一些破手机切换个应用就会被杀等情况。这里还是要早做打算。</p>
-<p>这样也可以缓解不少上一条Post嵌套太多的问题。</p>
-<h2 id="本应适度使用Single-Activity"><a href="#本应适度使用Single-Activity" class="headerlink" title="本应适度使用Single Activity"></a>本应适度使用Single Activity</h2><p>没人会告诉你，在面对一些核心操作时，Single Activity就力不从心了。</p>
-<p>比如在Fragment中放相机预览，每次切换页面后返回时，相机都得重新启动一遍，使用体验很糟糕。</p>
-<p>在一些应用核心操作时，最好单独使用一个Activity。这并不意味不需要控制好UI状态，只是不让这些核心状态太容易地被丢失。</p>
-<h2 id="本应细心规划Navigation"><a href="#本应细心规划Navigation" class="headerlink" title="本应细心规划Navigation"></a>本应细心规划Navigation</h2><p>如果要在不同屏幕间做约定，最好在顶层设计一些通用抽象的功能。不然未来就看不懂代码了。</p>
-<h2 id="本应记录更多日志"><a href="#本应记录更多日志" class="headerlink" title="本应记录更多日志"></a>本应记录更多日志</h2><p>面对一些棘手的Bug，在尝试各种方案的同时，要确保多留一些日志。</p>
-<h2 id="本应谨慎使用null"><a href="#本应谨慎使用null" class="headerlink" title="本应谨慎使用null"></a>本应谨慎使用null</h2><p>null代表的是不存在，而不是默认值。使用null就意味需要在之后不断地判断是否为null。</p>
-<p>比如用户的主题设置怎么会不存在，最多也就是默认主题。对吧！</p>
-<p>能不用null就不用。使用enum、sealed interface或者继承都会优雅的多。</p>
-<h2 id="本应注释废弃的功能"><a href="#本应注释废弃的功能" class="headerlink" title="本应注释废弃的功能"></a>本应注释废弃的功能</h2><p>把废弃功能入口关掉就好，谁不知道未来会不会有用。</p>
-<h2 id="本应适度使用Singleton"><a href="#本应适度使用Singleton" class="headerlink" title="本应适度使用Singleton"></a>本应适度使用Singleton</h2><p>这里不是用多了，而是用少了。</p>
-<p>都怪Android一开始鼓吹不用Singleton，导致我尽可能用依赖注入的<code>@Resuable</code>来控制内存。但是这会让一些简单的操作都复杂起来。</p>
-<p>既然一个对象从应用开始之初就会被分配并一直使用，就乖乖用Singleton。性能问题几乎永远不会在于几个Singleton。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -2506,50 +2506,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Github Stars整理</title>
-    <url>/2019/11/24/github-stars/</url>
-    <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
-<p><a href="https://github.com/DeweyReed?tab=stars">Github的Stars页</a></p>
-<span id="more"></span>
-
-<p><a href="https://github.com/ncase/wbwwb">wbwwb(We Become What We Behold – a minigame about the news!)</a></p>
-<p><a href="https://github.com/javiersantos/MaterialStyledDialogs">MaterialStyledDialogs(A library that shows a beautiful and customizable Material-based dialog with header. API 11+ required.)</a></p>
-<p><a href="https://github.com/FoxxMD/intellij-jvm-options-explained">intellij-jvm-options-explained(Common JVM options used with Intellij and what they do)</a></p>
-<p><a href="https://github.com/rock3r/uplift">uplift(A playground for elevation on Android)</a></p>
-<p><a href="https://github.com/lopspower/GradientView">GradientView(Create gradient view in Android in the simplest way possible 🌈)</a></p>
-<p><a href="https://github.com/PandoraMedia/BottomNavigator">BottomNavigator(Android Bottom Navigation multiple stack manager)</a></p>
-<p><a href="https://github.com/skydoves/Balloon">Balloon(🎈 A lightweight popup like tooltips, fully customizable with arrow and animations.)</a></p>
-<p><a href="https://github.com/skydoves/Only">Only(💐 An easy way to persist and run code block only as many times as necessary on Android.)</a></p>
-<p><a href="https://github.com/roughike/SwipeSelector">SwipeSelector(A nicer-looking, more intuitive and highly customizable alternative for radio buttons and dropdowns for Android.)</a></p>
-<p><a href="https://github.com/skydoves/Submarine">Submarine(🚤 Floating navigation view for listing items dynamically on Android.)</a></p>
-<p><a href="https://github.com/zhanghai/SystemUiHelper">SystemUiHelper(Helper for dealing with Android System UI visibility)</a></p>
-<p><a href="https://github.com/bernaferrari/ChangeDetection">ChangeDetection(Automatically track websites changes on Android in background.)</a></p>
-<p><a href="https://github.com/Dimowner/AudioRecorder">AudioRecorder(Audio Recording Android application)</a></p>
-<p><a href="https://github.com/SimonMarquis/InternalAppStore">InternalAppStore(Manage your own internal Android App Store.)</a></p>
-<p><a href="https://github.com/ashishb/adb-enhanced">adb-enhanced(🔪Swiss-army knife for Android testing and development 🔪 ⛺)</a></p>
-<p><a href="https://github.com/jaredrummler/Cyanea">Cyanea(A theme engine for Android)</a></p>
-<p><a href="https://github.com/novoda/bintray-release">bintray-release(A helper for releasing from gradle up to bintray)</a></p>
-<p><a href="https://github.com/Karn/notify">notify(Simplified notification construction and delivery for Android.)</a></p>
-<p><a href="https://github.com/afollestad/aesthetic">aesthetic(🔮 A fast, easy to use, dynamic theme engine. Powered by Rx and Kotlin, for Android apps.)</a></p>
-<p><a href="https://github.com/rubensousa/BottomSheetBuilder">BottomSheetBuilder(A simple library that creates BottomSheets according to the Material Design specs)</a></p>
-<p><a href="https://github.com/Tinder/StateMachine">StateMachine(A Kotlin DSL for finite state machine)</a></p>
-<p><a href="https://github.com/aritraroy/Flashbar">Flashbar(⚡️A highly customizable, powerful and easy-to-use alerting library for Android.)</a></p>
-<p><a href="https://github.com/vanniktech/gradle-dependency-graph-generator-plugin">gradle-dependency-graph-generator-plugin(Gradle plugin that generates dependency graphs from your project.)</a></p>
-<p><a href="https://github.com/willowtreeapps/Hyperion-Android">Hyperion-Android(App Debugging &amp; Inspection Tool for Android)</a></p>
-<p><a href="https://github.com/JetradarMobile/desertplaceholder">desertplaceholder(Animated placeholder in desert style.)</a></p>
-<p><a href="https://github.com/KeepSafe/dexcount-gradle-plugin">dexcount-gradle-plugin(A Gradle plugin to report the number of method references in your APK on every build.)</a></p>
-<p><a href="https://github.com/openstf/stf">stf(Control and manage Android devices from your browser.)</a></p>
-<p><a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll(✨ Build a beautiful and simple website in literally minutes.)</a></p>
-<p><a href="https://github.com/MEiDIK/Cipher.so">Cipher.so(A simple way to encrypt your secure data like passwords into a native .so library.)</a></p>
-<p><a href="https://github.com/Ereza/CustomActivityOnCrash">CustomActivityOnCrash(Android library that allows launching a custom activity when your app crashes, instead of showing the hated “Unfortunately, X has stopped” dialog.)</a></p>
-<p><a href="https://github.com/Triple-T/gradle-play-publisher">gradle-play-publisher(GPP is Android’s unofficial release automation Gradle Plugin. It can do anything from building, uploading, and then promoting your App Bundle or APK to publishing app listings and other metadata.)</a></p>
-<p><a href="https://github.com/akexorcist/Android-LocalizationActivity">Android-LocalizationActivity(Let’s make language swithching in your app with easy way)</a></p>
-]]></content>
-      <categories>
-        <category>Notes</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Google I/O 2018 笔记</title>
     <url>/2018/05/12/google-io-2018-notes/</url>
     <content><![CDATA[<p>把今年I/O的内容参加的差不多了，这里记录一些对我有用的东西。</p>
@@ -2598,6 +2554,50 @@
 ]]></content>
       <categories>
         <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Github Stars整理</title>
+    <url>/2019/11/24/github-stars/</url>
+    <content><![CDATA[<p>由于要收藏各种Repo，但有的Repo因为年久失修或其他原因，食之无味弃之可惜，只好丢在这里了。</p>
+<p><a href="https://github.com/DeweyReed?tab=stars">Github的Stars页</a></p>
+<span id="more"></span>
+
+<p><a href="https://github.com/ncase/wbwwb">wbwwb(We Become What We Behold – a minigame about the news!)</a></p>
+<p><a href="https://github.com/javiersantos/MaterialStyledDialogs">MaterialStyledDialogs(A library that shows a beautiful and customizable Material-based dialog with header. API 11+ required.)</a></p>
+<p><a href="https://github.com/FoxxMD/intellij-jvm-options-explained">intellij-jvm-options-explained(Common JVM options used with Intellij and what they do)</a></p>
+<p><a href="https://github.com/rock3r/uplift">uplift(A playground for elevation on Android)</a></p>
+<p><a href="https://github.com/lopspower/GradientView">GradientView(Create gradient view in Android in the simplest way possible 🌈)</a></p>
+<p><a href="https://github.com/PandoraMedia/BottomNavigator">BottomNavigator(Android Bottom Navigation multiple stack manager)</a></p>
+<p><a href="https://github.com/skydoves/Balloon">Balloon(🎈 A lightweight popup like tooltips, fully customizable with arrow and animations.)</a></p>
+<p><a href="https://github.com/skydoves/Only">Only(💐 An easy way to persist and run code block only as many times as necessary on Android.)</a></p>
+<p><a href="https://github.com/roughike/SwipeSelector">SwipeSelector(A nicer-looking, more intuitive and highly customizable alternative for radio buttons and dropdowns for Android.)</a></p>
+<p><a href="https://github.com/skydoves/Submarine">Submarine(🚤 Floating navigation view for listing items dynamically on Android.)</a></p>
+<p><a href="https://github.com/zhanghai/SystemUiHelper">SystemUiHelper(Helper for dealing with Android System UI visibility)</a></p>
+<p><a href="https://github.com/bernaferrari/ChangeDetection">ChangeDetection(Automatically track websites changes on Android in background.)</a></p>
+<p><a href="https://github.com/Dimowner/AudioRecorder">AudioRecorder(Audio Recording Android application)</a></p>
+<p><a href="https://github.com/SimonMarquis/InternalAppStore">InternalAppStore(Manage your own internal Android App Store.)</a></p>
+<p><a href="https://github.com/ashishb/adb-enhanced">adb-enhanced(🔪Swiss-army knife for Android testing and development 🔪 ⛺)</a></p>
+<p><a href="https://github.com/jaredrummler/Cyanea">Cyanea(A theme engine for Android)</a></p>
+<p><a href="https://github.com/novoda/bintray-release">bintray-release(A helper for releasing from gradle up to bintray)</a></p>
+<p><a href="https://github.com/Karn/notify">notify(Simplified notification construction and delivery for Android.)</a></p>
+<p><a href="https://github.com/afollestad/aesthetic">aesthetic(🔮 A fast, easy to use, dynamic theme engine. Powered by Rx and Kotlin, for Android apps.)</a></p>
+<p><a href="https://github.com/rubensousa/BottomSheetBuilder">BottomSheetBuilder(A simple library that creates BottomSheets according to the Material Design specs)</a></p>
+<p><a href="https://github.com/Tinder/StateMachine">StateMachine(A Kotlin DSL for finite state machine)</a></p>
+<p><a href="https://github.com/aritraroy/Flashbar">Flashbar(⚡️A highly customizable, powerful and easy-to-use alerting library for Android.)</a></p>
+<p><a href="https://github.com/vanniktech/gradle-dependency-graph-generator-plugin">gradle-dependency-graph-generator-plugin(Gradle plugin that generates dependency graphs from your project.)</a></p>
+<p><a href="https://github.com/willowtreeapps/Hyperion-Android">Hyperion-Android(App Debugging &amp; Inspection Tool for Android)</a></p>
+<p><a href="https://github.com/JetradarMobile/desertplaceholder">desertplaceholder(Animated placeholder in desert style.)</a></p>
+<p><a href="https://github.com/KeepSafe/dexcount-gradle-plugin">dexcount-gradle-plugin(A Gradle plugin to report the number of method references in your APK on every build.)</a></p>
+<p><a href="https://github.com/openstf/stf">stf(Control and manage Android devices from your browser.)</a></p>
+<p><a href="https://github.com/daattali/beautiful-jekyll">beautiful-jekyll(✨ Build a beautiful and simple website in literally minutes.)</a></p>
+<p><a href="https://github.com/MEiDIK/Cipher.so">Cipher.so(A simple way to encrypt your secure data like passwords into a native .so library.)</a></p>
+<p><a href="https://github.com/Ereza/CustomActivityOnCrash">CustomActivityOnCrash(Android library that allows launching a custom activity when your app crashes, instead of showing the hated “Unfortunately, X has stopped” dialog.)</a></p>
+<p><a href="https://github.com/Triple-T/gradle-play-publisher">gradle-play-publisher(GPP is Android’s unofficial release automation Gradle Plugin. It can do anything from building, uploading, and then promoting your App Bundle or APK to publishing app listings and other metadata.)</a></p>
+<p><a href="https://github.com/akexorcist/Android-LocalizationActivity">Android-LocalizationActivity(Let’s make language swithching in your app with easy way)</a></p>
+]]></content>
+      <categories>
+        <category>Notes</category>
       </categories>
   </entry>
   <entry>
@@ -2837,6 +2837,16 @@
       </categories>
   </entry>
   <entry>
+    <title>Deprecated 开发历程</title>
+    <url>/2019/07/07/personal-info/</url>
+    <content><![CDATA[<p>Deprecated</p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>What</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Material Design 笔记</title>
     <url>/2018/05/27/md-notes/</url>
     <content><![CDATA[<p><strong>不保证全对、可能更新，这玩意儿主要是给自己看的</strong></p>
@@ -2920,16 +2930,6 @@
 ]]></content>
       <categories>
         <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Deprecated 开发历程</title>
-    <url>/2019/07/07/personal-info/</url>
-    <content><![CDATA[<p>Deprecated</p>
-<span id="more"></span>
-]]></content>
-      <categories>
-        <category>What</category>
       </categories>
   </entry>
   <entry>
@@ -3283,21 +3283,6 @@
       </categories>
   </entry>
   <entry>
-    <title>计时机器无法唤醒设备的临时解决方案</title>
-    <url>/2017/12/10/timer-huawei-solution/</url>
-    <content><![CDATA[<p>计时机器无法唤醒国产设备的临时解决方案。几乎所有国产手机都需要类似的设置，因为国内厂商的对Android应用后台的态度是，错杀一万也不能放走一个没跟自己打招呼的应用。</p>
-<span id="more"></span>
-
-<p>华为用户：感谢酷安用户@无野 提供的华为设备在锁屏后无法运行的解决方案。我顺便修了一下图。</p>
-<img src="/2017/12/10/timer-huawei-solution/huawei-solution.jpg" class="" title="[huawei-solution.jpg](.&#x2F;timer-huawei-solution&#x2F;huawei-solution.jpg)">
-
-<p>其他用户：最近发现了一个链接<a href="https://bitbucket.org/copluk/acr/issues/607">ACR is automatically closed on some phones</a>，是个国外应用处理一些应用在国产设备上后台被杀时如何白名单的文章。虽然是英文，但下面有各个设备的链接，里面有一些示范图片，各位可以参考一下。</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>计时机器的使用方法</title>
     <url>/2018/12/19/timer-machine-usage-zh/</url>
     <content><![CDATA[<p><strong>此文章已过时，来这里看最新的使用指南：<a href="https://github.com/DeweyReed/Grocery/blob/master/instruction-manuals/zh.md">计时机器的使用指南</a></strong></p>
@@ -3327,6 +3312,21 @@
 <p> 预计在2.0.0中加入“组”的概念，可以把现有的步骤放到组里，组有各自的名字和循环。到那个时候，我就得画图来解释了。</p>
 </li>
 </ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>计时机器无法唤醒设备的临时解决方案</title>
+    <url>/2017/12/10/timer-huawei-solution/</url>
+    <content><![CDATA[<p>计时机器无法唤醒国产设备的临时解决方案。几乎所有国产手机都需要类似的设置，因为国内厂商的对Android应用后台的态度是，错杀一万也不能放走一个没跟自己打招呼的应用。</p>
+<span id="more"></span>
+
+<p>华为用户：感谢酷安用户@无野 提供的华为设备在锁屏后无法运行的解决方案。我顺便修了一下图。</p>
+<img src="/2017/12/10/timer-huawei-solution/huawei-solution.jpg" class="" title="[huawei-solution.jpg](.&#x2F;timer-huawei-solution&#x2F;huawei-solution.jpg)">
+
+<p>其他用户：最近发现了一个链接<a href="https://bitbucket.org/copluk/acr/issues/607">ACR is automatically closed on some phones</a>，是个国外应用处理一些应用在国产设备上后台被杀时如何白名单的文章。虽然是英文，但下面有各个设备的链接，里面有一些示范图片，各位可以参考一下。</p>
 ]]></content>
       <categories>
         <category>Android</category>
@@ -3391,26 +3391,6 @@
       </categories>
   </entry>
   <entry>
-    <title>个人使用的VSCode配置</title>
-    <url>/2025/02/01/vscode-settings/</url>
-    <content><![CDATA[<p>手动同步VSCode设置。</p>
-<span id="more"></span>
-
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Monokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;security.workspace.trust.untrustedFiles&quot;</span><span class="punctuation">:</span> <span class="string">&quot;open&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.cursorBlinking&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="attr">&quot;editor.lineNumbers&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;window.commandCenter&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;git.openRepositoryInParentFolders&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.nonBasicASCII&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.stickyScroll.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.startupEditor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.ambiguousCharacters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.editor.enablePreview&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>扩展：</p>
-<ul>
-<li>APKLab</li>
-<li>IntelliJ IDEA Keybindings</li>
-<li>markdownlint</li>
-<li>Subword Navigation</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>个人常用的视频下载及处理命令整理</title>
     <url>/2023/11/23/youtube-dl-commands/</url>
     <content><![CDATA[<p>RT</p>
@@ -3437,6 +3417,26 @@
 ]]></content>
       <categories>
         <category>Notes</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>个人使用的VSCode配置</title>
+    <url>/2025/02/01/vscode-settings/</url>
+    <content><![CDATA[<p>手动同步VSCode设置。</p>
+<span id="more"></span>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;workbench.colorTheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Monokai&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;security.workspace.trust.untrustedFiles&quot;</span><span class="punctuation">:</span> <span class="string">&quot;open&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.cursorBlinking&quot;</span><span class="punctuation">:</span> <span class="string">&quot;solid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="attr">&quot;editor.lineNumbers&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;window.commandCenter&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;git.openRepositoryInParentFolders&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.nonBasicASCII&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.stickyScroll.enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.startupEditor&quot;</span><span class="punctuation">:</span> <span class="string">&quot;none&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;editor.unicodeHighlight.ambiguousCharacters&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;workbench.editor.enablePreview&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>扩展：</p>
+<ul>
+<li>APKLab</li>
+<li>IntelliJ IDEA Keybindings</li>
+<li>markdownlint</li>
+<li>Subword Navigation</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
