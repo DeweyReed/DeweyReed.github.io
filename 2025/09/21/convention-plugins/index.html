@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"deweyreed.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="最近终于狠下心来，认真研究了Gradle Convention Plugins的Android项目实现。本文一行行地分析了其实现、原理与理由。如果只是上手，直接去扒Now in Android的实现更为快捷。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知Convention Plugins然且知Convention Plugins所以然">
+<meta property="og:url" content="http://deweyreed.github.io/2025/09/21/convention-plugins/index.html">
+<meta property="og:site_name" content="April Down">
+<meta property="og:description" content="最近终于狠下心来，认真研究了Gradle Convention Plugins的Android项目实现。本文一行行地分析了其实现、原理与理由。如果只是上手，直接去扒Now in Android的实现更为快捷。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-21T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-21T08:57:47.347Z">
+<meta property="article:author" content="Dewey Reed">
+<meta property="article:tag" content="Android Development">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://deweyreed.github.io/2025/09/21/convention-plugins/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://deweyreed.github.io/2025/09/21/convention-plugins/","path":"2025/09/21/convention-plugins/","title":"知Convention Plugins然且知Convention Plugins所以然"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>知Convention Plugins然且知Convention Plugins所以然 | April Down</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">April Down</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Android Development</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-依赖"><a href="/dependencies/" rel="section"><i class="fa fa-code fa-fw"></i>依赖</a></li>
+        <li class="menu-item menu-item-资源"><a href="/resources/" rel="section"><i class="fa fa-code fa-fw"></i>资源</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%9A%84%E7%90%86%E7%94%B1"><span class="nav-number">1.</span> <span class="nav-text">选择的理由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">前期的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">3.</span> <span class="nav-text">实现的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E8%A7%A3%E7%9A%84%E7%96%91%E9%97%AE"><span class="nav-number">4.</span> <span class="nav-text">未解的疑问</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Dewey Reed"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Dewey Reed</p>
+  <div class="site-description" itemprop="description">Hang in there, hang in there.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/DeweyReed" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;DeweyReed" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5507158/dewey-reed" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5507158&#x2F;dewey-reed" rel="noopener" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/DeweyReed" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://deweyreed.github.io/2025/09/21/convention-plugins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Dewey Reed">
+      <meta itemprop="description" content="Hang in there, hang in there.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="April Down">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          知Convention Plugins然且知Convention Plugins所以然<a href="https://github.com/DeweyReed/site/tree/master/source/_posts/convention-plugins.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-09-21 00:00:00" itemprop="dateCreated datePublished" datetime="2025-09-21T00:00:00+00:00">2025-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近终于狠下心来，认真研究了Gradle Convention Plugins的Android项目实现。本文一行行地分析了其实现、原理与理由。如果只是上手，直接去扒<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/tree/main/build-logic">Now in Android的实现</a>更为快捷。</p>
+<span id="more"></span>
+
+<h2 id="选择的理由"><a href="#选择的理由" class="headerlink" title="选择的理由"></a>选择的理由</h2><p>为了在多模块项目中共享Gradle配置，最直接的方式当然是———— <del>不用多模块！</del> 在根<code>build.gradle</code>中写<code>subprojects.afterEvaluate</code>。但时至今日，这种方法没有扩展度且显得很业余。</p>
+<p>几年前就有很多人转向了<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html"><code>buildSrc</code></a>作为项目构建最前期的运行内容，但是这个方案性能差：类似问题在<strong>重要内容养大象</strong><a target="_blank" rel="noopener" href="https://developer.squareup.com/blog/herding-elephants/#from-buildsrc-to-build-logic">Herding Elephants</a>亦有记载，而且限制多：实际上手后会发现各种依赖不兼容问题。虽然<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLLQbIfXVLZqG3wNV9vKDr8Mqv8TvogykN">最近的Gradle的教程</a>提到该方法适用于中小项目，但既生瑜何生亮。</p>
+<p>后来<a target="_blank" rel="noopener" href="https://developer.squareup.com/blog/herding-elephants/">Herding Elephants</a>横空出世，似乎有承前启后之作用。它提到了使用<code>build-logic</code>。一句题外话，我虽然一直有订阅Square的博客，并在这篇文章发布时，在第一时间也看过其内容，但由于其博客内容大多抽象，所以一直未能领略其精髓。</p>
+<p>随着Kotlin DSL和Version Catalog推出，Convention Plugins成了管理配置的最佳实践。这也是开头推荐直接抄<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/tree/main/build-logic">Now in Android的实现</a>的原因。</p>
+<p>联想到当年Uncle Bob提出Clean Architecture，Android开发的一些最佳实践或默认方案总有一些前人栽树之意味，而这棵树也是充满了前人之个性。</p>
+<h2 id="前期的准备"><a href="#前期的准备" class="headerlink" title="前期的准备"></a>前期的准备</h2><p>Gradle太灵活了，<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/implementing_gradle_plugins.html">一个问题有八种解决方法</a>。考虑到<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/issues/39">Pre-compiled script plugin性能差</a>且Kotlin真好用的情况，我们直接使用最好的Kotlin + Version Catalog + Binary plugin。这意味着在实现前，要先把Gradle迁移到Kotlin DSL。</p>
+<p>好在<code>build.gradle.kts</code>的重写可以一文件一个文件地进行，所以先把文件语法优化，再修改后缀，然后解决报错，最后Sync。如此这般不断重复。</p>
+<h2 id="实现的细节"><a href="#实现的细节" class="headerlink" title="实现的细节"></a>实现的细节</h2><p>我们以<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/tree/main/build-logic">Now in Android的实现</a>为基础来一点点讲解。</p>
+<p>我们先从根目录的<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/blob/main/settings.gradle.kts"><code>settings.gradle.kts</code></a>开始：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pluginManagement &#123;</span><br><span class="line">    includeBuild(<span class="string">&quot;build-logic&quot;</span>)</span><br><span class="line">    repositories &#123;</span><br></pre></td></tr></table></figure>
+
+<p>这里要在<code>pluginManagement</code>下<code>includeBuild</code>，说明我们要写Plugin。这与另一个可顶层调用的方法<code>includeBuild</code>是不同的。其他内容原封不动。</p>
+<p>接下里的内容都在<code>build-logic</code>目录中，打包地很好。</p>
+<p>从[build-logic/settings.gradle.kts`](<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/blob/main/build-logic/settings.gradle.kts)%E5%BC%80%E5%A7%8B%EF%BC%9A">https://github.com/android/nowinandroid/blob/main/build-logic/settings.gradle.kts)开始：</a></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pluginManagement &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这一部分对于大多数项目是多余的。之所以这里有一块，是因为nia额外用到了一个Plugin。之后会讲。</p>
+<p>接下来的内容：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dependencyResolutionManagement &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        google &#123;</span><br><span class="line">            content &#123;</span><br><span class="line">                includeGroupByRegex(<span class="string">&quot;com\\.android.*&quot;</span>)</span><br><span class="line">                includeGroupByRegex(<span class="string">&quot;com\\.google.*&quot;</span>)</span><br><span class="line">                includeGroupByRegex(<span class="string">&quot;androidx.*&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        mavenCentral()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>dependencyResolutionManagement.repositories</code>中内容应修改为和根目录的<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/blob/main/settings.gradle.kts"><code>settings.gradle.kts</code></a>中的<code>pluginManagement.repositories</code>一致，因为我们要引用Plugin作为依赖，或者说，Convention Plugins中，我们要使用Plugin的代码而非其实现。对于常见的三个Plugin来源：<code>google</code>、<code>gradlePluginPortal</code>和<code>mavenCentral</code>，有的插件会出现在其中某一个或某两个中，所以一致的配置确保我们可以找到同样的内容。</p>
+<p>接下来：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    versionCatalogs &#123;</span><br><span class="line">        create(<span class="string">&quot;libs&quot;</span>) &#123;</span><br><span class="line">            from(files(<span class="string">&quot;../gradle/libs.versions.toml&quot;</span>))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rootProject.name = <span class="string">&quot;build-logic&quot;</span></span><br><span class="line">include(<span class="string">&quot;:convention&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>该内容是在<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/version_catalogs.html#sec:buildsrc-version-catalog">Gradle的Version Catalog的文档中</a>提及的。从<code>buildSrc</code>到<code>build-logic</code>的实现，最简单的情况只需要改一下文件夹名称，因此这里Version Catalog的声明可以被共享也不足为奇。</p>
+<p>在<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/blob/main/build-logic/gradle.properties"><code>build-logic/gradle.properties</code></a>中：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.parallel=<span class="literal">true</span></span><br><span class="line">org.gradle.caching=<span class="literal">true</span></span><br><span class="line">org.gradle.configureondemand=<span class="literal">true</span></span><br><span class="line">org.gradle.configuration-cache=<span class="literal">true</span></span><br><span class="line">org.gradle.configuration-cache.parallel=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><code>org.gradle.configureondemand=true</code>：这么多年了还在测试，而且我还能记得它当年跟Instant Run闹了不小的冲突。我推荐还是删了这行吧。</p>
+<p><code>org.gradle.configuration-cache.parallel=true</code>：死活没找到文档。处于安全起见，建议先删掉。</p>
+<p>其他内容照抄。</p>
+<p>接下来是<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/blob/main/build-logic/convention/build.gradle.kts"><code>build-logic/convention/build.gradle.kts</code></a>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    `kotlin-dsl`</span><br><span class="line">    alias(libs.plugins.android.lint)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二个Plugin就是那个导致要在<a target="_blank" rel="noopener" href="https://github.com/android/nowinandroid/blob/main/build-logic/settings.gradle.kts"><code>build-logic/settings.gradle.kts</code></a>声明<code>pluginManagement</code>的Plugin。考虑到大多数项目不会用，这里就删掉好了。如果要使用其他Plugin，那在<code>settings.gradle.kts</code>就要写好对应的<code>pluginManagement.repositories</code>，写法和普通Plugin一样。</p>
+<p>接下来：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group = <span class="string">&quot;com.google.samples.apps.nowinandroid.buildlogic&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>虽说声明<code>group</code>是个好习惯，但我至今也没搞明白不这么做会有什么后果。</p>
+<p>继续：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">java &#123;</span><br><span class="line">    sourceCompatibility = JavaVersion.VERSION_17</span><br><span class="line">    targetCompatibility = JavaVersion.VERSION_17</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">kotlin &#123;</span><br><span class="line">    compilerOptions &#123;</span><br><span class="line">        jvmTarget = JvmTarget.JVM_17</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>既然有了Version Catalog，那我就不允许版本号出现在这里，这里修改为使用Version Catalog的风格：</p>
+<p>首先在Version Catalog中增加一个版本号：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jvmTarget</span> = <span class="string">&quot;17&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java &#123;</span><br><span class="line">    <span class="keyword">val</span> javaVersion = JavaVersion.toVersion(libs.versions.jvmTarget.<span class="keyword">get</span>())</span><br><span class="line">    sourceCompatibility = javaVersion</span><br><span class="line">    targetCompatibility = javaVersion</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">kotlin &#123;</span><br><span class="line">    compilerOptions &#123;</span><br><span class="line">        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget</span><br><span class="line">            .fromTarget(libs.versions.jvmTarget.<span class="keyword">get</span>())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compileOnly(libs.android.gradleApiPlugin)</span><br><span class="line">    compileOnly(libs.android.tools.common)</span><br><span class="line">    compileOnly(libs.compose.gradlePlugin)</span><br></pre></td></tr></table></figure>
+
+<p>这里写明我们在Convention Plugins中会用到的Plugin。之所以是<code>compileOnly</code>，我猜是因为Plugin我们这里只需要代码，具体的运行是在项目各Module中的。</p>
+<p>这里专门把Plugin的依赖再在Version Catalog中写一遍就不漂亮了。在<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/version_catalogs.html#sec:buildsrc-version-catalog">Gradle的Version Catalog的文档中</a>，我们可以找到不用再写一遍的方法。这里稍加修改成为：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compileOnly(plugin(libs.plugins.kotlin.android))</span><br><span class="line">    compileOnly(plugin(libs.plugins.android.application))</span><br><span class="line">    compileOnly(plugin(libs.plugins.android.library))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">plugin</span><span class="params">(plugin: <span class="type">Provider</span>&lt;<span class="type">PluginDependency</span>&gt;)</span></span>: Provider&lt;String&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> plugin.map &#123; <span class="string">&quot;<span class="subst">$&#123;it.pluginId&#125;</span>:<span class="subst">$&#123;it.pluginId&#125;</span>.gradle.plugin:<span class="subst">$&#123;it.version&#125;</span>&quot;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就不用专门为了Convention Plugins而修改Version Catalog的结构了。</p>
+<p>然后就是照猫画虎了。从Plugin的实现到注册，都可以根据自己偏好删删改改了。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gradlePlugin &#123;</span><br><span class="line">    plugins &#123;</span><br><span class="line">        register(<span class="string">&quot;androidApplicationCompose&quot;</span>) &#123;</span><br><span class="line">            id = libs.plugins.nowinandroid.android.application.compose.<span class="keyword">get</span>().pluginId</span><br><span class="line">            implementationClass = <span class="string">&quot;AndroidApplicationComposeConventionPlugin&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之所以用<code>register</code>而不用<code>create</code>是因为其方法文档中提到前者懒加载，后者总是加载。</p>
+<h2 id="未解的疑问"><a href="#未解的疑问" class="headerlink" title="未解的疑问"></a>未解的疑问</h2><ul>
+<li>为什么Plugin是在根目录完成的呢？<a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/implementing_gradle_plugins_binary.html">Implementing Binary Plugins</a>明明是在对应包名下完成的。不过似乎没什么影响？</li>
+<li>为什么要叫做<code>build-logic</code>呢？该不会因为养大象的文章中就是这么称呼的？</li>
+<li>一个功能的实现散落在Gradle文档网站的数个页面中，阅读体验很差。</li>
+<li>虽说<code>gradlePluginPortal</code>可以方便Plugin管理，但现在感觉情况更混乱了。</li>
+<li>就像当年发布第三方Library时，大伙儿都会到处抄袭一些没人能懂但能跑的起来的Maven发布代码，如今的Convention Plugins看起来也是如此，尤其在AI都不知道最佳实践，只能乱生成代码的阶段。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/23/android-how-to-update-dependencies/" rel="prev" title="更新Android依赖的潜在风险">
+                  <i class="fa fa-chevron-left"></i> 更新Android依赖的潜在风险
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-superpowers"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey Reed</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
