@@ -27,7 +27,7 @@
 <meta property="og:description" content="Android Studio的每个新版本都或多或少有点问题，因此每次都重新安装并手动配置来避免配置继承的问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-12T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-28T03:09:06.012Z">
+<meta property="article:modified_time" content="2025-12-02T00:19:53.270Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -359,10 +359,15 @@
 </ul>
 </li>
 <li><code>Plugins</code><ul>
-<li><code>.ignore</code></li>
+<li><code>.ignore</code><br><code>IDE settings/options/ignore.xml</code> - <code>starredTemplates</code>:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/gitignore/Android.gitignore$/gitignore/C.gitignore$/gitignore/C++.gitignore$/gitignore/CMake.gitignore$/toptal/templates/Android.gitignore$/toptal/templates/AndroidStudio.gitignore$/gitignore/Java.gitignore$/toptal/templates/Java.gitignore$/gitignore/Kotlin.gitignore$/toptal/templates/Kotlin.gitignore$/toptal/templates/Intellij.gitignore$/toptal/templates/Intellij+all.gitignore$/toptal/templates/Intellij+iml.gitignore$/gitignore/Global/macOS.gitignore$/toptal/templates/macOS.gitignore$/gitignore/Global/Windows.gitignore$/toptal/templates/Windows.gitignore$/gitignore/Global/Linux.gitignore$/toptal/templates/Linux.gitignore$/toptal/templates/C++.gitignore$/toptal/templates/C.gitignore$/gitignore/Gradle.gitignore$/toptal/templates/Gradle.gitignore$/toptal/templates/JetBrains.gitignore$/gitignore/Global/JetBrains.gitignore$/toptal/templates/JetBrains+all.gitignore$/toptal/templates/JetBrains+iml.gitignore$/toptal/templates/Groovy.gitignore$/toptal/templates/Crashlytics.gitignore$/gitignore/Objective-C.gitignore$/gitignore/Swift.gitignore$/toptal/templates/Swift.gitignore$/toptal/templates/Objective-C.gitignore$/toptal/templates/Firebase.gitignore</span><br></pre></td></tr></table></figure></li>
 <li><code>ADB Idea</code></li>
 <li><code>Archive Browser</code></li>
 <li><code>Avocado</code></li>
+<li><code>detekt</code><ul>
+<li><code>Enable background analysis</code></li>
+<li>Config:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">complexity:</span><br><span class="line">  ComplexCondition:</span><br><span class="line">    active: false</span><br><span class="line">  CyclomaticComplexMethod:</span><br><span class="line">    active: false</span><br><span class="line">  LargeClass:</span><br><span class="line">    active: false</span><br><span class="line">  LongMethod:</span><br><span class="line">    active: false</span><br><span class="line">  LongParameterList:</span><br><span class="line">    functionThreshold: 22</span><br><span class="line">    constructorThreshold: 22</span><br><span class="line">  NestedBlockDepth:</span><br><span class="line">    active: false</span><br><span class="line">  TooManyFunctions:</span><br><span class="line">    active: false</span><br><span class="line"></span><br><span class="line">exceptions:</span><br><span class="line">  TooGenericExceptionCaught:</span><br><span class="line">    active: false</span><br><span class="line"></span><br><span class="line">naming:</span><br><span class="line">  FunctionNaming:</span><br><span class="line">    ignoreAnnotated:</span><br><span class="line">      - &quot;Composable&quot;</span><br><span class="line">style:</span><br><span class="line">  LoopWithTooManyJumpStatements:</span><br><span class="line">    active: false</span><br><span class="line">  MagicNumber:</span><br><span class="line">    active: false</span><br><span class="line">  ReturnCount:</span><br><span class="line">    active: false</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 <li><code>GLSL</code></li>
 <li><code>JsonToKotlinClass</code></li>
 <li><code>Kotlin Multiplatform</code></li>
@@ -395,6 +400,7 @@
 <li>Build project</li>
 <li><code>Keymap</code>(Delete old keys)<ul>
 <li><code>Build</code>(Tool Window): Alt + 5</li>
+<li><code>Repeat Last Action</code>: Ctrl + Alt + Shift + R</li>
 </ul>
 </li>
 <li><code>Editor</code><ul>
