@@ -27,7 +27,7 @@
 <meta property="og:description" content="一个人一直走啊走，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-15T00:02:14.905Z">
+<meta property="article:modified_time" content="2025-12-16T00:35:56.836Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8815%E6%97%A5"><span class="nav-number">1.</span> <span class="nav-text">2025年12月15日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8814%E6%97%A5"><span class="nav-number">2.</span> <span class="nav-text">2025年12月14日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8812%E6%97%A5"><span class="nav-number">3.</span> <span class="nav-text">2025年12月12日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8811%E6%97%A5"><span class="nav-number">4.</span> <span class="nav-text">2025年12月11日</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8816%E6%97%A5"><span class="nav-number">1.</span> <span class="nav-text">2025年12月16日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8815%E6%97%A5"><span class="nav-number">2.</span> <span class="nav-text">2025年12月15日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8814%E6%97%A5"><span class="nav-number">3.</span> <span class="nav-text">2025年12月14日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8812%E6%97%A5"><span class="nav-number">4.</span> <span class="nav-text">2025年12月12日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2025%E5%B9%B412%E6%9C%8811%E6%97%A5"><span class="nav-number">5.</span> <span class="nav-text">2025年12月11日</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -271,6 +271,14 @@
         <p>一个人一直走啊走，</p>
 <span id="more"></span>
 
+<h2 id="2025年12月16日"><a href="#2025年12月16日" class="headerlink" title="2025年12月16日"></a>2025年12月16日</h2><p>在生成安装包时，尤其对于有XML或ViewBinding的项目，有时会出现类似symbol unresolved的报错。如果确定不是项目问题，很多开发者都只能Invalidate cache and restart，费时费力。不过我很久之前发现了一个方法，在各个系统上都很好使。苦于无处分享，只能放在这里：</p>
+<ol>
+<li>Clean project</li>
+<li>关掉AS</li>
+<li>删掉<code>系统用户目录/.gradle/caches</code>文件夹下，<code>build-cache-1</code>，<code>jars-9</code>和<code>journal-1</code>三个文件夹</li>
+<li>打开项目，Sync然后Build</li>
+</ol>
+<p>这个方法很快，不需要重新下载依赖。我已经很久没有Invalidate cache and restart了。</p>
 <h2 id="2025年12月15日"><a href="#2025年12月15日" class="headerlink" title="2025年12月15日"></a>2025年12月15日</h2><p>在AS的设置<code>Build, Execution, Deployment -&gt; Build Tools -&gt; Gradle</code>中，可以配置JDK。<a target="_blank" rel="noopener" href="https://developer.android.com/build/jdks#jdk-config-in-studio">官方推荐配置为GRADLE_LOCAL_JAVA_HOME</a>。但之前都是无视变量名称，根据AS大趋势，选一个版本，但这几天才发现GRADLE_LOCAL_JAVA_HOME下拉菜单可以直接选AS自带的JDK，这个很好很方便。</p>
 <p>话说话来，为什么默认设置不够用呢？因为要缝补一些年久失修的项目。如果不想经历整修整个项目才能运行的痛苦，用其AGP版本对应的AS是最直接地可以无痛运行项目的方法，但这也意味着机器上会有多个AS版本和JDK版本，进而要给不同项目选不同的JDK。</p>
 <h2 id="2025年12月14日"><a href="#2025年12月14日" class="headerlink" title="2025年12月14日"></a>2025年12月14日</h2><p>昨天怠惰，今天补上：</p>
