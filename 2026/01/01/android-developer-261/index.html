@@ -27,7 +27,7 @@
 <meta property="og:description" content="一个人接着走啊走，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-01-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-01T01:14:22.336Z">
+<meta property="article:modified_time" content="2026-01-02T02:51:17.665Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2026%E5%B9%B41%E6%9C%881%E6%97%A5"><span class="nav-number">1.</span> <span class="nav-text">2026年1月1日</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2026%E5%B9%B41%E6%9C%882%E6%97%A5"><span class="nav-number">1.</span> <span class="nav-text">2026年1月2日</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2026%E5%B9%B41%E6%9C%881%E6%97%A5"><span class="nav-number">2.</span> <span class="nav-text">2026年1月1日</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -271,6 +271,7 @@
         <p>一个人接着走啊走，</p>
 <span id="more"></span>
 
+<h2 id="2026年1月2日"><a href="#2026年1月2日" class="headerlink" title="2026年1月2日"></a>2026年1月2日</h2><p><a target="_blank" rel="noopener" href="https://developer.android.com/build/jdks">Java versions in Android builds</a>逻辑混乱，让人头大。怎样的配置是最佳实践，也是让人摸不着头脑。文档中的推荐也有着潜在的坑。保险起见，还是用传统的<code>sourceCompatibility</code> + <code>jvmTarget</code>吧。</p>
 <h2 id="2026年1月1日"><a href="#2026年1月1日" class="headerlink" title="2026年1月1日"></a>2026年1月1日</h2><p>与View相比，Jetpack Compose的<code>Text</code>关闭了<code>includeFontPadding</code>，所以英文的默认高度与<code>TextView</code>不同，打开就好了。</p>
 <p>Jetpack Compose的<code>TextField</code>的高度则会根据中英文不同而变化，加上其他需求，<a target="_blank" rel="noopener" href="https://juejin.cn/post/7530088591395160106">会很让人很抓狂</a>。我发现<code>TextField</code>的大部分参数都不会变，所以直接用<code>AndroidView</code>包裹一个<code>AppCompatEditText</code>就可以解决问题喽。其中，用<code>DrawableCompat.setTint</code>给<code>textCursorDrawable</code>上色（旧系统的用户应该不会注意到吧）。</p>
 
