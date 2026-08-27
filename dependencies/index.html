@@ -27,7 +27,7 @@
 <meta property="og:description" content="Gradle1gradle wrapper --gradle-version&#x3D; x 2 https:&#x2F;&#x2F;gradle.org&#x2F;releases&#x2F; Best Practices for Authoring Gradle Builds  9.5.1: ??  9.4.1: ✔  Default plugin IDs   9.3.1: ✔  9.2.1: ✔  9.0.0: -(Java 17, Kot">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-03T23:42:48.840Z">
+<meta property="article:modified_time" content="2026-08-27T02:40:36.710Z">
 <meta property="article:author" content="Dewey Reed">
 <meta property="article:tag" content="Android Development">
 <meta name="twitter:card" content="summary">
@@ -308,6 +308,7 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/whatsnew24.html#new-stable-features">Context parameters, Explicit backing fields, UUID</a></li>
 <li>~~~`annotation-default-target=param-property`~~~</li>
+<li>delay(Duration)</li>
 </ul>
 </li>
 <li><p>2.3.21: ✔</p>
@@ -768,7 +769,7 @@
 </li>
 </ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/collection">androidx.collection:collection-ktx</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/androidx/releases/collection">androidx.collection:collection<del>-ktx</del></a></p>
 <ul>
 <li><p>1.6.0: ✔</p>
 </li>
@@ -1047,6 +1048,12 @@
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.com/develop/ui/compose/bom/bom-mapping">BOM to library version mapping</a></p>
 </li>
+<li><p>2026.08.00: ??(Compose 1.12.0, Android 17(37))</p>
+<ul>
+<li>The <code>androidx.compose.material.icons</code> library is no longer recommended. you can still manually reference it if you cannot migrate yet.</li>
+<li>Added an overload to SideEffect that accepts key arguments. The new API can be used to fire one-shot SideEffects without the need for a LaunchedEffect or DisposableEffect whose CoroutineScope or onDispose block are unused.</li>
+</ul>
+</li>
 <li><p>2026.06.01: ✔(Compose 1.11.4)</p>
 </li>
 <li><p>2026.06.00: ✔(Compose 1.11.3)</p>
@@ -1120,9 +1127,11 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/material-components/material-components-android/releases">com.google.android.material:material</a></p>
 <ul>
+<li><p>1.14.0: ??</p>
+</li>
 <li><p>1.9.0: ✔</p>
 <p>Set the background color:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;AppTheme&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.Material3.DayNight.NoActionBar&quot;</span>&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;elevationOverlayEnabled&quot;</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android:colorBackground&quot;</span>&gt;</span>#FFF<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;colorSurface&quot;</span>&gt;</span>#FFF<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">&quot;AppTheme&quot;</span> <span class="attr">parent</span>=<span class="string">&quot;Theme.Material3.DayNight.NoActionBar&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    &lt;item name=&quot;elevationOverlayEnabled&quot;&gt;false&lt;/item&gt;</span></span><br><span class="line"><span class="language-css">    &lt;item name=&quot;android:colorBackground<span class="string">&quot;&gt;#FFF&lt;/item&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-css">    &lt;item name=&quot;</span>colorSurface<span class="string">&quot;&gt;#FFF&lt;/item&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-css"></span></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>1.4.0: ✔</p>
 </li>
 </ul>
@@ -1293,6 +1302,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/bumptech/glide/releases">com.github.bumptech.glide</a></p>
 <ul>
+<li>5.0.9: ??(Android 17(37))</li>
 <li>5.0.7: ✔</li>
 <li>5.0.5: ✔</li>
 <li>4.16.0: ✔</li>
@@ -1337,7 +1347,7 @@
 </li>
 </ul>
 </li>
-<li><p>com.github.chuckerteam.chucker:library</p>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ChuckerTeam/chucker/releases">com.github.chuckerteam.chucker:library</a></p>
 <ul>
 <li>4.3.1: ✔(Kotlin 2.3, Material 1.13)<ul>
 <li>Remove unused wake lock permission</li>
@@ -1385,8 +1395,9 @@
 <li>0.3.5: ✔(ThreeTenABP)</li>
 </ul>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/ben-manes/gradle-versions-plugin">com.github.ben-manes:gradle-versions-plugin</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ben-manes/gradle-versions-plugin">io.github.ben-manes.versions</a></p>
 <ul>
+<li>0.61.0: ??(Renamed to <code>io.github.ben-manes.versions</code>)</li>
 <li>0.54.0: ✔(AGP 9)</li>
 <li>0.53.0: ❌(Not working with AGP 9 + Gradle 9)</li>
 <li>0.52.0: ✔</li>
@@ -1414,6 +1425,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/koral--/android-gif-drawable">pl.droidsonroids.gif:android-gif-drawable</a></p>
 <ul>
+<li>1.2.32: ??</li>
 <li>1.2.31: ✔(<del>Kotlin</del>)</li>
 <li>1.2.30: ⬆️(Kotlin 2.3)</li>
 <li>1.2.29: ✔(Kotlin 2.0)</li>
@@ -1430,6 +1442,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/Tencent/libpag/releases">com.tencent.tav:libpag</a></p>
 <ul>
+<li>4.5.85: ??</li>
 <li>4.5.27: ✔</li>
 <li>4.5.12: ✔</li>
 <li>4.4.35: ✔</li>
@@ -1454,6 +1467,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://devs.umeng.com/">com.umeng.umsdk:common</a></p>
 <ul>
+<li>9.9.8: ??</li>
 <li>9.9.2: ✔</li>
 <li>9.9.1: ✔</li>
 <li>9.8.8: ✔</li>
@@ -1499,6 +1513,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/Android.html">com.tencent.mm.opensdk:wechat-sdk-android</a>: <a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Downloads/Android_Resource.html">https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Downloads/Android_Resource.html</a></p>
 <ul>
+<li>6.8.40: ??</li>
 <li>6.8.34: ✔</li>
 </ul>
 </li>
